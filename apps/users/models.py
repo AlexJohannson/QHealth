@@ -1,8 +1,12 @@
 from django.db import models
 
-class User(models.Model):
+from core.models import BaseModel
+
+
+class UserModel(BaseModel):
     class Meta:
         db_table = 'users'
+
     name = models.CharField(max_length=30)
     surname = models.CharField(max_length=30)
     phone_number = models.CharField(max_length=30)
@@ -16,4 +20,5 @@ class User(models.Model):
     region = models.CharField(max_length=30)
     country = models.CharField(max_length=30)
     gender = models.CharField(max_length=10)
+
 
