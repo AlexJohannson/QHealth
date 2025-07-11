@@ -1,8 +1,19 @@
 from django.urls import path
 
-from apps.users.views import UsersListCreateApiView, UsersRetrieveUpdateDestroyApiView
+from apps.users.views import (
+    BlockUserView,
+    UnBlockUserView,
+    UserRevokeAdminView,
+    UsersListCreateApiView,
+    UsersRetrieveUpdateDestroyApiView,
+    UserToAdminView,
+)
 
 urlpatterns = [
-    path('', UsersListCreateApiView.as_view(), name='users-list-create'),
-    path('/<int:pk>', UsersRetrieveUpdateDestroyApiView.as_view(), name='users-retrieve-update'),
+    path('', UsersListCreateApiView.as_view(), name='users_list_create'),
+    path('/<int:pk>', UsersRetrieveUpdateDestroyApiView.as_view(), name='users_retrieve_update'),
+    path('/<int:pk>/block', BlockUserView.as_view(), name='user_block'),
+    path('/<int:pk>/unblock', UnBlockUserView.as_view(), name='user_unblock'),
+    path('/<int:pk>/create_admin', UserToAdminView.as_view(), name='user_admin'),
+    path('/<int:pk>/revoke_admin', UserRevokeAdminView.as_view(), name='user_revoke_admin'),
 ]
