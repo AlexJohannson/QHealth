@@ -1,24 +1,24 @@
-[project]
-name = "qhealth"
+[tool.poetry]
+name = "QHealth"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "AlexJohannson",email = "mehedsanya@gmail.com"}
-]
+authors = ["AlexJohannson <mehedsanya@gmail.com>"]
 readme = "README.md"
-requires-python = ">=3.13"
-dependencies = [
-    "djangorestframework (>=3.16.0,<4.0.0)",
-    "mysqlclient (>=2.2.7,<3.0.0)",
-    "django-dotenv (>=1.4.2,<2.0.0)",
-    "djangorestframework-simplejwt (>=5.5.0,<6.0.0)"
-]
+package-mode = false
 
+[tool.poetry.dependencies]
+python = "^3.12"
+djangorestframework = "^3.16.0"
+mysqlclient = "^2.2.7"
+djangorestframework-simplejwt = "^5.5.0"
+
+
+
+
+[tool.poetry.group.dev.dependencies]
+isort = "^6.0.1"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.poetry.group.dev.dependencies]
-isort = "^6.0.1"
 

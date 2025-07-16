@@ -21,6 +21,7 @@ class UsersRetrieveUpdateDestroyApiView(RetrieveUpdateDestroyAPIView):
     http_method_names = ['get', 'patch', 'delete']
 
 
+
 class BlockUserView(GenericAPIView):
     def get_queryset(self):
         return UserModel.objects.exclude(id=self.request.user.id)
