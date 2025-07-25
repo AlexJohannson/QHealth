@@ -2,9 +2,10 @@ from django.contrib.auth import get_user_model
 
 from rest_framework import status
 from rest_framework.generics import GenericAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.permissions import AllowAny, IsAdminUser
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
+from apps.users.permissions import IsSuperUserOnly, IsSuperUserOrAdminOnly, IsSuperUserOrAdminOrUser
 from apps.users.serializer import UserSerializer
 
 UserModel = get_user_model()
@@ -13,16 +14,18 @@ class UsersListCreateApiView(ListCreateAPIView):
     serializer_class = UserSerializer
 
     def get_permissions(self):
-        return [IsAdminUser()] if self.request.method == 'GET' else [AllowAny()]
+        return [IsSuperUserOrAdminOnly()] if self.request.method == 'GET' else [AllowAny()]
 
 class UsersRetrieveUpdateDestroyApiView(RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
     queryset = UserModel.objects.all()
+    permission_classes = [IsSuperUserOrAdminOrUser]
     http_method_names = ['get', 'patch', 'delete']
 
 
 
 class BlockUserView(GenericAPIView):
+    permission_classes = [IsSuperUserOrAdminOnly]
     def get_queryset(self):
         return UserModel.objects.exclude(id=self.request.user.id)
 
@@ -37,6 +40,7 @@ class BlockUserView(GenericAPIView):
 
 
 class UnBlockUserView(GenericAPIView):
+    permission_classes = [IsSuperUserOrAdminOnly]
     def get_queryset(self):
         return UserModel.objects.exclude(id=self.request.user.id)
 
@@ -52,6 +56,7 @@ class UnBlockUserView(GenericAPIView):
 
 
 class UserToAdminView(GenericAPIView):
+    permission_classes = [IsSuperUserOnly]
     def get_queryset(self):
         return UserModel.objects.exclude(id=self.request.user.id)
 
@@ -67,11 +72,15 @@ class UserToAdminView(GenericAPIView):
 
 
 class UserRevokeAdminView(GenericAPIView):
+    permission_classes = [IsSuperUserOnly]
     def get_queryset(self):
         return UserModel.objects.exclude(id=self.request.user.id)
 
     def patch(self, *args, **kwargs):
         user = self.get_object()
+
+
+
         if user.is_staff:
             user.is_staff = False
             user.save()

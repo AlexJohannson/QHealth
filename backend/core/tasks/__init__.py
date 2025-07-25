@@ -1,0 +1,3 @@
+from .send_birthday_email_task import happy_birthday
+from .send_happy_new_year_email_task import happy_new_year
+from .send_merry_christmas_email_task import merry_christmas_email
