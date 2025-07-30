@@ -32,6 +32,11 @@ class ProfileSerializer(serializers.ModelSerializer):
             'updated_at',
         )
 
+    def validate_age(self, value):
+        if value <= 17:
+            raise serializers.ValidationError('You must be are legal age to register on our platform.')
+        return value
+
 
 class UserSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
@@ -74,6 +79,7 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
+
     def update(self, instance, validated_data:dict):
         profile_data = validated_data.pop('profile', None)
 
@@ -88,5 +94,6 @@ class UserSerializer(serializers.ModelSerializer):
             profile.save()
 
         return instance
+
 
     

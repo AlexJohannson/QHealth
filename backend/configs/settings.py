@@ -47,11 +47,13 @@ INSTALLED_APPS = [
     'core',
     'apps.users',
     'apps.auth',
+    'apps.security',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'core.middleware.security_middleware.LoginRateLimitMiddleware',
 ]
 
 ROOT_URLCONF = 'configs.urls'

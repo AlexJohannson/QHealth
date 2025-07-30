@@ -19,10 +19,16 @@ class UserModel(AbstractBaseUser, PermissionsMixin, BaseModel):
     objects = UserManager()
 
 
+class GenderChoices(models.TextChoices):
+    MALE = 'Male',
+    FEMALE = 'Female',
+
+
+
+
 class ProfileModel(BaseModel):
     class Meta:
         db_table = 'profile'
-
 
     name = models.CharField(max_length=30)
     surname = models.CharField(max_length=30)
@@ -36,7 +42,7 @@ class ProfileModel(BaseModel):
     city = models.CharField(max_length=30)
     region = models.CharField(max_length=30)
     country = models.CharField(max_length=30)
-    gender = models.CharField(max_length=10)
+    gender = models.CharField(max_length=6, choices=GenderChoices.choices)
     user = models.OneToOneField(UserModel, on_delete=models.CASCADE, related_name='profile')
 
 
