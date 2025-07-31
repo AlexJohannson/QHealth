@@ -13,6 +13,7 @@ def error_handler(exc: Exception, context: dict):
         "PermissionDenied": _permission_denied_handler,
         "InvalidToken": _invalid_token_handler,
         "AuthenticationFailed": _authentication_failed_handler,
+        "Http404": _close_permission,
     }
 
     response = exception_handler(exc, context)
@@ -34,3 +35,6 @@ def _invalid_token_handler(exc, context):
 
 def _authentication_failed_handler(exc, context):
     return Response({'detail': 'Invalid login data.'}, status.HTTP_401_UNAUTHORIZED)
+
+def _close_permission(exc, context):
+    return Response({'detail': 'Invalid data.'}, status.HTTP_403_FORBIDDEN)

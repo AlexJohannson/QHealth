@@ -1,8 +1,12 @@
+from datetime import date
+
 from django.contrib.auth import get_user_model
+from django.core import validators as V
 from django.db.transaction import atomic
 
 from rest_framework import serializers
 
+from core.enums.regex_enum import RegexEnum
 from core.services.email_service import EmailService
 
 from apps.users.models import ProfileModel
@@ -18,7 +22,6 @@ class ProfileSerializer(serializers.ModelSerializer):
             'name',
             'surname',
             'phone_number',
-            'age',
             'date_of_birth',
             'height',
             'weight',
@@ -32,14 +35,31 @@ class ProfileSerializer(serializers.ModelSerializer):
             'updated_at',
         )
 
-    def validate_age(self, value):
-        if value <= 17:
-            raise serializers.ValidationError('You must be are legal age to register on our platform.')
+    def validate_date_of_birth(self, value):
+        today = date.today()
+        age = today.year - value.year - ((today.month, today.day) < (value.month, value.day))
+        if age < 18:
+            raise serializers.ValidationError('You must be at least 18 years old to register.')
         return value
+
+    def validate_height(self, value):
+        if value <= 0:
+            raise serializers.ValidationError('Height must be greater than zero.')
+        return value
+
+    def validate_weight(self, value):
+        if value < 0:
+            raise serializers.ValidationError('Weight must be greater than zero.')
+        return value
+
 
 
 class UserSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
+    password = serializers.CharField(
+        write_only=True,
+        validators=[V.RegexValidator(RegexEnum.PASSWORD.pattern, RegexEnum.PASSWORD.msg)]
+    )
 
     class Meta:
         model = UserModel
@@ -64,11 +84,7 @@ class UserSerializer(serializers.ModelSerializer):
             'created_at',
             'updated_at'
         )
-        extra_kwargs = {
-            'password': {
-                'write_only': True,
-            }
-        }
+
 
     @atomic
     def create(self, validated_data:dict):
