@@ -5,6 +5,7 @@ from rest_framework.generics import GenericAPIView, ListCreateAPIView, RetrieveU
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
+from apps.users.filter import UsersFilter
 from apps.users.permissions import IsSuperUserOnly, IsSuperUserOrAdminOnly, IsSuperUserOrAdminOrUser
 from apps.users.serializer import UserSerializer
 
@@ -12,6 +13,7 @@ UserModel = get_user_model()
 class UsersListCreateApiView(ListCreateAPIView):
     queryset = UserModel.objects.all()
     serializer_class = UserSerializer
+    filterset_class = UsersFilter
 
     def get_permissions(self):
         return [IsSuperUserOrAdminOnly()] if self.request.method == 'GET' else [AllowAny()]

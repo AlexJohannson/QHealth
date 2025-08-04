@@ -15,6 +15,7 @@ UserModel = get_user_model()
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+    age = serializers.SerializerMethodField()
     class Meta:
         model = ProfileModel
         fields = (
@@ -23,6 +24,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             'surname',
             'phone_number',
             'date_of_birth',
+            'age',
             'height',
             'weight',
             'street',
@@ -33,6 +35,12 @@ class ProfileSerializer(serializers.ModelSerializer):
             'gender',
             'created_at',
             'updated_at',
+        )
+
+    def get_age(self, obj):
+        today = date.today()
+        return today.year - obj.date_of_birth.year - (
+            (today.month, today.day) < (obj.date_of_birth.month, obj.date_of_birth.day)
         )
 
     def validate_date_of_birth(self, value):
