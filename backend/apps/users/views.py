@@ -6,7 +6,13 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from apps.users.filter import UsersFilter
-from apps.users.permissions import IsSuperUserOnly, IsSuperUserOrAdminOnly, IsSuperUserOrAdminOrUser
+from apps.users.permissions import (
+    IsSuperUserAdminOrRole,
+    IsSuperUserAdminOrRoleOrOwner,
+    IsSuperUserOnly,
+    IsSuperUserOrAdminOnly,
+    IsSuperUserOrAdminOrUser,
+)
 from apps.users.serializer import UserSerializer
 
 UserModel = get_user_model()
@@ -16,13 +22,18 @@ class UsersListCreateApiView(ListCreateAPIView):
     filterset_class = UsersFilter
 
     def get_permissions(self):
-        return [IsSuperUserOrAdminOnly()] if self.request.method == 'GET' else [AllowAny()]
+        return [IsSuperUserAdminOrRole()] if self.request.method == 'GET' else [AllowAny()]
 
 class UsersRetrieveUpdateDestroyApiView(RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
     queryset = UserModel.objects.all()
     permission_classes = [IsSuperUserOrAdminOrUser]
     http_method_names = ['get', 'patch', 'delete']
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [IsSuperUserAdminOrRoleOrOwner()]
+        return [IsSuperUserOrAdminOrUser()]
 
 
 
