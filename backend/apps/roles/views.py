@@ -1,5 +1,6 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
+from apps.roles.filter import RolesFilter
 from apps.roles.models import RolesModels
 from apps.roles.permissions import IsSuperUserOrAdmin, IsSuperUserOrRoleOwner
 from apps.roles.serializer import RolesReadSerializer, RolesWriteSerializer
@@ -8,6 +9,7 @@ from apps.roles.serializer import RolesReadSerializer, RolesWriteSerializer
 class RolesListCreateAPIView(ListCreateAPIView):
     queryset = RolesModels.objects.all()
     permission_classes = [IsSuperUserOrAdmin]
+    filterset_class = RolesFilter
 
     def get_serializer_class(self):
         if self.request.method == 'POST':

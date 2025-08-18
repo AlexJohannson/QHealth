@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 
 from rest_framework import serializers
 
+from core.tasks.send_create_role_email_task import send_create_role_email_task
+
 from apps.roles.models import RolesModels
 from apps.users.serializer import UserSerializer
 
@@ -53,6 +55,7 @@ class RolesWriteSerializer(serializers.ModelSerializer):
         user_serializer.is_valid(raise_exception=True)
         user = user_serializer.save()
         user.save()
+        send_create_role_email_task.delay()
         return RolesModels.objects.create(user=user, **validated_data)
 
 

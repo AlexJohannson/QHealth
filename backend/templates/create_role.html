@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+	<p> Hi {{ name }},</p>
+    <p>You get new role as {{ role }} in our clinic QHealth.</p>
+    <p>{% if specialty %} Your specialty is {{ specialty }} {% endif %}</p>
+    <p>We wish you growth the realization of your dreams and many years of cooperation. We thank you very much
+       for joining our team</p>
+    <p>With respect QHealth</p>
+{% endblock %}

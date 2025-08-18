@@ -22,5 +22,6 @@ urlpatterns = [
     path('auth', include('apps.auth.urls')),
     path('security', include('apps.security.urls')),
     path('roles', include('apps.roles.urls')),
+    path('patient_card', include('apps.patient_card.urls')),
 
 ]

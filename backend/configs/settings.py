@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'apps.auth',
     'apps.security',
     'apps.roles',
+    'apps.patient_card',
 ]
 
 MIDDLEWARE = [
