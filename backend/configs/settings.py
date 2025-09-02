@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'apps.security',
     'apps.roles',
     'apps.patient_card',
+    'apps.diagnostics',
 ]
 
 MIDDLEWARE = [
