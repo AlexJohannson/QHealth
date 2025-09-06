@@ -23,5 +23,6 @@ urlpatterns = [
     path('security', include('apps.security.urls')),
     path('roles', include('apps.roles.urls')),
     path('patient_card', include('apps.patient_card.urls')),
+    path('diagnostics', include('apps.diagnostics.urls')),
 
 ]
