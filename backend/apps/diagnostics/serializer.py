@@ -12,3 +12,11 @@ class DiagnosticsSerializer(serializers.ModelSerializer):
             'created_at',
             'updated_at',
         )
+
+    def validate(self, attrs):
+        modality = attrs.get('modality')
+        if DiagnosticsModel.objects.filter(modality=modality).exists():
+            raise serializers.ValidationError({
+                'Modality':'This modality is already registered! Please, check the modality list.'
+            })
+        return attrs

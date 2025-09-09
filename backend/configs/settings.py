@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'apps.roles',
     'apps.patient_card',
     'apps.diagnostics',
+    'apps.booking_diagnostic',
 ]
 
 MIDDLEWARE = [
