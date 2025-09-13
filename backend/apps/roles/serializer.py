@@ -30,8 +30,14 @@ class RolesWriteSerializer(serializers.ModelSerializer):
             'id',
             'role',
             'specialty',
-            'user'
+            'user',
+            'created_at',
+            'updated_at',
         )
+        extra_kwargs = {
+            'created_at': {'read_only': True},
+            'updated_at': {'read_only': True},
+        }
 
     def validate(self, data):
         role = data.get('role')

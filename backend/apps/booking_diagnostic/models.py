@@ -11,6 +11,8 @@ class BookingDiagnosticModel(BaseModel):
     class Meta:
         db_table = 'booking_diagnostic'
 
+
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='booking_diagnostic')
     diagnostic_service = models.ForeignKey(DiagnosticsModel, on_delete=models.CASCADE, related_name='booking_diagnostic_user')
     booked_by = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='booking_diagnostic_by')
+    date_time = models.CharField(max_length=50, blank=True, null=True)

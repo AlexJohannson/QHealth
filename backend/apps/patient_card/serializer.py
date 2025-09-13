@@ -29,6 +29,10 @@ class PatientCardSerializer(serializers.ModelSerializer):
             'created_at',
             'updated_at',
         )
+        extra_kwargs = {
+            'created_at': {'read_only': True},
+            'updated_at': {'read_only': True},
+        }
 
     def create(self, validated_data):
         patient_card = super().create(validated_data)

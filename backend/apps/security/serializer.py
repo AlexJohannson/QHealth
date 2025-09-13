@@ -15,3 +15,7 @@ class SecuritySerializer(serializers.ModelSerializer):
             'created_at',
             'updated_at',
         )
+        extra_kwargs = {
+            'created_at': {'read_only': True},
+            'updated_at': {'read_only': True},
+        }

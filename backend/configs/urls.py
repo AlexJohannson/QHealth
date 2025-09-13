@@ -24,5 +24,6 @@ urlpatterns = [
     path('roles', include('apps.roles.urls')),
     path('patient_card', include('apps.patient_card.urls')),
     path('diagnostics', include('apps.diagnostics.urls')),
+    path('booking_diagnostic', include('apps.booking_diagnostic.urls')),
 
 ]
