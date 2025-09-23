@@ -74,7 +74,7 @@ class BookingDiagnosticSerializer(serializers.ModelSerializer):
 
             if not can_book_for_others:
                 raise serializers.ValidationError({
-                    "user_id": "You can only book appointments for yourself."
+                    "Details": "You can only book appointments for yourself."
                 })
 
 

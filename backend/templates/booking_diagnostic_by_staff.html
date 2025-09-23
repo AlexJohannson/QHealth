@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+
+
+{% block body %}
+	<p>Hello {{ name }},</p>
+    <p>Our {{ booked_by }} booked "{{ diagnostic_service }}" at {{ date_time }}.</p>
+    <p>Please, if you cannot attend inform us 24 hours in advance.</p>
+    <p>QHealth</p>
+{% endblock %}

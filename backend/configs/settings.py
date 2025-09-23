@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'apps.patient_card',
     'apps.diagnostics',
     'apps.booking_diagnostic',
+    'apps.booking_doctor',
 ]
 
 MIDDLEWARE = [

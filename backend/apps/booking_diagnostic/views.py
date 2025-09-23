@@ -1,6 +1,9 @@
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
+from core.tasks.send_patient_booking_diagnostic_by_staff import send_patient_booking_diagnostic_by_staff
+from core.tasks.send_patient_booking_diagnostic_email_task import send_patient_booking_diagnostic_email_task
+
 from apps.booking_diagnostic.filter import BookingDiagnosticFilter
 from apps.booking_diagnostic.models import BookingDiagnosticModel
 from apps.booking_diagnostic.permissions import (
@@ -32,7 +35,15 @@ class BookingDiagnosticListCreateAPIView(ListCreateAPIView):
                 f"Patient {user.profile.name} already has a booking for {diagnostic_service.modality}."
             )
 
-        serializer.save(user=user, booked_by=booked_by)
+        booking = serializer.save(user=user, booked_by=booked_by)
+
+        is_self_booking = (user == booked_by)
+
+        if is_self_booking:
+            send_patient_booking_diagnostic_email_task.delay(booking.id)
+        else:
+            send_patient_booking_diagnostic_by_staff.delay(booking.id)
+
 
 
     def get_permissions(self):
