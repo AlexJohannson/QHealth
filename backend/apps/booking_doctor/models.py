@@ -3,7 +3,7 @@ from django.db import models
 
 from core.models import BaseModel
 
-from apps.roles.models import RolesChoices
+from apps.roles.models import RolesModels
 
 UserModel = get_user_model()
 
@@ -13,5 +13,5 @@ class BookingDoctorModel(BaseModel):
 
 
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='booking_doctor_user')
-    doctors_specialty = models.ForeignKey(RolesChoices, on_delete=models.CASCADE, related_name='booking_doctor_specialty')
+    doctors_specialty = models.ForeignKey(RolesModels, on_delete=models.CASCADE, related_name='booking_doctor_specialty')
     date_time = models.CharField(max_length=50)
