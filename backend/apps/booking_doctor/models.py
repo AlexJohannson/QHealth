@@ -13,5 +13,10 @@ class BookingDoctorModel(BaseModel):
 
 
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='booking_doctor_user')
-    doctors_specialty = models.ForeignKey(RolesModels, on_delete=models.CASCADE, related_name='booking_doctor_specialty')
+    doctor = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE,
+        related_name='bookings_as_doctor',
+        limit_choices_to={'role__role': 'doctor'}
+    )
     date_time = models.CharField(max_length=50)
