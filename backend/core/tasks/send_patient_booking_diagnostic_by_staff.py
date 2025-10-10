@@ -18,6 +18,15 @@ def send_patient_booking_diagnostic_by_staff(booking_id):
         diagnostic_service = booking.diagnostic_service
         booked_by = booking.booked_by
 
+        if hasattr(booked_by, 'role') and booked_by.role:
+            booked_by_label = booked_by.role.role
+        elif booked_by.is_superuser:
+            booked_by_label = 'Superuser'
+        elif booked_by.is_staff:
+            booked_by_label = 'Admin'
+        else:
+            booked_by_label = 'Staff'
+
         EmailService.send_email(
             to=user.email,
             template_name='booking_diagnostic_by_staff.html',
@@ -25,7 +34,7 @@ def send_patient_booking_diagnostic_by_staff(booking_id):
                 'name': user.profile.name,
                 'diagnostic_service': diagnostic_service.modality,
                 'date_time': booking.date_time,
-                'booked_by': booked_by.role.role,
+                'booked_by': booked_by_label,
             },
             subject='Booking Diagnostic',
         )

@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core import validators as V
+from django.core.exceptions import ValidationError
 from django.db import models
 
 from core.enums.regex_enum import RegexEnum
@@ -19,6 +20,14 @@ class UserModel(AbstractBaseUser, PermissionsMixin, BaseModel):
     USERNAME_FIELD = 'email'
 
     objects = UserManager()
+
+    def has_bookings(self):
+        return self.booking_doctor_user.exists() or self.bookings_as_doctor.exists()
+
+    def delete(self, *args, **kwargs):
+        if self.has_bookings():
+            raise ValidationError("Cannot delete user-staff with active bookings. Check the list of booking!")
+        super().delete(*args, **kwargs)
 
 
 class GenderChoices(models.TextChoices):

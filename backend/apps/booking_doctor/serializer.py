@@ -27,6 +27,9 @@ class BookingDoctorSerializer(serializers.ModelSerializer):
 
     doctor = serializers.SerializerMethodField()
 
+    status = serializers.ChoiceField(choices=BookingDoctorModel.STATUS_CHOICES)
+    is_active = serializers.BooleanField(read_only=True)
+
 
     class Meta:
         model = BookingDoctorModel
@@ -36,6 +39,8 @@ class BookingDoctorSerializer(serializers.ModelSerializer):
             'user',
             'doctor_id',
             'doctor',
+            'status',
+            'is_active',
             'date_time',
             'created_at',
             'updated_at',
@@ -53,16 +58,17 @@ class BookingDoctorSerializer(serializers.ModelSerializer):
             print(f"Error getting doctor role: {e}")
         return None
 
+
     def validate_doctor_id(self, value):
         try:
             if not hasattr(value, 'role') or value.role.role != 'doctor':
-                raise serializers.ValidationError({
-                    'Details' : 'The selected user is not a doctor.'
-                })
+                raise serializers.ValidationError({'Details': 'The selected user is not a doctor.'})
+
+            if not value.role.is_available_for_booking:
+                raise serializers.ValidationError({'Details': 'This doctor is not available for booking.'})
         except Exception:
-            raise serializers.ValidationError({
-                'Details' : 'The selected user has no role assigned.'
-            })
+            raise serializers.ValidationError({'Details': 'The selected user has no role assigned.'})
+
         return value
 
     def validate(self, attrs):

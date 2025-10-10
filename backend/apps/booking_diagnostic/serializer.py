@@ -33,6 +33,8 @@ class BookingDiagnosticSerializer(serializers.ModelSerializer):
     )
     booked_by = UserSerializer(read_only=True)
 
+    date_time = serializers.DateTimeField(required=False)
+
     class Meta:
         model = BookingDiagnosticModel
         fields = (
@@ -50,6 +52,7 @@ class BookingDiagnosticSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'created_at': {'read_only': True},
             'updated_at': {'read_only': True},
+            'date_time': {'required': False},
         }
 
 

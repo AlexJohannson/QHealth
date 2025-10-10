@@ -17,6 +17,7 @@ class RolesReadSerializer(serializers.ModelSerializer):
             'id',
             'role',
             'specialty',
+            'is_available_for_booking',
             'user'
         )
 

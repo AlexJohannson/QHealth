@@ -1,4 +1,6 @@
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework import status
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView
+from rest_framework.response import Response
 
 from apps.roles.filter import RolesFilter
 from apps.roles.models import RolesModels
@@ -21,7 +23,32 @@ class RolesRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = RolesModels.objects.all()
     serializer_class = RolesReadSerializer
     permission_classes = [IsSuperUserOrRoleOwner]
-    http_method_names = ['get', 'delete']
+    http_method_names = ['get']
+
+class ToggleDoctorNotAvailabilityAPIView(UpdateAPIView):
+    queryset = RolesModels.objects.filter(role='doctor')
+    serializer_class = RolesReadSerializer
+    permission_classes = [IsSuperUserOrAdmin]
+    http_method_names = ['patch']
+
+    def patch(self, request, *args, **kwargs):
+        role = self.get_object()
+        role.is_available_for_booking = not role.is_available_for_booking
+        role.save()
+        return Response({'is_available_for_booking': role.is_available_for_booking}, status=status.HTTP_200_OK)
+
+class ToggleDoctorAvailabilityAPIView(UpdateAPIView):
+    queryset = RolesModels.objects.filter(role='doctor')
+    serializer_class = RolesReadSerializer
+    permission_classes = [IsSuperUserOrAdmin]
+    http_method_names = ['patch']
+
+    def patch(self, request, *args, **kwargs):
+        role = self.get_object()
+        role.is_available_for_booking = True
+        role.save()
+        return Response({'is_available_for_booking': role.is_available_for_booking}, status.HTTP_200_OK)
+
 
 
 

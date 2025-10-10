@@ -13,6 +13,6 @@ class BookingDiagnosticModel(BaseModel):
 
 
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='booking_diagnostic')
-    diagnostic_service = models.ForeignKey(DiagnosticsModel, on_delete=models.CASCADE, related_name='booking_diagnostic_user')
+    diagnostic_service = models.ForeignKey(DiagnosticsModel, on_delete=models.PROTECT, related_name='booking_diagnostic_user')
     booked_by = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='booking_diagnostic_by')
-    date_time = models.CharField(max_length=50, blank=True, null=True)
+    date_time = models.DateTimeField(null=True, blank=True)
