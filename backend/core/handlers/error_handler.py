@@ -15,7 +15,6 @@ def error_handler(exc: Exception, context: dict):
         "AuthenticationFailed": _authentication_failed_handler,
         "Http404": _close_permission,
         "ProtectedError": _protected_error,
-        "ValidationError": _user_delete_blocked_handler,
 
     }
 
@@ -47,13 +46,7 @@ def _protected_error(exc, context):
         'detail': 'It is not possible to delete a diagnosis if you have booked diagnostic appointments.'
     }, status.HTTP_403_FORBIDDEN)
 
-def _user_delete_blocked_handler(exc, context):
-    if str(exc) == "Cannot delete user with active bookings.":
-        return Response(
-            {'detail': 'User cannot be deleted because they have active bookings.'},
-            status.HTTP_403_FORBIDDEN
-        )
-    return Response({'detail': str(exc)}, status.HTTP_400_BAD_REQUEST)
+
 
 
 

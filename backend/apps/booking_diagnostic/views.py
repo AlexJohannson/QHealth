@@ -31,9 +31,9 @@ class BookingDiagnosticListCreateAPIView(ListCreateAPIView):
 
 
         if BookingDiagnosticModel.objects.filter(user=user, diagnostic_service=diagnostic_service).exists():
-            raise ValidationError(
-                f"Patient {user.profile.name} already has a booking for {diagnostic_service.modality}."
-            )
+            raise ValidationError({
+                "detail":f"Patient {user.profile.name} already has a booking for {diagnostic_service.modality}."
+            })
 
         booking = serializer.save(user=user, booked_by=booked_by)
 

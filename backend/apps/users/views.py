@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 
 from rest_framework import status
-from rest_framework.exceptions import ValidationError as DRFValidationError
 from rest_framework.generics import GenericAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -40,6 +39,7 @@ class UsersRetrieveUpdateDestroyApiView(RetrieveUpdateDestroyAPIView):
         user = self.get_object()
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 
 class BlockUserView(GenericAPIView):

@@ -8,6 +8,7 @@ from rest_framework import serializers
 
 from core.enums.regex_enum import RegexEnum
 from core.services.email_service import EmailService
+from core.tasks.send_welcome_to_qhealt_email_task import send_welcome_to_qhealt_email
 
 from apps.users.models import ProfileModel
 
@@ -100,6 +101,7 @@ class UserSerializer(serializers.ModelSerializer):
         user = UserModel.objects.create_user(**validated_data)
         ProfileModel.objects.create(user=user, **profile)
         EmailService.register(user)
+        send_welcome_to_qhealt_email.apply_async(kwargs={'user_id': user.id}, countdown=20)
         return user
 
 

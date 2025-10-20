@@ -1,7 +1,8 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core import validators as V
-from django.core.exceptions import ValidationError
 from django.db import models
+
+from rest_framework.exceptions import ValidationError
 
 from core.enums.regex_enum import RegexEnum
 from core.models import BaseModel
@@ -22,11 +23,16 @@ class UserModel(AbstractBaseUser, PermissionsMixin, BaseModel):
     objects = UserManager()
 
     def has_bookings(self):
-        return self.booking_doctor_user.exists() or self.bookings_as_doctor.exists()
+        return self.booking_doctor_user.exists() or self.bookings_as_doctor.exists() or self.booking_diagnostic.exists()
+
 
     def delete(self, *args, **kwargs):
         if self.has_bookings():
-            raise ValidationError("Cannot delete user-staff with active bookings. Check the list of booking!")
+            raise ValidationError({
+                "detail":
+                    "It is forbidden to delete a user with the role of doctor who has a reservation and patient with reservation. "
+                    "Please, check the booking docktor list for doctor and booking diagnostic for patient!"
+            })
         super().delete(*args, **kwargs)
 
 
