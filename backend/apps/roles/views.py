@@ -2,6 +2,9 @@ from rest_framework import status
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView
 from rest_framework.response import Response
 
+from core.tasks.send_block_doctor_email_task import send_block_doctor_email_task
+from core.tasks.send_unblock_doctor_email_task import send_unblock_doctor_email_task
+
 from apps.roles.filter import RolesFilter
 from apps.roles.models import RolesModels
 from apps.roles.permissions import IsSuperUserOrAdmin, IsSuperUserOrRoleOwner
@@ -35,6 +38,7 @@ class ToggleDoctorNotAvailabilityAPIView(UpdateAPIView):
         role = self.get_object()
         role.is_available_for_booking = not role.is_available_for_booking
         role.save()
+        send_block_doctor_email_task.delay(role.user.id)
         return Response({'is_available_for_booking': role.is_available_for_booking}, status=status.HTTP_200_OK)
 
 class ToggleDoctorAvailabilityAPIView(UpdateAPIView):
@@ -47,6 +51,7 @@ class ToggleDoctorAvailabilityAPIView(UpdateAPIView):
         role = self.get_object()
         role.is_available_for_booking = True
         role.save()
+        send_unblock_doctor_email_task.delay(role.user.id)
         return Response({'is_available_for_booking': role.is_available_for_booking}, status.HTTP_200_OK)
 
 

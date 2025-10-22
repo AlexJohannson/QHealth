@@ -5,6 +5,12 @@ from rest_framework.generics import GenericAPIView, ListCreateAPIView, RetrieveU
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
+from core.tasks.send_block_user_account_email_task import send_block_user_account_email_task
+from core.tasks.send_create_admin_email_task import send_create_admin_email_task
+from core.tasks.send_delete_user_account_email_task import send_delete_user_account_email_task
+from core.tasks.send_revoke_admin_email_task import send_revoke_admin_email_task
+from core.tasks.send_unblock_user_account_email_task import send_unblock_user_account_email_task
+
 from apps.users.filter import UsersFilter
 from apps.users.permissions import (
     IsSuperUserAdminOrRole,
@@ -37,6 +43,7 @@ class UsersRetrieveUpdateDestroyApiView(RetrieveUpdateDestroyAPIView):
 
     def delete(self, request, *args, **kwargs):
         user = self.get_object()
+        send_delete_user_account_email_task.delay(user.id)
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -52,7 +59,7 @@ class BlockUserView(GenericAPIView):
         if user.is_active:
             user.is_active = False
             user.save()
-
+        send_block_user_account_email_task.delay(user.id)
         serializer = UserSerializer(user)
         return Response(serializer.data, status.HTTP_200_OK)
 
@@ -67,7 +74,7 @@ class UnBlockUserView(GenericAPIView):
         if not user.is_active:
             user.is_active = True
             user.save()
-
+        send_unblock_user_account_email_task.delay(user.id)
         serializer = UserSerializer(user)
         return Response(serializer.data, status.HTTP_200_OK)
 
@@ -83,7 +90,7 @@ class UserToAdminView(GenericAPIView):
         if not user.is_staff:
             user.is_staff = True
             user.save()
-
+        send_create_admin_email_task.delay(user.id)
         serializer = UserSerializer(user)
         return Response(serializer.data, status.HTTP_200_OK)
 
@@ -96,13 +103,10 @@ class UserRevokeAdminView(GenericAPIView):
 
     def patch(self, *args, **kwargs):
         user = self.get_object()
-
-
-
         if user.is_staff:
             user.is_staff = False
             user.save()
-
+        send_revoke_admin_email_task.delay(user.id)
         serializer = UserSerializer(user)
         return Response(serializer.data, status.HTTP_200_OK)
 
