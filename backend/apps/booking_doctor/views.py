@@ -1,6 +1,9 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView
 from rest_framework.response import Response
 
+from core.tasks.send_booking_doctor_email_task import send_booking_doctor_email_task
+from core.tasks.send_cancelled_booking_doctor_email_tasl import send_cancelled_booking_doctor_email_task
+
 from apps.booking_doctor.filter import BookingDoctorFilter
 from apps.booking_doctor.models import BookingDoctorModel
 from apps.booking_doctor.permissions import (
@@ -21,6 +24,10 @@ class BookingDoctorListCreateAPIView(ListCreateAPIView):
         if self.request.method == 'GET':
             return [IsSuperUserOrAdminOrOperatorOrDoctor()]
         return [IsSuperUserOrAdminOrOperator()]
+
+    def perform_create(self, serializer):
+        booking = serializer.save()
+        send_booking_doctor_email_task.delay(booking.id)
 
 
 class BookingDoctorRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
@@ -44,6 +51,7 @@ class BookingDoctorCancelAPIView(UpdateAPIView):
         booking = self.get_object()
         booking.status = 'cancelled'
         booking.save()
+        send_cancelled_booking_doctor_email_task.delay(booking.id)
         return self.get_response(booking)
 
     def get_response(self, booking):

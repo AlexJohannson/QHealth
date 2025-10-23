@@ -2,10 +2,12 @@
 
 
 {% block body %}
-	<p> Hi {{ name }},</p>
-    <p>You get new role as {{ role }} in our clinic QHealth.</p>
-    <p>{% if specialty %} Your specialty is {{ specialty }} {% endif %}</p>
+    <p> Hello <strong>{{ name }}</strong>,</p>
+    <p>You get new role as <strong>{{ role }}</strong> in our clinic <strong>QHealth</strong>.</p>
+    <p>{% if specialty %} Your specialty is <strong>{{ specialty }}</strong> {% endif %}</p>
     <p>We wish you growth the realization of your dreams and many years of cooperation. We thank you very much
        for joining our team</p>
-    <p>With respect QHealth</p>
+    <p>If you have any questions, please call us.</p>
+    <p>Call us: <a href="tel:+00000000000">+00000000000</a></p>
+    <p>Best regards, <br><strong>QHealth Team</strong></p>
 {% endblock %}

@@ -2,9 +2,11 @@
 
 
 {% block body %}
-	<p>Dear {{ name }},</p>
-    <p>We have decided to temporarily block your position as a {{ role }} with a specialty {{ specialty }}
-    in general medicine to avoid bookings.</p>
-    <p>For more information, please, contact our support team - +00 00 000-00 00</p>
-    <p>QHealt</p>
+    <p>Dear <strong>{{ name }}</strong>,</p>
+    <p>We have decided to temporarily block your position as a <strong>{{ role }}</strong> with a specialty
+        <strong>{{ specialty }}</strong> in general medicine to avoid bookings in our clinic
+        <strong>QHealth</strong>.</p>
+    <p>For more information, please, contact our support team!</p>
+    <p>Call us: <a href="tel:+00000000000">+00000000000</a></p>
+    <p>Best regards, <br><strong>QHealth Team</strong></p>
 {% endblock %}

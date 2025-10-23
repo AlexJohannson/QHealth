@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
 {% block body %}
-	<p>Hello {{ name }},</p>
+    <p>Hello <strong>{{ name }}</strong>,</p>
     <p>For recovery your password, please follow this <a href="{{ url }}">link for recovery password!</a></p>
-    <p>QHealth</p>
+    <p>If you have any problems and cannot recovery your password or maybe there is some other problem, you can
+        always contact our support team.</p>
+    <p>Call us: <a href="tel:+00000000000">+00000000000</a></p>
+    <p>Best regards, <br><strong>QHealth Team</strong></p>
 {% endblock %}

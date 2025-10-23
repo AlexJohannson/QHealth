@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+    <p>Hello <strong>{{ name }}</strong>,</p>
+    <p>You have booked time to doctor in <strong>QHealth</strong> clinic.</p>
+    <p>Time: <strong>{{ date_time }}</strong></p>
+    <p><strong>Doctor:</strong></p>
+    <p>Name: <strong>{{ doctor_name }}</strong></p>
+    <p>Surname <strong>{{ doctor_surname }}</strong></p>
+    <p>Specialty: <strong>{{ specialty }}</strong></p>
+    <p>Status: <strong>{{ status }}</strong></p>
+    <p>If you are unable to attend your scheduled appointment, you can cancel your appointment yourself or by
+        calling us. You can cancel your appointment within <strong>24 hours</strong>, otherwise a cancellation
+    fee will be charged.</p>
+    <p>If you have any questions regarding booking or cancellation or perhaps other questions or wishes we
+    will be happy to listen and help you.</p>
+    <p>Call us: <a href="tel:+00000000000">+00000000000</a></p>
+    <p>Best regards, <br><strong>QHealth Team</strong></p>
+{% endblock %}
