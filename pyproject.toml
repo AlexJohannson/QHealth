@@ -16,6 +16,9 @@ redis = "^6.2.0"
 django-celery-results = "^2.6.0"
 django-celery-beat = "^2.8.1"
 django-filter = "^25.1"
+djangochannelsrestframework = "^1.3.0"
+daphne = "^4.2.1"
+channels-redis = "^4.3.0"
 
 
 

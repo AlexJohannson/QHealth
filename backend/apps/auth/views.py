@@ -2,11 +2,11 @@ from django.contrib.auth import get_user_model
 
 from rest_framework import status
 from rest_framework.generics import GenericAPIView, get_object_or_404
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from core.services.email_service import EmailService
-from core.services.jwt_service import ActivateToken, JWTService, RecoveryToken
+from core.services.jwt_service import ActivateToken, JWTService, RecoveryToken, SocketToken
 
 from apps.auth.serializer import EmailSerializer, PasswordSerializer
 from apps.users.serializer import UserSerializer
@@ -50,4 +50,11 @@ class RecoveryPasswordView(GenericAPIView):
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+
+class WebSocketTokenView(GenericAPIView):
+    permission_classes = (IsAuthenticated, )
+
+    def get(self, *args, **kwargs):
+        token = JWTService.create_token(user=self.request.user, token_class=SocketToken)
+        return Response({'token': str(token)}, status=status.HTTP_200_OK)
         

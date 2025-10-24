@@ -18,13 +18,13 @@ Including another URLconf
 from django.urls import include, path
 
 urlpatterns = [
-    path('users', include('apps.users.urls')),
-    path('auth', include('apps.auth.urls')),
-    path('security', include('apps.security.urls')),
-    path('roles', include('apps.roles.urls')),
-    path('patient_card', include('apps.patient_card.urls')),
-    path('diagnostics', include('apps.diagnostics.urls')),
-    path('booking_diagnostic', include('apps.booking_diagnostic.urls')),
-    path('booking_doctor', include('apps.booking_doctor.urls')),
+    path('api/users', include('apps.users.urls')),
+    path('api/auth', include('apps.auth.urls')),
+    path('api/security', include('apps.security.urls')),
+    path('api/roles', include('apps.roles.urls')),
+    path('api/patient_card', include('apps.patient_card.urls')),
+    path('api/diagnostics', include('apps.diagnostics.urls')),
+    path('api/booking_diagnostic', include('apps.booking_diagnostic.urls')),
+    path('api/booking_doctor', include('apps.booking_doctor.urls')),
 
 ]
