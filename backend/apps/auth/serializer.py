@@ -12,3 +12,12 @@ class PasswordSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
         fields = ['password']
+
+
+class UserRoleSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    is_superuser = serializers.BooleanField()
+    is_staff = serializers.BooleanField()
+    is_user = serializers.BooleanField()
+    role = serializers.CharField(allow_null=True)
+    specialty = serializers.CharField(allow_null=True)

@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from core.services.email_service import EmailService
 from core.services.jwt_service import ActivateToken, JWTService, RecoveryToken, SocketToken
 
-from apps.auth.serializer import EmailSerializer, PasswordSerializer
+from apps.auth.serializer import EmailSerializer, PasswordSerializer, UserRoleSerializer
 from apps.users.serializer import UserSerializer
 
 UserModel = get_user_model()
@@ -57,4 +57,29 @@ class WebSocketTokenView(GenericAPIView):
     def get(self, *args, **kwargs):
         token = JWTService.create_token(user=self.request.user, token_class=SocketToken)
         return Response({'token': str(token)}, status=status.HTTP_200_OK)
+
+
+class UserRoleView(GenericAPIView):
+    permission_classes = (IsAuthenticated, )
+
+    
+    def get(self, request):
+        user = request.user
+        role_obj = getattr(user, 'role', None)
+        role = role_obj.role if role_obj else None
+        specialty = role_obj.specialty if role_obj and role_obj.role == 'doctor' else None
+
+        data = {
+            'id': user.id,
+            'is_superuser': user.is_superuser,
+            'is_staff': user.is_staff,
+            'is_user': user.is_active,
+            'role': role,
+            'specialty': specialty,
+        }
+
+        serializer = UserRoleSerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        return Response(serializer.data)
+
         

@@ -22,7 +22,7 @@ BAN_DURATION = 600
 
 class LoginRateLimitMiddleware(MiddlewareMixin):
     def process_request(self, request):
-        if request.path == "/auth" and request.method == "POST":
+        if request.path == "/api/auth" and request.method == "POST":
             email = request.POST.get("email") or request.POST.get("username")
             ip = self.get_client_ip(request)
             redis_key = f"failed_login:{ip}"
@@ -42,7 +42,7 @@ class LoginRateLimitMiddleware(MiddlewareMixin):
 
     def process_response(self, request, response):
         if (
-            request.path == "/auth"
+            request.path == "/api/auth"
             and request.method == "POST"
             and hasattr(request, "_login_ip")
         ):

@@ -17,10 +17,6 @@ class IsSuperUserOrRoleOwner(BasePermission):
                 return True
             return hasattr(request.user, 'role') and request.user.role and request.user.role.role in self.allowed_roles
 
-
-        if request.method == 'DELETE':
-            return request.user.is_superuser or request.user.is_staff
-
         return False
 
     def has_object_permission(self, request, view, obj):
@@ -28,9 +24,6 @@ class IsSuperUserOrRoleOwner(BasePermission):
             if request.user.is_superuser or request.user.is_staff:
                 return True
             return obj.user == request.user and request.user.role.role in self.allowed_roles
-
-        if request.method == 'DELETE':
-            return request.user.is_superuser or request.user.is_staff
 
         return False
 
