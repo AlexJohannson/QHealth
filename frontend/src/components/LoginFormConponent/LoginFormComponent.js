@@ -50,6 +50,9 @@ const LoginFormComponent = () => {
                 <button type="submit">LOGIN</button>
             </form>
             {error && <p style={{ color: 'red' }}>{error}</p>}
+            <div>
+                <button onClick={() => navigate(-1)}>BACK</button>
+            </div>
         </div>
     );
 };

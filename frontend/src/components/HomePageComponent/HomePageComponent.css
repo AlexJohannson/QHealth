@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Parkinsans:wght@300..800&display=swap');
+
+.home-page{
+    width: 100%;
+}
+/*-----------------------------------------   div HEADER SECTION  -------------------------------------------------------*/
+.header-section-home-page{
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 170px;
+    background-color: lightyellow;
+}
+.header-section-home-page h1 {
+    font-family: "Lobster Two", sans-serif;
+    font-size: 80px;
+    font-weight: 700;
+    font-style: italic;
+    color: blue;
+}
+.logo{
+    width: 200px;
+    height: 120px;
+    margin-right: 50px;
+}
+.login-button {
+    width: 100px;
+    height: 45px;
+    border: none;
+    border-radius: 10px;
+    background-color: blue;
+}
+.login-button:hover {
+    background-color: green;
+}
+.login-link {
+    text-decoration: none;
+    color: white;
+}
+/*--------------------------------------------    div home-page-content  -------------------------------------------------*/
+.home-page-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid lightskyblue;
+    background-color: lightyellow;
+    text-align: center;
+    font-family: "Lobster Two", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+}
+.home-page-content-h2{
+    padding: 50px 0 30px 0;
+}
+.home-page-content h4 {
+    padding-bottom: 30px;
+}
+.home-page-content ul {
+    padding: 0 0 30px 0;
+    list-style-type: none;
+}
+/*--------------------------------------------------   div about-us-offer  -------------------------------------------*/
+.about-us-offer {
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.about-us-offer-block{
+    width: 400px;
+    height: 400px;
+    padding: 100px 0 30px 0;
+    text-align: center;
+}
+.qhealt-one {
+    width: 400px;
+    height: 400px;
+    border-radius: 10px;
+}
+/*----------------------------------------------  div about-us-values    ---------------------------------------------*/
+.about-us-values {
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.about-us-value-block {
+    width: 400px;
+    height: 400px;
+    padding: 100px 0 30px 0;
+    text-align: center;
+}
+.qhealth-two {
+    width: 400px;
+    height: 400px;
+    border-radius: 10px;
+}
+/*---------------------------------------------   div about-us-slogan  ----------------------------------------------*/
+.about-us-slogan {
+    width: 100%;
+    height: 100px;
+    margin-top: 30px;
+    padding-top: 40px;
+}

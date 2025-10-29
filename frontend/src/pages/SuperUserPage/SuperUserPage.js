@@ -1,11 +1,13 @@
 import React from 'react';
-import {NavigationComponent} from "../../components/NavigationComponent/NavigationComponent";
+import {HeaderComponent} from "../../components/HeaderComponent/HeaderComponent";
+
 
 const SuperUserPage = () => {
     return (
         <div>
+            <HeaderComponent/>
+            <hr/>
             <h1>Super User Page!!!</h1>
-            <NavigationComponent/>
         </div>
     );
 };

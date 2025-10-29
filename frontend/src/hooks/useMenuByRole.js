@@ -1,18 +1,23 @@
 import { useMemo } from 'react';
 
 const useMenuByRole = () => {
+  const userId = localStorage.getItem('userId');
   const role = localStorage.getItem('role');
   const isSuperuser = localStorage.getItem('is_superuser') === 'true';
   const isStaff = localStorage.getItem('is_staff') === 'true';
   const isUser = localStorage.getItem('is_user') === 'true';
 
-  console.log('Role from localStorage:', role);
+
 
   const menu = useMemo(() => {
+    if (!userId) return [];
+
+    const result = [];
+
+
     if (isSuperuser) {
       return [
-        { label: 'Dashboard', path: '/superuser' },
-        { label: 'Users', path: '/user' },
+          { label: 'Users', path: '/users' },
       ];
     }
 
@@ -26,7 +31,7 @@ const useMenuByRole = () => {
 
     if (isUser) {
       return [
-        { label: 'My profile', path: '/user-home-page' },
+        { label: 'My profile', path: `/users/${userId}` },
 
       ];
     }
@@ -49,7 +54,7 @@ const useMenuByRole = () => {
           { label: 'Inventory', path: '/pharmacist/inventory' },
         ];
       default:
-        return [];
+        return result;
     }
   }, [role, isSuperuser, isStaff, isUser]);
 

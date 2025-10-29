@@ -1,15 +1,15 @@
 import React from 'react';
 import {Outlet} from "react-router-dom";
-import {HeaderComponent} from "../components/HeaderComponent/HeaderComponent";
+import './MainLayout.css';
+
 
 const MainLayout = () => {
     return (
-        <div>
-            <HeaderComponent/>
-            <hr/>
+        <div className={'wrapper'}>
             <Outlet/>
         </div>
     );
 };
 
 export {MainLayout};
+

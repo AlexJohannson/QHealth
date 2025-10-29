@@ -1,16 +1,13 @@
 import React from 'react';
-import {UserDetailsComponent} from "../../../components/UsersComponent/UserDetailsComponent";
-import {NavigationComponent} from "../../../components/NavigationComponent/NavigationComponent";
+import {HeaderComponent} from "../../../components/HeaderComponent/HeaderComponent";
 
 
 const UserHomePage = () => {
-  const userId = localStorage.getItem('userId');
-
-  return (
+    return (
     <div>
-      <h1>Your Home Page</h1>
-      <NavigationComponent/>
-      <UserDetailsComponent userId={userId}/>
+        <HeaderComponent/>
+        <hr/>
+      <h1>User Home Page</h1>
     </div>
   );
 };

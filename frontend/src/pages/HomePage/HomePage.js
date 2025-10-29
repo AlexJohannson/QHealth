@@ -1,12 +1,10 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {HomePageComponent} from "../../components/HomePageComponent/HomePageComponent";
 
 const HomePage = () => {
     return (
         <div>
-                <h1>QHealth Oleksandr</h1>
-                <Link to="/login">Go to Login</Link>
-
+            <HomePageComponent/>
         </div>
     );
 };
