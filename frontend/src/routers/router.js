@@ -10,6 +10,10 @@ import {SuperUserPage} from "../pages/SuperUserPage/SuperUserPage";
 import {UserDetailsPage} from "../pages/user/UserDetailsPage/UserDetailsPage";
 import {UserHomePage} from "../pages/user/UserHomePage/UserHomePage";
 import {UserPage} from "../pages/user/UserPage/UserPage";
+import {RegisterPage} from "../pages/RegisterPage/RegisterPage";
+import {ActivateAccountPage} from "../pages/ActivateAccountPage/ActivateAccountPage";
+import {RecoveryRequestPage} from "../pages/RecoveryRequestPage/RecoveryRequestPage";
+import {RecoveryPasswordPage} from "../pages/RecoveryPasswordPage/RecoveryPasswordPage";
 
 
 
@@ -27,8 +31,13 @@ const router = createBrowserRouter([
             {path: 'users/:id', element: <UserDetailsPage/>},
             {path: 'user-home-page', element: <UserHomePage/>},
             {path: 'login', element: <LoginPage/>},
+            {path: 'registration', element: <RegisterPage/>},
+            {path: 'auth/activate/:token', element: <ActivateAccountPage />},
+            {path: 'auth/recovery', element: <RecoveryRequestPage/>},
+            {path: 'auth/recovery_password/:token', element: <RecoveryPasswordPage/>}
         ]
     },
+
 
 ])
 

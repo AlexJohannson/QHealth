@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+.login-container {
+    width: 100%;
+    background-color: lightyellow;
+
+}
+/*-------------------------------   div login-container-header   ------------------------------------------------------*/
+.login-container-header {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 170px;
+    background-color: lightyellow;
+    border-bottom: 2px solid lightskyblue;
+}
+.logo-login {
+    width: 200px;
+    height: 120px;
+    margin-right: 50px;
+}
+.login-container-header h1 {
+    font-family: "Lobster Two", sans-serif;
+    font-size: 80px;
+    font-weight: 700;
+    font-style: italic;
+    color: blue;
+}
+/*-----------------------------------------------------    form-login-div   -----------------------------------------------*/
+.login-form-div {
+    width: 100%;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0 10px 0;
+}
+.form-login {
+    width: 450px;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 40px;
+    border-radius: 10px;
+    background-color: gray;
+}
+.form-login-error {
+    color: red;
+}
+/*------------------------------------------    login-form-input    ---------------------------------------------------*/
+.form-login input {
+    width: 350px;
+    height: 30px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+.login-form input:focus {
+  border-color: #007bff;
+}
+.login-form input::placeholder {
+    color: #999;
+    font-style: italic;
+    opacity: 1;
+}
+.login-password {
+    width: 450px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 25px;
+}
+.show-password-login {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px
+}
+/*----------------------------------------   form-login-button   -----------------------------------------------------*/
+.form-login-button-div {
+    width: 450px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.form-login-button {
+    width: 100px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+.form-login-button:hover {
+    background-color: green;
+}
+/*--------------------------------------    form-login-links-div   ------------------------------------------------------*/
+.form-login-links-div {
+    width: 450px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.form-login-links {
+    color: black;
+}

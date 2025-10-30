@@ -39,7 +39,7 @@ class EmailService:
     @classmethod
     def recovery(cls, user):
         token = JWTService.create_token(user, RecoveryToken)
-        url = f'http://localhost/auth/recovery/{token}'
+        url = f'http://localhost/auth/recovery_password/{token}'
         cls.send_email.delay(
             to=user.email,
             template_name='recovery.html',
