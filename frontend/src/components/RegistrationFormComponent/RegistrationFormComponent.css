@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-.login-container {
+
+.registration-form-container {
     width: 100%;
     background-color: lightyellow;
-
 }
-/*-------------------------------   div login-container-header   ------------------------------------------------------*/
-.login-container-header {
+/*------------------------------------   registration-container-header  ---------------------------------------------*/
+.registration-container-header {
     width: 100%;
     height: 150px;
     display: flex;
@@ -16,46 +16,47 @@
     background-color: lightyellow;
     border-bottom: 2px solid lightskyblue;
 }
-.logo-login {
+.logo-register {
     width: 200px;
     height: 120px;
     margin-right: 50px;
 }
-.login-container-header h1 {
+.registration-container-header h1 {
     font-family: "Lobster Two", sans-serif;
     font-size: 80px;
     font-weight: 700;
     font-style: italic;
     color: blue;
 }
-/*-----------------------------------------------------    form-login-div   -----------------------------------------------*/
-.login-form-div {
+/*---------------------------------------   register-form-div   -----------------------------------------------------*/
+.register-form-div {
     width: 100%;
-    height: 450px;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 10px 0 10px 0;
 }
-.form-login {
+.register-successful {
+    color: green;
+}
+.register-error {
+    color: red;
+}
+.register-form {
     width: 450px;
-    height: 450px;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 40px;
+    padding: 25px 0 25px 0;
     border-radius: 10px;
     background-color: gray;
 }
-.form-login-error {
-    color: red;
-}
-.form-message {
-    color: red;
-}
-/*------------------------------------------    login-form-input    ---------------------------------------------------*/
-.form-login input {
+/*-----------------------------------------------    register-form input   -------------------------------------------*/
+.register-form input {
     width: 350px;
     height: 30px;
     padding: 10px 12px;
@@ -65,15 +66,15 @@
     outline: none;
     transition: border-color 0.2s ease;
 }
-.login-form input:focus {
-  border-color: #007bff;
+.register-form input:focus {
+    border-color: #007bff;
 }
-.login-form input::placeholder {
+.register-form input::placeholder {
     color: #999;
     font-style: italic;
     opacity: 1;
 }
-.login-password {
+.register-password {
     width: 450px;
     height: 30px;
     display: flex;
@@ -81,21 +82,43 @@
     justify-content: center;
     padding-left: 25px;
 }
-.show-password-login {
+.show-password-register {
     background: none;
     border: none;
     cursor: pointer;
     font-size: 18px
 }
-/*----------------------------------------   form-login-button   -----------------------------------------------------*/
-.form-login-button-div {
+/*------------------------------------------     register-form select  -----------------------------------------------*/
+.register-form select {
+    width: 350px;
+    height: 40px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease;
+    color: #999;
+    font-style: italic;
+    opacity: 1;
+}
+.register-form input:focus {
+    border-color: #007bff;
+}
+.register-form select option {
+    color: #999;
+    font-style: italic;
+    opacity: 1;
+}
+/*---------------------------------------------    form-register-button-div   ----------------------------------------*/
+.form-register-button-div {
     width: 450px;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
-.form-login-button {
+.form-register-button {
     width: 100px;
     height: 45px;
     border-radius: 10px;
@@ -104,17 +127,6 @@
     color: white;
     cursor: pointer;
 }
-.form-login-button:hover {
+.form-register-button:hover {
     background-color: green;
-}
-/*--------------------------------------    form-login-links-div   ------------------------------------------------------*/
-.form-login-links-div {
-    width: 450px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-.form-login-links {
-    color: black;
 }

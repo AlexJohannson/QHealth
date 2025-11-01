@@ -2,9 +2,12 @@ import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {apiService} from "../../services/apiService";
 import {urls} from "../../constants/urls";
+import './RegistrationFormComponent.css';
+import {FooterComponent} from "../FooterComponent/FooterComponent";
 
 const RegistrationFormComponent = () => {
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
     const [form, setForm] = useState({
         email: '',
         password: '',
@@ -64,70 +67,82 @@ const RegistrationFormComponent = () => {
         }
     };
 
+    const togglePassword = () => setShowPassword(prev => !prev);
+
 
 
 
     return (
-        <div>
-            <div>
-                <h4>Register</h4>
+        <div className="registration-form-container">
+            <div className={'registration-container-header'}>
+                <img src={'/img/logo.png'} className={'logo-register'} alt="Logo"/>
+                <h1>QHealth</h1>
+            </div>
+            <div className={'register-form-div'}>
                 {success ? (
-                    <p>Registration successful. Please check your email to activate your account.</p>
+                    <p className={'register-successful'}>Registration successful. Please check your email to activate your account.</p>
                 ): (
-                    <form onSubmit={handleSubmit}>
+                    <form  className={'register-form'} onSubmit={handleSubmit}>
+                        <h2>REGISTER</h2>
                         <input name={'email'} placeholder={'Email'} value={form.email} onChange={handelChange}/>
-                        {error.email && (<p>{error.email}</p>)}
+                        {error.email && (<p className={'register-error'}>{error.email}</p>)}
 
-                        <input name={'password'} type={'password'} placeholder={'Password'} value={form.password} onChange={handelChange}/>
-                        {error.password && (<p>{error.password}</p>)}
+                        <div className={'register-password'}>
+                        <input name={'password'} type={showPassword ? 'text' : 'password'} placeholder={'Password'} value={form.password} onChange={handelChange}/>
+                        <button className={'show-password-register'} type="button" onClick={togglePassword}
+                        >{showPassword ? '👁️' : '🙈'}</button>
+                        </div>
+                        {error.password && (<p className={'register-error'}>{error.password}</p>)}
 
                         <input name={'name'} placeholder={'Name'} value={form.name} onChange={handelChange}/>
-                        {error.profile?.name && (<p>{error.profile.name}</p>)}
+                        {error.profile?.name && (<p className={'register-error'}>{error.profile.name}</p>)}
 
                         <input name={'surname'} placeholder={'Surname'} value={form.surname} onChange={handelChange}/>
-                        {error.profile?.surname && (<p>{error.profile.surname}</p>)}
+                        {error.profile?.surname && (<p className={'register-error'}>{error.profile.surname}</p>)}
 
                         <input name={'phone_number'} placeholder={'Phone number'} value={form.phone_number} onChange={handelChange}/>
-                        {error.profile?.phone_number && (<p>{error.profile.phone_number}</p>)}
+                        {error.profile?.phone_number && (<p className={'register-error'}>{error.profile.phone_number}</p>)}
 
                         <input name={'date_of_birth'}  type={'date'} value={form.date_of_birth} onChange={handelChange}/>
-                        {error.profile?.date_of_birth && (<p>{error.profile.date_of_birth}</p>)}
+                        {error.profile?.date_of_birth && (<p className={'register-error'}>{error.profile.date_of_birth}</p>)}
 
                         <input name={'height'} type={'number'} placeholder={'Height (cm)'} value={form.height} onChange={handelChange}/>
-                        {error.profile?.height && (<p>{error.profile.height}</p>)}
+                        {error.profile?.height && (<p className={'register-error'}>{error.profile.height}</p>)}
 
                         <input name={'weight'} type={'number'} placeholder={'Weight (kg)'} value={form.weight} onChange={handelChange}/>
-                        {error.profile?.weight && (<p>{error.profile.weight}</p>)}
+                        {error.profile?.weight && (<p className={'register-error'}>{error.profile.weight}</p>)}
 
                         <input name={'street'} placeholder={'Street'} value={form.street} onChange={handelChange}/>
-                        {error.profile?.street && (<p>{error.profile.street}</p>)}
+                        {error.profile?.street && (<p className={'register-error'}>{error.profile.street}</p>)}
 
                         <input name={'house'} placeholder={'House'} value={form.house} onChange={handelChange}/>
-                        {error.profile?.house && (<p>{error.profile.house}</p>)}
+                        {error.profile?.house && (<p className={'register-error'}>{error.profile.house}</p>)}
 
                         <input name={'city'} placeholder={'City'} value={form.city} onChange={handelChange}/>
-                        {error.profile?.city && (<p>{error.profile.city}</p>)}
+                        {error.profile?.city && (<p className={'register-error'}>{error.profile.city}</p>)}
 
                         <input name={'region'} placeholder={'Region'} value={form.region} onChange={handelChange}/>
-                        {error.profile?.region && (<p>{error.profile.region}</p>)}
+                        {error.profile?.region && (<p className={'register-error'}>{error.profile.region}</p>)}
 
                         <input name={'country'} placeholder={'Country'} value={form.country} onChange={handelChange}/>
-                        {error.profile?.country && (<p>{error.profile.country}</p>)}
+                        {error.profile?.country && (<p className={'register-error'}>{error.profile.country}</p>)}
 
                         <select name={'gender'} value={form.gender} onChange={handelChange}>
                             <option value={''}>Select Gender</option>
                             <option value={'Female'}>Female</option>
                             <option value={'Male'}>Male</option>
                         </select>
-                        {error.profile?.gender && (<p>{error.profile.gender}</p>)}
+                        {error.profile?.gender && (<p className={'register-error'}>{error.profile.gender}</p>)}
 
-                        {error.general && (<p>{error.general}</p>)}
-
-                        <button type={'submit'}>REGISTER</button>
+                        {error.general && (<p className={'register-error'}>{error.general}</p>)}
+                        <div className={'form-register-button-div'}>
+                        <button className={'form-register-button'} type={'submit'}>REGISTER</button>
+                        <button className={'form-register-button'} onClick={() => navigate(-1)}>BACK</button>
+                        </div>
                     </form>
                 )}
-                <button onClick={() => navigate(-1)}>BACK</button>
             </div>
+            <FooterComponent/>
         </div>
     );
 };

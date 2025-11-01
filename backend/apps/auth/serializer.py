@@ -1,6 +1,9 @@
 from django.contrib.auth import get_user_model
+from django.core import validators as V
 
 from rest_framework import serializers
+
+from core.enums.regex_enum import RegexEnum
 
 UserModel = get_user_model()
 
@@ -9,6 +12,10 @@ class EmailSerializer(serializers.Serializer):
 
 
 class PasswordSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(
+        validators=[V.RegexValidator(RegexEnum.PASSWORD.pattern, RegexEnum.PASSWORD.msg)]
+    )
+
     class Meta:
         model = UserModel
         fields = ['password']
