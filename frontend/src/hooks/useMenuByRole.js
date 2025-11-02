@@ -56,7 +56,7 @@ const useMenuByRole = () => {
       default:
         return result;
     }
-  }, [role, isSuperuser, isStaff, isUser]);
+  }, [role, isSuperuser, isStaff, isUser, userId]);
 
   return menu;
 };
