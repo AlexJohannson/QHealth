@@ -17,6 +17,18 @@ const userService = {
   delete(id) {
     return apiService.delete(`${urls.users.list}/${id}`);
   },
+  blockUser(id) {
+    return apiService.patch(`${urls.users.list}/${id}/block`);
+  },
+  unblockUser(id) {
+    return apiService.patch(`${urls.users.list}/${id}/unblock`);
+  },
+  userToAdmin(id) {
+    return apiService.patch(`${urls.users.list}/${id}/create_admin`);
+  },
+  revokeAdmin(id) {
+    return apiService.patch(`${urls.users.list}/${id}/revoke_admin`);
+  }
 };
 
 export {userService};

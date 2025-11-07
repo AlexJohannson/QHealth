@@ -1,5 +1,6 @@
 import {apiService} from "./apiService";
 import {urls} from "../constants/urls";
+import {rawApiService} from "./rawApiService";
 
 const authService = {
     async login(user) {
@@ -7,10 +8,9 @@ const authService = {
         localStorage.setItem('access', data.access);
         localStorage.setItem('refresh', data.refresh);
     },
-
     async refreshToken() {
         const refresh = localStorage.getItem('refresh');
-        const {data} = await apiService.post(urls.auth.refresh, {refresh});
+        const {data} = await rawApiService.post(urls.auth.refresh, {refresh});
         localStorage.setItem('access', data.access);
         return data.access;
     },

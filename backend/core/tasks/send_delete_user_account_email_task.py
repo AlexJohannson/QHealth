@@ -7,16 +7,14 @@ UserModel = get_user_model()
 
 
 @app.task
-def send_delete_user_account_email_task(user_id):
-    try:
-        user = UserModel.objects.select_related('profile').get(pk=user_id)
-    except UserModel.DoesNotExist:
-        return
+def send_delete_user_account_email_task(email, name):
     EmailService.send_email(
-        to=user.email,
+        to=email,
         template_name='deleted_account.html',
         context={
-            'name': user.profile.name
+            'name': name
         },
         subject='Deleted Account',
     )
+
+

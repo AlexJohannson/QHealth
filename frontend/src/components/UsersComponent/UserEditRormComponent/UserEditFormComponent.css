@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 
-.registration-form-container {
+.user-edit-form-container {
     width: 100%;
     background-color: lightyellow;
 }
-/*------------------------------------   registration-container-header  ---------------------------------------------*/
-.registration-container-header {
+/*------------------------------------   user-edit-form-container-header   -------------------------------------------*/
+.user-edit-form-container-header {
     width: 100%;
     height: 150px;
     display: flex;
@@ -16,20 +16,32 @@
     background-color: lightyellow;
     border-bottom: 2px solid lightskyblue;
 }
-.logo-register {
+.logo-user-edit {
     width: 200px;
     height: 120px;
     margin-right: 50px;
 }
-.registration-container-header h1 {
+.user-edit-form-container-header h1 {
     font-family: "Lobster Two", sans-serif;
     font-size: 80px;
     font-weight: 700;
     font-style: italic;
     color: blue;
 }
-/*---------------------------------------   register-form-div   -----------------------------------------------------*/
-.register-form-div {
+.user-edit-form-container-button {
+    width: 100px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+.user-edit-form-container-button:hover {
+    background-color: green;
+}
+/*-------------------------------------   user-edit-form-div   -------------------------------------------------------*/
+.user-edit-form-div {
     width: 100%;
     height: 100%;
     display: flex;
@@ -37,13 +49,7 @@
     justify-content: center;
     margin: 10px 0 10px 0;
 }
-.register-successful {
-    color: green;
-}
-.register-error {
-    color: red;
-}
-.register-form {
+.user-edit-form {
     width: 450px;
     height: 100%;
     display: flex;
@@ -55,8 +61,8 @@
     border-radius: 10px;
     background-color: gray;
 }
-/*-----------------------------------------------    register-form input   -------------------------------------------*/
-.register-form input {
+/*-------------------------------------------    user-edit-form input   ----------------------------------------------*/
+.user-edit-form input {
     width: 350px;
     height: 30px;
     padding: 10px 12px;
@@ -66,30 +72,16 @@
     outline: none;
     transition: border-color 0.2s ease;
 }
-.register-form input:focus {
+.user-edit-form input:focus {
     border-color: #007bff;
 }
-.register-form input::placeholder {
+.user-edit-form input::placeholder {
     color: #999;
     font-style: italic;
     opacity: 1;
 }
-.register-password {
-    width: 450px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-left: 25px;
-}
-.show-password-register {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 18px
-}
-/*------------------------------------------     register-form select  -----------------------------------------------*/
-.register-form select {
+/*-----------------------   user-edit-form select  -------------------------------------------------------------------*/
+.user-edit-form select {
     width: 350px;
     height: 40px;
     padding: 10px 12px;
@@ -102,24 +94,17 @@
     font-style: italic;
     opacity: 1;
 }
-.register-form select:focus {
+.user-edit-form select:focus {
     border-color: #007bff;
 }
-.register-form select option {
+.user-edit-form select option {
     color: #999;
     font-style: italic;
     opacity: 1;
 }
-/*---------------------------------------------    form-register-button-div   ----------------------------------------*/
-.form-register-button-div {
-    width: 450px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-.form-register-button {
-    width: 100px;
+/*-----------------------------------   user-edit-form button   ------------------------------------------------------*/
+.user-edit-form-save-change {
+    width: 130px;
     height: 45px;
     border-radius: 10px;
     border: none;
@@ -127,6 +112,15 @@
     color: white;
     cursor: pointer;
 }
-.form-register-button:hover {
+.user-edit-form-save-change:hover {
     background-color: green;
+}
+.user-edit-form-delete-account {
+    width: 130px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: red;
+    color: white;
+    cursor: pointer;
 }

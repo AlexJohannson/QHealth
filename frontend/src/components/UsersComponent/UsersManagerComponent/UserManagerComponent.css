@@ -1,0 +1,18 @@
+.user-manager-component {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+.user-manager-component button {
+    width: 100px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+.user-manager-component button:hover {
+    background-color: green;
+}

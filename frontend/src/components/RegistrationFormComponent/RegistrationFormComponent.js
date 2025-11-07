@@ -77,6 +77,7 @@ const RegistrationFormComponent = () => {
             <div className={'registration-container-header'}>
                 <img src={'/img/logo.png'} className={'logo-register'} alt="Logo"/>
                 <h1>QHealth</h1>
+                <button className={'form-register-button'} onClick={() => navigate(-1)}>BACK</button>
             </div>
             <div className={'register-form-div'}>
                 {success ? (
@@ -137,7 +138,6 @@ const RegistrationFormComponent = () => {
                         {error.general && (<p className={'register-error'}>{error.general}</p>)}
                         <div className={'form-register-button-div'}>
                         <button className={'form-register-button'} type={'submit'}>REGISTER</button>
-                        <button className={'form-register-button'} onClick={() => navigate(-1)}>BACK</button>
                         </div>
                     </form>
                 )}

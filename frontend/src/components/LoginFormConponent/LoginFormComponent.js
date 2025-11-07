@@ -13,6 +13,7 @@ const LoginFormComponent = () => {
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
+
     const onSubmit = async user => {
         setError('');
         setMessage('');
@@ -31,7 +32,13 @@ const LoginFormComponent = () => {
                 navigate('/superuser');
             } else if (data.is_staff) {
                 navigate('/admin');
-            } else if (data.is_user) {
+            } else if (data.role === 'doctor') {
+                navigate('/doctor');
+            } else if (data.role === 'operator') {
+                navigate('/operator');
+            } else if (data.role === 'pharmacist') {
+                navigate('/pharmacist');
+            }else if (data.is_user) {
                 navigate('/user-home-page');
             } else {
                 navigate('/login');

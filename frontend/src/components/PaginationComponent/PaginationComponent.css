@@ -1,0 +1,45 @@
+.pagination-component {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 100px;
+    gap: 30px;
+    background-color: gray;
+    border-radius: 10px;
+
+}
+.pagination-button {
+    width: 100px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: lightgray;
+    color: black;
+    cursor: pointer;
+}
+.pagination-information {
+    font-weight: bold;
+}
+.pagination-component select {
+    width: 150px;
+    height: 45px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease;
+    color: #999;
+    font-style: italic;
+    opacity: 1;
+}
+.pagination-component select:focus {
+    border-color: #007bff;
+}
+.pagination-component select::placeholder {
+    color: #999;
+    font-style: italic;
+    opacity: 1;
+}

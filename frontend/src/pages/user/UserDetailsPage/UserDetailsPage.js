@@ -1,5 +1,6 @@
 import React from 'react';
-import {UserDetailsComponent} from "../../../components/UsersComponent/UserDetailsComponent";
+import {UserDetailsComponent} from "../../../components/UsersComponent/UserDetailsComponent/UserDetailsComponent";
+
 
 
 const UserDetailsPage = () => {

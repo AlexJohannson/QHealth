@@ -31,6 +31,7 @@ const RecoveryRequestComponent = () => {
             <div className={'recovery-request-container-header'}>
                 <img src={'/img/logo.png'} className={'logo-recovery-request'} alt="Logo"/>
                 <h1>QHealth</h1>
+                <button className={'recovery-request-button-navigate'} onClick={() => navigate(-1)}>BACK</button>
             </div>
             <div className={'recovery-request-form-div'}>
                 <form className={'recovery-request-form'} onSubmit={handleSubmit}>
@@ -40,8 +41,7 @@ const RecoveryRequestComponent = () => {
                     <input type={'email'} placeholder={'Enter your email'} value={email}
                            onChange={e => setEmail(e.target.value)} />
                     <div className={'recovery-request-button-div'}>
-                    <button className={'recovery-request-button'} type="submit">Send Recovery Link</button>
-                    <button className={'recovery-request-button'} onClick={() => navigate(-1)}>BACK</button>
+                    <button className={'recovery-request-button'} type="submit">SEND RECOVERY LINK</button>
                     </div>
                 </form>
             </div>

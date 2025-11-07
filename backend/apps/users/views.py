@@ -15,7 +15,6 @@ from apps.users.filter import UsersFilter
 from apps.users.permissions import (
     IsSuperUserAdminOrRole,
     IsSuperUserAdminOrRoleOrOwner,
-    IsSuperUserOnly,
     IsSuperUserOrAdminOnly,
     IsSuperUserOrAdminOrUser,
 )
@@ -41,12 +40,16 @@ class UsersRetrieveUpdateDestroyApiView(RetrieveUpdateDestroyAPIView):
             return [IsSuperUserAdminOrRoleOrOwner()]
         return [IsSuperUserOrAdminOrUser()]
 
+
     def delete(self, request, *args, **kwargs):
         user = self.get_object()
-        send_delete_user_account_email_task.delay(user.id)
-        user.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        email = user.email
+        name = user.profile.name 
 
+        user.delete()
+
+        send_delete_user_account_email_task.delay(email, name)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class BlockUserView(GenericAPIView):
@@ -81,7 +84,7 @@ class UnBlockUserView(GenericAPIView):
 
 
 class UserToAdminView(GenericAPIView):
-    permission_classes = [IsSuperUserOnly]
+    permission_classes = [IsSuperUserOrAdminOnly]
     def get_queryset(self):
         return UserModel.objects.exclude(id=self.request.user.id)
 
@@ -97,7 +100,7 @@ class UserToAdminView(GenericAPIView):
 
 
 class UserRevokeAdminView(GenericAPIView):
-    permission_classes = [IsSuperUserOnly]
+    permission_classes = [IsSuperUserOrAdminOnly]
     def get_queryset(self):
         return UserModel.objects.exclude(id=self.request.user.id)
 

@@ -14,6 +14,8 @@ import {RegisterPage} from "../pages/RegisterPage/RegisterPage";
 import {ActivateAccountPage} from "../pages/ActivateAccountPage/ActivateAccountPage";
 import {RecoveryRequestPage} from "../pages/RecoveryRequestPage/RecoveryRequestPage";
 import {RecoveryPasswordPage} from "../pages/RecoveryPasswordPage/RecoveryPasswordPage";
+import {UserEditFormPage} from "../pages/user/UserEditFormPage/UserEditFormPage";
+
 
 
 
@@ -34,11 +36,10 @@ const router = createBrowserRouter([
             {path: 'registration', element: <RegisterPage/>},
             {path: 'auth/activate/:token', element: <ActivateAccountPage />},
             {path: 'auth/recovery', element: <RecoveryRequestPage/>},
-            {path: 'auth/recovery_password/:token', element: <RecoveryPasswordPage/>}
+            {path: 'auth/recovery_password/:token', element: <RecoveryPasswordPage/>},
+            {path: 'users-update/:id', element: <UserEditFormPage/>},
         ]
     },
-
-
 ])
 
 export {router};

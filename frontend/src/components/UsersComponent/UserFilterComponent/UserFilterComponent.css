@@ -1,0 +1,65 @@
+.user-filter{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 25px 0 25px 0;
+    border-radius: 10px;
+    background-color: gray;
+}
+
+.user-filter input{
+    width: 150px;
+    height: 40px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.user-filter input:focus{
+    border-color: #007bff;
+}
+.user-filter input::placeholder {
+    color: #999;
+    font-style: italic;
+    opacity: 1;
+}
+
+.user-filter select{
+    width: 150px;
+    height: 40px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease;
+    color: #999;
+    font-style: italic;
+    opacity: 1;
+}
+
+.user-filter select:focus{
+    border-color: #007bff;
+}
+.user-filter select::placeholder {
+    color: #999;
+    font-style: italic;
+    opacity: 1;
+}
+.user-filter-component-button {
+    width: 100px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+.user-filter-component-button:hover {
+    background-color: green;
+}

@@ -93,3 +93,15 @@
 .recovery-request-button:hover {
     background-color: green;
 }
+.recovery-request-button-navigate {
+    width: 100px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+.recovery-request-button-navigate:hover {
+    background-color: green;
+}
