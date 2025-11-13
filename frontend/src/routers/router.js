@@ -19,6 +19,10 @@ import {RolesPage} from "../pages/roles/RolesPage/RolesPage";
 import {RolesDetailsPage} from "../pages/roles/RolesDetailsPage/RolesDetailsPage";
 import {RoleRegistrationPage} from "../pages/roles/RoleRegistationPage/RoleRegistrationPage";
 import {SecurityPage} from "../pages/SecurityPage/SecurytiPage";
+import {PatientPage} from "../pages/patient/PatientPage/PatientPage";
+import {PatientDetailsPage} from "../pages/patient/PatientDetailsPage/PatientDetailsPage";
+
+
 
 
 
@@ -45,7 +49,10 @@ const router = createBrowserRouter([
             {path: 'roles', element: <RolesPage/>},
             {path: 'roles/:id', element: <RolesDetailsPage/>},
             {path: 'staff-registration', element: <RoleRegistrationPage/>},
-            {path: 'security-list', element: <SecurityPage/>}
+            {path: 'security-list', element: <SecurityPage/>},
+            {path: 'patients-card', element: <PatientPage/>},
+            {path: 'patients-card/:id', element: <PatientDetailsPage/>},
+
         ]
     },
 ])

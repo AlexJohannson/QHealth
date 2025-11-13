@@ -5,7 +5,12 @@ const userService = {
   getAll(params) {
     return apiService.get(urls.users.list, { params }).then(res => res.data);
   },
-
+  getAllPatientCard(params) {
+    return apiService.get(urls.users.patientCards, { params }).then(res => res.data);
+  },
+  getPatientId (id) {
+    return apiService.get(`${urls.users.patientCards}/${id}`);
+  },
   getById(id) {
     return apiService.get(`${urls.users.list}/${id}`);
   },

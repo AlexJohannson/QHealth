@@ -8,7 +8,6 @@ import {useNavigate} from "react-router-dom";
 import {FooterComponent} from "../FooterComponent/FooterComponent";
 
 
-
 const UsersComponent = () => {
     const [users, setUsers] = useState([]);
     const [page, setPage] = useState(1);
@@ -40,15 +39,15 @@ const UsersComponent = () => {
 
     return (
         <div className="users-component-container">
-             <div className={'user-component-container-header'}>
+            <div className={'user-component-container-header'}>
                 <img src={'/img/logo.png'} className={'logo-user-component-container'} alt="Logo"/>
                 <h1>QHealth</h1>
                 <button className={'user-component-container-button'} onClick={() => navigate(-1)}>BACK</button>
             </div>
             <div className="users-component-container-filter">
                 <UsersFilterComponent onFilter={(params) => {
-                        userService.getAll(params).then(res => setUsers(res.data));
-                    }}
+                    userService.getAll(params).then(res => setUsers(res.data));
+                }}
                 />
             </div>
             <div className='users-component-container-maping'>
@@ -62,7 +61,10 @@ const UsersComponent = () => {
             </div>
             <div className="users-component-container-pagination">
                 <PaginationComponent page={page} totalPages={totalPages} size={size} onPageChange={setPage}
-                                     onSizeChange={(newSize) => {setSize(newSize);setPage(1);}}
+                                     onSizeChange={(newSize) => {
+                                         setSize(newSize);
+                                         setPage(1);
+                                     }}
                 />
             </div>
             <FooterComponent/>

@@ -19,17 +19,17 @@ const useMenuByRole = () => {
                 {label: 'Users Cards', path: '/users'},
                 {label: 'Staff QHealth', path: '/roles'},
                 {label: 'Staff Registration', path: '/staff-registration'},
+                {label: 'Patients Cards', path: '/patients-card'},
                 {label: 'Security List', path: '/security-list'},
-
             ];
         }
 
         if (isStaff) {
             return [
                 {label: 'Users Cards', path: '/users'},
-                {label: 'My profile', path: `/users/${userId}`},
                 {label: 'Staff QHealth', path: '/roles'},
                 {label: 'Staff Registration', path: '/staff-registration'},
+                {label: 'Patients Cards', path: '/patients-card'},
                 {label: 'Security List', path: '/security-list'},
             ];
         }
@@ -37,22 +37,20 @@ const useMenuByRole = () => {
         switch (role) {
             case 'doctor':
                 return [
-                    {label: 'Users Cards', path: '/users'},
-                    {label: 'My profile', path: `/users/${userId}`},
+                    {label: 'Patients Cards', path: '/patients-card'},
                     {label: 'Update My Profile', path: `users-update/${userId}`},
                     {label: 'My Staff QHealth Profile', path: `roles/${roleId}`},
                 ];
             case 'operator':
                 return [
                     {label: 'Users Cards', path: '/users'},
-                    {label: 'My profile', path: `/users/${userId}`},
+                    {label: 'Patients Cards', path: '/patients-card'},
                     {label: 'Update My Profile', path: `users-update/${userId}`},
                     {label: 'Staff QHealth', path: '/roles'}
                 ];
             case 'pharmacist':
                 return [
-                    {label: 'Users Cards', path: '/users'},
-                    {label: 'My profile', path: `/users/${userId}`},
+                    {label: 'Patients Cards', path: '/patients-card'},
                     {label: 'Update My Profile', path: `users-update/${userId}`},
                     {label: 'My Staff QHealth Profile', path: `roles/${roleId}`},
                 ];

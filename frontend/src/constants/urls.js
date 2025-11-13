@@ -18,6 +18,7 @@ const urls = {
     users: {
         list: users,
         registrationUserAccount: users,
+        patientCards: `${users}/patient`
     },
     roles: {
         list: roles,

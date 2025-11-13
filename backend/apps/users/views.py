@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 
 from rest_framework import status
-from rest_framework.generics import GenericAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
@@ -21,6 +21,8 @@ from apps.users.permissions import (
 from apps.users.serializer import UserSerializer
 
 UserModel = get_user_model()
+
+
 class UsersListCreateApiView(ListCreateAPIView):
     queryset = UserModel.objects.all()
     serializer_class = UserSerializer
@@ -28,6 +30,7 @@ class UsersListCreateApiView(ListCreateAPIView):
 
     def get_permissions(self):
         return [IsSuperUserAdminOrRole()] if self.request.method == 'GET' else [AllowAny()]
+
 
 class UsersRetrieveUpdateDestroyApiView(RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
@@ -40,11 +43,10 @@ class UsersRetrieveUpdateDestroyApiView(RetrieveUpdateDestroyAPIView):
             return [IsSuperUserAdminOrRoleOrOwner()]
         return [IsSuperUserOrAdminOrUser()]
 
-
     def delete(self, request, *args, **kwargs):
         user = self.get_object()
         email = user.email
-        name = user.profile.name 
+        name = user.profile.name
 
         user.delete()
 
@@ -54,6 +56,7 @@ class UsersRetrieveUpdateDestroyApiView(RetrieveUpdateDestroyAPIView):
 
 class BlockUserView(GenericAPIView):
     permission_classes = [IsSuperUserOrAdminOnly]
+
     def get_queryset(self):
         return UserModel.objects.exclude(id=self.request.user.id)
 
@@ -69,6 +72,7 @@ class BlockUserView(GenericAPIView):
 
 class UnBlockUserView(GenericAPIView):
     permission_classes = [IsSuperUserOrAdminOnly]
+
     def get_queryset(self):
         return UserModel.objects.exclude(id=self.request.user.id)
 
@@ -82,9 +86,9 @@ class UnBlockUserView(GenericAPIView):
         return Response(serializer.data, status.HTTP_200_OK)
 
 
-
 class UserToAdminView(GenericAPIView):
     permission_classes = [IsSuperUserOrAdminOnly]
+
     def get_queryset(self):
         return UserModel.objects.exclude(id=self.request.user.id)
 
@@ -98,9 +102,9 @@ class UserToAdminView(GenericAPIView):
         return Response(serializer.data, status.HTTP_200_OK)
 
 
-
 class UserRevokeAdminView(GenericAPIView):
     permission_classes = [IsSuperUserOrAdminOnly]
+
     def get_queryset(self):
         return UserModel.objects.exclude(id=self.request.user.id)
 
@@ -112,4 +116,33 @@ class UserRevokeAdminView(GenericAPIView):
         send_revoke_admin_email_task.delay(user.id)
         serializer = UserSerializer(user)
         return Response(serializer.data, status.HTTP_200_OK)
+
+
+class UserPatientApiView(ListAPIView):
+    permission_classes = [IsSuperUserAdminOrRole]
+    filterset_class = UsersFilter
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        base_qs = UserModel.objects.all()
+        return base_qs.filter(
+            is_superuser=False,
+            is_staff=False,
+            role__isnull=True
+        )
+
+
+class PatientRetrieveUpdateDestroyApiView(RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsSuperUserAdminOrRoleOrOwner]
+    filterset_class = UsersFilter
+    serializer_class = UserSerializer
+    http_method_names = ['get']
+
+    def get_queryset(self):
+        base_qs = UserModel.objects.all()
+        return base_qs.filter(
+            is_superuser=False,
+            is_staff=False,
+            role__isnull=True
+        )
 
