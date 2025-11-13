@@ -7,13 +7,13 @@ from core.tasks.send_unblock_doctor_email_task import send_unblock_doctor_email_
 
 from apps.roles.filter import RolesFilter
 from apps.roles.models import RolesModels
-from apps.roles.permissions import IsSuperUserOrAdmin, IsSuperUserOrRoleOwner
+from apps.roles.permissions import IsSuperUserOrAdmin, IsSuperUserOrOperator, IsSuperUserOrRoleOwner
 from apps.roles.serializer import RolesReadSerializer, RolesWriteSerializer
 
 
 class RolesListCreateAPIView(ListCreateAPIView):
     queryset = RolesModels.objects.all()
-    permission_classes = [IsSuperUserOrAdmin]
+    permission_classes = [IsSuperUserOrOperator]
     filterset_class = RolesFilter
 
     def get_serializer_class(self):

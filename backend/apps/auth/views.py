@@ -63,10 +63,32 @@ class UserRoleView(GenericAPIView):
     permission_classes = (IsAuthenticated, )
 
     
+    # def get(self, request):
+    #     user = request.user
+    #     role_obj = getattr(user, 'role', None)
+    #     role = role_obj.role if role_obj else None
+    #     specialty = role_obj.specialty if role_obj and role_obj.role == 'doctor' else None
+    #
+    #     data = {
+    #         'id': user.id,
+    #         'is_superuser': user.is_superuser,
+    #         'is_staff': user.is_staff,
+    #         'is_user': user.is_active,
+    #         'role': role,
+    #         'role_id': role.id,
+    #         'specialty': specialty,
+    #     }
+    #
+    #     serializer = UserRoleSerializer(data=data)
+    #     serializer.is_valid(raise_exception=True)
+    #     return Response(serializer.data)
+
     def get(self, request):
         user = request.user
         role_obj = getattr(user, 'role', None)
+
         role = role_obj.role if role_obj else None
+        role_id = role_obj.id if role_obj else None
         specialty = role_obj.specialty if role_obj and role_obj.role == 'doctor' else None
 
         data = {
@@ -75,6 +97,7 @@ class UserRoleView(GenericAPIView):
             'is_staff': user.is_staff,
             'is_user': user.is_active,
             'role': role,
+            'role_id': role_id,
             'specialty': specialty,
         }
 

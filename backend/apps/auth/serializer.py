@@ -27,4 +27,5 @@ class UserRoleSerializer(serializers.Serializer):
     is_staff = serializers.BooleanField()
     is_user = serializers.BooleanField()
     role = serializers.CharField(allow_null=True)
+    role_id = serializers.IntegerField(allow_null=True)
     specialty = serializers.CharField(allow_null=True)

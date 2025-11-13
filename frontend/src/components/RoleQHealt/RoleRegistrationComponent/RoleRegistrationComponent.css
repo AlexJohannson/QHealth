@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+.role-registration-component {
+    width: 100%;
+    background-color: lightyellow;
+}
+/*--------------------------------------    role-registration-component-header  --------------------------------------*/
+.role-registration-component-header {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 170px;
+    background-color: lightyellow;
+    border-bottom: 2px solid lightskyblue;
+}
+.role-logo-register {
+    width: 200px;
+    height: 120px;
+    margin-right: 50px;
+}
+.role-registration-component-header h1 {
+    font-family: "Lobster Two", sans-serif;
+    font-size: 80px;
+    font-weight: 700;
+    font-style: italic;
+    color: blue;
+}
+.role-form-register-button {
+    width: 100px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+.role-form-register-button:hover {
+    background-color: green;
+}
+/*-----------------------------------------------    role-register-form-div   ----------------------------------------*/
+.role-register-form-div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0 10px 0;
+}
+.role-register-successful {
+    color: green;
+}
+.role-error-register {
+    color: red;
+}
+/*-----------------------------------       role-register-form   -----------------------------------------------------*/
+.role-register-form {
+    width: 450px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 40px;
+    padding: 25px 0 25px 0;
+    border-radius: 10px;
+    background-color: gray;
+}
+/*---------------------------------------   role-register-form input   -----------------------------------------------*/
+.role-register-form input {
+    width: 350px;
+    height: 30px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+.role-register-form input:focus {
+    border-color: #007bff;
+}
+.role-register-form input::placeholder {
+    color: #999;
+    font-style: italic;
+    opacity: 1;
+}
+/*---------------------------------------   role-register-form select    ---------------------------------------------*/
+.role-register-form select {
+    width: 350px;
+    height: 40px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease;
+    color: #999;
+    font-style: italic;
+    opacity: 1;
+}
+.role-register-form select:focus {
+    border-color: #007bff;
+}
+.role-register-form select option {
+    color: #999;
+    font-style: italic;
+    opacity: 1;
+}
+/*---------------------------------------------    role-register-button-div  -----------------------------------------*/
+.role-register-button-div {
+    width: 450px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/*------------------------------------------------   role-register-password   ----------------------------------------*/
+.role-register-password {
+     width: 450px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 25px;
+}
+.role-show-password-register {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px
+}

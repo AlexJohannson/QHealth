@@ -8,7 +8,6 @@ const PaginationComponent = ({page, totalPages, onPageChange, size, onSizeChange
                 Prev
             </button>
 
-            <span className={'pagination-information'}>Page {page} of {totalPages}</span>
 
             <button className={'pagination-button'} disabled={page === totalPages} onClick={() => onPageChange(page + 1)}>
                 Next

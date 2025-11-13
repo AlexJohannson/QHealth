@@ -22,8 +22,11 @@ const LoginFormComponent = () => {
             await authService.login(user);
             const { data } = await authService.getMe();
 
+
+
             localStorage.setItem('userId', data.id);
             localStorage.setItem('role', data.role);
+            localStorage.setItem('roleId', data.role_id);
             localStorage.setItem('is_superuser', data.is_superuser);
             localStorage.setItem('is_staff', data.is_staff);
             localStorage.setItem('is_user', data.is_user);

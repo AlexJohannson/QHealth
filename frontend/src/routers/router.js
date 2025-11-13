@@ -15,6 +15,10 @@ import {ActivateAccountPage} from "../pages/ActivateAccountPage/ActivateAccountP
 import {RecoveryRequestPage} from "../pages/RecoveryRequestPage/RecoveryRequestPage";
 import {RecoveryPasswordPage} from "../pages/RecoveryPasswordPage/RecoveryPasswordPage";
 import {UserEditFormPage} from "../pages/user/UserEditFormPage/UserEditFormPage";
+import {RolesPage} from "../pages/roles/RolesPage/RolesPage";
+import {RolesDetailsPage} from "../pages/roles/RolesDetailsPage/RolesDetailsPage";
+import {RoleRegistrationPage} from "../pages/roles/RoleRegistationPage/RoleRegistrationPage";
+import {SecurityPage} from "../pages/SecurityPage/SecurytiPage";
 
 
 
@@ -38,6 +42,10 @@ const router = createBrowserRouter([
             {path: 'auth/recovery', element: <RecoveryRequestPage/>},
             {path: 'auth/recovery_password/:token', element: <RecoveryPasswordPage/>},
             {path: 'users-update/:id', element: <UserEditFormPage/>},
+            {path: 'roles', element: <RolesPage/>},
+            {path: 'roles/:id', element: <RolesDetailsPage/>},
+            {path: 'staff-registration', element: <RoleRegistrationPage/>},
+            {path: 'security-list', element: <SecurityPage/>}
         ]
     },
 ])

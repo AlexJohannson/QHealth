@@ -1,0 +1,18 @@
+.role-manager-component {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+.role-manager-component button {
+    width: 100px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+.role-manager-component button:hover {
+    background-color: green;
+}

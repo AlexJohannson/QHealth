@@ -29,6 +29,7 @@ const NavigationComponent = () => {
         localStorage.removeItem('is_staff');
         localStorage.removeItem('is_user');
         localStorage.removeItem('userId');
+        localStorage.removeItem('roleId');
         localStorage.removeItem('access');
         localStorage.removeItem('refresh');
 
