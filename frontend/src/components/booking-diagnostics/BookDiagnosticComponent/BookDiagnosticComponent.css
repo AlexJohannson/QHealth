@@ -1,0 +1,44 @@
+.book-diagnostic-component {
+    width: 900px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 15px 0 15px 0;
+    background-color: gray;
+}
+.book-diagnostic-component {
+    width: 900px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+
+}
+.book-diagnostic-component-container-error {
+    color: red;
+}
+.book-diagnostic-component-container input {
+    width: 350px;
+    height: 30px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+.book-diagnostic-component button {
+    width: 170px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+.book-diagnostic-component button:hover {
+    background-color: green;
+}

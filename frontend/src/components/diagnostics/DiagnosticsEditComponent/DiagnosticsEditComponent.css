@@ -1,0 +1,44 @@
+.diagnostics-edit-component {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.diagnostics-edit-form-component {
+    width: 900px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    border-radius: 10px;
+    margin: 15px 0 15px 0;
+    background-color: gray;
+}
+.diagnostics-edit-form-component input {
+    width: 750px;
+    height: 60px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+.diagnostics-edit-form-component-button {
+    width: 170px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+.diagnostics-edit-form-component-button:hover {
+    background-color: green;
+}
+.diagnostics-edit-form-component-error {
+    color: red;
+}

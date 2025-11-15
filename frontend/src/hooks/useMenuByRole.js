@@ -13,13 +13,14 @@ const useMenuByRole = () => {
         if (!userId) return [];
 
 
-
         if (isSuperuser) {
             return [
                 {label: 'Users Cards', path: '/users'},
                 {label: 'Staff QHealth', path: '/roles'},
                 {label: 'Staff Registration', path: '/staff-registration'},
                 {label: 'Patients Cards', path: '/patients-card'},
+                {label: 'Diagnostics', path: '/diagnostics'},
+                {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
                 {label: 'Security List', path: '/security-list'},
             ];
         }
@@ -30,6 +31,8 @@ const useMenuByRole = () => {
                 {label: 'Staff QHealth', path: '/roles'},
                 {label: 'Staff Registration', path: '/staff-registration'},
                 {label: 'Patients Cards', path: '/patients-card'},
+                {label: 'Diagnostics', path: '/diagnostics'},
+                {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
                 {label: 'Security List', path: '/security-list'},
             ];
         }
@@ -40,25 +43,31 @@ const useMenuByRole = () => {
                     {label: 'Patients Cards', path: '/patients-card'},
                     {label: 'Update My Profile', path: `users-update/${userId}`},
                     {label: 'My Staff QHealth Profile', path: `roles/${roleId}`},
+                    {label: 'Diagnostics', path: '/diagnostics'},
+                    {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
                 ];
             case 'operator':
                 return [
-                    {label: 'Users Cards', path: '/users'},
                     {label: 'Patients Cards', path: '/patients-card'},
                     {label: 'Update My Profile', path: `users-update/${userId}`},
-                    {label: 'Staff QHealth', path: '/roles'}
+                    {label: 'Staff QHealth', path: '/roles'},
+                    {label: 'Diagnostics', path: '/diagnostics'},
+                    {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
                 ];
             case 'pharmacist':
                 return [
                     {label: 'Patients Cards', path: '/patients-card'},
                     {label: 'Update My Profile', path: `users-update/${userId}`},
                     {label: 'My Staff QHealth Profile', path: `roles/${roleId}`},
+                    {label: 'Diagnostics', path: '/diagnostics'},
                 ];
             default:
                 if (isUser) {
                     return [
-                        {label: 'My profile', path: `/users/${userId}`},
-                        {label: 'Update My Profile', path: `users-update/${userId}`}
+                        {label: 'My card', path: `/patients-card/${userId}`},
+                        {label: 'Update My Profile', path: `users-update/${userId}`},
+                        {label: 'Diagnostics', path: '/diagnostics'},
+                        {label: 'Booking Diagnostics', path: '/booking-diagnostic'}
                     ];
                 }
                 return [];

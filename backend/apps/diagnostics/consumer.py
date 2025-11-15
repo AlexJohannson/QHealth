@@ -11,7 +11,10 @@ class DiagnosticsConsumer(GenericAsyncAPIConsumer):
         self.group = 'diagnostics'
         super().__init__(*args, **kwargs)
 
-    async def consumer(self):
+    async def connect(self):
+        print(">>> CONNECT CALLED")
+        print(">>> USER:", self.scope.get("user"))
+
         if not self.scope['user']:
             return await self.close()
 
@@ -28,3 +31,7 @@ class DiagnosticsConsumer(GenericAsyncAPIConsumer):
     @action()
     async def subscribe_to_diagnostics_model_changes(self, request_id, **kwargs):
         await self.diagnostics_model_activity.subscribe(request_id=request_id)
+
+
+
+

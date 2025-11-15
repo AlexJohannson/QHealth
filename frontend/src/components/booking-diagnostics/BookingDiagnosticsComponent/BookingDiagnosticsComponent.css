@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+.booking-diagnostics-component {
+    width: 100%;
+    background-color: lightyellow;
+}
+/*------------------------------     booking-diagnostics-component-header   ------------------------------------------*/
+.booking-diagnostics-component-header {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 170px;
+    background-color: lightyellow;
+    border-bottom: 2px solid lightskyblue;
+}
+.logo-booking-diagnostics-component {
+    width: 200px;
+    height: 120px;
+    margin-right: 50px;
+}
+.booking-diagnostics-component-header h1 {
+    font-family: "Lobster Two", sans-serif;
+    font-size: 80px;
+    font-weight: 700;
+    font-style: italic;
+    color: blue;
+}
+.booking-diagnostics-component-button {
+    width: 100px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+.booking-diagnostics-component-button:hover {
+    background-color: green;
+}
+/*----------------------------------------    booking-diagnostics-component-filter   ---------------------------------*/
+.booking-diagnostics-component-filter {
+    margin: 15px 0 15px 0;
+}
+/*-------------------------------------------   booking-diagnostics-component-maping   -------------------------------*/
+.booking-diagnostics-component-maping {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    overflow-y: auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.booking-diagnostics-component-maping-information {
+    color: red;
+}
+/*----------------------------------     booking-diagnostics-component-pagination    ---------------------------------*/
+.booking-diagnostics-component-pagination {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 0 15px 0;
+}

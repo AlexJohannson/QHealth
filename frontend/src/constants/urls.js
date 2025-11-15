@@ -4,6 +4,8 @@ const auth = '/auth';
 const users = '/users'
 const roles = '/roles';
 const securityList = '/security';
+const diagnostics = '/diagnostics';
+const bookingDiagnostic = '/booking_diagnostic';
 
 const urls = {
     auth: {
@@ -25,6 +27,12 @@ const urls = {
     },
     securityList: {
         list: securityList,
+    },
+    diagnostics: {
+        list: diagnostics,
+    },
+    bookingDiagnostic: {
+        list: bookingDiagnostic,
     }
 }
 

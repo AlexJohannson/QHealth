@@ -7,8 +7,8 @@ const baseURL = 'ws://localhost/api'
 const socketService = async () => {
     const {data: {token}} = await authService.getSocketToken();
     return {
-        // chat: (room) => new W3cwebsocket(`${baseURL}/chat/${room}/?token=${token}`),
         diagnostics: () => new W3cwebsocket(`${baseURL}/diagnostics/?token=${token}`),
+        bookingDiagnostics: () => new W3cwebsocket(`${baseURL}/booking_diagnostic/?token=${token}`),
     }
 }
 

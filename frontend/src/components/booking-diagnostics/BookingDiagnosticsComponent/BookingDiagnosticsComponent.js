@@ -1,0 +1,101 @@
+import React, {useEffect, useState} from 'react';
+import {bookingDiagnosticsService} from "../../../services/bookingDiagnosticsService";
+import {BookingDiagnosticsProfile} from "../BookingDiagnosticsProfile/BookingDiagnosticsProfile";
+import {PaginationComponent} from "../../PaginationComponent/PaginationComponent";
+import './BookingDiagnosticsComponent.css';
+import {useNavigate} from "react-router-dom";
+import {FooterComponent} from "../../FooterComponent/FooterComponent";
+import {
+    BookingDiagnosticsFilterComponent
+} from "../BookingDiagnosticsFilterComponent/BookingDiagnosticsFilterComponent";
+import {socketService} from "../../../services/socketService";
+
+const BookingDiagnosticsComponent = () => {
+    const [bookingDiagnostics, setBookingDiagnostics] = useState([]);
+    const [page, setPage] = useState(1);
+    const [size, setSize] = useState(5);
+    const [totalPages, setTotalPages] = useState(1);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+    const [trigger, setTrigger] = useState(null);
+
+
+    useEffect(() => {
+        const fetchBookingDiagnostics = async () => {
+            setLoading(true);
+            try {
+                const data = await bookingDiagnosticsService.getAllLisr({page, size});
+                setBookingDiagnostics(data.data);
+                setTotalPages(data.total_pages);
+            } catch (err) {
+                setError('Could not load booking diagnostics.');
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchBookingDiagnostics();
+    }, [page, size, trigger]);
+
+    useEffect(() => {
+        socketInit().then()
+    }, []);
+
+
+    const socketInit = async () => {
+        const service = await socketService();
+        const client = service.bookingDiagnostics();
+
+
+        client.onopen = () => {
+            client.send(JSON.stringify({
+                action: 'subscribe_to_booking_diagnostics_model_changes',
+                request_id: new Date().getTime(),
+            }));
+        }
+        client.onmessage = ({data}) => {
+            setTrigger(prev => !prev)
+        }
+    }
+
+
+    if (loading) return <p>Loading users...</p>;
+    if (error) return <p style={{color: 'red'}}>{error}</p>;
+
+
+
+    return (
+        <div className={'booking-diagnostics-component'}>
+            <div className={'booking-diagnostics-component-header'}>
+                <img src={'/img/logo.png'} className={'logo-booking-diagnostics-component'} alt="Logo"/>
+                <h1>QHealth</h1>
+                <button className={'booking-diagnostics-component-button'} onClick={() => navigate(-1)}>BACK</button>
+            </div>
+            <div className={'booking-diagnostics-component-filter'}>
+                <BookingDiagnosticsFilterComponent onFilter={(params) => {
+                    bookingDiagnosticsService.getAllLisr(params).then(res => setBookingDiagnostics(res.data));
+                }}/>
+            </div>
+            <div className={'booking-diagnostics-component-maping'}>
+                {bookingDiagnostics.length === 0 ? (
+                     <p className={'booking-diagnostics-component-maping-information'}>No booking diagnostics found.</p>
+                ) : (
+                    bookingDiagnostics.map((bookingDiagnostic) => (
+                        <BookingDiagnosticsProfile key={bookingDiagnostic.id} bookingDiagnostic={bookingDiagnostic} />
+                    ))
+                )}
+            </div>
+            <div className={'booking-diagnostics-component-pagination'}>
+                <PaginationComponent page={page} totalPages={totalPages} size={size} onPageChange={setPage}
+                                     onSizeChange={(newSize) => {
+                                         setSize(newSize);
+                                         setPage(1);
+                                     }}
+                />
+            </div>
+            <FooterComponent/>
+        </div>
+    );
+};
+
+export {BookingDiagnosticsComponent};

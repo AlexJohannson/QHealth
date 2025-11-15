@@ -1,0 +1,15 @@
+.booking-diagnostics-profile {
+    width: 100%;
+    margin: 9px 0 9px 0;
+    border-top: 2px solid grey;
+    border-bottom: 2px solid grey;
+}
+.booking-diagnostics-profile-link {
+    font: inherit;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

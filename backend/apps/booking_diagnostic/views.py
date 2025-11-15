@@ -9,16 +9,24 @@ from apps.booking_diagnostic.models import BookingDiagnosticModel
 from apps.booking_diagnostic.permissions import (
     IsSuperUserOrAdminOrDoctorOrOperatorOrPatient,
     IsSuperUserOrAdminOrOperator,
-    IsSuperUserOrAdminOrOperatorOrDoctor,
     IsSuperUserOrAdminOrPatientOrOperator,
 )
 from apps.booking_diagnostic.serializer import BookingDiagnosticSerializer
 
 
 class BookingDiagnosticListCreateAPIView(ListCreateAPIView):
-    queryset = BookingDiagnosticModel.objects.all()
     serializer_class = BookingDiagnosticSerializer
     filterset_class = BookingDiagnosticFilter
+
+    def get_queryset(self):
+        user = self.request.user
+        role = getattr(user, 'role', None)
+
+        if user.is_superuser or user.is_staff or (role and role.role in ['operator', 'doctor']):
+            return BookingDiagnosticModel.objects.all()
+
+        return BookingDiagnosticModel.objects.filter(user=user)
+
 
     def perform_create(self, serializer):
         booked_by = self.request.user
@@ -45,10 +53,9 @@ class BookingDiagnosticListCreateAPIView(ListCreateAPIView):
             send_patient_booking_diagnostic_by_staff.delay(booking.id)
 
 
-
     def get_permissions(self):
         if self.request.method == 'GET':
-            return [IsSuperUserOrAdminOrOperatorOrDoctor()]
+            return [IsSuperUserOrAdminOrDoctorOrOperatorOrPatient()]
         else:
             return [IsSuperUserOrAdminOrPatientOrOperator()]
 

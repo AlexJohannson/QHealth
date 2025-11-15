@@ -10,7 +10,6 @@ from apps.users.serializer import UserSerializer
 UserModel = get_user_model()
 
 
-
 class BookingDiagnosticSerializer(serializers.ModelSerializer):
     user_id = serializers.PrimaryKeyRelatedField(
         queryset=UserModel.objects.all(),
@@ -20,9 +19,9 @@ class BookingDiagnosticSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
 
     diagnostics_id = serializers.PrimaryKeyRelatedField(
-       queryset=DiagnosticsModel.objects.all(),
-       source='diagnostic_service',
-       write_only=True
+        queryset=DiagnosticsModel.objects.all(),
+        source='diagnostic_service',
+        write_only=True
     )
     diagnostic_service = DiagnosticsSerializer(read_only=True)
 
@@ -56,46 +55,48 @@ class BookingDiagnosticSerializer(serializers.ModelSerializer):
         }
 
 
+        def validate(self, attrs):
+            request = self.context.get('request')
+            user = getattr(request, 'user', None)
+            date_time = attrs.get('date_time')
 
-    def validate(self, attrs):
-        request = self.context.get('request')
-        user = getattr(request, 'user', None) if request else None
-        date_time = attrs.get('date_time')
-        target_user = attrs.get('user')
+            if not user:
+                raise serializers.ValidationError("Authentication required.")
 
-        if not user:
-            raise serializers.ValidationError("Authentication required.")
-
-
-        if target_user and target_user != user:
-            role = getattr(user, 'role', None)
-            can_book_for_others = (
+            has_admin_rights = (
                     user.is_superuser or
                     user.is_staff or
-                    (role and role.role == 'operator')
+                    (getattr(user, 'role', None) and user.role.role == 'operator')
             )
 
-            if not can_book_for_others:
-                raise serializers.ValidationError({
-                    "Details": "You can only book appointments for yourself."
-                })
+            if has_admin_rights:
+                if not date_time:
+                    raise serializers.ValidationError({
+                        "date_time": "This field is required for operators/admins/superusers."
+                    })
+            else:
+                if date_time:
+                    raise serializers.ValidationError({
+                        "date_time": "You are not allowed to set this field."
+                    })
 
+            return attrs
 
-        has_admin_rights = (
-                user.is_superuser or
-                user.is_staff or
-                (getattr(user, 'role', None) and user.role.role == 'operator')
-        )
+        def create(self, validated_data):
+            request = self.context.get('request')
+            user = request.user
+            target_user = validated_data['user']
 
-        if has_admin_rights:
-            if not date_time:
-                raise serializers.ValidationError({
-                    "date_time": "This field is required for operators/admins/superusers."
-                })
-        else:
-            if date_time:
-                raise serializers.ValidationError({
-                    "date_time": "You are not allowed to set this field."
-                })
+            if target_user != user:
+                role = getattr(user, 'role', None)
+                can_book_for_others = (
+                        user.is_superuser or
+                        user.is_staff or
+                        (role and role.role == 'operator')
+                )
+                if not can_book_for_others:
+                    raise serializers.ValidationError({
+                        "Details": "You can only book appointments for yourself."
+                    })
 
-        return attrs
+            return super().create(validated_data)

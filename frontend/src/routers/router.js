@@ -21,6 +21,13 @@ import {RoleRegistrationPage} from "../pages/roles/RoleRegistationPage/RoleRegis
 import {SecurityPage} from "../pages/SecurityPage/SecurytiPage";
 import {PatientPage} from "../pages/patient/PatientPage/PatientPage";
 import {PatientDetailsPage} from "../pages/patient/PatientDetailsPage/PatientDetailsPage";
+import {DiagnosticPage} from "../pages/diagnostic/DiagnosticPage/DiagnosticPage";
+import {DiagnosticDetailPage} from "../pages/diagnostic/DiagnosticDetailPage/DiagnosticDetailPage";
+import {CreateNewDiagnosticPage} from "../pages/diagnostic/CreateNewDiagnosticPage/CreateNewDiagnosticPage";
+import {BookingDiagnosticsPage} from "../pages/booking-diagnostics/BookingDiagnosticsPage/BookingDiagnosticsPage";
+import {
+    BookingDiagnosticsDetailsPage
+} from "../pages/booking-diagnostics/BookingDiagnosticDetailsPage/BookingDiagnosticsDetailsPage";
 
 
 
@@ -52,6 +59,11 @@ const router = createBrowserRouter([
             {path: 'security-list', element: <SecurityPage/>},
             {path: 'patients-card', element: <PatientPage/>},
             {path: 'patients-card/:id', element: <PatientDetailsPage/>},
+            {path: 'diagnostics', element: <DiagnosticPage/>},
+            {path: 'diagnostics/:id', element: <DiagnosticDetailPage/>},
+            {path: 'create-new-diagnostic', element: <CreateNewDiagnosticPage/>},
+            {path: 'booking-diagnostic', element: <BookingDiagnosticsPage/>},
+            {path:'booking-diagnostic/:id', element: <BookingDiagnosticsDetailsPage/>}
 
         ]
     },

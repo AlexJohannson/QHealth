@@ -2,8 +2,10 @@ from django.urls import path
 
 from channels.routing import URLRouter
 
+from apps.booking_diagnostic.routing import websocket_urlpatterns as booking_diagnostic_routes
 from apps.diagnostics.routing import websocket_urlpatterns as diagnostics_routes
 
 websocket_urlpatterns = [
     path('api/diagnostics/', URLRouter(diagnostics_routes)),
+    path('api/booking_diagnostic/', URLRouter(booking_diagnostic_routes)),
 ]

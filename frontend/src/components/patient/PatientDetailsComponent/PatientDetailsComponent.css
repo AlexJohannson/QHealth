@@ -50,3 +50,7 @@
     margin: 15px 0 15px 0;
     gap: 25px;
 }
+/*---------------------------------   booking-diagnostics-link-patient-details-component    --------------------------*/
+.booking-diagnostics-link-patient-details-component {
+    color: red;
+}
