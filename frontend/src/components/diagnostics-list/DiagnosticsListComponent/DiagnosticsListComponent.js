@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import './DiagnosticsComponent.css';
+import './DiagnosticsListComponent.css';
+import {Link, useNavigate} from "react-router-dom";
 import {diagnosticsService} from "../../../services/diagnosticsService";
-import {DiagnosticsProfileComponent} from "../DiagnosticsProfileComponent/DiagnosticsProfileComponent";
-import {PaginationComponent} from "../../PaginationComponent/PaginationComponent";
-import {DiagnosticsFilterComponent} from "../DiagnosticsFilterComponent/DiagnosticsFilterComponent";
 import {socketService} from "../../../services/socketService";
-import {useNavigate} from "react-router-dom";
+import {DiagnosticsFilterComponent} from "../../diagnostics/DiagnosticsFilterComponent/DiagnosticsFilterComponent";
+import {PaginationComponent} from "../../PaginationComponent/PaginationComponent";
 import {FooterComponent} from "../../FooterComponent/FooterComponent";
+import {DiagnosticsListProfile} from "../DiagnosticsListProfile/DiagnosticsListProfile";
 
-const DiagnosticsComponent = () => {
-    const [diagnostics, setDiagnostics] = useState([]);
+const DiagnosticsListComponent = () => {
+    const [diagnosticsList, setDiagnosticsList] = useState([]);
     const [page, setPage] = useState(1);
     const [size, setSize] = useState(5);
     const [totalPages, setTotalPages] = useState(1);
@@ -24,7 +24,7 @@ const DiagnosticsComponent = () => {
             setLoading(true);
             try {
                 const data = await diagnosticsService.getAllDiagnosticsService({page, size});
-                setDiagnostics(data.data);
+                setDiagnosticsList(data.data);
                 setTotalPages(data.total_pages);
             } catch (error) {
                 setError('Could not load diagnostics');
@@ -35,6 +35,11 @@ const DiagnosticsComponent = () => {
         fetchDiagnostics();
     }, [page, size, trigger]);
 
+    const isSuperUser = localStorage.getItem('is_superuser') === 'true';
+    const isStaff = localStorage.getItem('is_staff') === 'true';
+
+
+    const canCreate = isSuperUser || isStaff;
 
     useEffect(() => {
         socketInit().then()
@@ -60,27 +65,32 @@ const DiagnosticsComponent = () => {
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
     return (
-        <div className="diagnostics-component">
-            <div className={'diagnostics-component-container-header'}>
-                <img src={'/img/logo.png'} className={'logo-diagnostics-component-container'} alt="Logo"/>
+        <div className="diagnostics-list-component">
+            <div className={'diagnostics-list-component-header'}>
+                <img src={'/img/logo.png'} className={'logo-diagnostics-list-component'} alt="Logo"/>
                 <h1>QHealth</h1>
-                <button className={'diagnostics-component-container-button'} onClick={() => navigate(-1)}>BACK</button>
+                <button className={'diagnostics-list-component-button'} onClick={() => navigate(-1)}>BACK</button>
             </div>
-            <div className={'diagnostics-component-filter'}>
+            {canCreate && (
+            <din className={'diagnostics-list-component-link'}>
+                <Link className={'link-create-new-diagnostic-list-component'} to={'/create-new-diagnostic'}>Create New Modality</Link>
+            </din>
+                )}
+            <div className={'diagnostics-list-component-filter'}>
                 <DiagnosticsFilterComponent onFilter={(params) => {
-                    diagnosticsService.getAllDiagnosticsService(params).then(res => setDiagnostics(res.data))
+                    diagnosticsService.getAllDiagnosticsService(params).then(res => setDiagnosticsList(res.data))
                 }}/>
             </div>
-            <div className={'diagnostics-component-maping'}>
-                {diagnostics.length === 0 ? (
-                    <p className={'diagnostics-component-information'}>No diagnostics found.</p>
+            <div className={'diagnostics-list-component-maping'}>
+                {diagnosticsList.length === 0 ? (
+                    <p className={'diagnostics-list-component-information'}>No diagnostics found.</p>
                 ) : (
-                    diagnostics.map(diagnostic => (
-                        <DiagnosticsProfileComponent key={diagnostic.id} diagnostic={diagnostic}/>
+                    diagnosticsList.map(diagnostic => (
+                        <DiagnosticsListProfile key={diagnostic.id} diagnostic={diagnostic}/>
                     ))
                 )}
             </div>
-            <div className={'diagnostics-component-pagination'}>
+            <div className={'diagnostics-list-component-pagination'}>
                 <PaginationComponent page={page} totalPages={totalPages} size={size} onPageChange={setPage}
                                      onSizeChange={(newSize) => {
                                          setSize(newSize);
@@ -93,4 +103,4 @@ const DiagnosticsComponent = () => {
     );
 };
 
-export {DiagnosticsComponent};
+export {DiagnosticsListComponent};

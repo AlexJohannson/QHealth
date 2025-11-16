@@ -39,18 +39,6 @@
 .diagnostics-component-container-button:hover {
     background-color: green;
 }
-/*-------------------------------------------    diagnostics-component-link   ----------------------------------------*/
-.diagnostics-component-link {
-    width: 100%;
-    height: 45px;
-    border-bottom: 2px solid lightskyblue;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.link-create-new-diagnostic {
-    color: red;
-}
 /*--------------------------------------------   diagnostics-component-filter   --------------------------------------*/
 .diagnostics-component-filter {
     margin: 15px 0 15px 0;
@@ -58,11 +46,14 @@
 /*-----------------------------------------    diagnostics-component-maping   ----------------------------------------*/
 .diagnostics-component-maping {
     width: 100%;
+    height: 300px;
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
     gap: 40px;
+    overflow-y: auto;
+    padding: 10px;
+    box-sizing: border-box;
 }
 .diagnostics-component-information {
     color: red;

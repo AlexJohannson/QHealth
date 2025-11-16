@@ -28,6 +28,12 @@ import {BookingDiagnosticsPage} from "../pages/booking-diagnostics/BookingDiagno
 import {
     BookingDiagnosticsDetailsPage
 } from "../pages/booking-diagnostics/BookingDiagnosticDetailsPage/BookingDiagnosticsDetailsPage";
+import {DiagnosticsListPage} from "../pages/diagnostics-list-page/DiagnosticsListPage/DiagnosticsListPage";
+import {
+    DiagnosticsListDetailsPage
+} from "../pages/diagnostics-list-page/DiagnosticsListDetailsPage/DiagnosticsListDetailsPage";
+
+
 
 
 
@@ -63,7 +69,9 @@ const router = createBrowserRouter([
             {path: 'diagnostics/:id', element: <DiagnosticDetailPage/>},
             {path: 'create-new-diagnostic', element: <CreateNewDiagnosticPage/>},
             {path: 'booking-diagnostic', element: <BookingDiagnosticsPage/>},
-            {path:'booking-diagnostic/:id', element: <BookingDiagnosticsDetailsPage/>}
+            {path:'booking-diagnostic/:id', element: <BookingDiagnosticsDetailsPage/>},
+            {path: 'diagnostics-list', element: <DiagnosticsListPage/>},
+            {path: 'diagnostics-list/:id', element: <DiagnosticsListDetailsPage/>},
 
         ]
     },

@@ -42,3 +42,7 @@
 .navigation-nav div button:hover {
     background-color: green;
 }
+.nav-separator {
+    margin: 0 8px;
+    color: #888;
+}

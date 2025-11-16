@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useParams, useNavigate, Link} from "react-router-dom";
 import {diagnosticsService} from "../../../services/diagnosticsService";
-import {DiagnosticsEditComponent} from "../DiagnosticsEditComponent/DiagnosticsEditComponent";
 import {BookDiagnosticComponent} from "../../booking-diagnostics/BookDiagnosticComponent/BookDiagnosticComponent";
 import './DiagnosticsDetailComponent.css';
 import {FooterComponent} from "../../FooterComponent/FooterComponent";
@@ -13,7 +12,7 @@ const DiagnosticsDetailComponent = () => {
     const [diagnostic, setDiagnostic] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const [deleting, setDeleting] = useState(false);
+
 
     useEffect(() => {
         const fetchDiagnostics = async () => {
@@ -29,22 +28,7 @@ const DiagnosticsDetailComponent = () => {
         fetchDiagnostics();
     }, [id]);
 
-    const isSuperUser = localStorage.getItem('is_superuser') === 'true';
-    const isStaff = localStorage.getItem('is_staff') === 'true';
 
-    const canCreate = isSuperUser || isStaff;
-
-    const handleDelete = async () => {
-        setDeleting(true);
-        try {
-            await diagnosticsService.deleteDiagnostic(id);
-            navigate('/diagnostics');
-        } catch (error) {
-            setError('Failed to delete diagnostic');
-        } finally {
-            setDeleting(false);
-        }
-    };
 
     if (loading) return <p>Loading diagnostic...</p>;
     if (error) return <p style={{color: 'red'}}>{error}</p>;
@@ -62,23 +46,6 @@ const DiagnosticsDetailComponent = () => {
                 <p>Created: {diagnostic.created_at}</p>
                 <p>Updated: {diagnostic.updated_at}</p>
             </div>
-            {canCreate && (
-                <div className={'diagnostics-detail-component-content-delete'}>
-                    <h5>BLOCK FOR DELETE MODALITY</h5>
-                    <button
-                        className={'diagnostics-detail-component-content-delete-button'}
-                        onClick={handleDelete}
-                        disabled={deleting}
-                    >
-                        {deleting ? 'Deleting...' : 'Delete Diagnostic'}
-                    </button>
-                </div>
-            )}
-            {canCreate && (
-                <div className={'diagnostics-detail-component-edit-form'}>
-                    <DiagnosticsEditComponent id={id}/>
-                </div>
-            )}
             <div className={'diagnostics-detail-component-booking-form'}>
                 <BookDiagnosticComponent id={id}/>
             </div>

@@ -19,7 +19,7 @@ const useMenuByRole = () => {
                 {label: 'Staff QHealth', path: '/roles'},
                 {label: 'Staff Registration', path: '/staff-registration'},
                 {label: 'Patients Cards', path: '/patients-card'},
-                {label: 'Diagnostics', path: '/diagnostics'},
+                {label: 'Diagnostics List', path: '/diagnostics-list'},
                 {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
                 {label: 'Security List', path: '/security-list'},
             ];
@@ -31,7 +31,7 @@ const useMenuByRole = () => {
                 {label: 'Staff QHealth', path: '/roles'},
                 {label: 'Staff Registration', path: '/staff-registration'},
                 {label: 'Patients Cards', path: '/patients-card'},
-                {label: 'Diagnostics', path: '/diagnostics'},
+                {label: 'Diagnostics List', path: '/diagnostics-list'},
                 {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
                 {label: 'Security List', path: '/security-list'},
             ];
@@ -43,7 +43,7 @@ const useMenuByRole = () => {
                     {label: 'Patients Cards', path: '/patients-card'},
                     {label: 'Update My Profile', path: `users-update/${userId}`},
                     {label: 'My Staff QHealth Profile', path: `roles/${roleId}`},
-                    {label: 'Diagnostics', path: '/diagnostics'},
+                    {label: 'Diagnostics List', path: '/diagnostics-list'},
                     {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
                 ];
             case 'operator':
@@ -51,7 +51,7 @@ const useMenuByRole = () => {
                     {label: 'Patients Cards', path: '/patients-card'},
                     {label: 'Update My Profile', path: `users-update/${userId}`},
                     {label: 'Staff QHealth', path: '/roles'},
-                    {label: 'Diagnostics', path: '/diagnostics'},
+                    {label: 'Diagnostics List', path: '/diagnostics-list'},
                     {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
                 ];
             case 'pharmacist':
@@ -59,7 +59,7 @@ const useMenuByRole = () => {
                     {label: 'Patients Cards', path: '/patients-card'},
                     {label: 'Update My Profile', path: `users-update/${userId}`},
                     {label: 'My Staff QHealth Profile', path: `roles/${roleId}`},
-                    {label: 'Diagnostics', path: '/diagnostics'},
+                    {label: 'Diagnostics List', path: '/diagnostics-list'},
                 ];
             default:
                 if (isUser) {

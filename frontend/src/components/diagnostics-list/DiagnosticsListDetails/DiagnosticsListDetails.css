@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-.diagnostics-detail-component {
+.diagnostics-list-detail-component {
     width: 100%;
     background-color: lightyellow;
     display: flex;
@@ -9,8 +9,8 @@
     flex-direction: column;
     gap: 25px
 }
-/*------------------------------------    diagnostic-detail-component-header   ---------------------------------------*/
-.diagnostic-detail-component-header {
+/*--------------------------------------     diagnostic-list-detail-component-header    ------------------------------*/
+.diagnostic-list-detail-component-header {
     width: 100%;
     height: 150px;
     display: flex;
@@ -20,19 +20,19 @@
     background-color: lightyellow;
     border-bottom: 2px solid lightskyblue;
 }
-.logo-diagnostic-detail-component {
+.logo-diagnostic-list-detail-component {
     width: 200px;
     height: 120px;
     margin-right: 50px;
 }
-.diagnostic-detail-component-header h1 {
+.diagnostic-list-detail-component-header h1 {
     font-family: "Lobster Two", sans-serif;
     font-size: 80px;
     font-weight: 700;
     font-style: italic;
     color: blue;
 }
-.diagnostics-detail-component-button {
+.diagnostics-list-detail-component-button {
     width: 100px;
     height: 45px;
     border-radius: 10px;
@@ -41,12 +41,13 @@
     color: white;
     cursor: pointer;
 }
-.diagnostics-detail-component-button:hover {
-    background-color: green;
+.diagnostics-list-detail-component-button:hover {
+    color: green;
 }
-/*---------------------------------------------    diagnostics-detail-component-content   ----------------------------*/
-.diagnostics-detail-component-content {
+/*------------------------------------     diagnostics-list-detail-component-content   -------------------------------*/
+.diagnostics-list-detail-component-content {
     width: 100%;
+    height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -56,12 +57,24 @@
     border-bottom: 2px solid grey;
     padding-bottom: 15px;
 }
-/*-------------------------------------     diagnostics-detail-component-booking-form  -------------------------------*/
-.diagnostics-detail-component-booking-form {
-    width: 100%;
+/*------------------------------     diagnostics-list-detail-component-content-delete   ------------------------------*/
+.diagnostics-list-detail-component-content-delete {
+    width: 900px;
+    height: 150px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     flex-direction: column;
-    margin: 15px 0 15px 0;
+    background-color: grey;
+    border-radius: 10px;
+}
+.diagnostics-list-detail-component-content-delete-button {
+    width: 170px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 25px;
 }

@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+.diagnostics-list-component {
+    width: 100%;
+    background-color: lightyellow;
+}
+/*-----------------------------------    diagnostics-list-component-header   -----------------------------------------*/
+.diagnostics-list-component-header {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 170px;
+    background-color: lightyellow;
+    border-bottom: 2px solid lightskyblue;
+}
+.logo-diagnostics-list-component {
+    width: 200px;
+    height: 120px;
+    margin-right: 50px;
+}
+.diagnostics-list-component-header h1 {
+    font-family: "Lobster Two", sans-serif;
+    font-size: 80px;
+    font-weight: 700;
+    font-style: italic;
+    color: blue;
+}
+.diagnostics-list-component-button {
+    width: 100px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+.diagnostics-list-component-button:hover {
+    color: green;
+}
+/*----------------------------------     diagnostics-list-component-link   -------------------------------------------*/
+.diagnostics-list-component-link {
+    width: 100%;
+    height: 45px;
+    border-bottom: 2px solid lightskyblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.link-create-new-diagnostic-list-component {
+    color: red;
+}
+/*----------------------------------------------    diagnostics-list-component-filter   ------------------------------*/
+.diagnostics-list-component-filter {
+    margin: 15px 0 15px 0;
+}
+/*----------------------------------------   diagnostics-list-component-maping   -------------------------------------*/
+.diagnostics-list-component-maping {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+    overflow-y: auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.diagnostics-list-component-information {
+    color: red;
+}
+/*---------------------------------------    diagnostics-list-component-pagination   ---------------------------------*/
+.diagnostics-list-component-pagination {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 0 15px 0;
+}

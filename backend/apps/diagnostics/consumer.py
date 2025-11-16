@@ -12,8 +12,7 @@ class DiagnosticsConsumer(GenericAsyncAPIConsumer):
         super().__init__(*args, **kwargs)
 
     async def connect(self):
-        print(">>> CONNECT CALLED")
-        print(">>> USER:", self.scope.get("user"))
+
 
         if not self.scope['user']:
             return await self.close()

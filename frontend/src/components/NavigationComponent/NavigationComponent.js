@@ -44,9 +44,12 @@ const NavigationComponent = () => {
             <nav className={'navigation'}>
                 <ul>
                     {menu.map((item, index) => (
-                        <li key={index}>
-                            <a href={item.path}>{item.label}</a>
-                        </li>
+                        <React.Fragment key={index}>
+                            <li>
+                                <a href={item.path}>{item.label}</a>
+                            </li>
+                            {index < menu.length - 1 && <span className="nav-separator">|</span>}
+                        </React.Fragment>
                     ))}
                 </ul>
             </nav>

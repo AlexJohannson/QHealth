@@ -46,11 +46,14 @@
 /*---------------------------------------   roles-component-maping  --------------------------------------------------*/
 .roles-component-maping {
     width: 100%;
+    height: 300px;
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
     gap: 40px;
+    overflow-y: auto;
+    padding: 10px;
+    box-sizing: border-box;
 }
 .role-component-container-information {
     color: red;
