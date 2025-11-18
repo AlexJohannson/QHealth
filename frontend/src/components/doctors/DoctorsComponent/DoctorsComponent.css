@@ -38,7 +38,7 @@
     cursor: pointer;
 }
 .doctors-component-button-header:hover {
-    color: green;
+    background-color: green;
 }
 /*-------------------------------------------    doctors-component-filter   ------------------------------------------*/
 .doctors-component-filter {

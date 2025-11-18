@@ -26,16 +26,18 @@ class IsSuperUserAdminDoctorOrPatient(BasePermission):
 
         return False
 
+
+
     def has_object_permission(self, request, view, obj):
         if request.method in SAFE_METHODS:
             if request.user.is_superuser or request.user.is_staff:
                 return True
 
-            if hasattr(request.user, "role") and request.user.role.role == "doctor":
+            role = getattr(request.user, "role", None)
+            if role and role.role in ["doctor", "operator"]:
                 return True
 
             return obj.user == request.user
-
 
         if request.method == "DELETE":
             return request.user.is_superuser or request.user.is_staff

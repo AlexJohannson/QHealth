@@ -36,5 +36,5 @@
 }
 
 .book-doctor-component button:hover {
-    color: green;
+    background-color: green;
 }

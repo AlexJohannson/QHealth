@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+.create-journal-form {
+    width: 100%;
+    background-color: lightyellow;
+}
+/*------------------------------------     create-journal-form-header   ----------------------------------------------*/
+.create-journal-form-header {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 170px;
+    background-color: lightyellow;
+    border-bottom: 2px solid lightskyblue;
+}
+.logo-create-journal-form {
+    width: 200px;
+    height: 120px;
+    margin-right: 50px;
+}
+.create-journal-form-header h1 {
+    font-family: "Lobster Two", sans-serif;
+    font-size: 80px;
+    font-weight: 700;
+    font-style: italic;
+    color: blue;
+}
+.create-journal-form-header-button {
+    width: 100px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+.create-journal-form-header-button:hover {
+    background-color: green;
+}
+/*--------------------------------------------    create-journal-form  -----------------------------------------------*/
+.create-journal-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: grey;
+    gap: 25px;
+}
+/*------------------------------------------    create-journal-form-diagnosis   --------------------------------------*/
+.create-journal-form-diagnosis {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+.create-journal-form-diagnosis input {
+    width: 750px;
+    height: 60px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease
+}
+/*---------------------------------------   create-journal-form-description   ----------------------------------------*/
+.create-journal-form-description {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+.create-journal-form-description textarea {
+    width: 750px;
+    height: 120px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease
+}
+/*----------------------------------------   create-journal-form-planning  -------------------------------------------*/
+.create-journal-form-planning {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+.create-journal-form-planning textarea {
+    width: 750px;
+    height: 120px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease
+}
+.create-journal-form-button-create {
+    width: 170px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+.create-journal-form-button-create:hover {
+    background-color: green;
+}

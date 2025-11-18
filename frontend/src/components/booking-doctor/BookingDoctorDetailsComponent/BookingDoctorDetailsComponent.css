@@ -37,7 +37,7 @@
     cursor: pointer
 }
 .booking-doctor-details-component-button:hover {
-    color: green;
+    background-color: green;
 }
 /*-----------------------------------------------------   booking-doctor-details-component-profile   -----------------*/
 .booking-doctor-details-component-profile {

@@ -36,6 +36,13 @@ import {DoctorPagePatient} from "../pages/doctor-page-patient/DoctorPagePatient/
 import {DoctorPagePatientDetails} from "../pages/doctor-page-patient/DoctorPagePatientDetails/DoctorPagePatientDetails";
 import {BookingDoctorPage} from "../pages/booking-doctor-page/BookingDoctorPage/BookingDoctorPage";
 import {BookingDoctorDetailsPage} from "../pages/booking-doctor-page/BookingDoctorDetailsPage/BookingDoctorDetailsPage";
+import {PatientJournalPage} from "../pages/patient-journal-page/PatientJournalPage/PatientJournalPage";
+import {
+    PatientJournalDetailsPage
+} from "../pages/patient-journal-page/PatientJournalDetailsPage/PatientJournalDetailsPage";
+import {
+    CreatePatientJournalPage
+} from "../pages/patient-journal-page/CreatePatientJournalPage/CreatePatientJournalPage";
 
 
 
@@ -80,6 +87,9 @@ const router = createBrowserRouter([
             {path: 'doctors/:id', element: <DoctorPagePatientDetails/>},
             {path: 'booking-doctor', element: <BookingDoctorPage/>},
             {path: 'booking-doctor/:id', element: <BookingDoctorDetailsPage/>},
+            {path: 'patient-journal', element: <PatientJournalPage/>},
+            {path: 'patient-journal/:id', element: <PatientJournalDetailsPage/>},
+            {path: 'create-patient-journal', element: <CreatePatientJournalPage/>}
         ]
     },
 ])

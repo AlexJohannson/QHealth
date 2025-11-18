@@ -22,7 +22,9 @@ const useMenuByRole = () => {
                 {label: 'Diagnostics List', path: '/diagnostics-list'},
                 {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
                 {label: 'Booking Doctors List', path: '/booking-doctor'},
+                {label: 'Journal', path: '/patient-journal'},
                 {label: 'Security List', path: '/security-list'},
+
             ];
         }
 
@@ -35,6 +37,7 @@ const useMenuByRole = () => {
                 {label: 'Diagnostics List', path: '/diagnostics-list'},
                 {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
                 {label: 'Booking Doctors List', path: '/booking-doctor'},
+                {label: 'Journal', path: '/patient-journal'},
                 {label: 'Security List', path: '/security-list'},
             ];
         }
@@ -48,6 +51,7 @@ const useMenuByRole = () => {
                     {label: 'Diagnostics List', path: '/diagnostics-list'},
                     {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
                     {label: 'Booking Doctors List', path: '/booking-doctor'},
+                    {label: 'Journal', path: '/patient-journal'},
                 ];
             case 'operator':
                 return [
@@ -57,6 +61,7 @@ const useMenuByRole = () => {
                     {label: 'Diagnostics List', path: '/diagnostics-list'},
                     {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
                     {label: 'Booking Doctors List', path: '/booking-doctor'},
+                    {label: 'Journal', path: '/patient-journal'}
                 ];
             case 'pharmacist':
                 return [
@@ -73,6 +78,7 @@ const useMenuByRole = () => {
                         {label: 'Diagnostics', path: '/diagnostics'},
                         {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
                         {label: 'Booking Doctors List', path: '/booking-doctor'},
+                        {label: 'Journal', path: '/patient-journal'},
                     ];
                 }
                 return [];

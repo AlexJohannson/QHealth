@@ -36,6 +36,11 @@ const PatientDetailsComponent = () => {
         isStaff ||
         role === 'operator';
 
+    const canSeeJournalLink =
+        isSuperUser ||
+        isStaff ||
+        role === 'doctor';
+
 
     if (loading) return <p>Loading user...</p>;
     if (error) return <p style={{color: 'red'}}>{error}</p>;
@@ -85,6 +90,13 @@ const PatientDetailsComponent = () => {
                         Booking Doctor
                     </Link>
                 )}
+                {canSeeJournalLink && (
+                    <Link className={'booking-diagnostics-link-patient-details-component'}
+                          to={`/create-patient-journal?patientId=${user.id}`}>
+                    Create Patient Journal
+                </Link>
+                )}
+
             </div>
             <FooterComponent/>
         </div>

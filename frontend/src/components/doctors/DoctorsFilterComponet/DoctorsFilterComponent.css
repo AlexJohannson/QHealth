@@ -58,5 +58,5 @@
     cursor: pointer;
 }
 .doctor-filter-component-button:hover {
-    color: green;
+    background-color: green;
 }

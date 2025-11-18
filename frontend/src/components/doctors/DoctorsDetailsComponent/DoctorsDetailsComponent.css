@@ -42,7 +42,7 @@
     cursor: pointer;
 }
 .doctors-details-component-button:hover {
-    color: green;
+    background-color: green;
 }
 /*-------------------------------------------    doctors-details-component-content    --------------------------------*/
 .doctors-details-component-content {

@@ -37,7 +37,7 @@
     cursor: pointer;
 }
 .booking-diagnostics-detail-component-button:hover {
-    color: green;
+    background-color: green;
 }
 /*--------------------------------    booking-diagnostics-details-component-profile    -------------------------------*/
 .booking-diagnostics-details-component-profile {

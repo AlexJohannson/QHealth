@@ -38,7 +38,7 @@
     cursor: pointer;
 }
 .diagnostics-list-component-button:hover {
-    color: green;
+    background-color: green;
 }
 /*----------------------------------     diagnostics-list-component-link   -------------------------------------------*/
 .diagnostics-list-component-link {

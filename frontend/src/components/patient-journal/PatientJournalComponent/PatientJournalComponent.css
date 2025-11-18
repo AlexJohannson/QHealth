@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 
-.booking-doctor-component {
-    width: 100%;
+.patient-journal-component {
+     width: 100%;
     background-color: lightyellow;
 }
-/*--------------------------------     booking-doctor-component-header   ---------------------------------------------*/
-.booking-doctor-component-header {
+/*--------------------------------    patient-journal-component-header   ---------------------------------------------*/
+.patient-journal-component-header {
     width: 100%;
     height: 150px;
     display: flex;
@@ -16,19 +16,19 @@
     background-color: lightyellow;
     border-bottom: 2px solid lightskyblue;
 }
-.logo-booking-doctor-component-header {
+.logo-patient-journal-component {
     width: 200px;
     height: 120px;
     margin-right: 50px;
 }
-.booking-doctor-component-header h1 {
+.patient-journal-component-header h1 {
     font-family: "Lobster Two", sans-serif;
     font-size: 80px;
     font-weight: 700;
     font-style: italic;
     color: blue;
 }
-.booking-doctor-component-button-header {
+.patient-journal-component-header-button {
     width: 100px;
     height: 45px;
     border-radius: 10px;
@@ -37,31 +37,30 @@
     color: white;
     cursor: pointer;
 }
-.booking-doctor-component-button-header:hover {
+.patient-journal-component-header-button:hover {
     background-color: green;
 }
-/*-----------------------------------    booking-doctor-component-filter   -------------------------------------------*/
-.booking-doctor-component-filter {
+/*------------------------------------    patient-journal-component-filter   -----------------------------------------*/
+.patient-journal-component-filter {
     margin: 15px 0 15px 0;
 }
-/*--------------------------------------   booking-doctor-component-maping    ----------------------------------------*/
-.booking-doctor-component-maping {
+/*-------------------------------------    patient-journal-component-maping   ----------------------------------------*/
+.patient-journal-component-maping {
     width: 100%;
     height: 300px;
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
     gap: 40px;
     overflow-y: auto;
     padding: 10px;
     box-sizing: border-box;
 }
-.booking-doctor-component-maping-information {
+.patient-journal-component-maping-information {
     color: red;
 }
-/*---------------------------------------   booking-doctor-component-pagination   ------------------------------------*/
-.booking-doctor-component-pagination {
+/*--------------------------------------    patient-journal-component-pagination   -----------------------------------*/
+.patient-journal-component-pagination {
     width: 100%;
     display: flex;
     align-items: center;

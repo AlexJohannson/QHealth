@@ -57,5 +57,5 @@
     cursor: pointer;
 }
 .booking-doctor-filter-component-form-button:hover {
-    color: green;
+    background-color: green;
 }
