@@ -1,4 +1,4 @@
-.book-diagnostic-component {
+.book-doctor-component {
     width: 900px;
     height: 150px;
     display: flex;
@@ -10,10 +10,11 @@
     background-color: gray;
 }
 
-.book-diagnostic-component-container-error {
+.book-doctor-component-error {
     color: red;
 }
-.book-diagnostic-component-container input {
+
+.book-doctor-component-handle input {
     width: 350px;
     height: 30px;
     padding: 10px 12px;
@@ -23,7 +24,8 @@
     outline: none;
     transition: border-color 0.2s ease;
 }
-.book-diagnostic-component button {
+
+.book-doctor-component button {
     width: 170px;
     height: 45px;
     border-radius: 10px;
@@ -32,6 +34,7 @@
     color: white;
     cursor: pointer;
 }
-.book-diagnostic-component button:hover {
-    background-color: green;
+
+.book-doctor-component button:hover {
+    color: green;
 }

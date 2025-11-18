@@ -8,7 +8,6 @@ from apps.booking_doctor.filter import BookingDoctorFilter
 from apps.booking_doctor.models import BookingDoctorModel
 from apps.booking_doctor.permissions import (
     IsSuperUserOrAdminOrOperator,
-    IsSuperUserOrAdminOrOperatorOrDoctor,
     IsSuperUserOrAdminOrOperatorOrDoctorOrPatient,
     IsSuperUserOrAdminOrOperatorOrPatient,
 )
@@ -16,18 +15,30 @@ from apps.booking_doctor.serializer import BookingDoctorSerializer
 
 
 class BookingDoctorListCreateAPIView(ListCreateAPIView):
-    queryset = BookingDoctorModel.objects.all()
     serializer_class = BookingDoctorSerializer
     filterset_class = BookingDoctorFilter
 
+
     def get_permissions(self):
         if self.request.method == 'GET':
-            return [IsSuperUserOrAdminOrOperatorOrDoctor()]
+            return [IsSuperUserOrAdminOrOperatorOrDoctorOrPatient()]
         return [IsSuperUserOrAdminOrOperator()]
 
     def perform_create(self, serializer):
         booking = serializer.save()
         send_booking_doctor_email_task.delay(booking.id)
+
+    def get_queryset(self):
+        user = self.request.user
+
+        if user.is_superuser or user.is_staff:
+            return BookingDoctorModel.objects.all()
+
+        role = getattr(user, 'role', None)
+        if role and role.role in ['operator', 'doctor']:
+            return BookingDoctorModel.objects.all()
+
+        return BookingDoctorModel.objects.filter(user=user)
 
 
 class BookingDoctorRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):

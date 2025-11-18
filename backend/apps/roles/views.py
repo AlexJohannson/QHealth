@@ -1,5 +1,6 @@
 from rest_framework import status
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView
+from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from core.tasks.send_block_doctor_email_task import send_block_doctor_email_task
@@ -21,6 +22,19 @@ class RolesListCreateAPIView(ListCreateAPIView):
             return RolesWriteSerializer
         return RolesReadSerializer
 
+
+class RoleDoctorApiView(ListAPIView):
+    queryset = RolesModels.objects.filter(role='doctor')
+    permission_classes = [IsAuthenticated]
+    filterset_class = RolesFilter
+    serializer_class = RolesReadSerializer
+
+
+class RolesDoctorById(RetrieveUpdateDestroyAPIView):
+    queryset = RolesModels.objects.filter(role='doctor')
+    permission_classes = [IsAuthenticated]
+    serializer_class = RolesReadSerializer
+    http_method_names = ['get']
 
 class RolesRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = RolesModels.objects.all()

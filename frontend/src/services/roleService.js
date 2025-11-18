@@ -17,6 +17,12 @@ const roleService = {
     },
     unblockRoleDoctor (id) {
         return apiService.patch(`${urls.roles.list}/unblock_staff_doctor/${id}`);
+    },
+    getListOfDoctors(params) {
+        return apiService.get(`${urls.roles.list}/doctor_list`, {params}).then(res => res.data);
+    },
+    getProfileDoctorById(id) {
+        return apiService.get(`${urls.roles.list}/doctor_list/${id}`);
     }
 }
 

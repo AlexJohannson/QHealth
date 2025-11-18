@@ -27,7 +27,7 @@ const DiagnosticsCreateComponent = () => {
                 modality: form.modality,
             })
             setSuccess(true);
-            navigate("/diagnostics");
+            navigate("/diagnostics-list");
         } catch (error) {
             if (error.response?.data) {
                 const normalized = {};

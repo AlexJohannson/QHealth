@@ -79,6 +79,12 @@ const PatientDetailsComponent = () => {
                         Booking Diagnostic
                     </Link>
                 )}
+                {canSeeBookingLink && (
+                    <Link className={'booking-diagnostics-link-patient-details-component'}
+                          to={`/doctors?patientId=${user.id}`}>
+                        Booking Doctor
+                    </Link>
+                )}
             </div>
             <FooterComponent/>
         </div>

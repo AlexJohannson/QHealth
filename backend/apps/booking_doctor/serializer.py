@@ -3,7 +3,6 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
 from apps.booking_doctor.models import BookingDoctorModel
-from apps.roles.serializer import RolesReadSerializer
 from apps.users.serializer import UserSerializer
 
 UserModel = get_user_model()
@@ -50,13 +49,19 @@ class BookingDoctorSerializer(serializers.ModelSerializer):
             'updated_at': {'read_only': True},
         }
 
+
     def get_doctor(self, obj):
         try:
-            if hasattr(obj.doctor, 'role'):
-                return RolesReadSerializer(obj.doctor.role).data
-        except Exception as e:
-            print(f"Error getting doctor role: {e}")
-        return None
+            role = getattr(obj.doctor, 'role', None)
+            profile = getattr(obj.doctor, 'profile', None)
+
+            return {
+                'specialty': role.specialty if role else None,
+                'name': profile.name if profile else None,
+                'surname': profile.surname if profile else None,
+            }
+        except Exception:
+            return None
 
 
     def validate_doctor_id(self, value):

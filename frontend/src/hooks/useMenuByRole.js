@@ -21,6 +21,7 @@ const useMenuByRole = () => {
                 {label: 'Patients Cards', path: '/patients-card'},
                 {label: 'Diagnostics List', path: '/diagnostics-list'},
                 {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
+                {label: 'Booking Doctors List', path: '/booking-doctor'},
                 {label: 'Security List', path: '/security-list'},
             ];
         }
@@ -33,6 +34,7 @@ const useMenuByRole = () => {
                 {label: 'Patients Cards', path: '/patients-card'},
                 {label: 'Diagnostics List', path: '/diagnostics-list'},
                 {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
+                {label: 'Booking Doctors List', path: '/booking-doctor'},
                 {label: 'Security List', path: '/security-list'},
             ];
         }
@@ -45,6 +47,7 @@ const useMenuByRole = () => {
                     {label: 'My Staff QHealth Profile', path: `roles/${roleId}`},
                     {label: 'Diagnostics List', path: '/diagnostics-list'},
                     {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
+                    {label: 'Booking Doctors List', path: '/booking-doctor'},
                 ];
             case 'operator':
                 return [
@@ -53,6 +56,7 @@ const useMenuByRole = () => {
                     {label: 'Staff QHealth', path: '/roles'},
                     {label: 'Diagnostics List', path: '/diagnostics-list'},
                     {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
+                    {label: 'Booking Doctors List', path: '/booking-doctor'},
                 ];
             case 'pharmacist':
                 return [
@@ -67,7 +71,8 @@ const useMenuByRole = () => {
                         {label: 'My card', path: `/patients-card/${userId}`},
                         {label: 'Update My Profile', path: `users-update/${userId}`},
                         {label: 'Diagnostics', path: '/diagnostics'},
-                        {label: 'Booking Diagnostics', path: '/booking-diagnostic'}
+                        {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
+                        {label: 'Booking Doctors List', path: '/booking-doctor'},
                     ];
                 }
                 return [];

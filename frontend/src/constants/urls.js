@@ -6,6 +6,7 @@ const roles = '/roles';
 const securityList = '/security';
 const diagnostics = '/diagnostics';
 const bookingDiagnostic = '/booking_diagnostic';
+const bookingDoctor = '/booking_doctor';
 
 const urls = {
     auth: {
@@ -33,6 +34,9 @@ const urls = {
     },
     bookingDiagnostic: {
         list: bookingDiagnostic,
+    },
+    bookingDoctor: {
+        list: bookingDoctor,
     }
 }
 

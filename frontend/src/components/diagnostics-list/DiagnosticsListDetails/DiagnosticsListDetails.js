@@ -4,6 +4,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {diagnosticsService} from "../../../services/diagnosticsService";
 import {DiagnosticsEditComponent} from "../../diagnostics/DiagnosticsEditComponent/DiagnosticsEditComponent";
 import {FooterComponent} from "../../FooterComponent/FooterComponent";
+import {BookDoctorComponent} from "../../booking-doctor/BookDoctorComponent/BookDoctorComponent";
 
 const DiagnosticsListDetails = () => {
     const {id} = useParams();
@@ -36,7 +37,7 @@ const DiagnosticsListDetails = () => {
         setDeleting(true);
         try {
             await diagnosticsService.deleteDiagnostic(id);
-            navigate('/diagnostics-list');
+            navigate(-1);
         } catch (error) {
             setError('Failed to delete diagnostic');
         } finally {

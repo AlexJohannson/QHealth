@@ -1,0 +1,28 @@
+.booking-actions-component {
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+.booking-actions-component-error {
+    color: red;
+}
+.booking-actions-component-button-canceled {
+    width: 170px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: brown;
+    color: white;
+    cursor: pointer;
+}
+.booking-actions-component-button-delete {
+    width: 170px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
