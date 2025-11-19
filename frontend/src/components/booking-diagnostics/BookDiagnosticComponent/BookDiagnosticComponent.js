@@ -16,39 +16,53 @@ const BookDiagnosticComponent = ({id}) => {
     const userId = patientId ? Number(patientId) : loggedInUserId;
 
 
-
     const isSuperUser = localStorage.getItem('is_superuser') === 'true';
     const isStaff = localStorage.getItem('is_staff') === 'true';
     const role = localStorage.getItem('role');
 
     const canSetDateTime = isSuperUser || isStaff || role === 'operator';
 
+    const formatBackendErrors = (errors) => {
+        if (typeof errors === 'string') return errors;
 
-    const handleBooking = async () => {
-    setLoading(true);
-    setError('');
+        if (typeof errors === 'object' && errors !== null) {
+            return Object.entries(errors)
+                .map(([field, messages]) => {
+                    if (Array.isArray(messages)) {
+                        return `${field}: ${messages.join(', ')}`;
+                    }
+                    return `${field}: ${messages}`;
+                })
+                .join('\n');
+        }
 
-    const data = {
-        user_id: Number(userId),
-        diagnostics_id: Number(diagnosticsId),
-        booked_by_id: Number(userId),
-        ...(canSetDateTime && { date_time: dateTime }),
+        return 'Unknown error';
     };
 
-    try {
-        await bookingDiagnosticsService.bookDiagnostic(data);
-    } catch (err) {
-        const backendMessage =
-            err?.response?.data?.detail ||
-            err?.response?.data?.error ||
-            err?.response?.data ||
-            'Booking failed';
+    const handleBooking = async () => {
+        setLoading(true);
+        setError('');
 
-        setError(typeof backendMessage === 'string' ? backendMessage : JSON.stringify(backendMessage));
-    } finally {
-        setLoading(false);
-    }
-};
+        const data = {
+            user_id: Number(userId),
+            diagnostics_id: Number(diagnosticsId),
+            booked_by_id: Number(userId),
+            ...(canSetDateTime && {date_time: dateTime}),
+        };
+
+        try {
+            await bookingDiagnosticsService.bookDiagnostic(data);
+        } catch (err) {
+            const raw = err?.response?.data?.detail ||
+                err?.response?.data?.error ||
+                err?.response?.data ||
+                'Booking failed';
+
+            setError(formatBackendErrors(raw));
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <div className={'book-diagnostic-component'}>

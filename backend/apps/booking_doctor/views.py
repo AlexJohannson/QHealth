@@ -15,6 +15,12 @@ from apps.booking_doctor.serializer import BookingDoctorSerializer
 
 
 class BookingDoctorListCreateAPIView(ListCreateAPIView):
+    """
+    get:
+        Booking doctor list
+    post:
+        Create new booking doctor
+    """
     serializer_class = BookingDoctorSerializer
     filterset_class = BookingDoctorFilter
 
@@ -42,6 +48,12 @@ class BookingDoctorListCreateAPIView(ListCreateAPIView):
 
 
 class BookingDoctorRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    """
+    get:
+        Get booking doctor details by ID
+    delete:
+        Delete booking doctor by ID
+    """
     queryset = BookingDoctorModel.objects.all()
     serializer_class = BookingDoctorSerializer
     http_method_names = ['get', 'delete']
@@ -53,6 +65,10 @@ class BookingDoctorRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
         return [IsSuperUserOrAdminOrOperator()]
 
 class BookingDoctorCancelAPIView(UpdateAPIView):
+    """
+    patch:
+        Canceled booking to doctor
+    """
     queryset = BookingDoctorModel.objects.all()
     serializer_class = BookingDoctorSerializer
     http_method_names = ['patch']

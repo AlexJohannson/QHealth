@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.utils.decorators import method_decorator
 
 from rest_framework import status
 from rest_framework.generics import GenericAPIView, ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
@@ -10,6 +11,7 @@ from core.tasks.send_create_admin_email_task import send_create_admin_email_task
 from core.tasks.send_delete_user_account_email_task import send_delete_user_account_email_task
 from core.tasks.send_revoke_admin_email_task import send_revoke_admin_email_task
 from core.tasks.send_unblock_user_account_email_task import send_unblock_user_account_email_task
+from drf_yasg.utils import swagger_auto_schema
 
 from apps.users.filter import UsersFilter
 from apps.users.permissions import (
@@ -22,8 +24,14 @@ from apps.users.serializer import UserSerializer
 
 UserModel = get_user_model()
 
-
+@method_decorator(name='post', decorator=swagger_auto_schema(security=[]))
 class UsersListCreateApiView(ListCreateAPIView):
+    """
+    get:
+        Get list of users
+    post:
+        Create new user
+    """
     queryset = UserModel.objects.all()
     serializer_class = UserSerializer
     filterset_class = UsersFilter
@@ -33,6 +41,14 @@ class UsersListCreateApiView(ListCreateAPIView):
 
 
 class UsersRetrieveUpdateDestroyApiView(RetrieveUpdateDestroyAPIView):
+    """
+    get:
+        Get user details by ID
+    patch:
+        Patrial update user details by ID
+    delete:
+        Delete user account by ID
+    """
     serializer_class = UserSerializer
     queryset = UserModel.objects.all()
     permission_classes = [IsSuperUserOrAdminOrUser]
@@ -55,7 +71,14 @@ class UsersRetrieveUpdateDestroyApiView(RetrieveUpdateDestroyAPIView):
 
 
 class BlockUserView(GenericAPIView):
+    """
+    patch:
+        Block user by ID
+    """
     permission_classes = [IsSuperUserOrAdminOnly]
+
+    def get_serializer(self):
+        return None
 
     def get_queryset(self):
         return UserModel.objects.exclude(id=self.request.user.id)
@@ -71,7 +94,14 @@ class BlockUserView(GenericAPIView):
 
 
 class UnBlockUserView(GenericAPIView):
+    """
+    patch:
+        Unblock user by ID
+    """
     permission_classes = [IsSuperUserOrAdminOnly]
+
+    def get_serializer(self):
+        return None
 
     def get_queryset(self):
         return UserModel.objects.exclude(id=self.request.user.id)
@@ -87,7 +117,14 @@ class UnBlockUserView(GenericAPIView):
 
 
 class UserToAdminView(GenericAPIView):
+    """
+    patch:
+        User to admin by ID
+    """
     permission_classes = [IsSuperUserOrAdminOnly]
+
+    def get_serializer(self):
+        return None
 
     def get_queryset(self):
         return UserModel.objects.exclude(id=self.request.user.id)
@@ -103,7 +140,15 @@ class UserToAdminView(GenericAPIView):
 
 
 class UserRevokeAdminView(GenericAPIView):
+    """
+    patch:
+        Revoke admin by ID
+    """
     permission_classes = [IsSuperUserOrAdminOnly]
+
+
+    def get_serializer(self):
+        return None
 
     def get_queryset(self):
         return UserModel.objects.exclude(id=self.request.user.id)
@@ -119,6 +164,10 @@ class UserRevokeAdminView(GenericAPIView):
 
 
 class UserPatientApiView(ListAPIView):
+    """
+    get:
+        Get list of patients
+    """
     permission_classes = [IsSuperUserAdminOrRole]
     filterset_class = UsersFilter
     serializer_class = UserSerializer
@@ -133,6 +182,10 @@ class UserPatientApiView(ListAPIView):
 
 
 class PatientRetrieveUpdateDestroyApiView(RetrieveUpdateDestroyAPIView):
+    """
+    get:
+        Get patient details by ID
+    """
     permission_classes = [IsSuperUserAdminOrRoleOrOwner]
     filterset_class = UsersFilter
     serializer_class = UserSerializer

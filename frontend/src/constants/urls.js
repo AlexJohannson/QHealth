@@ -9,6 +9,7 @@ const bookingDiagnostic = '/booking_diagnostic';
 const bookingDoctor = '/booking_doctor';
 const patientJournal = '/patient_card';
 
+
 const urls = {
     auth: {
         login: auth,

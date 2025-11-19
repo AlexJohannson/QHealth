@@ -8,6 +8,12 @@ from apps.diagnostics.serializer import DiagnosticsSerializer
 
 
 class DiagnosticsCreateListApiView(ListCreateAPIView):
+    """
+    get:
+        Get diagnostics list
+    post:
+        Create new diagnostic
+    """
     queryset = DiagnosticsModel.objects.all()
     serializer_class = DiagnosticsSerializer
     filterset_class = DiagnosticsFilter
@@ -20,6 +26,14 @@ class DiagnosticsCreateListApiView(ListCreateAPIView):
 
 
 class DiagnosticsRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    """
+    get:
+        Get diagnostic details by ID
+    patch:
+        Patrial update diagnostic details by ID
+    delete:
+        Delete diagnostic detail by ID
+    """
     queryset = DiagnosticsModel.objects.all()
     serializer_class = DiagnosticsSerializer
     http_method_names = ['get', 'patch', 'delete']

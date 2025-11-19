@@ -7,6 +7,10 @@ from apps.security.serializer import SecuritySerializer
 
 
 class SecurityListApiView(ListAPIView):
+    """
+    get:
+        Get security list
+    """
     queryset = LoginAttempt.objects.all()
     serializer_class = SecuritySerializer
     permission_classes = [IsSuperUserOrAdminOnly]
@@ -15,6 +19,10 @@ class SecurityListApiView(ListAPIView):
 
 
 class SecurityDestroyApiView(DestroyAPIView):
+    """
+    delete:
+        Delete security list by ID
+    """
     queryset = LoginAttempt.objects.all()
     serializer_class = SecuritySerializer
     permission_classes = [IsSuperUserOrAdminOnly]

@@ -13,6 +13,12 @@ from apps.roles.serializer import RolesReadSerializer, RolesWriteSerializer
 
 
 class RolesListCreateAPIView(ListCreateAPIView):
+    """
+    get:
+        Get roles list
+    post:
+        Create new role
+    """
     queryset = RolesModels.objects.all()
     permission_classes = [IsSuperUserOrOperator]
     filterset_class = RolesFilter
@@ -24,6 +30,10 @@ class RolesListCreateAPIView(ListCreateAPIView):
 
 
 class RoleDoctorApiView(ListAPIView):
+    """
+    get:
+        Get doctor role list
+    """
     queryset = RolesModels.objects.filter(role='doctor')
     permission_classes = [IsAuthenticated]
     filterset_class = RolesFilter
@@ -31,18 +41,30 @@ class RoleDoctorApiView(ListAPIView):
 
 
 class RolesDoctorById(RetrieveUpdateDestroyAPIView):
+    """
+    get:
+        Get doctor role by ID
+    """
     queryset = RolesModels.objects.filter(role='doctor')
     permission_classes = [IsAuthenticated]
     serializer_class = RolesReadSerializer
     http_method_names = ['get']
 
 class RolesRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    """
+    get:
+        Get roles details by ID
+    """
     queryset = RolesModels.objects.all()
     serializer_class = RolesReadSerializer
     permission_classes = [IsSuperUserOrRoleOwner]
     http_method_names = ['get']
 
 class ToggleDoctorNotAvailabilityAPIView(UpdateAPIView):
+    """
+    patch:
+        Block doctor role
+    """
     queryset = RolesModels.objects.filter(role='doctor')
     serializer_class = RolesReadSerializer
     permission_classes = [IsSuperUserOrAdmin]
@@ -56,6 +78,10 @@ class ToggleDoctorNotAvailabilityAPIView(UpdateAPIView):
         return Response({'is_available_for_booking': role.is_available_for_booking}, status=status.HTTP_200_OK)
 
 class ToggleDoctorAvailabilityAPIView(UpdateAPIView):
+    """
+    patch:
+        Unblock doctor role
+    """
     queryset = RolesModels.objects.filter(role='doctor')
     serializer_class = RolesReadSerializer
     permission_classes = [IsSuperUserOrAdmin]

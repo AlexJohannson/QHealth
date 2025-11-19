@@ -17,6 +17,24 @@ const BookDoctorComponent = ({id, patientId}) => {
     const userId = patientId ? Number(patientId) : (patientIdFromUrl ? Number(patientIdFromUrl)
         : Number(localStorage.getItem('userId')));
 
+
+    const formatBackendErrors = (errors) => {
+        if (typeof errors === 'string') return errors;
+
+        if (typeof errors === 'object' && errors !== null) {
+            return Object.entries(errors)
+                .map(([field, messages]) => {
+                    if (Array.isArray(messages)) {
+                        return `${field}: ${messages.join(', ')}`;
+                    }
+                    return `${field}: ${messages}`;
+                })
+                .join('\n');
+        }
+
+        return 'Unknown error';
+    };
+
     const handleBooking = async () => {
         setLoading(true);
         setError('');
@@ -30,13 +48,13 @@ const BookDoctorComponent = ({id, patientId}) => {
 
         try {
             await bookingDoctorService.createNewVisitToDoctor(data);
-        } catch (error) {
-            const backendMessage =
-                error?.response?.data?.detail ||
-                error?.response?.data?.error ||
-                error?.response?.data ||
-                'Booking doctor failed.';
-            setError(typeof backendMessage === 'string' ? backendMessage : JSON.stringify(backendMessage));
+        } catch (err) {
+            const raw = err?.response?.data?.detail ||
+                err?.response?.data?.error ||
+                err?.response?.data ||
+                'Booking failed';
+
+            setError(formatBackendErrors(raw));
         } finally {
             setLoading(false);
         }

@@ -17,6 +17,21 @@ Including another URLconf
 
 from django.urls import include, path
 
+from rest_framework.permissions import AllowAny
+
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="QHealth",
+        default_version='v1',
+        description="QHealth API",
+        contact=openapi.Contact(email="qhealth@exampl.com"),
+    ),
+    public=True,
+    permission_classes=[AllowAny],
+)
 urlpatterns = [
     path('api/users', include('apps.users.urls')),
     path('api/auth', include('apps.auth.urls')),
@@ -26,5 +41,6 @@ urlpatterns = [
     path('api/diagnostics', include('apps.diagnostics.urls')),
     path('api/booking_diagnostic', include('apps.booking_diagnostic.urls')),
     path('api/booking_doctor', include('apps.booking_doctor.urls')),
+    path('api/doc', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger'),
 
 ]

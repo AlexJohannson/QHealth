@@ -15,6 +15,12 @@ from apps.booking_diagnostic.serializer import BookingDiagnosticSerializer
 
 
 class BookingDiagnosticListCreateAPIView(ListCreateAPIView):
+    """
+    get:
+        Get list of booking diagnostics
+    post:
+        Create new booking diagnostic
+    """
     serializer_class = BookingDiagnosticSerializer
     filterset_class = BookingDiagnosticFilter
 
@@ -60,6 +66,12 @@ class BookingDiagnosticListCreateAPIView(ListCreateAPIView):
             return [IsSuperUserOrAdminOrPatientOrOperator()]
 
 class BookingDiagnosticRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    """
+    get:
+        Diagnostic details by Id
+    delete:
+        Delete diagnostic by Id
+    """
     queryset = BookingDiagnosticModel.objects.all()
     serializer_class = BookingDiagnosticSerializer
     http_method_names = ['get', 'delete']
