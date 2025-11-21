@@ -40,6 +40,7 @@ class UsersListCreateApiView(ListCreateAPIView):
         return [IsSuperUserAdminOrRole()] if self.request.method == 'GET' else [AllowAny()]
 
 
+
 class UsersRetrieveUpdateDestroyApiView(RetrieveUpdateDestroyAPIView):
     """
     get:
