@@ -11,6 +11,8 @@ UserModel = get_user_model()
 
 
 class BookingDiagnosticSerializer(serializers.ModelSerializer):
+
+
     user_id = serializers.PrimaryKeyRelatedField(
         queryset=UserModel.objects.all(),
         source='user',
@@ -55,7 +57,7 @@ class BookingDiagnosticSerializer(serializers.ModelSerializer):
         }
 
 
-        def validate(self, attrs):
+    def validate(self, attrs):
             request = self.context.get('request')
             user = getattr(request, 'user', None)
             date_time = attrs.get('date_time')
@@ -82,7 +84,7 @@ class BookingDiagnosticSerializer(serializers.ModelSerializer):
 
             return attrs
 
-        def create(self, validated_data):
+    def create(self, validated_data):
             request = self.context.get('request')
             user = request.user
             target_user = validated_data['user']
