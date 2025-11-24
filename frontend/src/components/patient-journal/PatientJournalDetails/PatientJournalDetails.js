@@ -59,6 +59,9 @@ const PatientJournalDetails = () => {
                 <p>Diagnosis: {patientsJournals.diagnosis}</p>
                 <p>Description: {patientsJournals.description}</p>
                 <p>Planning: {patientsJournals.planning}</p>
+                <h3>Patient:</h3>
+                <p>Name: {patientsJournals.user.profile.name}</p>
+                <p>Surname: {patientsJournals.user.profile.surname}</p>
             </div>
             {canDelete && (
                 <button className={'patient-journal-details-button-delete'}

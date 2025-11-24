@@ -8,7 +8,7 @@ from apps.patient_card.serializer import PatientCardSerializer
 
 class PatientCardConsumer(GenericAsyncAPIConsumer):
     def __init__(self, *args, **kwargs):
-        self.group = 'booking_diagnostic'
+        self.group = 'patient_card'
         super().__init__(*args, **kwargs)
 
     async def connect(self):

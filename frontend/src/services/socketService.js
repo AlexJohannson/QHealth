@@ -11,6 +11,7 @@ const socketService = async () => {
         bookingDiagnostics: () => new W3cwebsocket(`${baseURL}/booking_diagnostic/?token=${token}`),
         bookingDoctor: () => new W3cwebsocket(`${baseURL}/booking_doctor/?token=${token}`),
         patientCard: () => new W3cwebsocket(`${baseURL}/patient_card/?token=${token}`),
+        patientRecipe: () => new W3cwebsocket(`${baseURL}/patient_recipe/?token=${token}`),
     }
 }
 

@@ -1,0 +1,41 @@
+.patient-recipe-filter-form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 170px;
+    padding: 25px 0 25px 0;
+    border-radius: 10px;
+    background-color: gray;
+}
+.patient-recipe-filter-form input {
+     width: 450px;
+    height: 40px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+.patient-recipe-filter-form input:focus {
+    border-color: #007bff;
+}
+.patient-recipe-filter-form input::placeholder {
+    color: #999;
+    font-style: italic;
+    opacity: 1;
+}
+.patient-recipe-filter-form-button {
+    width: 100px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+.patient-recipe-filter-form-button:hover {
+    background-color: green;
+}

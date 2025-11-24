@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+.patient-recipe-container {
+    width: 100%;
+    background-color: lightyellow;
+}
+/*--------------------------    patient-recipe-component-header   ----------------------------------------------------*/
+.patient-recipe-component-header {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 170px;
+    background-color: lightyellow;
+    border-bottom: 2px solid lightskyblue;
+}
+.logo-patient-recipe-component {
+    width: 200px;
+    height: 120px;
+    margin-right: 50px;
+}
+.patient-recipe-component-header h1 {
+    font-family: "Lobster Two", sans-serif;
+    font-size: 80px;
+    font-weight: 700;
+    font-style: italic;
+    color: blue;
+}
+.patient-recipe-component-header-button {
+    width: 100px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+.patient-recipe-component-header-button:hover {
+    background-color: green;
+}
+/*------------------------------------------    patient-recipe-component-filter   ------------------------------------*/
+.patient-recipe-component-filter {
+    margin: 15px 0 15px 0;
+}
+/*-----------------------------------------    patient-recipe-component-maping  --------------------------------------*/
+.patient-recipe-component-maping {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+    overflow-y: auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.patient-recipe-component-maping-information {
+    color: red;
+}
+/*----------------------------------    patient-recipe-component-pagination   ----------------------------------------*/
+.patient-recipe-component-pagination {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 0 15px 0;
+}

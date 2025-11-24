@@ -23,8 +23,8 @@ const useMenuByRole = () => {
                 {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
                 {label: 'Booking Doctors List', path: '/booking-doctor'},
                 {label: 'Journal', path: '/patient-journal'},
+                {label: 'Patient Recipes', path: '/patient-recipe'},
                 {label: 'Security List', path: '/security-list'},
-
             ];
         }
 
@@ -38,6 +38,7 @@ const useMenuByRole = () => {
                 {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
                 {label: 'Booking Doctors List', path: '/booking-doctor'},
                 {label: 'Journal', path: '/patient-journal'},
+                {label: 'Patient Recipes', path: '/patient-recipe'},
                 {label: 'Security List', path: '/security-list'},
             ];
         }
@@ -52,6 +53,7 @@ const useMenuByRole = () => {
                     {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
                     {label: 'Booking Doctors List', path: '/booking-doctor'},
                     {label: 'Journal', path: '/patient-journal'},
+                    {label: 'Patient Recipes', path: '/patient-recipe'},
                 ];
             case 'operator':
                 return [
@@ -61,7 +63,8 @@ const useMenuByRole = () => {
                     {label: 'Diagnostics List', path: '/diagnostics-list'},
                     {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
                     {label: 'Booking Doctors List', path: '/booking-doctor'},
-                    {label: 'Journal', path: '/patient-journal'}
+                    {label: 'Journal', path: '/patient-journal'},
+                    {label: 'Patient Recipes', path: '/patient-recipe'},
                 ];
             case 'pharmacist':
                 return [
@@ -69,6 +72,7 @@ const useMenuByRole = () => {
                     {label: 'Update My Profile', path: `users-update/${userId}`},
                     {label: 'My Staff QHealth Profile', path: `roles/${roleId}`},
                     {label: 'Diagnostics List', path: '/diagnostics-list'},
+                    {label: 'Patient Recipes', path: '/patient-recipe'},
                 ];
             default:
                 if (isUser) {
@@ -79,6 +83,7 @@ const useMenuByRole = () => {
                         {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
                         {label: 'Booking Doctors List', path: '/booking-doctor'},
                         {label: 'Journal', path: '/patient-journal'},
+                        {label: 'My Recipes', path: '/patient-recipe'},
                     ];
                 }
                 return [];

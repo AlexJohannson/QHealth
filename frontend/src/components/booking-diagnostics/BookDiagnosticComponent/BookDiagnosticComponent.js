@@ -67,6 +67,7 @@ const BookDiagnosticComponent = ({id}) => {
     return (
         <div className={'book-diagnostic-component'}>
             <h5>BLOCK FOR BOOK MODALITY</h5>
+            {error && <p className={'book-diagnostic-component-error'}>{error}</p>}
             {canSetDateTime && (
                 <div className={'book-diagnostic-component-container'}>
                     {error && <p className={'book-diagnostic-component-container-error'}>{error}</p>}

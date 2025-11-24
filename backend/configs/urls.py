@@ -41,6 +41,7 @@ urlpatterns = [
     path('api/diagnostics', include('apps.diagnostics.urls')),
     path('api/booking_diagnostic', include('apps.booking_diagnostic.urls')),
     path('api/booking_doctor', include('apps.booking_doctor.urls')),
+    path('api/patient_recipe', include('apps.patient_recipe.urls')),
     path('api/doc', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger'),
 
 ]

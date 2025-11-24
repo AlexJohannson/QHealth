@@ -8,6 +8,7 @@ const diagnostics = '/diagnostics';
 const bookingDiagnostic = '/booking_diagnostic';
 const bookingDoctor = '/booking_doctor';
 const patientJournal = '/patient_card';
+const patientRecipe = '/patient_recipe';
 
 
 const urls = {
@@ -42,6 +43,9 @@ const urls = {
     },
     patientJournal: {
         list: patientJournal,
+    },
+    patientRecipe: {
+        list: patientRecipe,
     }
 }
 

@@ -37,12 +37,12 @@ const RolesDetailsComponent = () => {
     const currentUserId = localStorage.getItem('userId');
     const isSuperuser = localStorage.getItem('is_superuser') === 'true';
     const isStaff = localStorage.getItem('is_staff') === 'true';
-    const currentRole = localStorage.getItem('role');
+
 
     const canManageDoctor =
         roles.role === 'doctor' &&
         roles.user.id.toString() !== currentUserId &&
-        (isSuperuser || isStaff || currentRole === 'operator');
+        (isSuperuser || isStaff);
 
 
     const {profile, email, is_active} = roles.user;
