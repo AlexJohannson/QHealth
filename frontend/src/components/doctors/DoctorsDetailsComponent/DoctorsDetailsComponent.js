@@ -50,7 +50,6 @@ const DoctorsDetailsComponent = () => {
             </div>
             <div className={'doctors-details-component-content'}>
                 <h3>{profile.name} {profile.surname}</h3>
-                <p>Active: {is_active ? 'Yes' : 'No'}</p>
                 <p>Role: {doctors.role}</p>
                 {doctors.specialty && <p>Specialty: {doctors.specialty}</p>}
                 {doctors.role === 'doctor' && (

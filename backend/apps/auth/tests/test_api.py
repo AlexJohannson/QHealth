@@ -1,11 +1,9 @@
-
-
 from django.urls.base import reverse
 
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from core.services.jwt_service import ActivateToken, JWTService, RecoveryToken, SocketToken
+from core.services.jwt_service import ActivateToken, JWTService, RecoveryToken
 
 from apps.users.models import ProfileModel, UserModel
 

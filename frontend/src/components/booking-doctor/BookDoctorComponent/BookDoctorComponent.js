@@ -27,6 +27,9 @@ const BookDoctorComponent = ({id, patientId}) => {
                     if (Array.isArray(messages)) {
                         return `${field}: ${messages.join(', ')}`;
                     }
+                    if (typeof messages === 'object' && messages !== null) {
+                        return `${field}: ${Object.values(messages).join(', ')}`;
+                    }
                     return `${field}: ${messages}`;
                 })
                 .join('\n');

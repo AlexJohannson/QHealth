@@ -1,0 +1,2099 @@
+{
+	"info": {
+		"_postman_id": "29c231c7-c9ff-406a-90eb-425eaead4937",
+		"name": "q_health",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40047100"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "moderation",
+					"item": [
+						{
+							"name": "blockUser",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/users/:id/block",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										":id",
+										"block"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "unBlockUser",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/users/:id/unblock",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										":id",
+										"unblock"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userToAdmin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/users/:id/create_admin",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										":id",
+										"create_admin"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "77"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "revokeAdmin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/users/:id/revoke_admin",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										":id",
+										"revoke_admin"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "77"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "usersCRUD",
+					"item": [
+						{
+							"name": "getAllUsersList",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/users",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "4",
+											"disabled": true
+										},
+										{
+											"key": "size",
+											"value": "10",
+											"disabled": true
+										},
+										{
+											"key": "icontains_name",
+											"value": "magnus",
+											"disabled": true
+										},
+										{
+											"key": "icontains_surname",
+											"value": "abri",
+											"disabled": true
+										},
+										{
+											"key": "min_age",
+											"value": "28",
+											"disabled": true
+										},
+										{
+											"key": "max_age",
+											"value": "35",
+											"disabled": true
+										},
+										{
+											"key": "date_of_birth",
+											"value": "1991-01-02",
+											"disabled": true
+										},
+										{
+											"key": "icontains_city",
+											"value": "hels",
+											"disabled": true
+										},
+										{
+											"key": "icontains_country",
+											"value": "swed",
+											"disabled": true
+										},
+										{
+											"key": "gender",
+											"value": "male",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "partialUpdateUserProfile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"neuropsychologist@operator.send\",\r\n    \"profile\": {\r\n        \"name\": \"Jonathan\",\r\n        \"surname\": \"Neuropsychologist\",\r\n        \"phone_number\": \"+46700000000\",\r\n        \"date_of_birth\": \"1972-07-12\",\r\n        \"height\": 168,\r\n        \"weight\": 47,\r\n        \"street\": \"St. Street\",\r\n        \"house\": \"3A\",\r\n        \"city\": \"Lund\",\r\n        \"region\": \"Skone\",\r\n        \"country\": \"Sweden\",\r\n        \"gender\": \"Male\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "40"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getUserAccountById",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/users/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "61"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteUserAccount",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/users/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "77"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "registrationUserAccount",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"patienttwo@send.com\",\r\n    \"password\": \"AdminNQ@!1\",\r\n    \"profile\": {\r\n        \"name\": \"Eva\",\r\n        \"surname\": \"Patient Two\",\r\n        \"phone_number\": \"+46700000000\",\r\n        \"date_of_birth\": \"1985-09-22\",\r\n        \"height\": 168,\r\n        \"weight\": 47,\r\n        \"street\": \"St. Street\",\r\n        \"house\": \"3A\",\r\n        \"city\": \"Landskrona\",\r\n        \"region\": \"Skone\",\r\n        \"country\": \"Sweden\",\r\n        \"gender\": \"Female\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "patientCard",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/users/patient",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"patient"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "size",
+											"value": "5",
+											"disabled": true
+										},
+										{
+											"key": "icontains_name",
+											"value": "eva",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getPatientByID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/users/patient/:id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"patient",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "loginInTheSystem",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"res = pm.response.json();\r",
+									"pm.environment.set(\"access\", res.access);\r",
+									"pm.environment.set(\"refresh\", res.refresh);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "superuser@super.send",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "superuser1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "patientone@send.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "AdminNQ@!1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "patienttwo@send.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "AdminNQ@!1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "testother@email.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "email",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "neurolog@neurolog.send",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "AdminNQ@!1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "pharmacist@pharmacist.send",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "AdminNQ@!1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "operator@operator.send",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "AdminNQ@!1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "admin@admin.send",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "AdminNQ@!1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "therapist@therapist.send",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "AdminNQ@!1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "neuropsychologist@operator.send",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "AdminNQ@!1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "surgeon@surgeon.send",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "AdminNQ@!1",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/auth",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getRefreshToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"res = pm.response.json();\r",
+									"pm.environment.set(\"access\", res.access);\r",
+									"pm.environment.set(\"refresh\", res.refresh);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refresh",
+									"value": "{{refresh}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/auth/refresh",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "activateUserAccount",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/auth/activate/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWN0aXZhdGUiLCJleHAiOjE3NjA5NjU4NzYsImlhdCI6MTc2MDk2NDA3NiwianRpIjoiMzM0ZmM1ZTI3NjUxNDVmNWJjODVjMmQ5NjM3NjU3NTAiLCJ1c2VyX2lkIjo0Mn0.4jhitYZHXKyEcbhbyHN78HSzFaQiACqhUolEaWodnQc",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"activate",
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWN0aXZhdGUiLCJleHAiOjE3NjA5NjU4NzYsImlhdCI6MTc2MDk2NDA3NiwianRpIjoiMzM0ZmM1ZTI3NjUxNDVmNWJjODVjMmQ5NjM3NjU3NTAiLCJ1c2VyX2lkIjo0Mn0.4jhitYZHXKyEcbhbyHN78HSzFaQiACqhUolEaWodnQc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recoveryRequest",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "patientone@send.com",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/auth/recovery",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"recovery"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recoveryPassword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/auth/recovery_password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVjb3ZlcnkiLCJleHAiOjE3NTI3NDg0NDMsImlhdCI6MTc1Mjc0Nzg0MywianRpIjoiMjhiOTJkNWMyYTgyNGY3OGJhZWEyMTcwZGE4MmZiYTUiLCJ1c2VyX2lkIjo4fQ.InwmBoW6Ph0sg3Q2Tr3itp98E2SekPlMEgcLr67cTeE",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"recovery_password",
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVjb3ZlcnkiLCJleHAiOjE3NTI3NDg0NDMsImlhdCI6MTc1Mjc0Nzg0MywianRpIjoiMjhiOTJkNWMyYTgyNGY3OGJhZWEyMTcwZGE4MmZiYTUiLCJ1c2VyX2lkIjo4fQ.InwmBoW6Ph0sg3Q2Tr3itp98E2SekPlMEgcLr67cTeE"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "webSocketToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"res = pm.response.json()\r",
+									"pm.environment.set(\"websocket_token\", res.token)"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/auth/socket",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"socket"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "QHealthRole",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/auth/qhealth_role",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"qhealth_role"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "securityList",
+			"item": [
+				{
+					"name": "getSecurityList",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/security",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"security"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "25",
+									"disabled": true
+								},
+								{
+									"key": "success",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "success",
+									"value": "false",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "-id",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "success",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "-success",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "created_at",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "-created_at",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSecurityListById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/security/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"security",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "503"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "roles",
+			"item": [
+				{
+					"name": "getAllListRoles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/roles",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"roles"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "icontains_role",
+									"value": "doctor",
+									"disabled": true
+								},
+								{
+									"key": "icontains_specialty",
+									"value": "neu",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "-id",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postNewRoles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\": \"doctor\",\r\n    \"specialty\": \"Surgeon\",\r\n    \r\n    \"user\": {\r\n        \"email\": \"surgeon@surgeon.send\",\r\n        \"password\": \"AdminNQ@!1\",\r\n        \"profile\": {\r\n            \"name\": \"Max\",\r\n            \"surname\": \"Surgeon\",\r\n            \"phone_number\": \"+46700000000\",\r\n            \"date_of_birth\": \"1992-03-17\",\r\n            \"height\": 176,\r\n            \"weight\": 70,\r\n            \"street\": \"Street\",\r\n            \"house\": \"3D\",\r\n            \"city\": \"Stockholm\",\r\n            \"region\": \"Stocholm\",\r\n            \"country\": \"Sweden\",\r\n            \"gender\": \"Male\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/roles",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getRoleByID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/roles/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"roles",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "26"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "blockStaffRoleDoctor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/roles/block_staff_doctor/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"roles",
+								"block_staff_doctor",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "23"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unblockStaffRoleDoctor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/roles/unblock_staff_doctor/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"roles",
+								"unblock_staff_doctor",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "27"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getListDoctor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/roles/doctor_list",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"roles",
+								"doctor_list"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "5",
+									"disabled": true
+								},
+								{
+									"key": "icontains_specialty",
+									"value": "neurol",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "id",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "-id",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDoctorByID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/roles/doctor_list/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"roles",
+								"doctor_list",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "31"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "patient_card",
+			"item": [
+				{
+					"name": "getPatientCardList",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/patient_card",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"patient_card"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "diagnosis",
+									"value": "p",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createPatientCard",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"diagnosis\": \"PIENDJDKKKDSMX\",\r\n    \"description\": \"QQQQQQQQ\",\r\n    \"planning\": \"QQQQQQQQQQQQQQQQQQQQQQQQQ\",\r\n    \"user_id\": 80\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/patient_card",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"patient_card"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPatientCardByID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/patient_card/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"patient_card",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePatientCard",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/patient_card/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"patient_card",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "diagnostics",
+			"item": [
+				{
+					"name": "getAllListModality",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/diagnostics",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"diagnostics"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "modality",
+									"value": "urina",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "id",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createNewModality",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"modality\": \"Blood Glucose Test (Demermines the amount of sugar in the blood)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/diagnostics",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"diagnostics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateModalityDiagnostics",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"modality\": \"LabTest (Blood Tests, Urine Tests, Molecular and Genetic Tests, Microbiology and Immunology)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/diagnostics/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"diagnostics",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDiagnosticById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/diagnostics/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"diagnostics",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "14"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteModalityDiagnostic",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/diagnostics/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"diagnostics",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "23"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "booking_diagnostic",
+			"item": [
+				{
+					"name": "getListOfBookingDiagnostic",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/booking_diagnostic",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"booking_diagnostic"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "diagnostic_service",
+									"value": "MRI",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "-id",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bookingDiagnostic",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 80,\r\n    \"diagnostics_id\": 28,\r\n    \"booked_by_id\": 1\r\n    // \"date_time\": \"2025-01-12 09:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/booking_diagnostic",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"booking_diagnostic"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDiagnosticByID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/booking_diagnostic/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"booking_diagnostic",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "23"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDiagnosticByID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/booking_diagnostic/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"booking_diagnostic",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "21"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "booking_doctor",
+			"item": [
+				{
+					"name": "getAllListOfVisitToDoctors",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/booking_doctor",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"booking_doctor"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "specialty",
+									"value": "neu",
+									"disabled": true
+								},
+								{
+									"key": "doctor_name",
+									"value": "aib",
+									"disabled": true
+								},
+								{
+									"key": "doctor_surname",
+									"value": "aib",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "id",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "cancelled",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createNewVisitToDoctor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 10,\r\n    \"doctor_id\": 36,\r\n    \"status\": \"booked\",\r\n    \"date_time\": \"2025-09-01T09:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/booking_doctor",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"booking_doctor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBookingDoctorVisitByID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/booking_doctor/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"booking_doctor",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "18"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteBookingVisitToDoctor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/booking_doctor/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"booking_doctor",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "28"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancelledBooking",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/booking_doctor/cancelled/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"booking_doctor",
+								"cancelled",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "19"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "patient_recipe",
+			"item": [
+				{
+					"name": "getAllPatientRecipe",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/patient_recipe",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"patient_recipe"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "recipe",
+									"value": "admi",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createNewPatientRecipe",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"recipe\": \"ADMINNNNNNNNN\",\r\n    \"description\": \"QQQQQQQQ\",\r\n    \"user_id\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/patient_recipe",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"patient_recipe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPatientRecipeById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/patient_recipe/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"patient_recipe",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePatientRecipeById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/patient_recipe/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"patient_recipe",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

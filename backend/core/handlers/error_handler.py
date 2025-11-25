@@ -7,7 +7,6 @@ from rest_framework.views import exception_handler
 logger = logging.getLogger("security")
 
 def error_handler(exc: Exception, context: dict):
-    print(f"@@@@@@@@[DEBUG] Exception class: {exc.__class__.__name__}@@@@@@@@")
     handlers = {
         "JWTException": _jwt_exception_handler,
         "PermissionDenied": _permission_denied_handler,

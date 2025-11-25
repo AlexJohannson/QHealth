@@ -23,16 +23,16 @@ const userService = {
     return apiService.delete(`${urls.users.list}/${id}`);
   },
   blockUser(id) {
-    return apiService.patch(`${urls.users.list}/${id}/block`);
+    return apiService.patch(`${urls.users.list}/${id}/block`).then(res => res.data);
   },
   unblockUser(id) {
-    return apiService.patch(`${urls.users.list}/${id}/unblock`);
+    return apiService.patch(`${urls.users.list}/${id}/unblock`).then(res => res.data);
   },
   userToAdmin(id) {
-    return apiService.patch(`${urls.users.list}/${id}/create_admin`);
+    return apiService.patch(`${urls.users.list}/${id}/create_admin`).then(res => res.data);
   },
   revokeAdmin(id) {
-    return apiService.patch(`${urls.users.list}/${id}/revoke_admin`);
+    return apiService.patch(`${urls.users.list}/${id}/revoke_admin`).then(res => res.data);
   }
 };
 

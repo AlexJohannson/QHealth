@@ -1,0 +1,101 @@
+Technical Specification: QHealth Fullstack Project
+
+
+
+General Information:
+
+Project Type: Fullstack application for a medical institution
+
+- Goal:
+    - Booking diagnostics
+	- Booking doctor visits
+	- Maintaining patient journals
+	- Managing prescriptions
+
+- User Roles:
+	- Superuser
+	- Admin
+	- Doctor
+	- Operator
+	- Pharmacist
+	- Patient (default role upon registration)
+
+
+Administrative Roles
+
+-Superuser:
+	- Full control over the system.
+	- User Management: view, update, block (is_active = false), assign admin (is_staff = true), delete.
+	- Role Management: register doctors, operators, pharmacists; block doctors (is_available_for_booking = false).
+	- Patient Management: view patients, book diagnostics and doctor visits, create journal entries, create prescriptions.
+	- Diagnostics: create, edit, delete diagnostics; view booked diagnostics with details and delete bookings.
+	- Visits to doctors: view booked visits with details; delete or cancel visits.
+	- Journals & Prescriptions: view patient journals and prescriptions with details; delete by ID.
+	- Logins: view login history; delete login records by ID.
+
+-Admin:
+	- Same capabilities as Superuser except:
+	- Cannot manage Superuser.
+	- Cannot revoke own admin status.
+	- Cannot revoke other admins (only Superuser can).
+
+-Doctor:
+	- View filtered patient list with details.
+	- Create journal entries for patients.
+    - View, update, or delete own profile.
+	- View diagnostics, booked diagnostics, booked visits to doctors, patient journals, and prescriptions.
+
+-Operator:
+	- View filtered patient list with details.
+	- Book diagnostics and doctor visits for patients (with date).
+	- View all roles (doctors, operators, pharmacists).
+	- View, update, or delete own profile.
+	- View diagnostics, booked diagnostics (with ability to delete), booked visits (with ability to delete/cancel).
+	- View patient journals and prescriptions.
+
+-Pharmacist:
+	- View filtered patient list with details.
+	- Create prescriptions for patients.
+	- View, update, or delete own profile.
+	- View diagnostics and patient prescriptions.
+
+-Patient:
+    - View, update, or delete own profile.
+	- View diagnostics with details and book diagnostics (without date).
+	- View own booked diagnostics (filtered).
+	- View own booked doctor visits (filtered) with ability to cancel.
+	- View own journal entries (filtered).
+	- View own prescriptions (filtered).
+
+
+Non-Functional Requirements & Technologies
+
+- Security:
+	- JWT-based authentication.
+	- Registration with role assignment.
+	- Login attempt limitation: 5 failed attempts → API blocked for 10 minutes.
+	- Protection against brute-force attacks.
+	- Data validation on both backend and frontend.
+
+- System Requirements:
+	- Pagination for lists.
+	- Multiple filtering options depending on role and data type.
+	- WebSockets for real-time updates:
+		- Diagnostics
+		- Diagnostic bookings
+		- Doctor visit bookings
+		- Patient journals
+		- Patient prescriptions
+
+- UX/UI:
+	- Clear and lightweight design (React).
+	- Responsive interface.
+
+- Tech Stack:
+	- Backend: Django REST Framework (DRF).
+	- Database: MySQL.
+	- Frontend: React.
+	- API Documentation: Swagger + Postman collection.
+	- Testing: Full backend test coverage.
+	- Infrastructure: Docker, Docker Compose, Poetry, Nginx.
+
