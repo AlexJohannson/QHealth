@@ -7,10 +7,51 @@ General Information:
 Project Type: Fullstack application for a medical institution
 
 - Goal:
-    - Booking diagnostics
-	- Booking doctor visits
-	- Maintaining patient journals
-	- Managing prescriptions
+    - Login
+    - Refresh token
+    - Account registration
+    - Recovery request
+    - Recovery password
+    - WebSocket token
+    - Getting QHealth role
+    - Activate account via email
+    - Block and unblock users
+    - Getting security list for view login history; delete login records by ID
+    - User to admin and revoke admin
+    - Users list
+    - Patrial update users profile
+    - Getting a user profile by ID
+    - Delete user account
+    - Patient list (filtered)
+    - Getting patient profile by ID
+    - Getting list of role (operator, doctor, pharmacist)
+    - Greate new role (operator, doctor, pharmacist)
+    - Getting role profile by ID
+    - Block and unblock role - doctor
+    - Getting list if doctors (filtered)
+    - Getting doctor profile by ID
+    - Getting lost of diagnostics - modality
+    - Create new modality
+    - Patrial update modality
+    - Getting modality by ID
+    - Delete modality by ID
+    - Getting list of booking diagnostics
+    - Create new booking for a patient
+    - Getting booking diagnostic by ID
+    - Delete booking diagnostic by ID
+	- Getting list of booking doctor visits
+	- Create new visit to doctor for patient
+	- Getting booking visit to doctor by ID
+	- Delete booking visit to doctor by ID
+	- Canceled booking visit to doctor by ID
+	- Getting patient journals list
+	- Create new patient journal
+	- Getting patient journal by ID
+	- Delete patient journal by ID
+	- Getting list of patients prescriptions
+	- Create new prescriptions for a patient
+	- Getting patient prescription by ID
+	- Delete patient prescription by ID
 
 - User Roles:
 	- Superuser
@@ -39,6 +80,11 @@ Administrative Roles
 	- Cannot revoke own admin status.
 	- Cannot revoke other admins (only Superuser can).
 
+(Superuser and Admin have full control over the system including booking diagnostics, booking doctor appointments,
+creating prescriptions for patient and creating patient journal in case of technical failures or unforeseen situation
+when the operator or doctor or pharmacist cannot create a booking or create patient journal or prescription. In case of
+assisting patients with booking assistance, account recovery or assistance in making changes to the patient profile.)
+
 -Doctor:
 	- View filtered patient list with details.
 	- Create journal entries for patients.
@@ -47,10 +93,10 @@ Administrative Roles
 
 -Operator:
 	- View filtered patient list with details.
-	- Book diagnostics and doctor visits for patients (with date).
+	- Book diagnostics and doctor visits for patients (with date and time).
 	- View all roles (doctors, operators, pharmacists).
 	- View, update, or delete own profile.
-	- View diagnostics, booked diagnostics (with ability to delete), booked visits (with ability to delete/cancel).
+	- View diagnostics, booked diagnostics (with ability to delete), booked visits to the doctor(with ability to delete/cancel).
 	- View patient journals and prescriptions.
 
 -Pharmacist:
@@ -61,12 +107,28 @@ Administrative Roles
 
 -Patient:
     - View, update, or delete own profile.
-	- View diagnostics with details and book diagnostics (without date).
+	- View diagnostics with details and book diagnostics (without date and time).
 	- View own booked diagnostics (filtered).
 	- View own booked doctor visits (filtered) with ability to cancel.
 	- View own journal entries (filtered).
 	- View own prescriptions (filtered).
+(The patient books diagnostics without a date and time. This is provided for by a real scenario of medical institutions
+when the operator has to call the patient and clarify the diagnosis, causes, prescription from the doctor, possibly give
+some advice or perhaps first book a visit to the doctor for a more accurate diagnosis. If everything is agreed, the operator
+book diagnostics for the patient with a date and time. The patient can cancel a doctors visit. Before booking the operator
+discusses all the details with the patient over the phone and books a doctors visit with a date and time. The patient can
+cancel the reservation 24 hours before the visit this is a warning about the excellent reservation and the time within
+which it can be canceled. The patient receives an email notification after booking a doctors visit with a detailed
+description of the reservation and canceled visit to doctor.)
 
+
+Required!!! It is not possible to delete a patients account if a patient has a reservation for a diagnosis or a visit to
+a doctor. It is not possible to delete a doctor if a visit is booked for doctor. Validation for creating a diagnosis, it
+is not possible to create two identical diagnoses and only administrator (Admin) and Superuser can create a diagnosis. The
+patients journal and prescriptions are stored without validation, in a real scenario the medical history or prescription
+history should be stored without correction in case something needs to be added or changed a new prescription on journal
+is created. This is done so that each record carries its own value even if something needs to be corrected in it or it is
+not relevant this is the patients life and health.
 
 Non-Functional Requirements & Technologies
 
@@ -88,8 +150,11 @@ Non-Functional Requirements & Technologies
 		- Patient prescriptions
 
 - UX/UI:
-	- Clear and lightweight design (React).
-	- Responsive interface.
+	- UI - Clear and lightweight design using CSS (React).
+	- UX - Easy-to-understand user interface.
+	- Favicon with the emblem of medical institution
+	- Home page with several photos of the medical institution and description of the medical institution and service
+	- Import fonts from Google Fonts to the home page and logo of the medical institution in the header
 
 - Tech Stack:
 	- Backend: Django REST Framework (DRF).
@@ -98,4 +163,66 @@ Non-Functional Requirements & Technologies
 	- API Documentation: Swagger + Postman collection.
 	- Testing: Full backend test coverage.
 	- Infrastructure: Docker, Docker Compose, Poetry, Nginx.
+
+- Pagination:
+    - By default page size is 5 items
+    - Maximum page size is 25 items
+    - The user can change the page size within this range (5, 10, 15, 20, 25)
+    - Pagination queryset ordered by 'id'
+
+-Filtering:
+    Users:
+        - Name
+        - Surname
+        - Min age
+        - Max age
+        - Date of birth
+        - City
+        - Country
+        - Gender
+    Roles:
+        - Role
+        - Specialty (for doctors)
+        - Ordering (by ID)
+    Patient:
+        - Name
+        - Surname
+        - Min age
+        - Max age
+        - Date of birth
+        - City
+        - Country
+        - Gender
+    Diagnostics:
+        - Modality
+        - Ordering (by ID)
+    Booking Diagnostic:
+        - Diagnostic service (modality)
+        - Ordering (by ID)
+    Booking doctor list:
+        - Specialty (for doctor)
+        - Doctor name
+        - Doctor surname
+        - Status (Booked/Canceled)
+        - Ordering (by ID)
+    Patient journal:
+        - Diagnosis
+    Patient prescription (recipe):
+        - Recipe
+    Security list:
+        - Success (True/False)
+        - Ordering (by ID, by success, by created_at)
+
+Dockerization and DevOps:
+    - Docker/Docker Compose
+    - Poetry
+    - Nginx
+
+DataBase:
+    - MySQL
+
+Documentation:
+    - Swagger
+    - Postman collection
+
 
