@@ -128,7 +128,10 @@ is not possible to create two identical diagnoses and only administrator (Admin)
 patients journal and prescriptions are stored without validation, in a real scenario the medical history or prescription
 history should be stored without correction in case something needs to be added or changed a new prescription on journal
 is created. This is done so that each record carries its own value even if something needs to be corrected in it or it is
-not relevant this is the patients life and health.
+not relevant this is the patients life and health. The system lacks regex validation for creating diagnostics, creating
+prescriptions and creating journal for patient. This is a deliberate decision that is consistent with medical practice:
+data should be stored in any form, even if it does not conform to formal templates. In case of errors or changes a new
+record is created to preserve the patients complete treatment history.
 
 Non-Functional Requirements & Technologies
 
@@ -156,13 +159,6 @@ Non-Functional Requirements & Technologies
 	- Home page with several photos of the medical institution and description of the medical institution and service
 	- Import fonts from Google Fonts to the home page and logo of the medical institution in the header
 
-- Tech Stack:
-	- Backend: Django REST Framework (DRF).
-	- Database: MySQL.
-	- Frontend: React.
-	- API Documentation: Swagger + Postman collection.
-	- Testing: Full backend test coverage.
-	- Infrastructure: Docker, Docker Compose, Poetry, Nginx.
 
 - Pagination:
     - By default page size is 5 items
@@ -213,16 +209,39 @@ Non-Functional Requirements & Technologies
         - Success (True/False)
         - Ordering (by ID, by success, by created_at)
 
-Dockerization and DevOps:
-    - Docker/Docker Compose
-    - Poetry
-    - Nginx
 
-DataBase:
-    - MySQL
+Celery tasks:
+    - Birthday greetings email notification (sent at 10 a.m. on the users birthday)
+    - Merry Christmas greeting email notification (sent at 10 a.m. on december 25th of each year)
+    - Happy New Year greeting email notification (sent at 10 a.m. on december 31th of each year)
+    - Activate account email notification with link for activate account
+    - Block doctor email notification, sent for doctor and change automatically is_available_for_booking = false
+    - Block user account email notification, sent email for users and change automatically is_active = false
+    - Booking diagnostic by staff email notification, sent to patient when diagnostic booked by operator with date and time
+    - Booking diagnostic by patient email notification, sent to patient when patient booked diagnostic by self without date and time
+    - Booking visit to doctor email notification, sent to patient when visit to doctor booked by staff
+    - Canceled booking visit to doctor email notification sent to patient when visit was canceled.
+    - Create admin email notification sent to user when superuser create admin
+    - Create role email notification sent to user when superuser or admin create role (operator, doctor, pharmacist) with
+        a specialty that is displayed only in the doctor email notification and mandatory for the doctor
+    - Delete account email notification sent to user when account was deleted from system
+    - Recovery password email notification with link for recovery password
+    - Revoke admin email notification sent to admin when superuser revoke admin from system
+    - Send patient massage email notification sent to patient when a new entry was made in the patients journal by the doctor
+    - Send patient recipe message email notification sent to patient when a new entry was made in the patients list of
+        recipes by the pharmacist
+    - Unblock doctor email notification sent to the doctor which was blocked and change automatically
+        is_available_for_booking = true
+    - Unblock user account email notification sent to user which was blocked in the system and change
+        automatically is_active = true
+    - Welcome email notification sent to all users upon successful registration in the system
 
-Documentation:
-    - Swagger
-    - Postman collection
+- Tech Stack:
+	- Backend: Django REST Framework (DRF).
+	- Database: MySQL.
+	- Frontend: React.
+	- API Documentation: Swagger + Postman collection.
+	- Testing: Full backend test coverage.
+	- Infrastructure: Docker, Docker Compose, Poetry, Nginx.
 
 
