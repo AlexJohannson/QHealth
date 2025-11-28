@@ -21,7 +21,7 @@ It provides secure role-based access and real-time functionality for booking dia
   - Frontend: React  
   - Infrastructure: Docker, Docker Compose, Poetry, Nginx  
   - API Documentation: Swagger + Postman collection  
-  - Full backend test coverage  
+  - Test backend coverage: views - api`s, filters, managers, models, permissions, serializers 
 
 ---
 
@@ -194,3 +194,70 @@ password: <your_password>
 docker compose run --rm app sh
 python manage.py test
 ```
+
+---
+
+# Business flow overview for QHealth
+
+Everything is build around a simple, safe interaction of roles: the patient initiates, the operator coordinate,
+the doctor diagnoses and documents, the pharmacist prescribes prescriptions and the admin ensures work continuity.
+
+### Patient flow:
+
+- **Registration and activation:**
+  - The patient registers, activate the account via email and logs in.
+- **Initiate a diagnosis:**
+  - The patient reviews the list of diagnoses and create e request without a date and time.
+- **Books doctors appointments:**
+  - The patient reviews their reservation, can cancel the appointment at list 24 hours before the appointments 
+    (information about canceled patient get in email notification); receives email notification about 
+    booking/cancellations.
+- **View history:**
+  - The patient sees their journals and prescriptions (read only) a complete, unchangeable treatment history.
+
+### Operator flow:
+
+- **Patient contact:**
+  - The operator receives a request without a date and time, calls the patient, specifies the purpose, symptoms and
+    needs for a doctors visit.
+- **Booking with date and time:**
+  - The operator books a diagnosis or a doctors visit with a specific date and time, the system checks the
+    doctors availability and avoids duplication.
+- **Operation support:**
+  - The operator can delete/cancel the booking as needed, the patient receives appropriate email notification.
+
+  
+### Doctor flow:
+
+- **Patient access:**
+  - The doctor views a filtered list of patients, their bookings and history.
+- **Clinical documentation:**
+  - The doctor creates entries in the patient journal without regex restrictions. Corrections are made with new
+    entries to maintain a complete history.
+
+
+### Pharmacist flow:
+
+- **Prescription assignment:**
+  - The pharmacist creates prescriptions for a patient without regex restrictions, each new prescription is 
+    stored as a separate record.
+- **View:**
+  - Has access to diagnoses and prescriptions associated with the patient.
+
+
+### Admin/Superuser flow:
+
+- **Business continuity:**
+  - Admin/superuser manages users, roles, diagnostics. Block/Unblock accounts and doctors.
+- **Emergency actions:**
+  - In case of technical failures, performs booking, creating journal and prescriptions at the request of staff.
+    Has full audit (logins, history of actions)
+
+
+### System guarantees:
+
+- **Data consistency:**
+  - Cannot delete a patient with active bookings or a doctor with scheduled visit. Diagnoses are not duplicate.
+- **Real-time and notification:**
+  - WebSocket for list updates. Celery sends all critical email notifications (bookings, block/unblock, greetings,
+    users GRUD operations, role notification). 

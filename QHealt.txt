@@ -236,6 +236,9 @@ Celery tasks:
         automatically is_active = true
     - Welcome email notification sent to all users upon successful registration in the system
 
+- Test:
+    - Tests on backend includes: views - api`s, filters, managers, models, permissions, serializers
+
 - Tech Stack:
 	- Backend: Django REST Framework (DRF).
 	- Database: MySQL.
