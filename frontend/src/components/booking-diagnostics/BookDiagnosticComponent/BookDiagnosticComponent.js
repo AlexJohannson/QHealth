@@ -2,11 +2,13 @@ import React, {useState} from 'react';
 import {bookingDiagnosticsService} from '../../../services/bookingDiagnosticsService';
 import {useLocation} from "react-router-dom";
 import './BookDiagnosticComponent.css';
+import {bookingDiagnosticValidator} from "../../../validator/bookingDiagnosticValidator";
 
 const BookDiagnosticComponent = ({id}) => {
     const diagnosticsId = Number(id);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
     const [dateTime, setDateTime] = useState('');
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
@@ -42,6 +44,25 @@ const BookDiagnosticComponent = ({id}) => {
     const handleBooking = async () => {
         setLoading(true);
         setError('');
+        setSuccessMessage('');
+
+
+        const {error: validationError} = bookingDiagnosticValidator.validate(
+            {date_time: dateTime},
+            {abortEarly: false}
+        );
+
+        if (validationError) {
+            const formattedErrors = {};
+            validationError.details.forEach(err => {
+                const path = err.path.join(".");
+                formattedErrors[path] = err.message;
+            });
+            setError(formattedErrors.date_time || "Invalid date");
+            setLoading(false);
+            return;
+        }
+
 
         const data = {
             user_id: Number(userId),
@@ -52,6 +73,7 @@ const BookDiagnosticComponent = ({id}) => {
 
         try {
             await bookingDiagnosticsService.bookDiagnostic(data);
+            setSuccessMessage("Successfully booked diagnostic!");
         } catch (err) {
             const raw = err?.response?.data?.detail ||
                 err?.response?.data?.error ||
@@ -67,10 +89,10 @@ const BookDiagnosticComponent = ({id}) => {
     return (
         <div className={'book-diagnostic-component'}>
             <h5>BLOCK FOR BOOK MODALITY</h5>
+            {successMessage && <p className={'book-diagnostic-component-success'}>{successMessage}</p>}
             {error && <p className={'book-diagnostic-component-error'}>{error}</p>}
             {canSetDateTime && (
                 <div className={'book-diagnostic-component-container'}>
-                    {error && <p className={'book-diagnostic-component-container-error'}>{error}</p>}
                     <label>Date & Time:</label>
                     <input
                         type="datetime-local"

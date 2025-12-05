@@ -1,5 +1,7 @@
 .diagnostics-profile-component {
     font: inherit;
-    text-decoration: none;
     color: inherit;
+}
+.diagnostics-profile-component:hover{
+    color: red;
 }

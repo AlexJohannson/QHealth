@@ -46,32 +46,104 @@ import {
 import {PatientRecipePage} from "../pages/patient-recipe-page/PatientRecipePage/PatientRecipePage";
 import {PatientRecipeDetailsPage} from "../pages/patient-recipe-page/PatientRecipeDetailsPage/PatientRecipeDetailsPage";
 import {CreatePatientRecipePage} from "../pages/patient-recipe-page/CreatePatientRecipePage/CreatePatientRecipePage";
-
-
-
-
-
-
+import {RoleGuardComponent} from "../components/RoleGuardComponent/RoleGuardComponent";
+import {PublicOnlyGuard} from "../components/RoleGuardComponent/PublicOnlyGuard";
 
 
 const router = createBrowserRouter([
     {
         path: '', element: <MainLayout/>,
         children: [
-            {index: true, element: <HomePage/>},
-            {path: 'superuser', element: <SuperUserPage/>},
-            {path: 'admin', element: <AdminPage/>},
-            {path: 'doctor', element: <DoctorPage/>},
-            {path: 'pharmacist', element: <PharmacistPage/>},
-            {path: 'operator', element: <OperatorPage/>},
+            {
+                index: true, element: (
+                     <PublicOnlyGuard>
+                        <HomePage/>
+                    </PublicOnlyGuard>
+                )
+            },
+            {
+                path: 'superuser', element: (
+                    <RoleGuardComponent allow={['superuser']}>
+                        <SuperUserPage/>
+                    </RoleGuardComponent>
+                )
+            },
+            {
+                path: 'admin', element: (
+                    <RoleGuardComponent allow={['admin']}>
+                        <AdminPage/>
+                    </RoleGuardComponent>
+                )
+            },
+            {
+                path: 'doctor',
+                element: (
+                    <RoleGuardComponent allow={['doctor']}>
+                        <DoctorPage/>
+                    </RoleGuardComponent>
+                )
+            },
+            {
+                path: 'pharmacist',
+                element: (
+                    <RoleGuardComponent allow={['pharmacist']}>
+                        <PharmacistPage/>
+                    </RoleGuardComponent>
+                )
+            },
+            {
+                path: 'operator',
+                element: (
+                    <RoleGuardComponent allow={['operator']}>
+                        <OperatorPage/>
+                    </RoleGuardComponent>
+                )
+            },
+            {
+                path: 'user-home-page',
+                element: (
+                    <RoleGuardComponent allow={['user']}>
+                        <UserHomePage/>
+                    </RoleGuardComponent>
+                )
+            },
+            {
+                path: 'login', element: (
+                    <PublicOnlyGuard>
+                        <LoginPage/>
+                    </PublicOnlyGuard>
+                )
+            },
+            {
+                path: 'registration', element: (
+                    <PublicOnlyGuard>
+                        <RegisterPage/>
+                    </PublicOnlyGuard>
+                )
+            },
+            {
+                path: 'auth/recovery', element: (
+                    <PublicOnlyGuard>
+                        <RecoveryRequestPage/>
+                    </PublicOnlyGuard>
+                )
+            },
+            {
+                path: 'auth/recovery_password/:token', element: (
+                    <PublicOnlyGuard>
+                        <RecoveryPasswordPage/>
+                    </PublicOnlyGuard>
+                )
+            },
+            {
+                path: 'auth/activate/:token', element: (
+                    <PublicOnlyGuard>
+                        <ActivateAccountPage/>
+                    </PublicOnlyGuard>
+                )
+            },
             {path: 'users', element: <UserPage/>},
             {path: 'users/:id', element: <UserDetailsPage/>},
-            {path: 'user-home-page', element: <UserHomePage/>},
-            {path: 'login', element: <LoginPage/>},
-            {path: 'registration', element: <RegisterPage/>},
-            {path: 'auth/activate/:token', element: <ActivateAccountPage />},
-            {path: 'auth/recovery', element: <RecoveryRequestPage/>},
-            {path: 'auth/recovery_password/:token', element: <RecoveryPasswordPage/>},
             {path: 'users-update/:id', element: <UserEditFormPage/>},
             {path: 'roles', element: <RolesPage/>},
             {path: 'roles/:id', element: <RolesDetailsPage/>},
@@ -83,7 +155,7 @@ const router = createBrowserRouter([
             {path: 'diagnostics/:id', element: <DiagnosticDetailPage/>},
             {path: 'create-new-diagnostic', element: <CreateNewDiagnosticPage/>},
             {path: 'booking-diagnostic', element: <BookingDiagnosticsPage/>},
-            {path:'booking-diagnostic/:id', element: <BookingDiagnosticsDetailsPage/>},
+            {path: 'booking-diagnostic/:id', element: <BookingDiagnosticsDetailsPage/>},
             {path: 'diagnostics-list', element: <DiagnosticsListPage/>},
             {path: 'diagnostics-list/:id', element: <DiagnosticsListDetailsPage/>},
             {path: 'doctors', element: <DoctorPagePatient/>},

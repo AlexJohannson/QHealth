@@ -1,5 +1,7 @@
 .doctors-profile-component {
     font: inherit;
-    text-decoration: none;
     color: inherit;
+}
+.doctors-profile-component:hover {
+    color: red;
 }

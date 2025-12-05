@@ -2,12 +2,14 @@ import React, {useState} from 'react';
 import {useLocation} from "react-router-dom";
 import {bookingDoctorService} from "../../../services/bookingDoctorService";
 import './BookDoctorComponent.css';
+import {bookingDoctorValidator} from "../../../validator/bookingDoctorValidator";
 
 
 const BookDoctorComponent = ({id, patientId}) => {
     const doctor = Number(id);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
     const [dateTime, setDateTime] = useState('');
     const location = useLocation();
 
@@ -41,6 +43,23 @@ const BookDoctorComponent = ({id, patientId}) => {
     const handleBooking = async () => {
         setLoading(true);
         setError('');
+        setSuccessMessage('');
+
+        const {error: validationError} = bookingDoctorValidator.validate(
+            {date_time: dateTime},
+            {abortEarly: false}
+        );
+
+        if (validationError) {
+            const formattedErrors = {};
+            validationError.details.forEach(err => {
+                const path = err.path.join(".");
+                formattedErrors[path] = err.message;
+            });
+            setError(formattedErrors.date_time || "Invalid date");
+            setLoading(false);
+            return;
+        }
 
         const data = {
             user_id: Number(userId),
@@ -51,6 +70,7 @@ const BookDoctorComponent = ({id, patientId}) => {
 
         try {
             await bookingDoctorService.createNewVisitToDoctor(data);
+            setSuccessMessage("Successfully booked visit to doctor!");
         } catch (err) {
             const raw = err?.response?.data?.detail ||
                 err?.response?.data?.error ||
@@ -68,6 +88,7 @@ const BookDoctorComponent = ({id, patientId}) => {
             <h5>BLOCK FOR BOOK DOCTORS</h5>
             <div className={'book-doctor-component-handle'}>
                 {error && <p className={'book-doctor-component-error'}>{error}</p>}
+                {successMessage && <p className={'book-doctor-component-success'}>{successMessage}</p>}
                 <label>Date & Time:</label>
                 <input
                     type="datetime-local"

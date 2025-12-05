@@ -6,10 +6,12 @@
 }
 .booking-diagnostics-profile-link {
     font: inherit;
-    text-decoration: none;
     color: inherit;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+.booking-diagnostics-profile-link:hover {
+    color: red;
 }

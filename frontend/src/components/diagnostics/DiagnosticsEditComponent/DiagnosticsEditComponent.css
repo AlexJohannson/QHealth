@@ -42,3 +42,6 @@
 .diagnostics-edit-form-component-error {
     color: red;
 }
+.diagnostics-edit-form-component-message {
+    color: green;
+}

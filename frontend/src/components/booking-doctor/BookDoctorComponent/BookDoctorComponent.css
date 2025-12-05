@@ -13,7 +13,9 @@
 .book-doctor-component-error {
     color: red;
 }
-
+.book-doctor-component-success{
+    color: green;
+}
 .book-doctor-component-handle input {
     width: 350px;
     height: 30px;

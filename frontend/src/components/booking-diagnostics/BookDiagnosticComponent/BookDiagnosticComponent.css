@@ -26,6 +26,9 @@
 .book-diagnostic-component-error {
     color: red;
 }
+.book-diagnostic-component-success{
+    color: green;
+}
 .book-diagnostic-component button {
     width: 170px;
     height: 45px;

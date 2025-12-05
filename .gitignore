@@ -1,5 +1,7 @@
 .idea
 /mysql/
 .env
-/.venv/
+.venv
+.vscode
+/client/
 

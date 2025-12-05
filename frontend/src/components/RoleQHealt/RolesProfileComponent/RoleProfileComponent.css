@@ -1,5 +1,7 @@
 .role-profile-component-link {
     font: inherit;
-    text-decoration: none;
     color: inherit;
+}
+.role-profile-component-link:hover {
+    color: red;
 }

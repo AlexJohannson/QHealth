@@ -43,7 +43,7 @@ const CreateNewPatientJournal = ({patientId}) => {
             setDescription('');
             setPlanning('');
         } catch (error) {
-            setError('Something went wrong');
+            setError('Journal should be filled');
         } finally {
             setLoading(false);
         }

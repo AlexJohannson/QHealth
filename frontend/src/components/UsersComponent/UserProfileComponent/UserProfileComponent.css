@@ -1,6 +1,7 @@
 .link-user-profile-component {
     font: inherit;
-    text-decoration: none;
     color: inherit;
-
+}
+.link-user-profile-component:hover {
+    color: red;
 }

@@ -1,5 +1,7 @@
 .patient-journal-profile {
     font: inherit;
-    text-decoration: none;
     color: inherit;
+}
+.patient-journal-profile:hover {
+    color: red;
 }

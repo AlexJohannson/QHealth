@@ -1,5 +1,7 @@
 .patient-recipe-profile-link {
     font: inherit;
-    text-decoration: none;
     color: inherit;
+}
+.patient-recipe-profile-link:hover {
+    color: red;
 }

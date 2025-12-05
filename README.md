@@ -69,6 +69,7 @@ It provides secure role-based access and real-time functionality for booking dia
     - react-dom;
     - react-router-dom;
     - axios;
+    - joi;
     - websocket;
     - react-hook-form;
     - npm-watch;
@@ -97,7 +98,7 @@ It is designed to handle role-based access, medical workflows, and real-time upd
 - **Real-time communication:** Channels + Daphne + WebSockets for live updates (diagnostics, bookings, journals, prescriptions).
 - **Background tasks:** Celery + Redis for asynchronous and scheduled jobs (notifications, cleanup, reporting).
 - **API documentation:** Swagger (DRF-YASG) and Postman collection for testing and integration.
-- **Testing:** full backend test coverage to ensure reliability and maintainability.
+- **Testing:** coverage: views - api`s, filters, managers, models, permissions, serializers 
 - **Deployment:** containerized with Docker, orchestrated via Docker Compose, served through Nginx.
 
 ### Key Features on Backend

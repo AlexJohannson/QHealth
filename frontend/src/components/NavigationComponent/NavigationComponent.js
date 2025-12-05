@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useMenuByRole} from '../../hooks/useMenuByRole';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import './NavigationComponent.css';
 
 const NavigationComponent = () => {
@@ -46,7 +46,7 @@ const NavigationComponent = () => {
                     {menu.map((item, index) => (
                         <React.Fragment key={index}>
                             <li>
-                                <a href={item.path}>{item.label}</a>
+                                <Link to={item.path}>{item.label}</Link>
                             </li>
                             {index < menu.length - 1 && <span className="nav-separator">|</span>}
                         </React.Fragment>

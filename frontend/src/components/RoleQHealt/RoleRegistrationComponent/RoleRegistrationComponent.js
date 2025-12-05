@@ -3,6 +3,7 @@ import {roleService} from "../../../services/roleService";
 import './RoleRegistrationComponent.css';
 import {useNavigate} from "react-router-dom";
 import {FooterComponent} from "../../FooterComponent/FooterComponent";
+import {registerStaffValidator} from "../../../validator/registerStaffValidator";
 
 
 const RoleRegistrationComponent = () => {
@@ -41,6 +42,17 @@ const RoleRegistrationComponent = () => {
         setError({});
         setSuccess(false);
 
+        const {error: validationError} = registerStaffValidator.validate(form, {abortEarly: false});
+        if (validationError) {
+            const formattedErrors = {};
+            validationError.details.forEach(err => {
+                const path = err.path.join(".");
+                formattedErrors[path] = err.message;
+            });
+            setError(formattedErrors);
+            return;
+        }
+
         try {
             await roleService.createNewRole({
                 role: form.role,
@@ -74,18 +86,6 @@ const RoleRegistrationComponent = () => {
         }
     };
 
-    const getError = (path) => {
-        const parts = path.split('.');
-        let current = error;
-        for (const part of parts) {
-            if (current && typeof current === 'object') {
-                current = current[part];
-            } else {
-                return null;
-            }
-        }
-        return Array.isArray(current) ? current[0] : current;
-    };
 
     const togglePassword = () => setShowPassword(prev => !prev);
 
@@ -105,6 +105,7 @@ const RoleRegistrationComponent = () => {
                     <form className={'role-register-form'} onSubmit={handleSubmit}>
                         <h2>REGISTER STAFF</h2>
                         {error.role && (<p className={'role-error-register'}>{error.role}</p>)}
+                        <label>Select Role</label>
                         <select name={'role'} value={form.role} onChange={handleChange}>
                             <option value={''}>Select Role</option>
                             <option value={'doctor'}>Doctor</option>
@@ -113,58 +114,73 @@ const RoleRegistrationComponent = () => {
                         </select>
 
                         {error.specialty && (<p className={'role-error-register'}>{error.specialty}</p>)}
+                        <label>Select Specialty. Only for doctors</label>
                         <input name={'specialty'}
                                placeholder={'Specialty is mandatory for a doctor.'}
                                value={form.specialty} onChange={handleChange}
                         />
 
-                        {getError('user.email') && <p className={'role-error-register'}>{getError('user.email')}</p>}
+                        {error.email && (<p className={'role-error-register'}>{error.email}</p>)}
+                        <label>Email</label>
                         <input name={'email'} placeholder={'Email'} value={form.email} onChange={handleChange}/>
 
-                        {getError('user.password') && <p className={'role-error-register'}>{getError('user.password')}</p>}
+                        {error.password && (<p className={'role-error-register'}>{error.password}</p>)}
+                        <label>Password</label>
                         <div className={'role-register-password'}>
                         <input name={'password'} type={showPassword ? 'text' : 'password'} placeholder={'Password'} value={form.password} onChange={handleChange}/>
                         <button className={'role-show-password-register'} type="button" onClick={togglePassword}
                         >{showPassword ? '👁️' : '🙈'}</button>
                         </div>
 
-                        {getError('user.profile.name') && <p className={'role-error-register'}>{getError('user.profile.name')}</p>}
+                        {error.name && (<p className={'role-error-register'}>{error.name}</p>)}
+                        <label>Name</label>
                         <input name={'name'} placeholder={'Name'} value={form.name} onChange={handleChange}/>
 
-                        {getError('user.profile.surname') && <p className={'role-error-register'}>{getError('user.profile.surname')}</p>}
+                        {error.surname && (<p className={'role-error-register'}>{error.surname}</p>)}
+                        <label>Surname</label>
                         <input name={'surname'} placeholder={'Surname'} value={form.surname} onChange={handleChange}/>
 
-                        {getError('user.profile.phone_number') && <p className={'role-error-register'}>{getError('user.profile.phone_number')}</p>}
+                        {error.phone_number && (<p className={'role-error-register'}>{error.phone_number}</p>)}
+                        <label>Phone Number</label>
                         <input name={'phone_number'} placeholder={'Phone number'} value={form.phone_number}
                                onChange={handleChange}/>
 
-                        {getError('user.profile.date_of_birth') && <p className={'role-error-register'}>{getError('user.profile.date_of_bird')}</p>}
+                        {error.date_of_birth && (<p className={'role-error-register'}>{error.date_of_birth}</p>)}
+                        <label>Date of Birth</label>
                         <input name={'date_of_birth'} type={'date'} value={form.date_of_birth} onChange={handleChange}/>
 
-                        {getError('user.profile.height') && <p className={'role-error-register'}>{getError('user.profile.height')}</p>}
+                        {error.height && (<p className={'role-error-register'}>{error.height}</p>)}
+                        <label>Height</label>
                         <input name={'height'} type={'number'} placeholder={'Height (cm)'} value={form.height}
                                onChange={handleChange}/>
 
-                        {getError('user.profile.weight') && <p className={'role-error-register'}>{getError('user.profile.weight')}</p>}
+                        {error.weight && (<p className={'role-error-register'}>{error.weight}</p>)}
+                        <label>Weight</label>
                         <input name={'weight'} type={'number'} placeholder={'Weight (kg)'} value={form.weight}
                                onChange={handleChange}/>
 
-                        {getError('user.profile.street') && <p className={'role-error-register'}>{getError('user.profile.street')}</p>}
+                        {error.street && (<p className={'role-error-register'}>{error.street}</p>)}
+                        <label>Street</label>
                         <input name={'street'} placeholder={'Street'} value={form.street} onChange={handleChange}/>
 
-                        {getError('user.profile.house') && <p className={'role-error-register'}>{getError('user.profile.house')}</p>}
+                        {error.house && (<p className={'role-error-register'}>{error.house}</p>)}
+                        <label>House</label>
                         <input name={'house'} placeholder={'House'} value={form.house} onChange={handleChange}/>
 
-                        {getError('user.profile.city') && <p className={'role-error-register'}>{getError('user.profile.city')}</p>}
+                        {error.city && (<p className={'role-error-register'}>{error.city}</p>)}
+                        <label>City</label>
                         <input name={'city'} placeholder={'City'} value={form.city} onChange={handleChange}/>
 
-                        {getError('user.profile.region') && <p className={'role-error-register'}>{getError('user.profile.region')}</p>}
+                        {error.region && (<p className={'role-error-register'}>{error.region}</p>)}
+                        <label>Region</label>
                         <input name={'region'} placeholder={'Region'} value={form.region} onChange={handleChange}/>
 
-                        {getError('user.profile.country') && <p className={'role-error-register'}>{getError('user.profile.country')}</p>}
+                        {error.country && (<p className={'role-error-register'}>{error.country}</p>)}
+                        <label>Country</label>
                         <input name={'country'} placeholder={'Country'} value={form.country} onChange={handleChange}/>
 
-                        {getError('user.profile.gender') && <p className={'role-error-register'}>{getError('user.profile.gender')}</p>}
+                        {error.gender && (<p className={'role-error-register'}>{error.gender}</p>)}
+                        <label>Gender</label>
                         <select name={'gender'} value={form.gender} onChange={handleChange}>
                             <option value={''}>Select Gender</option>
                             <option value={'Female'}>Female</option>

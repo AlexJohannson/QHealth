@@ -4,6 +4,7 @@ import {urls} from "../../constants/urls";
 import './RecoveryRequestComponent.css';
 import {useNavigate} from "react-router-dom";
 import {FooterComponent} from "../FooterComponent/FooterComponent";
+import {recoveryPasswordEmailValidator} from "../../validator/recoveryPasswordEmailValidator";
 
 const RecoveryRequestComponent = () => {
     const [email, setEmail] = useState('');
@@ -16,6 +17,20 @@ const RecoveryRequestComponent = () => {
         setMessage('');
         setError('');
 
+        const { error: validationError } = recoveryPasswordEmailValidator.validate(
+            email, { abortEarly: false });
+
+        if (validationError) {
+            const formattedErrors = {};
+            validationError.details.forEach(err => {
+                const path = err.path.join(".");
+                formattedErrors[path] = err.message;
+            });
+            setError(formattedErrors.email || "Invalid email");
+            return;
+        }
+
+
         try {
             await apiService.post(urls.auth.recovery, {email});
             setMessage('Email sent. Please check your inbox.');
@@ -23,7 +38,6 @@ const RecoveryRequestComponent = () => {
             setError(error.response?.data?.detail || error.message || 'Something went wrong');
         }
     };
-
 
 
     return (
@@ -39,9 +53,9 @@ const RecoveryRequestComponent = () => {
                     {message && <p className={'recovery-request-message'}>{message}</p>}
                     {error && <p className={'recovery-request-error'}>{error}</p>}
                     <input type={'email'} placeholder={'Enter your email'} value={email}
-                           onChange={e => setEmail(e.target.value)} />
+                           onChange={e => setEmail(e.target.value)}/>
                     <div className={'recovery-request-button-div'}>
-                    <button className={'recovery-request-button'} type="submit">SEND RECOVERY LINK</button>
+                        <button className={'recovery-request-button'} type="submit">SEND RECOVERY LINK</button>
                     </div>
                 </form>
             </div>

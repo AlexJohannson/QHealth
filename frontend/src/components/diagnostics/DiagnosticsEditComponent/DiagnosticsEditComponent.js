@@ -56,7 +56,7 @@ const DiagnosticsEditComponent = ({id}) => {
 
     return (
         <div className={'diagnostics-edit-component'}>
-            {message && <p className={'diagnostics-edit-form-component-error'}>{message}</p>}
+            {message && <p className={'diagnostics-edit-form-component-message'}>{message}</p>}
             {error && <p className={'diagnostics-edit-form-component-error'}>{error}</p>}
             <form className={'diagnostics-edit-form-component'} onSubmit={handleSubmit}>
                 <h5>BLOCK FOR UPDATE MODALITY</h5>

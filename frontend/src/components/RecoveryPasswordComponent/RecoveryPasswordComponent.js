@@ -4,6 +4,7 @@ import {apiService} from "../../services/apiService";
 import {urls} from "../../constants/urls";
 import './RecoveryPasswordComponent.css';
 import {FooterComponent} from "../FooterComponent/FooterComponent";
+import {recoveryPasswordValidator} from "../../validator/recoveryPasswordValidator";
 
 const RecoveryPasswordComponent = () => {
     const {token} = useParams();
@@ -14,31 +15,35 @@ const RecoveryPasswordComponent = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
 
 
-
-
-
-
     const handleSubmit = async e => {
         e.preventDefault();
         setError('');
 
-        if (password !== confirmPassword) {
-            setError({confirm: 'Passwords do not match.'});
+        const {error: validationError} = recoveryPasswordValidator.validate(
+            {password, confirmPassword},
+            {abortEarly: false}
+        );
+
+        if (validationError) {
+            const formattedErrors = {};
+            validationError.details.forEach(err => {
+                const path = err.path.join(".");
+                formattedErrors[path] = err.message;
+            });
+            setError(formattedErrors);
             return;
         }
-
 
         try {
             const formData = new URLSearchParams();
             formData.append('password', password);
 
             await apiService.post(urls.auth.recoveryPassword(token), formData, {
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             });
 
             navigate('/login');
-        }
-        catch (error) {
+        } catch (error) {
             if (error.response?.data) {
                 setError(error.response.data);
             } else {
@@ -50,8 +55,6 @@ const RecoveryPasswordComponent = () => {
     const togglePassword = () => setShowPassword(prev => !prev);
 
 
-
-
     return (
         <div className={'recovery-password-container'}>
             <div className={'recovery-password-container-header'}>
@@ -59,16 +62,16 @@ const RecoveryPasswordComponent = () => {
                 <h1>QHealth</h1>
             </div>
             <div className={'recovery-password-form-div'}>
-                <form  className={'recovery-password-form'} onSubmit={handleSubmit}>
+                <form className={'recovery-password-form'} onSubmit={handleSubmit}>
                     <h2>SET NEW PASSWORD</h2>
                     {error.password && (<p className={'recovery-password-error'}>{error.password}</p>)}
-                    {error.confirm && (<p className="recovery-password-error">{error.confirm}</p>)}
+                    {error.confirmPassword && (<p className="recovery-password-error">{error.confirmPassword}</p>)}
                     {error.general && (<p className={'recovery-password-error'}>{error.general}</p>)}
                     <div className={'new-password-recovery'}>
                         <input type={showPassword ? 'text' : 'password'}
                                placeholder={'Enter your new password'}
                                value={password}
-                                onChange={e => setPassword(e.target.value)}/>
+                               onChange={e => setPassword(e.target.value)}/>
                         <button className={'show-new-password-recovery'} type="button" onClick={togglePassword}
                         >{showPassword ? '👁️' : '🙈'}</button>
                     </div>

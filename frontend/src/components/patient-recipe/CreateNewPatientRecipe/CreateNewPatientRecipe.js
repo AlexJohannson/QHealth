@@ -40,7 +40,7 @@ const CreateNewPatientRecipe = ({patientId}) => {
             setRecipe('');
             setDescription('');
         } catch (error) {
-            setError('Something went wrong. Please try again later');
+            setError('Patient recipe should be filled');
         } finally {
             setLoading(false);
         }

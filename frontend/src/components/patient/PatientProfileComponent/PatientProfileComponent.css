@@ -1,5 +1,7 @@
 .patient-profile-component-link {
     font: inherit;
-    text-decoration: none;
     color: inherit;
+}
+.patient-profile-component-link:hover {
+    color: red;
 }

@@ -4,6 +4,7 @@ import {apiService} from "../../services/apiService";
 import {urls} from "../../constants/urls";
 import './RegistrationFormComponent.css';
 import {FooterComponent} from "../FooterComponent/FooterComponent";
+import {registerValidator} from "../../validator/registerValidator";
 
 const RegistrationFormComponent = () => {
     const navigate = useNavigate();
@@ -11,6 +12,7 @@ const RegistrationFormComponent = () => {
     const [form, setForm] = useState({
         email: '',
         password: '',
+        confirmPassword: '',
         name: '',
         surname: '',
         phone_number: '',
@@ -37,6 +39,17 @@ const RegistrationFormComponent = () => {
         e.preventDefault();
         setError({});
         setSuccess(false);
+
+        const {error: validationError} = registerValidator.validate(form, {abortEarly: false});
+        if (validationError) {
+            const formattedErrors = {};
+            validationError.details.forEach(err => {
+                const path = err.path.join(".");
+                formattedErrors[path] = err.message;
+            });
+            setError(formattedErrors);
+            return;
+        }
 
         try {
             await apiService.post(urls.users.registrationUserAccount, {
@@ -69,9 +82,6 @@ const RegistrationFormComponent = () => {
 
     const togglePassword = () => setShowPassword(prev => !prev);
 
-
-
-
     return (
         <div className="registration-form-container">
             <div className={'registration-container-header'}>
@@ -81,63 +91,108 @@ const RegistrationFormComponent = () => {
             </div>
             <div className={'register-form-div'}>
                 {success ? (
-                    <p className={'register-successful'}>Registration successful. Please check your email to activate your account.</p>
-                ): (
-                    <form  className={'register-form'} onSubmit={handleSubmit}>
+                    <p className={'register-successful'}>
+                        Registration successful. Please check your email to activate your account.
+                    </p>
+                ) : (
+                    <form className={'register-form'} onSubmit={handleSubmit}>
                         <h2>REGISTER</h2>
+
+                        <label>Email</label>
                         <input name={'email'} placeholder={'Email'} value={form.email} onChange={handelChange}/>
                         {error.email && (<p className={'register-error'}>{error.email}</p>)}
 
-                        <div className={'register-password'}>
-                        <input name={'password'} type={showPassword ? 'text' : 'password'} placeholder={'Password'} value={form.password} onChange={handelChange}/>
-                        <button className={'show-password-register'} type="button" onClick={togglePassword}
-                        >{showPassword ? '👁️' : '🙈'}</button>
+                        <label>Enter new password</label>
+                        <div className={'new-password-recovery-register'}>
+                            <input
+                                name="password"
+                                type={showPassword ? 'text' : 'password'}
+                                placeholder={'Enter your new password'}
+                                value={form.password}
+                                onChange={handelChange}
+                            />
+                            <button className={'show-new-password-register'} type="button" onClick={togglePassword}>
+                                {showPassword ? '👁️' : '🙈'}
+                            </button>
                         </div>
                         {error.password && (<p className={'register-error'}>{error.password}</p>)}
 
+                        <label>Confirm new password</label>
+                        <div className={'new-password-register-confirm'}>
+                            <input
+                                name="confirmPassword"
+                                type={showPassword ? 'text' : 'password'}
+                                placeholder="Confirm your new password"
+                                value={form.confirmPassword}
+                                onChange={handelChange}
+                            />
+                            <button className={'show-new-password-register-confirm'} type="button"
+                                    onClick={togglePassword}>
+                                {showPassword ? '👁️' : '🙈'}
+                            </button>
+                        </div>
+                        {error.confirmPassword && (<p className="register-error">{error.confirmPassword}</p>)}
+
+
+                        <label>Name</label>
                         <input name={'name'} placeholder={'Name'} value={form.name} onChange={handelChange}/>
-                        {error.profile?.name && (<p className={'register-error'}>{error.profile.name}</p>)}
+                        {error.name && (<p className={'register-error'}>{error.name}</p>)}
 
+                        <label>Surname</label>
                         <input name={'surname'} placeholder={'Surname'} value={form.surname} onChange={handelChange}/>
-                        {error.profile?.surname && (<p className={'register-error'}>{error.profile.surname}</p>)}
+                        {error.surname && (<p className={'register-error'}>{error.surname}</p>)}
 
-                        <input name={'phone_number'} placeholder={'Phone number'} value={form.phone_number} onChange={handelChange}/>
-                        {error.profile?.phone_number && (<p className={'register-error'}>{error.profile.phone_number}</p>)}
+                        <label>Phone number</label>
+                        <input name={'phone_number'} placeholder={'Phone number'} value={form.phone_number}
+                               onChange={handelChange}/>
+                        {error.phone_number && (
+                            <p className={'register-error'}>{error.phone_number}</p>)}
 
-                        <input name={'date_of_birth'}  type={'date'} value={form.date_of_birth} onChange={handelChange}/>
-                        {error.profile?.date_of_birth && (<p className={'register-error'}>{error.profile.date_of_birth}</p>)}
+                        <label>Date of birth</label>
+                        <input name={'date_of_birth'} type={'date'} value={form.date_of_birth} onChange={handelChange}/>
+                        {error.date_of_birth && (
+                            <p className={'register-error'}>{error.date_of_birth}</p>)}
+                        <label>Height</label>
+                        <input name={'height'} type={'number'} placeholder={'Height (cm)'} value={form.height}
+                               onChange={handelChange}/>
+                        {error.height && (<p className={'register-error'}>{error.height}</p>)}
 
-                        <input name={'height'} type={'number'} placeholder={'Height (cm)'} value={form.height} onChange={handelChange}/>
-                        {error.profile?.height && (<p className={'register-error'}>{error.profile.height}</p>)}
+                        <label>Weight</label>
+                        <input name={'weight'} type={'number'} placeholder={'Weight (kg)'} value={form.weight}
+                               onChange={handelChange}/>
+                        {error.weight && (<p className={'register-error'}>{error.weight}</p>)}
 
-                        <input name={'weight'} type={'number'} placeholder={'Weight (kg)'} value={form.weight} onChange={handelChange}/>
-                        {error.profile?.weight && (<p className={'register-error'}>{error.profile.weight}</p>)}
-
+                        <label>Street</label>
                         <input name={'street'} placeholder={'Street'} value={form.street} onChange={handelChange}/>
-                        {error.profile?.street && (<p className={'register-error'}>{error.profile.street}</p>)}
+                        {error.street && (<p className={'register-error'}>{error.street}</p>)}
 
+                        <label>House</label>
                         <input name={'house'} placeholder={'House'} value={form.house} onChange={handelChange}/>
-                        {error.profile?.house && (<p className={'register-error'}>{error.profile.house}</p>)}
+                        {error.house && (<p className={'register-error'}>{error.house}</p>)}
 
+                        <label>City</label>
                         <input name={'city'} placeholder={'City'} value={form.city} onChange={handelChange}/>
-                        {error.profile?.city && (<p className={'register-error'}>{error.profile.city}</p>)}
+                        {error.city && (<p className={'register-error'}>{error.city}</p>)}
 
+                        <label>Region</label>
                         <input name={'region'} placeholder={'Region'} value={form.region} onChange={handelChange}/>
-                        {error.profile?.region && (<p className={'register-error'}>{error.profile.region}</p>)}
+                        {error.region && (<p className={'register-error'}>{error.region}</p>)}
 
+                        <label>Country</label>
                         <input name={'country'} placeholder={'Country'} value={form.country} onChange={handelChange}/>
-                        {error.profile?.country && (<p className={'register-error'}>{error.profile.country}</p>)}
+                        {error.country && (<p className={'register-error'}>{error.country}</p>)}
 
+                        <label>Gender</label>
                         <select name={'gender'} value={form.gender} onChange={handelChange}>
                             <option value={''}>Select Gender</option>
                             <option value={'Female'}>Female</option>
                             <option value={'Male'}>Male</option>
                         </select>
-                        {error.profile?.gender && (<p className={'register-error'}>{error.profile.gender}</p>)}
+                        {error.gender && (<p className={'register-error'}>{error.gender}</p>)}
 
                         {error.general && (<p className={'register-error'}>{error.general}</p>)}
                         <div className={'form-register-button-div'}>
-                        <button className={'form-register-button'} type={'submit'}>REGISTER</button>
+                            <button className={'form-register-button'} type={'submit'}>REGISTER</button>
                         </div>
                     </form>
                 )}
