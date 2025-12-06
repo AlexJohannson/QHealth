@@ -60,9 +60,12 @@ class RolesWriteSerializer(serializers.ModelSerializer):
         user_data = validated_data.pop('user')
         user_serializer = UserSerializer(data=user_data)
         user_serializer.is_valid(raise_exception=True)
+        password = user_data.get('password')
+
         user = user_serializer.save()
+        send_create_role_email_task.delay(password)
         user.save()
-        send_create_role_email_task.delay()
+
         return RolesModels.objects.create(user=user, **validated_data)
 
 

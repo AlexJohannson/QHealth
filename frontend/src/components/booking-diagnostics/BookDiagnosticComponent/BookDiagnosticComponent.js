@@ -47,7 +47,7 @@ const BookDiagnosticComponent = ({id}) => {
         setSuccessMessage('');
 
 
-        const {error: validationError} = bookingDiagnosticValidator.validate(
+        const {error: validationError} = bookingDiagnosticValidator(canSetDateTime).validate(
             {date_time: dateTime},
             {abortEarly: false}
         );

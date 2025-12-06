@@ -6,6 +6,7 @@ import {FooterComponent} from "../../FooterComponent/FooterComponent";
 import {registerStaffValidator} from "../../../validator/registerStaffValidator";
 
 
+
 const RoleRegistrationComponent = () => {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
@@ -41,6 +42,7 @@ const RoleRegistrationComponent = () => {
         e.preventDefault();
         setError({});
         setSuccess(false);
+
 
         const {error: validationError} = registerStaffValidator.validate(form, {abortEarly: false});
         if (validationError) {
@@ -99,7 +101,9 @@ const RoleRegistrationComponent = () => {
             </div>
             <div className={'role-register-form-div'}>
                 {success ? (
-                    <p className={'role-register-successful'}>Registration successful. Please, check your email to activate your account.</p>
+                    <p className={'role-register-successful'}>
+                        Registration successful. Please, check your email to activate your account.
+                    </p>
 
                 ) : (
                     <form className={'role-register-form'} onSubmit={handleSubmit}>

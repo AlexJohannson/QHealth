@@ -1,5 +1,6 @@
 import React from 'react';
 import './FooterComponent.css';
+import {Link} from "react-router-dom";
 
 const FooterComponent = () => {
     return (
@@ -13,9 +14,9 @@ const FooterComponent = () => {
                 <p>© Copyright 2025</p>
             </div>
             <div className={'footer-contact'}>
-                <a  className={'swagger'} href="http://localhost/api/doc" target="_blank" rel="noopener noreferrer">
+                <Link  className={'swagger'} to="http://localhost/api/doc" target="_blank" rel="noopener noreferrer">
                      Swagger
-                </a>
+                </Link>
                 <p>tel: +00 00 000-00 00</p>
                 <p>email: qhealth@exampl.com</p>
             </div>

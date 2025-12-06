@@ -1,13 +1,11 @@
 import Joi from "joi";
 
-const bookingDiagnosticValidator = Joi.object({
-    date_time: Joi.string()
-        .required()
-        .messages({
-            "string.empty": "Date & Time is required",
-            "any.required": "Date & Time is required"
-        })
+const bookingDiagnosticValidator = (canSetDateTime) => Joi.object({
+  date_time: canSetDateTime
+    ? Joi.date().required().messages({
+        "date.base": "Date & Time must be a valid date",
+        "any.required": "Date & Time is required"
+      })
+    : Joi.any().strip()
 });
-
-export {bookingDiagnosticValidator};
-
+export { bookingDiagnosticValidator };

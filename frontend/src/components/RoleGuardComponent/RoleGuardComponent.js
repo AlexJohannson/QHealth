@@ -18,7 +18,7 @@ const RoleGuardComponent = ({children, allow = []}) => {
     else if (role === 'doctor') current = 'doctor';
     else if (role === 'operator') current = 'operator';
     else if (role === 'pharmacist') current = 'pharmacist';
-    else if (isUser) current = 'user';
+    else if (isUser) current = 'user-home-page';
 
 
     if (!allow.includes(current)) {

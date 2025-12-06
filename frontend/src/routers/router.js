@@ -102,7 +102,7 @@ const router = createBrowserRouter([
             {
                 path: 'user-home-page',
                 element: (
-                    <RoleGuardComponent allow={['user']}>
+                    <RoleGuardComponent allow={['user-home-page']}>
                         <UserHomePage/>
                     </RoleGuardComponent>
                 )

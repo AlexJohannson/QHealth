@@ -47,8 +47,8 @@ const useMenuByRole = () => {
             case 'doctor':
                 return [
                     {label: 'Patients Cards', path: '/patients-card'},
-                    {label: 'Update My Profile', path: `users-update/${userId}`},
-                    {label: 'My Staff QHealth Profile', path: `roles/${roleId}`},
+                    {label: 'Update My Profile', path: `/users-update/${userId}`},
+                    {label: 'My Staff QHealth Profile', path: `/roles/${roleId}`},
                     {label: 'Diagnostics List', path: '/diagnostics-list'},
                     {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
                     {label: 'Booking Doctors List', path: '/booking-doctor'},
@@ -58,7 +58,7 @@ const useMenuByRole = () => {
             case 'operator':
                 return [
                     {label: 'Patients Cards', path: '/patients-card'},
-                    {label: 'Update My Profile', path: `users-update/${userId}`},
+                    {label: 'Update My Profile', path: `/users-update/${userId}`},
                     {label: 'Staff QHealth', path: '/roles'},
                     {label: 'Diagnostics List', path: '/diagnostics-list'},
                     {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
@@ -69,8 +69,8 @@ const useMenuByRole = () => {
             case 'pharmacist':
                 return [
                     {label: 'Patients Cards', path: '/patients-card'},
-                    {label: 'Update My Profile', path: `users-update/${userId}`},
-                    {label: 'My Staff QHealth Profile', path: `roles/${roleId}`},
+                    {label: 'Update My Profile', path: `/users-update/${userId}`},
+                    {label: 'My Staff QHealth Profile', path: `/roles/${roleId}`},
                     {label: 'Diagnostics List', path: '/diagnostics-list'},
                     {label: 'Patient Recipes', path: '/patient-recipe'},
                 ];
@@ -78,7 +78,7 @@ const useMenuByRole = () => {
                 if (isUser) {
                     return [
                         {label: 'My card', path: `/patients-card/${userId}`},
-                        {label: 'Update My Profile', path: `users-update/${userId}`},
+                        {label: 'Update My Profile', path: `/users-update/${userId}`},
                         {label: 'Diagnostics', path: '/diagnostics'},
                         {label: 'Booking Diagnostics', path: '/booking-diagnostic'},
                         {label: 'Booking Doctors List', path: '/booking-doctor'},
