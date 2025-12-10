@@ -4,6 +4,7 @@ import {roleService} from "../../../services/roleService";
 import {RolesManagerComponent} from "../RolesManagerComponent/RolesManagerComponent";
 import './RoleDetailsComponent.css';
 import {FooterComponent} from "../../FooterComponent/FooterComponent";
+import {formatDate} from "../../../untils/formatDate";
 
 const RolesDetailsComponent = () => {
     const {id} = useParams();
@@ -29,7 +30,7 @@ const RolesDetailsComponent = () => {
     }, [roleId]);
 
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <div className={'loading-roles'}><h1 className={'loading-roles-text'}>Loading...</h1></div>;
     if (error) return <p style={{color: 'red'}}>{error}</p>;
     if (!roles || !roles.user || !roles.user.profile) return <p>No role data</p>;
 
@@ -57,26 +58,26 @@ const RolesDetailsComponent = () => {
             </div>
             <div className={'role-details-container-profile'}>
                 <h3>{profile.name} {profile.surname}</h3>
-                <p>UserID: {id}</p>
-                <p>Email: {email}</p>
-                <p>Active: {is_active ? 'Yes' : 'No'}</p>
-                <p>Role: {roles.role}</p>
-                {roles.specialty && <p>Specialty: {roles.specialty}</p>}
+                <p><strong>Number:</strong> {id}</p>
+                <p><strong>Email:</strong> {email}</p>
+                <p><strong>Active:</strong> {is_active ? 'Yes' : 'No'}</p>
+                <p><strong>Role:</strong> {roles.role}</p>
+                {roles.specialty && <p><strong>Specialty:</strong> {roles.specialty}</p>}
                 {roles.role === 'doctor' && (
-                    <p>Available for booking: {roles.is_available_for_booking ? 'Yes' : 'No'}</p>
+                    <p><strong>Available for booking:</strong> {roles.is_available_for_booking ? 'Yes' : 'No'}</p>
                 )}
-                <p>Phone Number: {profile.phone_number}</p>
-                <p>Date of birth: {profile.date_of_birth}</p>
-                <p>Height: {profile.height}</p>
-                <p>Weight: {profile.weight}</p>
-                <p>Street: {profile.street}</p>
-                <p>House: {profile.house}</p>
-                <p>City: {profile.city}</p>
-                <p>Region: {profile.region}</p>
-                <p>Country: {profile.country}</p>
-                <p>Gender: {profile.gender}</p>
-                <p>Create: {profile.created_at}</p>
-                <p>Update: {profile.updated_at}</p>
+                <p><strong>Phone Number:</strong> {profile.phone_number}</p>
+                <p><strong>Date of birth:</strong> {profile.date_of_birth}</p>
+                <p><strong>Height:</strong> {profile.height}</p>
+                <p><strong>Weight:</strong> {profile.weight}</p>
+                <p><strong>Street:</strong> {profile.street}</p>
+                <p><strong>House:</strong> {profile.house}</p>
+                <p><strong>City:</strong> {profile.city}</p>
+                <p><strong>Region:</strong> {profile.region}</p>
+                <p><strong>Country:</strong> {profile.country}</p>
+                <p><strong>Gender:</strong> {profile.gender}</p>
+                <p><strong>Create:</strong> {formatDate(profile.created_at)}</p>
+                <p><strong>Update:</strong> {formatDate(profile.updated_at)}</p>
             </div>
             <div>
                 {canManageDoctor && (

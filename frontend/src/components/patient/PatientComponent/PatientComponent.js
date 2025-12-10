@@ -33,7 +33,7 @@ const PatientsComponent = () => {
         fetchPatient();
     }, [page, size]);
 
-    if (loading) return <p>Loading patient...</p>;
+    if (loading) return <div className={'loading-patient'}><h1 className={'loading-patient-text'}>Loading...</h1></div>;
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
 

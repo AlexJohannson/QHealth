@@ -4,6 +4,7 @@ import {userService} from "../../../services/userService";
 import {UsersManagerComponent} from "../UsersManagerComponent/UsersManagerComponent";
 import './UserDetailsComponent.css';
 import {FooterComponent} from "../../FooterComponent/FooterComponent";
+import {formatDate} from "../../../untils/formatDate";
 
 
 
@@ -52,7 +53,7 @@ const UserDetailsComponent = () => {
 
 
 
-    if (loading) return <p>Loading user...</p>;
+    if (loading) return <div className={'loading-users'}><h1 className={'loading-users-text'}>Loading...</h1></div>;
     if (error) return <p style={{color: 'red'}}>{error}</p>;
     if (!user) return null;
     const isTargetSuperuser = user?.is_superuser === true;
@@ -93,24 +94,24 @@ const UserDetailsComponent = () => {
             <h3 style={getNameStyle()}>
                 {profile?.name || 'No name'} {profile?.surname || ''}
             </h3>
-            <p>UserID: {user.id}</p>
-            <p>Email: {email}</p>
-            <p>Active: {user.is_active ? 'Yes' : 'No'}</p>
+                <p><strong>Number:</strong> {user.id}</p>
+                <p><strong>Email:</strong> {email}</p>
+                <p><strong>Active:</strong> {user.is_active ? 'Yes' : 'No'}</p>
 
             {profile ? (
                 <>
-                    <p>Phone Number: {profile.phone_number}</p>
-                    <p>Date of birth: {profile.date_of_birth}</p>
-                    <p>Height: {profile.height}</p>
-                    <p>Weight: {profile.weight}</p>
-                    <p>Street: {profile.street}</p>
-                    <p>House: {profile.house}</p>
-                    <p>City: {profile.city}</p>
-                    <p>Region: {profile.region}</p>
-                    <p>Country: {profile.country}</p>
-                    <p>Gender: {profile.gender}</p>
-                    <p>Create: {profile.created_at}</p>
-                    <p>Update: {profile.updated_at}</p>
+                    <p><strong>Phone Number:</strong> {profile.phone_number}</p>
+                    <p><strong>Date of birth:</strong> {profile.date_of_birth}</p>
+                    <p><strong>Height:</strong> {profile.height}</p>
+                    <p><strong>Weight:</strong> {profile.weight}</p>
+                    <p><strong>Street:</strong> {profile.street}</p>
+                    <p><strong>House:</strong> {profile.house}</p>
+                    <p><strong>City:</strong> {profile.city}</p>
+                    <p><strong>Region:</strong> {profile.region}</p>
+                    <p><strong>Country:</strong> {profile.country}</p>
+                    <p><strong>Gender:</strong> {profile.gender}</p>
+                    <p><strong>Create:</strong> {formatDate(profile.created_at)}</p>
+                    <p><strong>Update:</strong> {formatDate(profile.updated_at)}</p>
                 </>
             ) : (
                 <p style={{color: 'gray'}}>No profile data available</p>

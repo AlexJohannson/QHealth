@@ -34,7 +34,7 @@ const SecurityComponent = () => {
         fetchSecurity();
     }, [page, size]);
 
-    if (loading) return <p>Loading security list...</p>;
+    if (loading) return <div className={'loading-security'}><h1 className={'loading-security-text'}>Loading...</h1></div>;
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
 

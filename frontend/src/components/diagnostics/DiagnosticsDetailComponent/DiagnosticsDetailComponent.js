@@ -4,6 +4,7 @@ import {diagnosticsService} from "../../../services/diagnosticsService";
 import {BookDiagnosticComponent} from "../../booking-diagnostics/BookDiagnosticComponent/BookDiagnosticComponent";
 import './DiagnosticsDetailComponent.css';
 import {FooterComponent} from "../../FooterComponent/FooterComponent";
+import {formatDate} from "../../../untils/formatDate";
 
 
 const DiagnosticsDetailComponent = () => {
@@ -30,7 +31,7 @@ const DiagnosticsDetailComponent = () => {
 
 
 
-    if (loading) return <p>Loading diagnostic...</p>;
+    if (loading) return <div className={'loading-diagnostics'}><h1 className={'loading-diagnostics-text'}>Loading...</h1></div>;
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
     return (
@@ -42,9 +43,9 @@ const DiagnosticsDetailComponent = () => {
             </div>
             <div className={'diagnostics-detail-component-content'}>
                 <h4>{diagnostic.modality}</h4>
-                <p>ID: {diagnostic.id}</p>
-                <p>Created: {diagnostic.created_at}</p>
-                <p>Updated: {diagnostic.updated_at}</p>
+                <p><strong>Number:</strong> {diagnostic.id}</p>
+                <p><strong>Created:</strong> {formatDate(diagnostic.created_at)}</p>
+                <p><strong>Updated:</strong> {formatDate(diagnostic.updated_at)}</p>
             </div>
             <div className={'diagnostics-detail-component-booking-form'}>
                 <BookDiagnosticComponent id={id}/>

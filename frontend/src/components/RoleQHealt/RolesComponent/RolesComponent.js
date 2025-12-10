@@ -33,7 +33,7 @@ const RolesComponent = () => {
         fetchRoles();
     }, [page, size]);
 
-    if (loading) return <p>Loading roles...</p>;
+    if (loading) return <div className={'loading-roles'}><h1 className={'loading-roles-text'}>Loading...</h1></div>;
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
 

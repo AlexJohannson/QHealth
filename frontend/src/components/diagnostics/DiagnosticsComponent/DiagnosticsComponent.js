@@ -56,7 +56,7 @@ const DiagnosticsComponent = () => {
     }
 
 
-    if (loading) return <p>Loading diagnostics...</p>;
+    if (loading) return <div className={'loading-diagnostics'}><h1 className={'loading-diagnostics-text'}>Loading...</h1></div>;
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
     return (

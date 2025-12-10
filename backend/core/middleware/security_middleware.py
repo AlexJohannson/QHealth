@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 
@@ -21,9 +22,19 @@ BAN_DURATION = 600
 
 
 class LoginRateLimitMiddleware(MiddlewareMixin):
+
     def process_request(self, request):
         if request.path == "/api/auth" and request.method == "POST":
+
             email = request.POST.get("email") or request.POST.get("username")
+
+            if not email:
+                try:
+                    data = json.loads(request.body.decode("utf-8"))
+                    email = data.get("email") or data.get("username")
+                except Exception:
+                    email = None
+
             ip = self.get_client_ip(request)
             redis_key = f"failed_login:{ip}"
 
@@ -59,8 +70,10 @@ class LoginRateLimitMiddleware(MiddlewareMixin):
                     count = redis_client.incr(key)
                     if count == 1:
                         redis_client.expire(key, BAN_DURATION)
+
                     LoginAttempt.objects.create(email=email, ip_address=ip, success=False)
                     logger.warning(f"[FAILED] Login from {email} | IP: {ip} | Count: {count}")
+
             except redis.exceptions.ConnectionError:
                 logger.warning("[REDIS UNAVAILABLE] Cannot update login attempt count")
 
@@ -71,5 +84,3 @@ class LoginRateLimitMiddleware(MiddlewareMixin):
         if x_forwarded_for:
             return x_forwarded_for.split(",")[0]
         return request.META.get("REMOTE_ADDR")
-
-

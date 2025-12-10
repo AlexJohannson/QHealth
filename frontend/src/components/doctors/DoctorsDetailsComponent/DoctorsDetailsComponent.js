@@ -33,12 +33,12 @@ const DoctorsDetailsComponent = () => {
         fetchDoctors();
     }, [roleId]);
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <div className={'loading-doctors-details'}><h1 className={'loading-doctor-details-text'}>Loading...</h1></div>;
     if (error) return <p style={{color: 'red'}}>{error}</p>;
     if (!doctors) return <p>No doctors data</p>;
 
 
-    const {profile, is_active} = doctors.user;
+    const {profile} = doctors.user;
 
 
     return (
@@ -50,10 +50,10 @@ const DoctorsDetailsComponent = () => {
             </div>
             <div className={'doctors-details-component-content'}>
                 <h3>{profile.name} {profile.surname}</h3>
-                <p>Role: {doctors.role}</p>
-                {doctors.specialty && <p>Specialty: {doctors.specialty}</p>}
+                <p><strong>Role:</strong> {doctors.role}</p>
+                {doctors.specialty && <p><strong>Specialty:</strong> {doctors.specialty}</p>}
                 {doctors.role === 'doctor' && (
-                    <p>Available for booking: {doctors.is_available_for_booking ? 'Yes' : 'No'}</p>
+                    <p><strong>Available for booking:</strong> {doctors.is_available_for_booking ? 'Yes' : 'No'}</p>
                 )}
             </div>
             <div className={'doctors-details-component-book-doctor-component'}>

@@ -60,7 +60,7 @@ const BookingDoctorComponent = () => {
 
 
 
-    if (loading) return <p>Loading booking doctors list...</p>;
+    if (loading) return <div className={'loading-booking-doctor'}><h1 className={'loading-booking-doctor-text'}>Loading...</h1></div>;
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
 

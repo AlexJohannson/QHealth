@@ -3,6 +3,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {bookingDiagnosticsService} from "../../../services/bookingDiagnosticsService";
 import './BookingDiagnosticsDetailsComponent.css';
 import {FooterComponent} from "../../FooterComponent/FooterComponent";
+import {formatDate} from "../../../untils/formatDate";
 
 const BookingDiagnosticsDetailsComponent = () => {
     const {id} = useParams();
@@ -41,7 +42,8 @@ const BookingDiagnosticsDetailsComponent = () => {
         }
     };
 
-    if (loading) return <p>Loading user...</p>;
+    if (loading) return <div className={'loading-booking-diagnostic-details'}><h1
+        className={'loading-booking-diagnostic-detail-text'}>Loading...</h1></div>;
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
 
@@ -50,7 +52,8 @@ const BookingDiagnosticsDetailsComponent = () => {
             <div className={'booking-diagnostic-detail-component-header'}>
                 <img src={'/img/logo.png'} className={'logo-booking-diagnostic-detail-component'} alt="Logo"/>
                 <h1>QHealth</h1>
-                <button className={'booking-diagnostics-detail-component-button'} onClick={() => navigate(-1)}>BACK</button>
+                <button className={'booking-diagnostics-detail-component-button'} onClick={() => navigate(-1)}>BACK
+                </button>
             </div>
             <div className={'booking-diagnostics-details-component-profile'}>
                 <h3>Patient:</h3>
@@ -59,21 +62,21 @@ const BookingDiagnosticsDetailsComponent = () => {
                         ? `${bookingDiagnostic.user.profile.name} ${bookingDiagnostic.user.profile.surname}`
                         : bookingDiagnostic.user?.email || 'Unknown user'}
                 </h4>
-                <p>UserId: {bookingDiagnostic.user.id}</p>
-                <p>Email: {bookingDiagnostic.user.email}</p>
-                <p>Active: {bookingDiagnostic.user.is_active ? 'Yes' : 'No'}</p>
-                <p>Phone number: {bookingDiagnostic.user.profile.phone_number}</p>
-                <p>Date of birth: {bookingDiagnostic.user.profile.date_of_birth}</p>
-                <p>Height: {bookingDiagnostic.user.profile.height}</p>
-                <p>Weight: {bookingDiagnostic.user.profile.weight}</p>
-                <p>Street: {bookingDiagnostic.user.profile.street}</p>
-                <p>House: {bookingDiagnostic.user.profile.house}</p>
-                <p>City: {bookingDiagnostic.user.profile.city}</p>
-                <p>Region: {bookingDiagnostic.user.profile.region}</p>
-                <p>Country: {bookingDiagnostic.user.profile.country}</p>
-                <p>Gender: {bookingDiagnostic.user.profile.gender}</p>
+                <p><strong>Number:</strong> {bookingDiagnostic.user.id}</p>
+                <p><strong>Email:</strong> {bookingDiagnostic.user.email}</p>
+                <p><strong>Active:</strong> {bookingDiagnostic.user.is_active ? 'Yes' : 'No'}</p>
+                <p><strong>Phone number:</strong> {bookingDiagnostic.user.profile.phone_number}</p>
+                <p><strong>Date of birth:</strong> {bookingDiagnostic.user.profile.date_of_birth}</p>
+                <p><strong>Height:</strong> {bookingDiagnostic.user.profile.height}</p>
+                <p><strong>Weight:</strong> {bookingDiagnostic.user.profile.weight}</p>
+                <p><strong>Street:</strong> {bookingDiagnostic.user.profile.street}</p>
+                <p><strong>House:</strong> {bookingDiagnostic.user.profile.house}</p>
+                <p><strong>City:</strong> {bookingDiagnostic.user.profile.city}</p>
+                <p><strong>Region:</strong> {bookingDiagnostic.user.profile.region}</p>
+                <p><strong>Country:</strong> {bookingDiagnostic.user.profile.country}</p>
+                <p><strong>Gender:</strong> {bookingDiagnostic.user.profile.gender}</p>
                 <h3>Diagnostic:</h3>
-                <p>Diagnostics: {bookingDiagnostic.diagnostic_service.modality}</p>
+                <p><strong>Diagnostic service:</strong> {bookingDiagnostic.diagnostic_service.modality}</p>
                 <h3>Booked by:</h3>
                 {
                     <p>
@@ -82,7 +85,13 @@ const BookingDiagnosticsDetailsComponent = () => {
                             : bookingDiagnostic.booked_by.email}
                     </p>
                 }
-                {bookingDiagnostic.diagnostic_service.date_time}
+                <p>
+                    <strong>Visit to diagnostic service:</strong>{" "}
+                    {bookingDiagnostic.date_time
+                        ? formatDate(bookingDiagnostic.date_time)
+                        : "Operator will call soon about the time of diagnostic service"}
+                </p>
+                <p><strong>Create:</strong> {formatDate(bookingDiagnostic.created_at)}</p>
             </div>
             <div className={'booking-diagnostics-details-component-button'}>
                 {canDelete && (

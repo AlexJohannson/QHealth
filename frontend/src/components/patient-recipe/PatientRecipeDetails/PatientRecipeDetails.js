@@ -3,6 +3,7 @@ import './PatientRecipeDetails.css';
 import {useNavigate, useParams} from "react-router-dom";
 import {patientRecipeService} from "../../../services/patientRecipeService";
 import {FooterComponent} from "../../FooterComponent/FooterComponent";
+import {formatDate} from "../../../untils/formatDate";
 
 
 const PatientRecipeDetails = () => {
@@ -43,7 +44,7 @@ const PatientRecipeDetails = () => {
     }
 
 
-    if (loading) return <p>Loading diagnostic...</p>;
+    if (loading) return <div className={'loading-patient-recipe-details'}><h1 className={'loading-patient-recipe-details-text'}>Loading...</h1></div>;
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
     return (
@@ -55,12 +56,13 @@ const PatientRecipeDetails = () => {
             </div>
             <div className={'patient-recipe-details-profile'}>
                 <h2>My Recipe:</h2>
-                <p>Number: {patientRecipes.id}</p>
-                <p>Recipe: {patientRecipes.recipe}</p>
-                <p>Description: {patientRecipes.description}</p>
+                <p><strong>Number:</strong> {patientRecipes.id}</p>
+                <p><strong>Recipe:</strong> {patientRecipes.recipe}</p>
+                <p><strong>Description:</strong> {patientRecipes.description}</p>
+                <p><strong>Greate:</strong> {formatDate(patientRecipes.created_at)}</p>
                 <h3>Patient:</h3>
-                <p>Name: {patientRecipes.user.profile.name}</p>
-                <p>Surname: {patientRecipes.user.profile.surname}</p>
+                <p><strong>Name:</strong> {patientRecipes.user.profile.name}</p>
+                <p><strong>Surname:</strong> {patientRecipes.user.profile.surname}</p>
             </div>
             {canDelete && (
                 <button className={'patient-recipe-details-delete-button'}

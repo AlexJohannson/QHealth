@@ -57,7 +57,7 @@ const PatientJournalComponent = () => {
     }
 
 
-    if (loading) return <p>Loading diagnostics...</p>;
+    if (loading) return <div className={'loading-patient-journal'}><h1 className={'loading-patient-journal-text'}>Loading...</h1></div>;
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
 

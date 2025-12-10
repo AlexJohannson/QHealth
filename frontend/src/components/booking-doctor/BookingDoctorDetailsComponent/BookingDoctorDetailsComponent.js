@@ -4,6 +4,7 @@ import {bookingDoctorService} from "../../../services/bookingDoctorService";
 import {BookingActionsComponent} from "../BookingActionComponent/BookingActionComponent";
 import './BookingDoctorDetailsComponent.css';
 import {FooterComponent} from "../../FooterComponent/FooterComponent";
+import {formatDate} from "../../../untils/formatDate";
 
 
 const BookingDoctorDetailsComponent = () => {
@@ -40,7 +41,7 @@ const BookingDoctorDetailsComponent = () => {
     }, [id]);
 
 
-    if (loading) return <p>Loading user...</p>;
+    if (loading) return <div className={'loading-booking-doctor-details'}><h1 className={'loading-booking-doctor-details-text'}>Loading...</h1></div>;
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
 
@@ -58,25 +59,26 @@ const BookingDoctorDetailsComponent = () => {
                         ? `${bookingDoctor.user.profile.name} ${bookingDoctor.user.profile.surname}`
                         : bookingDoctor.user?.email || 'Unknown user'}
                 </h4>
-                <p>UserId: {bookingDoctor.user.id}</p>
-                <p>Email: {bookingDoctor.user.email}</p>
-                <p>Active: {bookingDoctor.user.is_active ? 'Yes' : 'No'}</p>
-                <p>Phone number: {bookingDoctor.user.profile.phone_number}</p>
-                <p>Date of birth: {bookingDoctor.user.profile.date_of_birth}</p>
-                <p>Height: {bookingDoctor.user.profile.height}</p>
-                <p>Weight: {bookingDoctor.user.profile.weight}</p>
-                <p>Street: {bookingDoctor.user.profile.street}</p>
-                <p>House: {bookingDoctor.user.profile.house}</p>
-                <p>City: {bookingDoctor.user.profile.city}</p>
-                <p>Region: {bookingDoctor.user.profile.region}</p>
-                <p>Country: {bookingDoctor.user.profile.country}</p>
-                <p>Gender: {bookingDoctor.user.profile.gender}</p>
+                <p><strong>Number:</strong> {bookingDoctor.user.id}</p>
+                <p><strong>Email:</strong> {bookingDoctor.user.email}</p>
+                <p><strong>Active:</strong> {bookingDoctor.user.is_active ? 'Yes' : 'No'}</p>
+                <p><strong>Phone number:</strong> {bookingDoctor.user.profile.phone_number}</p>
+                <p><strong>Date of birth:</strong> {bookingDoctor.user.profile.date_of_birth}</p>
+                <p><strong>Height:</strong> {bookingDoctor.user.profile.height}</p>
+                <p><strong>Weight:</strong> {bookingDoctor.user.profile.weight}</p>
+                <p><strong>Street:</strong> {bookingDoctor.user.profile.street}</p>
+                <p><strong>House:</strong> {bookingDoctor.user.profile.house}</p>
+                <p><strong>City:</strong> {bookingDoctor.user.profile.city}</p>
+                <p><strong>Region:</strong> {bookingDoctor.user.profile.region}</p>
+                <p><strong>Country:</strong> {bookingDoctor.user.profile.country}</p>
+                <p><strong>Gender:</strong> {bookingDoctor.user.profile.gender}</p>
                 <h3>Doctor:</h3>
-                <p>Speciality: {bookingDoctor.doctor?.specialty}</p>
-                <h3>Name: {bookingDoctor.doctor?.name} {bookingDoctor.doctor?.surname}</h3>
-                <h4>Status: {bookingDoctor.status === 'cancelled' ? 'Cancelled' : 'Booked'}</h4>
-                <p>Date: {bookingDoctor.date_time}</p>
-                <p>Create: {bookingDoctor.created_at}</p>
+                <p><strong>Speciality:</strong> {bookingDoctor.doctor?.specialty}</p>
+                <p><strong>Name:</strong> {bookingDoctor.doctor?.name} {bookingDoctor.doctor?.surname}</p>
+                <p><strong>Status:</strong> {bookingDoctor.status === 'cancelled' ? 'Cancelled' : 'Booked'}</p>
+                <p><strong>Visit to doctor:</strong> {formatDate(bookingDoctor.date_time)}</p>
+                <p><strong>Create:</strong> {formatDate(bookingDoctor.created_at)}</p>
+                <p><strong>Update:</strong> {formatDate(bookingDoctor.updated_at)}</p>
             </div>
             <div className={'booking-doctor-details-component-actions'}>
                 <BookingActionsComponent id={bookingDoctor.doctor.id}

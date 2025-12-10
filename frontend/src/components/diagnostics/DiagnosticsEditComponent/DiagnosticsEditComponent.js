@@ -52,7 +52,7 @@ const DiagnosticsEditComponent = ({id}) => {
         }
     };
 
-    if (!formData) return <p>Loading...</p>;
+    if (!formData) return <div className={'loading-diagnostic-edit'}><h1 className={'loading-diagnostic-edit-text'}>Loading...</h1></div>;
 
     return (
         <div className={'diagnostics-edit-component'}>

@@ -67,3 +67,19 @@
     color: white;
     cursor: pointer;
 }
+/*-------------------------------------     loading-booking-diagnostic-details   -------------------------------------*/
+.loading-booking-diagnostic-details {
+    width: 100%;
+    height: 695px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightyellow;
+}
+.loading-booking-diagnostic-detail-text {
+    font-family: "Lobster Two", sans-serif;
+    font-size: 80px;
+    font-weight: 700;
+    font-style: italic;
+    color: blue;
+}

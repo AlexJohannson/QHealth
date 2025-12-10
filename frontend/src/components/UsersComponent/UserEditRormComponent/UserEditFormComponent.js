@@ -109,7 +109,7 @@ const UserEditFormComponent = ({userId, canEdit, onDelete}) => {
     };
 
 
-    if (!formData) return <p>Loading user data...</p>;
+    if (!formData) return <div className={'loading-users-edit'}><h1 className={'loading-users-edit-text'}>Loading...</h1></div>;
 
 
     return (

@@ -34,7 +34,7 @@ const UsersComponent = () => {
         fetchUsers();
     }, [page, size]);
 
-    if (loading) return <p>Loading users...</p>;
+    if (loading) return <div className={'loading-users'}><h1 className={'loading-users-text'}>Loading...</h1></div>;
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
     return (

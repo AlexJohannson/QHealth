@@ -3,6 +3,7 @@ import './PatientJournalDetails.css';
 import {useNavigate, useParams} from "react-router-dom";
 import {patientJournal} from "../../../services/patientJournal";
 import {FooterComponent} from "../../FooterComponent/FooterComponent";
+import {formatDate} from "../../../untils/formatDate";
 
 const PatientJournalDetails = () => {
     const {id} = useParams();
@@ -42,7 +43,7 @@ const PatientJournalDetails = () => {
         }
     }
 
-    if (loading) return <p>Loading diagnostic...</p>;
+    if (loading) return <div className={'loading-patient-journal-details'}><h1 className={'loading-patient-journal-details-text'}>Loading...</h1></div>;
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
 
@@ -55,13 +56,14 @@ const PatientJournalDetails = () => {
             </div>
             <div className={'patient-journal-details-profile'}>
                 <h2>My Journal:</h2>
-                <p>Number: {patientsJournals.id}</p>
-                <p>Diagnosis: {patientsJournals.diagnosis}</p>
-                <p>Description: {patientsJournals.description}</p>
-                <p>Planning: {patientsJournals.planning}</p>
+                <p><strong>Number:</strong> {patientsJournals.id}</p>
+                <p><strong>Diagnosis:</strong> {patientsJournals.diagnosis}</p>
+                <p><strong>Description:</strong> {patientsJournals.description}</p>
+                <p><strong>Planning:</strong> {patientsJournals.planning}</p>
+                <p><strong>Create:</strong> {formatDate(patientsJournals.created_at)}</p>
                 <h3>Patient:</h3>
-                <p>Name: {patientsJournals.user.profile.name}</p>
-                <p>Surname: {patientsJournals.user.profile.surname}</p>
+                <p><strong>Name:</strong> {patientsJournals.user.profile.name}</p>
+                <p><strong>Surname:</strong> {patientsJournals.user.profile.surname}</p>
             </div>
             {canDelete && (
                 <button className={'patient-journal-details-button-delete'}

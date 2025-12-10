@@ -59,7 +59,7 @@ const BookingDiagnosticsComponent = () => {
     }
 
 
-    if (loading) return <p>Loading users...</p>;
+    if (loading) return <div className={'loading-booking-diagnostic'}><h1 className={'loading-booking-diagnostic-text'}>Loading...</h1></div>;
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
 

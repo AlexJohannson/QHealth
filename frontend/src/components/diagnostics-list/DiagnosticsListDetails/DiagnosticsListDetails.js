@@ -4,6 +4,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {diagnosticsService} from "../../../services/diagnosticsService";
 import {DiagnosticsEditComponent} from "../../diagnostics/DiagnosticsEditComponent/DiagnosticsEditComponent";
 import {FooterComponent} from "../../FooterComponent/FooterComponent";
+import {formatDate} from "../../../untils/formatDate";
 
 
 const DiagnosticsListDetails = () => {
@@ -45,7 +46,7 @@ const DiagnosticsListDetails = () => {
         }
     };
 
-    if (loading) return <p>Loading diagnostic...</p>;
+    if (loading) return <div className={'loading-diagnostic-list'}><h1 className={'loading-diagnostic-list-text'}>Loading...</h1></div>;
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
     return (
@@ -57,9 +58,9 @@ const DiagnosticsListDetails = () => {
             </div>
             <div className={'diagnostics-list-detail-component-content'}>
                 <h4>{diagnostic.modality}</h4>
-                <p>ID: {diagnostic.id}</p>
-                <p>Created: {diagnostic.created_at}</p>
-                <p>Updated: {diagnostic.updated_at}</p>
+                <p><strong>Number:</strong> {diagnostic.id}</p>
+                <p><strong>Created:</strong> {formatDate(diagnostic.created_at)}</p>
+                <p><strong>Updated:</strong> {formatDate(diagnostic.updated_at)}</p>
             </div>
             {canCreate && (
                 <div className={'diagnostics-list-detail-component-content-delete'}>

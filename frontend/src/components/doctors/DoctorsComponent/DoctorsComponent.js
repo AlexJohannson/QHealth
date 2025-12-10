@@ -37,7 +37,7 @@ const DoctorsComponent = () => {
     }, [page, size]);
 
 
-    if (loading) return <p>Loading doctors...</p>;
+    if (loading) return <div className={'loading-doctors'}><h1 className={'loading-doctors-text'}>Loading...</h1></div>;
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
 

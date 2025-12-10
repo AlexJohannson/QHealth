@@ -65,3 +65,19 @@
     color: white;
     cursor: pointer
 }
+/*---------------------------------------   loading-patient-recipe-details   -----------------------------------------*/
+.loading-patient-recipe-details {
+    width: 100%;
+    height: 695px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightyellow;
+}
+.loading-patient-recipe-details-text {
+    font-family: "Lobster Two", sans-serif;
+    font-size: 80px;
+    font-weight: 700;
+    font-style: italic;
+    color: blue;
+}
