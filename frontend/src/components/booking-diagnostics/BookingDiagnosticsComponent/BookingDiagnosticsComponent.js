@@ -59,7 +59,19 @@ const BookingDiagnosticsComponent = () => {
     }
 
 
-    if (loading) return <div className={'loading-booking-diagnostic'}><h1 className={'loading-booking-diagnostic-text'}>Loading...</h1></div>;
+    if (loading) return (
+        <div className="bookings-diagnostics-skeleton-container">
+            {[...Array(size)].map((_, idx) => (
+                <div key={idx} className="booking-diagnostic-skeleton-item">
+                    <div className="booking-diagnostic-skeleton-avatar"></div>
+                    <div className="booking-diagnostic-skeleton-info">
+                        <div className="booking-diagnostic-skeleton-line short"></div>
+                        <div className="booking-diagnostic-skeleton-line long"></div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
 

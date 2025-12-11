@@ -3,6 +3,8 @@ import './BookingDoctorFilterComponent.css';
 
 const BookingDoctorFilterComponent = ({onFilter}) => {
     const [filter, setFilter] = useState({
+        patient_name: '',
+        patient_surname: '',
         specialty: '',
         doctor_name: '',
         doctor_surname: '',
@@ -18,12 +20,34 @@ const BookingDoctorFilterComponent = ({onFilter}) => {
         onFilter(cleaned);
     }
 
+    const isSuperUser = localStorage.getItem('is_superuser') === 'true';
+    const isStaff = localStorage.getItem('is_staff') === 'true';
+    const role = localStorage.getItem('role');
+
+    const canSeeInputPatientNameOrSurname = isSuperUser || isStaff || role === 'operator' || role === 'doctor';
+
 
 
 
     return (
         <div>
             <form className={'booking-doctor-filter-component-form'} onSubmit={handleSubmit}>
+                { canSeeInputPatientNameOrSurname && (
+                <>
+                    <input
+                    type={'text'}
+                    placeholder={'Patient Name'}
+                    value={filter.patient_name}
+                    onChange={(e) => setFilter({...filter, patient_name: e.target.value})}
+                />
+                    <input
+                    type={'text'}
+                    placeholder={'Patient Surname'}
+                    value={filter.patient_surname}
+                    onChange={(e) => setFilter({...filter, patient_surname: e.target.value})}
+                />
+                </>
+                )}
                 <input
                     type={'text'}
                     placeholder={'Specialty'}
@@ -45,7 +69,7 @@ const BookingDoctorFilterComponent = ({onFilter}) => {
                 <select value={filter.status}
                 onChange={(e) => setFilter({ ...filter, status: e.target.value })}
                 >
-                    <option value={''}>Status Booked : Cancelled</option>
+                    <option value={''}>Status</option>
                     <option value={'booked'}>Booked</option>
                     <option value={'cancelled'}>Cancelled</option>
                 </select>

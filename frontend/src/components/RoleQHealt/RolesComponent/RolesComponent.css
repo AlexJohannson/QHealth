@@ -66,19 +66,65 @@
     justify-content: center;
     margin: 15px 0 15px 0;
 }
-/*----------------------------------------------    loading-roles   --------------------------------------------------*/
-.loading-roles {
+/*----------------------------------------------    role-skeleton-container   --------------------------------------------------*/
+.role-skeleton-container {
     width: 100%;
-    height: 695px;
+    height: 690px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.role-skeleton-item {
     display: flex;
     align-items: center;
-    justify-content: center;
-    background-color: lightyellow;
+    gap: 10px;
+    padding: 10px;
+    background: #f2f2f2;
+    border-radius: 6px;
+    animation: pulse 1.2s infinite;
+    width: 100%;
 }
-.loading-roles-text {
-    font-family: "Lobster Two", sans-serif;
-    font-size: 80px;
-    font-weight: 700;
-    font-style: italic;
-    color: blue;
+
+
+.role-skeleton-avatar {
+    width: 50px;
+    height: 50px;
+    background: #ddd;
+    border-radius: 50%;
+}
+
+.role-skeleton-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 200px;
+}
+
+.role-skeleton-line {
+    height: 10px;
+    background: #ddd;
+    border-radius: 4px;
+}
+
+.role-skeleton-line.short {
+    width: 30%;
+}
+
+.role-skeleton-line.long {
+    width: 70%;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
 }

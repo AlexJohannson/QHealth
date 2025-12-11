@@ -45,19 +45,47 @@
 .diagnostics-edit-form-component-message {
     color: green;
 }
-/*------------------------------------    loading-diagnostic-edit   --------------------------------------------------*/
-.loading-diagnostic-edit {
+/*------------------------------------    diagnostic-edit-skeleton   -------------------------------------------------*/
+.diagnostic-edit-skeleton {
     width: 100%;
-    height: 695px;
+    height: 100vh;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    background-color: lightyellow;
+    align-items: center;
+    gap: 15px;
+    animation: pulse 1.2s infinite;
 }
-.loading-diagnostic-edit-text {
-    font-family: "Lobster Two", sans-serif;
-    font-size: 80px;
-    font-weight: 700;
-    font-style: italic;
-    color: blue;
+
+.diagnostic-edit-skeleton-avatar {
+    width: 50px;
+    height: 50px;
+    background: #ddd;
+    border-radius: 50%;
+}
+
+.diagnostic-edit-skeleton-line {
+    height: 10px;
+    background: #ddd;
+    border-radius: 4px;
+}
+
+.diagnostic-edit-skeleton-line.short {
+    width: 30%;
+}
+
+.diagnostic-edit-skeleton-line.long {
+    width: 70%;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
 }

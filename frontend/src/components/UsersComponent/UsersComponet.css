@@ -5,6 +5,7 @@
     width: 100%;
     background-color: lightyellow;
 }
+
 /*-----------------------------------   user-component-container-header  ---------------------------------------------*/
 .user-component-container-header {
     width: 100%;
@@ -66,6 +67,7 @@
 .users-component-container-information {
     color: red;
 }
+
 /*---------------------------------------    users-component-container-pagination  -----------------------------------*/
 .users-component-container-pagination {
     width: 100%;
@@ -74,19 +76,67 @@
     justify-content: center;
     margin: 15px 0 15px 0;
 }
-/*----------------------------------------    loading-users    -------------------------------------------------------*/
-.loading-users {
+
+/*----------------------------------------    users-skeleton-container    -------------------------------------------------------*/
+.users-skeleton-container {
     width: 100%;
-    height: 695px;
+    height: 690px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-skeleton-item {
     display: flex;
     align-items: center;
-    justify-content: center;
-    background-color: lightyellow;
+    gap: 10px;
+    padding: 10px;
+    background: #f2f2f2;
+    border-radius: 6px;
+    animation: pulse 1.2s infinite;
+    width: 100%;
 }
-.loading-users-text {
-    font-family: "Lobster Two", sans-serif;
-    font-size: 80px;
-    font-weight: 700;
-    font-style: italic;
-    color: blue;
+
+
+.user-skeleton-avatar {
+    width: 50px;
+    height: 50px;
+    background: #ddd;
+    border-radius: 50%;
 }
+
+.user-skeleton-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 200px;
+}
+
+.user-skeleton-line {
+    height: 10px;
+    background: #ddd;
+    border-radius: 4px;
+}
+
+.user-skeleton-line.short {
+    width: 30%;
+}
+
+.user-skeleton-line.long {
+    width: 70%;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+

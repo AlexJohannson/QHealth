@@ -3,6 +3,8 @@ import './RoleFilterComponent.css';
 
 const RolesFilterComponent = ({onFilter}) => {
     const [filter, setFilter] = useState({
+        icontains_name: '',
+        icontains_surname: '',
         icontains_role: '',
         icontains_specialty: '',
         order: '',
@@ -18,6 +20,18 @@ const RolesFilterComponent = ({onFilter}) => {
 
     return (
         <form className={'role-filter'} onSubmit={handleSubmit}>
+             <input
+                type="text"
+                placeholder="Search Roles Name"
+                value={filter.icontains_name}
+                onChange={(e) => setFilter({...filter, icontains_name: e.target.value})}
+            />
+            <input
+                type="text"
+                placeholder="Search Roles Surname"
+                value={filter.icontains_surname}
+                onChange={(e) => setFilter({...filter, icontains_surname: e.target.value})}
+            />
             <input
                 type="text"
                 placeholder="Search Roles"

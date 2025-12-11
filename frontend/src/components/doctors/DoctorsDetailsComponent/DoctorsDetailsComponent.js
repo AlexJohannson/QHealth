@@ -33,7 +33,14 @@ const DoctorsDetailsComponent = () => {
         fetchDoctors();
     }, [roleId]);
 
-    if (loading) return <div className={'loading-doctors-details'}><h1 className={'loading-doctor-details-text'}>Loading...</h1></div>;
+    if (loading) return (
+        <div className="doctor-profile-skeleton">
+            <div className="doctor-profile-skeleton-avatar"></div>
+            <div className="doctor-profile-skeleton-line short"></div>
+            <div className="doctor-profile-skeleton-line long"></div>
+            <div className="doctor-profile-skeleton-line long"></div>
+        </div>
+    );
     if (error) return <p style={{color: 'red'}}>{error}</p>;
     if (!doctors) return <p>No doctors data</p>;
 

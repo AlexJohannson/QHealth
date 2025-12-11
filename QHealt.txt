@@ -177,6 +177,8 @@ Non-Functional Requirements & Technologies
         - Country
         - Gender
     Roles:
+        - Role Name
+        - Role Surname
         - Role
         - Specialty (for doctors)
         - Ordering (by ID)
@@ -189,21 +191,34 @@ Non-Functional Requirements & Technologies
         - City
         - Country
         - Gender
+    Doctors:
+        - Name
+        - Surname
+        - Specialty
+        - Ordering (by ID)
     Diagnostics:
         - Modality
         - Ordering (by ID)
     Booking Diagnostic:
+        - Patient Name
+        - Patient Surname
         - Diagnostic service (modality)
         - Ordering (by ID)
     Booking doctor list:
+        - Patient Name
+        - Patient Surname
         - Specialty (for doctor)
         - Doctor name
         - Doctor surname
         - Status (Booked/Canceled)
         - Ordering (by ID)
     Patient journal:
+        - Patient Name
+        - Patient Surname
         - Diagnosis
     Patient prescription (recipe):
+        - Patient Name
+        - Patient Surname
         - Recipe
     Security list:
         - Success (True/False)

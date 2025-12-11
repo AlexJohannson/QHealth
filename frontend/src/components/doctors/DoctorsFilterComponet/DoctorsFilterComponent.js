@@ -3,6 +3,8 @@ import './DoctorsFilterComponent.css';
 
 const DoctorsFilterComponent = ({onFilter}) => {
     const [filter, setFilter] = useState({
+        icontains_name: '',
+        icontains_surname: '',
         icontains_specialty: '',
         order: '',
     });
@@ -20,6 +22,18 @@ const DoctorsFilterComponent = ({onFilter}) => {
     return (
         <div>
             <form className={'doctor-filter-component'} onSubmit={handleSubmit}>
+                <input
+                type="text"
+                placeholder="Search Doctor Name"
+                value={filter.icontains_name}
+                onChange={(e) => setFilter({...filter, icontains_name: e.target.value})}
+            />
+                <input
+                type="text"
+                placeholder="Search Doctor Surname"
+                value={filter.icontains_surname}
+                onChange={(e) => setFilter({...filter, icontains_surname: e.target.value})}
+            />
                 <input
                 type="text"
                 placeholder="Search Specialty"

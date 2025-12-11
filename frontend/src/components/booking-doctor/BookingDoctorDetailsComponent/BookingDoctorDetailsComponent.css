@@ -57,19 +57,47 @@
     justify-content: center;
     margin-bottom: 15px;
 }
-/*-------------------------------------------    loading-booking-doctor-details   ------------------------------------*/
-.loading-booking-doctor-details {
+/*-------------------------------------------    booking-doctor-profile-skeleton   -----------------------------------*/
+.booking-doctor-profile-skeleton {
     width: 100%;
-    height: 695px;
+    height: 100vh;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    background-color: lightyellow;
+    align-items: center;
+    gap: 15px;
+    animation: pulse 1.2s infinite;
 }
-.loading-booking-doctor-details-text {
-    font-family: "Lobster Two", sans-serif;
-    font-size: 80px;
-    font-weight: 700;
-    font-style: italic;
-    color: blue;
+
+.booking-doctor-profile-skeleton-avatar {
+    width: 50px;
+    height: 50px;
+    background: #ddd;
+    border-radius: 50%;
+}
+
+.booking-doctor-profile-skeleton-line {
+    height: 10px;
+    background: #ddd;
+    border-radius: 4px;
+}
+
+.booking-doctor-profile-skeleton-line.short {
+    width: 30%;
+}
+
+.booking-doctor-profile-skeleton-line.long {
+    width: 70%;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
 }

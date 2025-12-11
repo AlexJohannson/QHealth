@@ -1,5 +1,4 @@
 import {createBrowserRouter} from "react-router-dom";
-import {MainLayout} from "../layouts/MainLayout";
 import {HomePage} from "../pages/HomePage/HomePage";
 import {LoginPage} from "../pages/LoginPage/LoginPage";
 import {DoctorPage} from "../pages/DoctorPage/DoctorPage";
@@ -48,6 +47,8 @@ import {PatientRecipeDetailsPage} from "../pages/patient-recipe-page/PatientReci
 import {CreatePatientRecipePage} from "../pages/patient-recipe-page/CreatePatientRecipePage/CreatePatientRecipePage";
 import {RoleGuardComponent} from "../components/RoleGuardComponent/RoleGuardComponent";
 import {PublicOnlyGuard} from "../components/RoleGuardComponent/PublicOnlyGuard";
+import {MainLayout} from "../layouts/MainLayout";
+
 
 
 const router = createBrowserRouter([
@@ -57,8 +58,8 @@ const router = createBrowserRouter([
             {
                 index: true, element: (
                      <PublicOnlyGuard>
-                        <HomePage/>
-                    </PublicOnlyGuard>
+                         <HomePage/>
+                     </PublicOnlyGuard>
                 )
             },
             {

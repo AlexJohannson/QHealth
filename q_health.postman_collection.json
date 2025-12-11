@@ -173,7 +173,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{host}}/users",
+									"raw": "{{host}}/users?page=3",
 									"host": [
 										"{{host}}"
 									],
@@ -183,8 +183,7 @@
 									"query": [
 										{
 											"key": "page",
-											"value": "4",
-											"disabled": true
+											"value": "3"
 										},
 										{
 											"key": "size",
@@ -340,7 +339,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "77"
+											"value": "95"
 										}
 									]
 								}
@@ -354,7 +353,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"email\": \"patienttwo@send.com\",\r\n    \"password\": \"AdminNQ@!1\",\r\n    \"profile\": {\r\n        \"name\": \"Eva\",\r\n        \"surname\": \"Patient Two\",\r\n        \"phone_number\": \"+46700000000\",\r\n        \"date_of_birth\": \"1985-09-22\",\r\n        \"height\": 168,\r\n        \"weight\": 47,\r\n        \"street\": \"St. Street\",\r\n        \"house\": \"3A\",\r\n        \"city\": \"Landskrona\",\r\n        \"region\": \"Skone\",\r\n        \"country\": \"Sweden\",\r\n        \"gender\": \"Female\"\r\n    }\r\n}",
+									"raw": "{\r\n    \"email\": \"patienttwo@send.com\",\r\n    \"password\": \"AdminNQ@!1\",\r\n    \"profile\": {\r\n        \"name\": \"Eva\",\r\n        \"surname\": \"Patient Two\",\r\n        \"phone_number\": \"+46700000000\",\r\n        \"date_of_birth\": \"1985-09-22\",\r\n        \"height\": 170,\r\n        \"weight\": 60,\r\n        \"street\": \"St. Street\",\r\n        \"house\": \"3A\",\r\n        \"city\": \"Helsinborg\",\r\n        \"region\": \"Skone\",\r\n        \"country\": \"Sweden\",\r\n        \"gender\": \"Female\"\r\n    }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -486,14 +485,12 @@
 								{
 									"key": "email",
 									"value": "superuser@super.send",
-									"type": "text",
-									"disabled": true
+									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "superuser1",
-									"type": "text",
-									"disabled": true
+									"value": "superuser2",
+									"type": "text"
 								},
 								{
 									"key": "email",
@@ -984,6 +981,16 @@
 									"key": "order",
 									"value": "-id",
 									"disabled": true
+								},
+								{
+									"key": "icontains_name",
+									"value": "max",
+									"disabled": true
+								},
+								{
+									"key": "icontains_surname",
+									"value": "pha",
+									"disabled": true
 								}
 							]
 						}
@@ -1007,7 +1014,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"role\": \"doctor\",\r\n    \"specialty\": \"Surgeon\",\r\n    \r\n    \"user\": {\r\n        \"email\": \"surgeon@surgeon.send\",\r\n        \"password\": \"AdminNQ@!1\",\r\n        \"profile\": {\r\n            \"name\": \"Max\",\r\n            \"surname\": \"Surgeon\",\r\n            \"phone_number\": \"+46700000000\",\r\n            \"date_of_birth\": \"1992-03-17\",\r\n            \"height\": 176,\r\n            \"weight\": 70,\r\n            \"street\": \"Street\",\r\n            \"house\": \"3D\",\r\n            \"city\": \"Stockholm\",\r\n            \"region\": \"Stocholm\",\r\n            \"country\": \"Sweden\",\r\n            \"gender\": \"Male\"\r\n        }\r\n    }\r\n}",
+							"raw": "{\r\n    \"role\": \"doctor\",\r\n    \"specialty\": \"Neuropsychologis\",\r\n    \r\n    \"user\": {\r\n        \"email\": \"neuropsychologist@operator.send\",\r\n        \"password\": \"AdminNQ@!1\",\r\n        \"profile\": {\r\n            \"name\": \"Emil\",\r\n            \"surname\": \"Neuropsychologist\",\r\n            \"phone_number\": \"+46700000000\",\r\n            \"date_of_birth\": \"1982-03-17\",\r\n            \"height\": 168,\r\n            \"weight\": 70,\r\n            \"street\": \"Street\",\r\n            \"house\": \"3D\",\r\n            \"city\": \"Landskrona\",\r\n            \"region\": \"Skone\",\r\n            \"country\": \"Sweden\",\r\n            \"gender\": \"Male\"\r\n        }\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1262,6 +1269,16 @@
 								{
 									"key": "diagnosis",
 									"value": "p",
+									"disabled": true
+								},
+								{
+									"key": "patient_name",
+									"value": "zzzz",
+									"disabled": true
+								},
+								{
+									"key": "patient_surname",
+									"value": "two",
 									"disabled": true
 								}
 							]
@@ -1622,6 +1639,16 @@
 									"key": "order",
 									"value": "-id",
 									"disabled": true
+								},
+								{
+									"key": "patient_name",
+									"value": "ev",
+									"disabled": true
+								},
+								{
+									"key": "patient_surname",
+									"value": "patient one",
+									"disabled": true
 								}
 							]
 						}
@@ -1794,6 +1821,16 @@
 								{
 									"key": "status",
 									"value": "cancelled",
+									"disabled": true
+								},
+								{
+									"key": "patient_name",
+									"value": "ko",
+									"disabled": true
+								},
+								{
+									"key": "patient_surname",
+									"value": "patient two",
 									"disabled": true
 								}
 							]
@@ -1982,6 +2019,16 @@
 								{
 									"key": "recipe",
 									"value": "admi",
+									"disabled": true
+								},
+								{
+									"key": "patient_name",
+									"value": "ko",
+									"disabled": true
+								},
+								{
+									"key": "patient_surname",
+									"value": "two",
 									"disabled": true
 								}
 							]

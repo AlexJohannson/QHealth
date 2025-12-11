@@ -1,5 +1,7 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
+from django_filters.rest_framework import DjangoFilterBackend
+
 from apps.patient_card.filter import PatientCardFilter
 from apps.patient_card.models import PatientCardModel
 from apps.patient_card.permissions import IsSuperUserAdminDoctorOrPatient
@@ -16,6 +18,7 @@ class PatientCardListApiView(ListCreateAPIView):
     queryset = PatientCardModel.objects.all()
     serializer_class = PatientCardSerializer
     permission_classes = [IsSuperUserAdminDoctorOrPatient]
+    filter_backends = [DjangoFilterBackend]
     filterset_class = PatientCardFilter
 
     def get_queryset(self):

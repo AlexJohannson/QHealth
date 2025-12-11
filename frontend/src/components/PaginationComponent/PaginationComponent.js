@@ -7,14 +7,14 @@ const PaginationComponent = ({page, totalPages, onPageChange, size, onSizeChange
             <button className={'pagination-button'} disabled={page === 1} onClick={() => onPageChange(page - 1)}>
                 Prev
             </button>
-
-
-            <button className={'pagination-button'} disabled={page === totalPages} onClick={() => onPageChange(page + 1)}>
+            <span>{page} of {totalPages}</span>
+            <button className={'pagination-button'} disabled={page === totalPages}
+                    onClick={() => onPageChange(page + 1)}>
                 Next
             </button>
             <select value={size} onChange={(e) => onSizeChange(Number(e.target.value))}>
                 {[5, 10, 15, 20, 25].map((s) => (
-                <option key={s} value={s}>{s} per page</option>
+                    <option key={s} value={s}>{s} per page</option>
                 ))}
             </select>
         </div>

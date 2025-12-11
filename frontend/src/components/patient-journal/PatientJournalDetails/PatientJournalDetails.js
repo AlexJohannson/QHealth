@@ -43,7 +43,14 @@ const PatientJournalDetails = () => {
         }
     }
 
-    if (loading) return <div className={'loading-patient-journal-details'}><h1 className={'loading-patient-journal-details-text'}>Loading...</h1></div>;
+    if (loading) return (
+        <div className="patient-journal-details-skeleton">
+            <div className="patient-journal-details-skeleton-avatar"></div>
+            <div className="patient-journal-details-skeleton-line short"></div>
+            <div className="patient-journal-detail-skeleton-line long"></div>
+            <div className="patient-journal-details-skeleton-line long"></div>
+        </div>
+    );
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
 

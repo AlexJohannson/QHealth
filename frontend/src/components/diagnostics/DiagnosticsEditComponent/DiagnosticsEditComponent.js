@@ -52,7 +52,14 @@ const DiagnosticsEditComponent = ({id}) => {
         }
     };
 
-    if (!formData) return <div className={'loading-diagnostic-edit'}><h1 className={'loading-diagnostic-edit-text'}>Loading...</h1></div>;
+    if (!formData) return (
+        <div className="diagnostic-edit-skeleton">
+            <div className="diagnostic-edit-skeleton-avatar"></div>
+            <div className="diagnostic-edit-skeleton-line short"></div>
+            <div className="diagnostic-edit-skeleton-line long"></div>
+            <div className="diagnostic-edit-skeleton-line long"></div>
+        </div>
+    );
 
     return (
         <div className={'diagnostics-edit-component'}>

@@ -31,7 +31,14 @@ const DiagnosticsDetailComponent = () => {
 
 
 
-    if (loading) return <div className={'loading-diagnostics'}><h1 className={'loading-diagnostics-text'}>Loading...</h1></div>;
+    if (loading) return (
+        <div className="diagnostic-list-profile-skeleton">
+            <div className="diagnostic-list-profile-skeleton-avatar"></div>
+            <div className="diagnostic-list-profile-skeleton-line short"></div>
+            <div className="diagnostic-list-profile-skeleton-line long"></div>
+            <div className="diagnostic-list-profile-skeleton-line long"></div>
+        </div>
+    );
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
     return (

@@ -48,7 +48,14 @@ const PatientDetailsComponent = () => {
         role === 'pharmacist';
 
 
-    if (loading) return <div className={'loading-patient'}><h1 className={'loading-patient-text'}>Loading...</h1></div>;
+    if (loading) return (
+        <div className="patient-profile-skeleton">
+            <div className="patient-profile-skeleton-avatar"></div>
+            <div className="patient-profile-skeleton-line short"></div>
+            <div className="patient-profile-skeleton-line long"></div>
+            <div className="patient-profile-skeleton-line long"></div>
+        </div>
+    );
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
     const {email, profile} = user;

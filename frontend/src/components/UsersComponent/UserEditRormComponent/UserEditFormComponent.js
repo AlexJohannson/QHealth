@@ -109,7 +109,14 @@ const UserEditFormComponent = ({userId, canEdit, onDelete}) => {
     };
 
 
-    if (!formData) return <div className={'loading-users-edit'}><h1 className={'loading-users-edit-text'}>Loading...</h1></div>;
+    if (!formData) return (
+        <div className="user-edit-skeleton">
+            <div className="user-edit-skeleton-avatar"></div>
+            <div className="user-edit-skeleton-line short"></div>
+            <div className="user-edit-skeleton-line long"></div>
+            <div className="user-edit-skeleton-line long"></div>
+        </div>
+    );
 
 
     return (
@@ -126,92 +133,115 @@ const UserEditFormComponent = ({userId, canEdit, onDelete}) => {
                 {error.general && <p style={{color: 'red'}}>{error.general}</p>}
                 {message && <p style={{color: 'green'}}>{message}</p>}
 
+                <label>Email</label>
                 <input
                     type="email"
                     value={formData.email || ''}
                     onChange={e => handelChange('email', e.target.value)}
-                    placeholder=" New Email"
+                    placeholder="Email"
                 />
                 {error.email && <p style={{color: 'red'}}>{error.email}</p>}
 
+                <label>Name</label>
                 <input
                     type="text"
                     value={formData.profile?.name || ''}
                     onChange={e => handelChange('name', e.target.value, true)}
-                    placeholder="New Name"
+                    placeholder="Name"
                 />
                 {error.profile?.name && <p style={{color: 'red'}}>{error.profile.name}</p>}
 
+                <label>Surname</label>
                 <input
                     type="text"
                     value={formData.profile?.surname || ''}
                     onChange={e => handelChange('surname', e.target.value, true)}
-                    placeholder="New Surname"
+                    placeholder="Surname"
                 />
                 {error.profile?.surname && <p style={{color: 'red'}}>{error.profile.surname}</p>}
+
+                <label>Phone Number</label>
                 <input
                     type="text"
                     value={formData.profile?.phone_number || ''}
                     onChange={e => handelChange('phone_number', e.target.value, true)}
-                    placeholder="New Phone Number"
+                    placeholder="Phone Number"
                 />
                 {error.profile?.phone_number && <p style={{color: 'red'}}>{error.profile.phone_number}</p>}
+
+                <label>Date of Birth</label>
                 <input
                     type="date"
                     value={formData.profile?.date_of_birth || ''}
                     onChange={e => handelChange('date_of_birth', e.target.value, true)}
-                    placeholder="New Date of Birth"
+                    placeholder="Date of Birth"
                 />
                 {error.profile?.date_of_birth && <p style={{color: 'red'}}>{error.profile.date_of_birth}</p>}
+
+                <label>Height</label>
                 <input
                     type="number"
                     value={formData.profile?.height || ''}
                     onChange={e => handelChange('height', e.target.value, true)}
-                    placeholder="New Height"
+                    placeholder="Height"
                 />
                 {error.profile?.height && <p style={{color: 'red'}}>{error.profile.height}</p>}
+
+                <label>Weight</label>
                 <input
                     type="number"
                     value={formData.profile?.weight || ''}
                     onChange={e => handelChange('weight', e.target.value, true)}
-                    placeholder="New Weight"
+                    placeholder="Weight"
                 />
                 {error.profile?.weight && <p style={{color: 'red'}}>{error.profile.weight}</p>}
+
+                <label>Street</label>
                 <input
                     type="text"
                     value={formData.profile?.street || ''}
                     onChange={e => handelChange('street', e.target.value, true)}
-                    placeholder="New Street"
+                    placeholder="Street"
                 />
                 {error.profile?.street && <p style={{color: 'red'}}>{error.profile.street}</p>}
+
+                <label>House</label>
                 <input
                     type="text"
                     value={formData.profile?.house || ''}
                     onChange={e => handelChange('house', e.target.value, true)}
-                    placeholder="New House"
+                    placeholder="House"
                 />
                 {error.profile?.house && <p style={{color: 'red'}}>{error.profile.house}</p>}
+
+                <label>City</label>
                 <input
                     type="text"
                     value={formData.profile?.city || ''}
                     onChange={e => handelChange('city', e.target.value, true)}
-                    placeholder="New City"
+                    placeholder="City"
                 />
                 {error.profile?.city && <p style={{color: 'red'}}>{error.profile.city}</p>}
+
+                <label>Region</label>
                 <input
                     type="text"
                     value={formData.profile?.region || ''}
                     onChange={e => handelChange('region', e.target.value, true)}
-                    placeholder="New Region"
+                    placeholder="Region"
                 />
                 {error.profile?.region && <p style={{color: 'red'}}>{error.profile.region}</p>}
+
+                <label>Country</label>
                 <input
                     type="text"
                     value={formData.profile?.country || ''}
                     onChange={e => handelChange('country', e.target.value, true)}
-                    placeholder="New Country"
+                    placeholder="Country"
                 />
                 {error.profile?.country && <p style={{color: 'red'}}>{error.profile.country}</p>}
+
+                <label>Gender</label>
                 <select name={'gender'} value={formData.profile?.gender || ''}
                     onChange={e => handelChange('gender', e.target.value, true)}>
                             <option value={''}>Select Gender</option>

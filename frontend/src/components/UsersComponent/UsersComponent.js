@@ -34,7 +34,21 @@ const UsersComponent = () => {
         fetchUsers();
     }, [page, size]);
 
-    if (loading) return <div className={'loading-users'}><h1 className={'loading-users-text'}>Loading...</h1></div>;
+
+    if (loading) return (
+        <div className="users-skeleton-container">
+            {[...Array(size)].map((_, idx) => (
+                <div key={idx} className="user-skeleton-item">
+                    <div className="user-skeleton-avatar"></div>
+                    <div className="user-skeleton-info">
+                        <div className="user-skeleton-line short"></div>
+                        <div className="user-skeleton-line long"></div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
     return (

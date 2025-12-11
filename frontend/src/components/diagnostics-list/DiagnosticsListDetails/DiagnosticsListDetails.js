@@ -46,7 +46,14 @@ const DiagnosticsListDetails = () => {
         }
     };
 
-    if (loading) return <div className={'loading-diagnostic-list'}><h1 className={'loading-diagnostic-list-text'}>Loading...</h1></div>;
+    if (loading) return (
+        <div className="diagnostic-profile-skeleton">
+            <div className="diagnostic-profile-skeleton-avatar"></div>
+            <div className="diagnostic-profile-skeleton-line short"></div>
+            <div className="diagnostic-profile-skeleton-line long"></div>
+            <div className="diagnostic-profile-skeleton-line long"></div>
+        </div>
+    );
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
     return (

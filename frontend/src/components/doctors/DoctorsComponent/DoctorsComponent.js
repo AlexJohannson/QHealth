@@ -37,7 +37,19 @@ const DoctorsComponent = () => {
     }, [page, size]);
 
 
-    if (loading) return <div className={'loading-doctors'}><h1 className={'loading-doctors-text'}>Loading...</h1></div>;
+    if (loading) return (
+        <div className="doctors-skeleton-container">
+            {[...Array(size)].map((_, idx) => (
+                <div key={idx} className="doctor-skeleton-item">
+                    <div className="doctor-skeleton-avatar"></div>
+                    <div className="doctor-skeleton-info">
+                        <div className="doctor-skeleton-line short"></div>
+                        <div className="doctor-skeleton-line long"></div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
 

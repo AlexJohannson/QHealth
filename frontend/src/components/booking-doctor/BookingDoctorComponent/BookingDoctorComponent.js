@@ -60,7 +60,19 @@ const BookingDoctorComponent = () => {
 
 
 
-    if (loading) return <div className={'loading-booking-doctor'}><h1 className={'loading-booking-doctor-text'}>Loading...</h1></div>;
+    if (loading) return (
+        <div className="bookings-doctors-skeleton-container">
+            {[...Array(size)].map((_, idx) => (
+                <div key={idx} className="booking-doctor-skeleton-item">
+                    <div className="booking-doctor-skeleton-avatar"></div>
+                    <div className="booking-doctor-skeleton-info">
+                        <div className="booking-doctor-skeleton-line short"></div>
+                        <div className="booking-doctor-skeleton-line long"></div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
 

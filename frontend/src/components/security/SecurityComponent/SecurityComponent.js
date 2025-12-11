@@ -24,7 +24,7 @@ const SecurityComponent = () => {
             try {
                 const data = await securityService.getAll({page, size});
                 setSecurity(data.data);
-                setTotalPages(data.total_page);
+                setTotalPages(data.total_pages);
             } catch (error) {
                 setError('Could not load security list');
             } finally {
@@ -34,7 +34,20 @@ const SecurityComponent = () => {
         fetchSecurity();
     }, [page, size]);
 
-    if (loading) return <div className={'loading-security'}><h1 className={'loading-security-text'}>Loading...</h1></div>;
+
+    if (loading) return (
+        <div className="security-skeleton-container">
+            {[...Array(size)].map((_, idx) => (
+                <div key={idx} className="security-skeleton-item">
+                    <div className="security-skeleton-avatar"></div>
+                    <div className="security-skeleton-info">
+                        <div className="security-skeleton-line short"></div>
+                        <div className="security-skeleton-line long"></div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
 

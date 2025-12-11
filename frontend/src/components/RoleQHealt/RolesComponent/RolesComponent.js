@@ -33,7 +33,20 @@ const RolesComponent = () => {
         fetchRoles();
     }, [page, size]);
 
-    if (loading) return <div className={'loading-roles'}><h1 className={'loading-roles-text'}>Loading...</h1></div>;
+
+    if (loading) return (
+        <div className="role-skeleton-container">
+            {[...Array(size)].map((_, idx) => (
+                <div key={idx} className="role-skeleton-item">
+                    <div className="role-skeleton-avatar"></div>
+                    <div className="role-skeleton-info">
+                        <div className="role-skeleton-line short"></div>
+                        <div className="role-skeleton-line long"></div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
 

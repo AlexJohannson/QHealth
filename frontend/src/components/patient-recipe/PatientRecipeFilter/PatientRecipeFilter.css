@@ -3,8 +3,7 @@
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 170px;
+    justify-content: space-around;
     padding: 25px 0 25px 0;
     border-radius: 10px;
     background-color: gray;

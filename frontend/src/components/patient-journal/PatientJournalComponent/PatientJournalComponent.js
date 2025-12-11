@@ -57,7 +57,19 @@ const PatientJournalComponent = () => {
     }
 
 
-    if (loading) return <div className={'loading-patient-journal'}><h1 className={'loading-patient-journal-text'}>Loading...</h1></div>;
+    if (loading) return (
+        <div className="patient-journal-skeleton-container">
+            {[...Array(size)].map((_, idx) => (
+                <div key={idx} className="patient-journal-skeleton-item">
+                    <div className="patient-journal-skeleton-avatar"></div>
+                    <div className="patient-journal-skeleton-info">
+                        <div className="patient-journal-skeleton-line short"></div>
+                        <div className="patient-journal-skeleton-line long"></div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
 

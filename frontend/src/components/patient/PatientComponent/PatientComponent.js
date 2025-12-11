@@ -33,7 +33,19 @@ const PatientsComponent = () => {
         fetchPatient();
     }, [page, size]);
 
-    if (loading) return <div className={'loading-patient'}><h1 className={'loading-patient-text'}>Loading...</h1></div>;
+    if (loading) return (
+        <div className="patients-skeleton-container">
+            {[...Array(size)].map((_, idx) => (
+                <div key={idx} className="patient-skeleton-item">
+                    <div className="patient-skeleton-avatar"></div>
+                    <div className="patient-skeleton-info">
+                        <div className="patient-skeleton-line short"></div>
+                        <div className="patient-skeleton-line long"></div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
 

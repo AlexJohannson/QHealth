@@ -30,7 +30,14 @@ const RolesDetailsComponent = () => {
     }, [roleId]);
 
 
-    if (loading) return <div className={'loading-roles'}><h1 className={'loading-roles-text'}>Loading...</h1></div>;
+    if (loading) return (
+        <div className="role-profile-skeleton">
+            <div className="role-profile-skeleton-avatar"></div>
+            <div className="role-profile-skeleton-line short"></div>
+            <div className="role-profile-skeleton-line long"></div>
+            <div className="role-profile-skeleton-line long"></div>
+        </div>
+    );
     if (error) return <p style={{color: 'red'}}>{error}</p>;
     if (!roles || !roles.user || !roles.user.profile) return <p>No role data</p>;
 

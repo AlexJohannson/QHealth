@@ -56,7 +56,19 @@ const DiagnosticsComponent = () => {
     }
 
 
-    if (loading) return <div className={'loading-diagnostics'}><h1 className={'loading-diagnostics-text'}>Loading...</h1></div>;
+    if (loading) return (
+        <div className="diagnostics-list-skeleton-container">
+            {[...Array(size)].map((_, idx) => (
+                <div key={idx} className="diagnostic-list-skeleton-item">
+                    <div className="diagnostic-list-skeleton-avatar"></div>
+                    <div className="diagnostic-list-skeleton-info">
+                        <div className="diagnostic-list-skeleton-line short"></div>
+                        <div className="diagnostic-list-skeleton-line long"></div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
     return (

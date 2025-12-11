@@ -55,7 +55,19 @@ const PatientRecipeComponent = () => {
         }
     }
 
-    if (loading) return <div className={'loading-patient-recipe'}><h1 className={'loading-patient-recipe-text'}>Loading...</h1></div>;
+    if (loading) return (
+        <div className="patient-recipe-skeleton-container">
+            {[...Array(size)].map((_, idx) => (
+                <div key={idx} className="patient-recipe-skeleton-item">
+                    <div className="patient-recipe-skeleton-avatar"></div>
+                    <div className="patient-recipe-skeleton-info">
+                        <div className="patient-recipe-skeleton-line short"></div>
+                        <div className="patient-recipe-skeleton-line long"></div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
     return (

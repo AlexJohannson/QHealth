@@ -3,6 +3,8 @@ import './BookingDiagnosticsFilterComponent.css';
 
 const BookingDiagnosticsFilterComponent = ({onFilter}) => {
     const [filter, setFilter] = useState({
+        patient_name: '',
+        patient_surname: '',
         diagnostic_service: '',
         order: '',
     });
@@ -16,28 +18,51 @@ const BookingDiagnosticsFilterComponent = ({onFilter}) => {
         onFilter(cleaned);
     }
 
+    const isSuperUser = localStorage.getItem('is_superuser') === 'true';
+    const isStaff = localStorage.getItem('is_staff') === 'true';
+    const role = localStorage.getItem('role');
+
+    const canSeeInputNameOrSurname = isSuperUser || isStaff || role === 'operator' || role === 'doctor';
+
 
     return (
         <div>
             <form className={'booking-diagnostics-form-filter-component'} onSubmit={handleSubmit}>
-                <input
-                    type={'text'}
-                    placeholder={'Diagnostic Service'}
-                    value={filter.diagnostic_service}
-                    onChange={(e) => setFilter({...filter, diagnostic_service: e.target.value})}
-                />
-                <select
-                    value={filter.order}
-                    onChange={(e) => setFilter({...filter, order: e.target.value})}
-                >
-                    <option value={''}>Order by ID</option>
-                    <option value={'id'}>ID ascending</option>
-                    <option value={'-id'}>ID descending</option>
-                </select>
-                <button  className={'booking-diagnostics-form-filter-component-button'} type="submit">Apply</button>
-            </form>
-        </div>
-    );
+                {canSeeInputNameOrSurname && (
+                    <>
+                    <input
+                        type={'text'}
+                        placeholder={'Patient Name'}
+                        value={filter.patient_name}
+                        onChange={(e) => setFilter({...filter, patient_name: e.target.value})}
+                    />
+                    <input
+                        type={'text'}
+                        placeholder={'Patient Surname'}
+                        value={filter.patient_surname}
+                        onChange={(e) => setFilter({...filter, patient_surname: e.target.value})}
+                    />
+                    </>
+                )}
+            <input
+                type={'text'}
+                placeholder={'Diagnostic Service'}
+                value={filter.diagnostic_service}
+                onChange={(e) => setFilter({...filter, diagnostic_service: e.target.value})}
+            />
+            <select
+                value={filter.order}
+                onChange={(e) => setFilter({...filter, order: e.target.value})}
+            >
+                <option value={''}>Order by ID</option>
+                <option value={'id'}>ID ascending</option>
+                <option value={'-id'}>ID descending</option>
+            </select>
+            <button className={'booking-diagnostics-form-filter-component-button'} type="submit">Apply</button>
+        </form>
+</div>
+)
+    ;
 };
 
 export {BookingDiagnosticsFilterComponent};
