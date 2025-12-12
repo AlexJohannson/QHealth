@@ -3,6 +3,7 @@ import './CreateNewPatientRecipe.css';
 import {useLocation, useNavigate} from "react-router-dom";
 import {patientRecipeService} from "../../../services/patientRecipeService";
 import {FooterComponent} from "../../FooterComponent/FooterComponent";
+import {recipeValidator} from "../../../validator/recipeValidator";
 
 const CreateNewPatientRecipe = ({patientId}) => {
     const [recipe, setRecipe] = useState('');
@@ -10,6 +11,7 @@ const CreateNewPatientRecipe = ({patientId}) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
+    const [fieldErrors, setFieldErrors] = useState({});
     const navigate = useNavigate();
 
 
@@ -33,6 +35,20 @@ const CreateNewPatientRecipe = ({patientId}) => {
             recipe,
             description,
         };
+
+        const {error: validationError} = recipeValidator.validate(data, {abortEarly: false});
+
+        if (validationError) {
+            const errors = {};
+
+            validationError.details.forEach(err => {
+                errors[err.path[0]] = err.message;
+            });
+
+            setFieldErrors(errors);
+            setLoading(false);
+            return;
+        }
 
         try {
             await patientRecipeService.createNewPatientRecipe(data);
@@ -59,10 +75,11 @@ const CreateNewPatientRecipe = ({patientId}) => {
                 <h3>Create New Patient Recipe</h3>
 
                 {error && <p style={{color: 'red'}}>{error}</p>}
-                {success && <p style={{color: 'green'}}>Journal created successfully</p>}
+                {success && <p style={{color: 'green'}}>Recipe created successfully</p>}
 
                 <div className={'create-recipe-form-recipe'}>
                     <label>Recipe:</label>
+                    {fieldErrors.recipe && <p style={{color: 'red'}}>{fieldErrors.recipe}</p>}
                     <input
                         type="text"
                         value={recipe}
@@ -71,6 +88,7 @@ const CreateNewPatientRecipe = ({patientId}) => {
                 </div>
                 <div className={'create-recipe-form-description'}>
                     <label>Description:</label>
+                    {fieldErrors.description && <p style={{color: 'red'}}>{fieldErrors.description}</p>}
                     <textarea
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}

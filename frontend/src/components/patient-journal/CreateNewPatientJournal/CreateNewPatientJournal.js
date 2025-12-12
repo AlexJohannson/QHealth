@@ -3,6 +3,7 @@ import './CreateNewPatientJournal.css';
 import {useLocation, useNavigate} from "react-router-dom";
 import {patientJournal} from "../../../services/patientJournal";
 import {FooterComponent} from "../../FooterComponent/FooterComponent";
+import {journalValidator} from "../../../validator/journalValidator";
 
 const CreateNewPatientJournal = ({patientId}) => {
     const [diagnosis, setDiagnosis] = useState('');
@@ -11,6 +12,7 @@ const CreateNewPatientJournal = ({patientId}) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
+    const [fieldErrors, setFieldErrors] = useState({});
     const navigate = useNavigate();
 
 
@@ -35,6 +37,21 @@ const CreateNewPatientJournal = ({patientId}) => {
             description,
             planning,
         };
+
+        const {error: validationError} = journalValidator.validate(data, {abortEarly: false});
+
+        if (validationError) {
+            const errors = {};
+
+            validationError.details.forEach(err => {
+                errors[err.path[0]] = err.message;
+            });
+
+            setFieldErrors(errors);
+            setLoading(false);
+            return;
+        }
+
 
         try {
             await patientJournal.createNewPatientJournal(data);
@@ -65,6 +82,7 @@ const CreateNewPatientJournal = ({patientId}) => {
 
                 <div className={'create-journal-form-diagnosis'}>
                     <label>Diagnosis:</label>
+                    {fieldErrors.diagnosis && <p style={{color: 'red'}}>{fieldErrors.diagnosis}</p>}
                     <input
                         type="text"
                         value={diagnosis}
@@ -74,6 +92,7 @@ const CreateNewPatientJournal = ({patientId}) => {
 
                 <div className={'create-journal-form-description'}>
                     <label>Description:</label>
+                    {fieldErrors.description && <p style={{color: 'red'}}>{fieldErrors.description}</p>}
                     <textarea
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
@@ -82,13 +101,14 @@ const CreateNewPatientJournal = ({patientId}) => {
 
                 <div className={'create-journal-form-planning'}>
                     <label>Planning:</label>
+                    {fieldErrors.planning && <p style={{color: 'red'}}>{fieldErrors.planning}</p>}
                     <textarea
                         value={planning}
                         onChange={(e) => setPlanning(e.target.value)}
                     />
                 </div>
 
-                <button  className={'create-journal-form-button-create'} onClick={handleBooking} disabled={loading}>
+                <button className={'create-journal-form-button-create'} onClick={handleBooking} disabled={loading}>
                     {loading ? 'Saving...' : 'Create Journal'}
                 </button>
             </div>
