@@ -68,7 +68,7 @@ const registerStaffValidator = Joi.object({
         .required()
         .messages({
             "string.empty": "Phone number is required",
-            "string.pattern.base": "Enter a valid Swedish mobile number. Allowed formats: +46701234567, 0046701234567, " +
+            "string.pattern.base": "Enter a valid Swedish mobile number. Allowed formats: +46701234567, +46700000000, " +
                 "or 0701234567.",
         }),
 

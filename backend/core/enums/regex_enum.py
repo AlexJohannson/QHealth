@@ -12,7 +12,7 @@ class RegexEnum(Enum):
     )
     PHONE_NUMBER = (
         r'^(?:\+46|0046|0)7\d{8}$',
-        'Enter a valid Swedish mobile number. Allowed formats: +46701234567, 0046701234567, or 0701234567.'
+        'Enter a valid Swedish mobile number. Allowed formats: +46701234567, +46700000000, or 0701234567.'
     )
     STREET = (
         r'^([A-Z][a-z]{0,29}\.?)([ -][A-Z][a-z]{0,29}\.?)*$',
