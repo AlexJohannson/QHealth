@@ -1,9 +1,12 @@
 import React from 'react';
-import {NavigationComponent} from "../NavigationComponent/NavigationComponent";
 import './HeaderComponemt.css';
+import {Link, useLocation} from "react-router-dom";
 
 
 const HeaderComponent = () => {
+    const location = useLocation();
+
+    const isHomePage = location.pathname === "/"
 
 
     return (
@@ -11,12 +14,15 @@ const HeaderComponent = () => {
             <div className={'header-component-header'}>
                 <img src={'/img/logo.png'} className={'logo-header-page'} alt="Logo"/>
                 <h1>QHealth</h1>
-            </div>
-            <div className={'header-component-navigation'}>
-                <NavigationComponent/>
+                {isHomePage && (
+                    <button className={'login-button'}>
+                        <Link className={'login-link'} to="/login">LOGIN</Link>
+                    </button>
+                )}
             </div>
         </div>
     );
 };
 
 export {HeaderComponent};
+

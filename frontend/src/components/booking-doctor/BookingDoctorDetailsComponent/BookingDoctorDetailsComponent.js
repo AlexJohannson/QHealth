@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {bookingDoctorService} from "../../../services/bookingDoctorService";
 import {BookingActionsComponent} from "../BookingActionComponent/BookingActionComponent";
 import './BookingDoctorDetailsComponent.css';
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
 import {formatDate} from "../../../untils/formatDate";
 
 
@@ -12,7 +11,7 @@ const BookingDoctorDetailsComponent = () => {
     const [bookingDoctor, setBookingDoctor] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const navigate = useNavigate();
+
 
 
     const refreshBooking = async () => {
@@ -54,11 +53,6 @@ const BookingDoctorDetailsComponent = () => {
 
     return (
         <div className={'booking-doctor-details-component'}>
-            <div className={'booking-doctor-details-component-header'}>
-                <img src={'/img/logo.png'} className={'logo-booking-doctor-details-component'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'booking-doctor-details-component-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'booking-doctor-details-component-profile'}>
                 <h3>Patient:</h3>
                 <h4>
@@ -95,7 +89,6 @@ const BookingDoctorDetailsComponent = () => {
                                          onStatusChange={refreshBooking}
                 />
             </div>
-            <FooterComponent/>
         </div>
     );
 };

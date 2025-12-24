@@ -21,8 +21,23 @@ const UsersFilterComponent = ({onFilter}) => {
         onFilter(cleaned);
     };
 
+    const handleClear = () => {
+        setFilters(
+            {
+                icontains_name: '',
+                icontains_surname: '',
+                min_age: '',
+                max_age: '',
+                date_of_birth: '',
+                icontains_city: '',
+                icontains_country: '',
+                gender: '',
+            });
+        onFilter({});
+    };
+
     return (
-        <form  className={'user-filter'} onSubmit={handleSubmit}>
+        <form className={'user-filter'} onSubmit={handleSubmit}>
             <input
                 type="text"
                 placeholder="Name"
@@ -73,7 +88,14 @@ const UsersFilterComponent = ({onFilter}) => {
                 <option value="male">Male</option>
                 <option value="female">Female</option>
             </select>
-            <button className={'user-filter-component-button'} type="submit">Apply filters</button>
+            <button className={'user-filter-component-button'} type="submit">Apply</button>
+            <button
+                    className={'user-filter-component-button'}
+                    type="button"
+                    onClick={handleClear}
+                >
+                    Clear
+                </button>
         </form>
     );
 };

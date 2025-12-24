@@ -26,3 +26,63 @@
     color: white;
     cursor: pointer;
 }
+.booking-actions-component-button-delete-confirmation{
+    width: 350px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+}
+.booking-actions-component-button-delete-delete-confirmation-error{
+    color: red;
+}
+.booking-actions-component-button-delete-confirmation-button-delete{
+    width: 130px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
+.booking-actions-component-button-delete-confirmation-button-cancel{
+    width: 130px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+}
+.booking-actions-component-button-canceled-confirmation{
+    width: 350px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+}
+.booking-actions-component-button-canceled-confirmation-error{
+    color: red;
+}
+.booking-actions-component-button-canceled-confirmation-button-cancel-yes{
+    width: 130px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
+.booking-actions-component-button-canceled-confirmation-button-cancel-no{
+    width: 130px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+}

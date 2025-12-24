@@ -4,8 +4,7 @@ import {RolesProfileComponent} from "../RolesProfileComponent/RolesProfileCompon
 import {PaginationComponent} from "../../PaginationComponent/PaginationComponent";
 import {RolesFilterComponent} from "../RolesFilterComponent/RolesFilterComponent";
 import './RolesComponent.css';
-import {useNavigate} from "react-router-dom";
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
+
 
 
 const RolesComponent = () => {
@@ -15,7 +14,7 @@ const RolesComponent = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const navigate = useNavigate();
+
 
     useEffect(() => {
         const fetchRoles = async () => {
@@ -54,11 +53,6 @@ const RolesComponent = () => {
 
     return (
         <div className="roles-component-container">
-            <div className={'role-component-container-header'}>
-                <img src={'/img/logo.png'} className={'logo-role-component-container'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'role-component-container-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className="roles-component-filter">
                 <RolesFilterComponent onFilter={(params) => {
                         roleService.getAll(params).then(res => setRoles(res.data));
@@ -79,7 +73,6 @@ const RolesComponent = () => {
                                         onSizeChange={(newSize) => {setSize(newSize); setPage(1)}}
                 />
             </div>
-            <FooterComponent/>
         </div>
     );
 };

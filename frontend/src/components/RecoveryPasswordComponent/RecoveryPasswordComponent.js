@@ -3,7 +3,6 @@ import {useNavigate, useParams} from "react-router-dom";
 import {apiService} from "../../services/apiService";
 import {urls} from "../../constants/urls";
 import './RecoveryPasswordComponent.css';
-import {FooterComponent} from "../FooterComponent/FooterComponent";
 import {recoveryPasswordValidator} from "../../validator/recoveryPasswordValidator";
 
 const RecoveryPasswordComponent = () => {
@@ -57,10 +56,6 @@ const RecoveryPasswordComponent = () => {
 
     return (
         <div className={'recovery-password-container'}>
-            <div className={'recovery-password-container-header'}>
-                <img src={'/img/logo.png'} className={'logo-recovery-password'} alt="Logo"/>
-                <h1>QHealth</h1>
-            </div>
             <div className={'recovery-password-form-div'}>
                 <form className={'recovery-password-form'} onSubmit={handleSubmit}>
                     <h2>SET NEW PASSWORD</h2>
@@ -86,7 +81,6 @@ const RecoveryPasswordComponent = () => {
                     <button className={'recovery-password-button'} type="submit">Reset Password</button>
                 </form>
             </div>
-            <FooterComponent/>
         </div>
     );
 };

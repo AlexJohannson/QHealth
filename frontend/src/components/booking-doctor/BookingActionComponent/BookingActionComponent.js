@@ -7,6 +7,8 @@ const BookingActionsComponent = ({bookingDoctorId, status, onStatusChange}) => {
     const [cancelled, setCancelled] = useState(status === 'cancelled');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const [confirmDelete, setConfirmDelete] = useState(false);
+    const [confirmCancel, setConfirmCancel] = useState(false);
 
     const role = localStorage.getItem('role');
     const isSuperuser = localStorage.getItem('is_superuser') === 'true';
@@ -55,15 +57,85 @@ const BookingActionsComponent = ({bookingDoctorId, status, onStatusChange}) => {
             {error && <p className={'booking-actions-component-error'}>{error}</p>}
 
             {canCancel && (
-                <button  className={'booking-actions-component-button-canceled'} onClick={handleCancel}>
-                    Canceled booking
-                </button>
+                !confirmCancel ? (
+                        <button  className={'booking-actions-component-button-canceled'}
+                                 onClick={() => setConfirmCancel(true)}>
+                                    Canceled booking
+                        </button>
+                    ) : (
+                        <div className={'booking-actions-component-button-canceled-confirmation'}>
+                            <p className={'booking-actions-component-button-canceled-confirmation-error'}>
+                                Are you sure you want to cancel booking visit to doctor?
+                            </p>
+
+                            {error && (
+                                <p className="booking-actions-component-button-canceled-confirmation-error">
+                                    {error}
+                                </p>
+                            )}
+
+                            <button
+                                className={'booking-actions-component-button-canceled-confirmation-button-cancel-yes'}
+                                type="button"
+                                onClick={handleCancel}
+                            >
+                                Yes, Cancel
+                            </button>
+
+                            <button
+                                className={'booking-actions-component-button-canceled-confirmation-button-cancel-no'}
+                                type="button"
+                                onClick={() => {
+                                    setConfirmCancel(false);
+                                    setError('');
+                                }}
+                            >
+                                No, cancel
+                            </button>
+                        </div>
+                    )
             )}
 
             {canDelete && (
-                <button className={'booking-actions-component-button-delete'} onClick={handleDelete}>
-                    Delete booking
-                </button>
+                !confirmDelete ? (
+                        <button
+                            className={'booking-actions-component-button-delete'}
+                            onClick={() => setConfirmDelete(true)}
+                        >
+                            Delete Booking
+                        </button>
+                    ) : (
+                        <div className={'booking-actions-component-button-delete-confirmation'}>
+                            <p className={'booking-actions-component-button-delete-delete-confirmation-error'}>
+                                Are you sure you want to delete booking visit to doctor?
+                            </p>
+
+                            {error && (
+                                <p className="booking-actions-component-button-delete-delete-confirmation-error">
+                                    {error}
+                                </p>
+                            )}
+
+                            <button
+                                className={'booking-actions-component-button-delete-confirmation-button-delete'}
+                                type="button"
+                                onClick={handleDelete}
+                            >
+                                Yes, Delete
+                            </button>
+
+                            <button
+                                className={'booking-actions-component-button-delete-confirmation-button-cancel'}
+                                type="button"
+                                onClick={() => {
+                                    setConfirmDelete(false);
+                                    setError('');
+                                }}
+                            >
+                                No, cancel
+                            </button>
+                        </div>
+                    )
             )}
 
             {cancelled && <p className={'booking-actions-component-error'}>Booking is cancelled</p>}

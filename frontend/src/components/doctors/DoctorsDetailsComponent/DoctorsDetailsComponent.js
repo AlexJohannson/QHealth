@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import {roleService} from "../../../services/roleService";
 import {BookDoctorComponent} from "../../booking-doctor/BookDoctorComponent/BookDoctorComponent";
 import './DoctorsDetailsComponent.css';
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
+
 
 
 const DoctorsDetailsComponent = () => {
@@ -16,7 +16,7 @@ const DoctorsDetailsComponent = () => {
     const searchParams = new URLSearchParams(location.search);
     const patientId = searchParams.get('patientId');
     const userId = searchParams.get('userId');
-    const navigate = useNavigate();
+
 
 
     useEffect(() => {
@@ -50,11 +50,6 @@ const DoctorsDetailsComponent = () => {
 
     return (
         <div className={'doctors-details-component'}>
-            <div className={'doctors-details-component-header'}>
-                <img src={'/img/logo.png'} className={'logo-doctors-details-component'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'doctors-details-component-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'doctors-details-component-content'}>
                 <h3>{profile.name} {profile.surname}</h3>
                 <p><strong>Role:</strong> {doctors.role}</p>
@@ -69,7 +64,6 @@ const DoctorsDetailsComponent = () => {
                 )}
 
             </div>
-            <FooterComponent/>
         </div>
     );
 };

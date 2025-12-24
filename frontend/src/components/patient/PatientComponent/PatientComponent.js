@@ -3,8 +3,6 @@ import {userService} from "../../../services/userService";
 import {PaginationComponent} from "../../PaginationComponent/PaginationComponent";
 import {PatientProfileComponent} from "../PatientProfileComponent/PatientProfileComponent";
 import {UsersFilterComponent} from "../../UsersComponent/UserFilterComponent/UserFilterComponent";
-import {useNavigate} from "react-router-dom";
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
 import './PatientComponent.css';
 
 const PatientsComponent = () => {
@@ -14,7 +12,7 @@ const PatientsComponent = () => {
     const [totalPage, setTotalPage] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const navigate = useNavigate();
+
 
 
     useEffect(() => {
@@ -51,11 +49,6 @@ const PatientsComponent = () => {
 
     return (
         <div className={'patients-card-component'}>
-             <div className={'patient-component-container-header'}>
-                <img src={'/img/logo.png'} className={'logo-patient-component-container'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'patient-component-container-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'patient-card-filter'}>
                 <UsersFilterComponent onFilter={(params) => {
                     userService.getAllPatientCard(params).then(res => setPatient(res.data));
@@ -79,7 +72,6 @@ const PatientsComponent = () => {
                                      }}
                 />
             </div>
-            <FooterComponent/>
         </div>
     )
 };

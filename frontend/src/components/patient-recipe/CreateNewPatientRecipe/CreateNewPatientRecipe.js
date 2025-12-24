@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import './CreateNewPatientRecipe.css';
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import {patientRecipeService} from "../../../services/patientRecipeService";
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
 import {recipeValidator} from "../../../validator/recipeValidator";
 
 const CreateNewPatientRecipe = ({patientId}) => {
@@ -12,7 +11,7 @@ const CreateNewPatientRecipe = ({patientId}) => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
     const [fieldErrors, setFieldErrors] = useState({});
-    const navigate = useNavigate();
+
 
 
     const location = useLocation();
@@ -66,11 +65,6 @@ const CreateNewPatientRecipe = ({patientId}) => {
     
     return (
         <div className={'create-new-patient-recipe'}>
-            <div className={'create-recipe-form-header'}>
-                <img src={'/img/logo.png'} className={'logo-create-recipe-form'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'create-recipe-form-header-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'create-recipe-form'}>
                 <h3>Create New Patient Recipe</h3>
 
@@ -98,7 +92,6 @@ const CreateNewPatientRecipe = ({patientId}) => {
                     {loading ? 'Saving...' : 'Create Recipe'}
                 </button>
             </div>
-            <FooterComponent/>
         </div>
     );
 };

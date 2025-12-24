@@ -1,17 +1,10 @@
 import React from 'react';
-import {Link} from "react-router-dom";
 import './HomePageComponent.css';
-import {FooterComponent} from "../FooterComponent/FooterComponent";
 
 
 const HomePageComponent = () => {
     return (
         <div className={'home-page'}>
-            <div className={'header-section-home-page'}>
-                <img src={'/img/logo.png'} className={'logo'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'login-button'}><Link  className={'login-link'} to="/login">LOGIN</Link></button>
-            </div>
             <div className={'home-page-content'}>
                 <h2 className={'home-page-content-h2'}>QHealth — A Private Clinic of the Future</h2>
                 <h4>QHealth is a modern medical facility designed for those who value quality, speed, and compassion in
@@ -47,7 +40,6 @@ const HomePageComponent = () => {
                     <h2>QHealth is more than a clinic. It’s a place where health becomes a partnership.</h2>
                 </div>
             </div>
-            <FooterComponent/>
         </div>
     );
 };

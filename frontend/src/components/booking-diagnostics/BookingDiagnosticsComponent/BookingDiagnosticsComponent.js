@@ -3,8 +3,6 @@ import {bookingDiagnosticsService} from "../../../services/bookingDiagnosticsSer
 import {BookingDiagnosticsProfile} from "../BookingDiagnosticsProfile/BookingDiagnosticsProfile";
 import {PaginationComponent} from "../../PaginationComponent/PaginationComponent";
 import './BookingDiagnosticsComponent.css';
-import {useNavigate} from "react-router-dom";
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
 import {
     BookingDiagnosticsFilterComponent
 } from "../BookingDiagnosticsFilterComponent/BookingDiagnosticsFilterComponent";
@@ -17,7 +15,6 @@ const BookingDiagnosticsComponent = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const navigate = useNavigate();
     const [trigger, setTrigger] = useState(null);
 
 
@@ -78,11 +75,6 @@ const BookingDiagnosticsComponent = () => {
 
     return (
         <div className={'booking-diagnostics-component'}>
-            <div className={'booking-diagnostics-component-header'}>
-                <img src={'/img/logo.png'} className={'logo-booking-diagnostics-component'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'booking-diagnostics-component-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'booking-diagnostics-component-filter'}>
                 <BookingDiagnosticsFilterComponent onFilter={(params) => {
                     bookingDiagnosticsService.getAllLisr(params).then(res => setBookingDiagnostics(res.data));
@@ -105,7 +97,6 @@ const BookingDiagnosticsComponent = () => {
                                      }}
                 />
             </div>
-            <FooterComponent/>
         </div>
     );
 };

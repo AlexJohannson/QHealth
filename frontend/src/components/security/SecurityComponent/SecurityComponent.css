@@ -1,47 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
 .security-container {
     width: 100%;
     background-color: lightyellow;
 }
-/*--------------------------------------      security-container-header   --------------------------------------------*/
-.security-container-header {
-    width: 100%;
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: 170px;
-    background-color: lightyellow;
-    border-bottom: 2px solid lightskyblue;
-}
-.logo-security-component {
-    width: 200px;
-    height: 120px;
-    margin-right: 50px;
-}
-.security-container-header h1 {
-    font-family: "Lobster Two", sans-serif;
-    font-size: 80px;
-    font-weight: 700;
-    font-style: italic;
-    color: blue;
-}
-.security-component-button {
-    width: 100px;
-    height: 45px;
-    border-radius: 10px;
-    border: none;
-    background-color: blue;
-    color: white;
-    cursor: pointer;
-}
-.security-component-button:hover {
-    background-color: green;
-}
 /*--------------------------------------------    security-container-filter   ----------------------------------------*/
 .security-container-filter {
-    margin: 15px 0 15px 0;
+    margin-bottom: 15px;
 }
 /*------------------------------------------    security-container-delete  -------------------------------------------*/
 .security-container-delete {
@@ -85,7 +48,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 15px 0 15px 0;
+    margin-top: 15px;
 }
 /*-------------------------------------     security-skeleton-container   -------------------------------------------------------*/
 .security-skeleton-container {

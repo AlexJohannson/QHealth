@@ -3,6 +3,9 @@
     align-items: center;
     justify-content: center;
     gap: 100px;
+    background-color: #ffffe0;
+    padding: 10px 0 10px 0;
+    border-bottom: 2px solid lightskyblue;
 }
 
 .navigation-nav ul {
@@ -44,4 +47,10 @@
 .nav-separator {
     margin: 0 8px;
     color: #888;
+}
+.navigate-buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }

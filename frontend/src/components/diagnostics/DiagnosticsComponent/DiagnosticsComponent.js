@@ -5,8 +5,7 @@ import {DiagnosticsProfileComponent} from "../DiagnosticsProfileComponent/Diagno
 import {PaginationComponent} from "../../PaginationComponent/PaginationComponent";
 import {DiagnosticsFilterComponent} from "../DiagnosticsFilterComponent/DiagnosticsFilterComponent";
 import {socketService} from "../../../services/socketService";
-import {useNavigate} from "react-router-dom";
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
+
 
 const DiagnosticsComponent = () => {
     const [diagnostics, setDiagnostics] = useState([]);
@@ -16,7 +15,7 @@ const DiagnosticsComponent = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [trigger, setTrigger] = useState(null);
-    const navigate = useNavigate();
+
 
 
     useEffect(() => {
@@ -73,11 +72,6 @@ const DiagnosticsComponent = () => {
 
     return (
         <div className="diagnostics-component">
-            <div className={'diagnostics-component-container-header'}>
-                <img src={'/img/logo.png'} className={'logo-diagnostics-component-container'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'diagnostics-component-container-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'diagnostics-component-filter'}>
                 <DiagnosticsFilterComponent onFilter={(params) => {
                     diagnosticsService.getAllDiagnosticsService(params).then(res => setDiagnostics(res.data))
@@ -100,7 +94,6 @@ const DiagnosticsComponent = () => {
                                      }}
                 />
             </div>
-            <FooterComponent/>
         </div>
     );
 };

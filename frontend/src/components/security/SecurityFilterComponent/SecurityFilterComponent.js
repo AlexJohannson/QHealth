@@ -18,6 +18,12 @@ const SecurityFilterComponent = ({onFilter}) => {
         onFilter(cleaned);
     }
 
+    const handleClear = () => {
+        setFilter({ success: '', order: '' });
+        onFilter({});
+    };
+
+
 
     return (
         <div>
@@ -41,6 +47,13 @@ const SecurityFilterComponent = ({onFilter}) => {
                     <option value={'-created_at'}>Created descending</option>
                 </select>
                 <button className={'security-filter-button'} type="submit">Apply</button>
+                <button
+                    className={'security-filter-button'}
+                    type="button"
+                    onClick={handleClear}
+                >
+                    Clear
+                </button>
             </form>
         </div>
     );

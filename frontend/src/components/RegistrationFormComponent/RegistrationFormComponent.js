@@ -3,7 +3,6 @@ import {useNavigate} from "react-router-dom";
 import {apiService} from "../../services/apiService";
 import {urls} from "../../constants/urls";
 import './RegistrationFormComponent.css';
-import {FooterComponent} from "../FooterComponent/FooterComponent";
 import {registerValidator} from "../../validator/registerValidator";
 
 const RegistrationFormComponent = () => {
@@ -84,11 +83,6 @@ const RegistrationFormComponent = () => {
 
     return (
         <div className="registration-form-container">
-            <div className={'registration-container-header'}>
-                <img src={'/img/logo.png'} className={'logo-register'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'form-register-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'register-form-div'}>
                 {success ? (
                     <p className={'register-successful'}>
@@ -193,11 +187,11 @@ const RegistrationFormComponent = () => {
                         {error.general && (<p className={'register-error'}>{error.general}</p>)}
                         <div className={'form-register-button-div'}>
                             <button className={'form-register-button'} type={'submit'}>REGISTER</button>
+                            <button className={'form-register-button'} type="button" onClick={() => navigate(-1)}>BACK</button>
                         </div>
                     </form>
                 )}
             </div>
-            <FooterComponent/>
         </div>
     );
 };

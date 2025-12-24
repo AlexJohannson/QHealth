@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import './DiagnosticsCreateComponent.css';
 import {useNavigate} from "react-router-dom";
 import {diagnosticsService} from "../../../services/diagnosticsService";
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
+import {createDiagnosticValidator} from "../../../validator/createDiagnosticValidator";
+
 
 const DiagnosticsCreateComponent = () => {
     const navigate = useNavigate();
@@ -22,16 +23,28 @@ const DiagnosticsCreateComponent = () => {
         setError({});
         setSuccess(false);
 
+        const {error: validationError} = createDiagnosticValidator.validate(form, {abortEarly: false});
+
+        if (validationError) {
+            const errors = {};
+
+            validationError.details.forEach(err => {
+                errors[err.path[0]] = err.message;
+            });
+            setError(errors);
+            return;
+        }
+
         try {
             await diagnosticsService.createNewDiagnostic({
                 modality: form.modality,
             })
             setSuccess(true);
             navigate("/diagnostics-list");
-        } catch (error) {
-            if (error.response?.data) {
+        } catch (err) {
+            if (err.response?.data) {
                 const normalized = {};
-                Object.entries(error.response.data).forEach(([key, value]) => {
+                Object.entries(err.response.data).forEach(([key, value]) => {
                     normalized[key.toLowerCase()] = Array.isArray(value) ? value.join(' ') : value;
                 });
                 setError(normalized);
@@ -44,11 +57,6 @@ const DiagnosticsCreateComponent = () => {
 
     return (
         <div className={'diagnostics-create-component'}>
-            <div className={'diagnostics-create-component-header'}>
-                <img src={'/img/logo.png'} className={'logo-diagnostics-create-component'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'diagnostics-create-component-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'diagnostics-create-component-content'}>
                 {success ? (
                     <p className={'diagnostics-component-container-information'}>Registration new diagnostic successful.</p>
@@ -63,7 +71,6 @@ const DiagnosticsCreateComponent = () => {
                     </form>
                 )}
             </div>
-            <FooterComponent/>
         </div>
     );
 };

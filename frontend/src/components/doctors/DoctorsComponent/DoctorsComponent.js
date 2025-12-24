@@ -2,9 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {roleService} from "../../../services/roleService";
 import {DoctorsProfileComponent} from "../DoctorsProfileComponent/DoctorsProfileComponent";
 import {PaginationComponent} from "../../PaginationComponent/PaginationComponent";
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
 import {DoctorsFilterComponent} from "../DoctorsFilterComponet/DoctorsFilterComponent";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import './DoctorsComponent.css';
 
 const DoctorsComponent = () => {
@@ -17,7 +16,7 @@ const DoctorsComponent = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const patientId = searchParams.get('patientId');
-    const navigate = useNavigate();
+
 
 
     useEffect(() => {
@@ -55,11 +54,6 @@ const DoctorsComponent = () => {
 
     return (
         <div className={'doctors-component'}>
-            <div className={'doctors-component-header'}>
-                <img src={'/img/logo.png'} className={'logo-doctors-component-header'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'doctors-component-button-header'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'doctors-component-filter'}>
                 <DoctorsFilterComponent onFilter={(params) => {
                     roleService.getListOfDoctors(params).then(res => setDoctors(res.data));
@@ -83,7 +77,6 @@ const DoctorsComponent = () => {
                                      }}
                 />
             </div>
-            <FooterComponent/>
         </div>
     );
 };

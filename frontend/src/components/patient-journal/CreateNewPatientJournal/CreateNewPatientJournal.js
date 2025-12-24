@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import './CreateNewPatientJournal.css';
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import {patientJournal} from "../../../services/patientJournal";
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
 import {journalValidator} from "../../../validator/journalValidator";
 
 const CreateNewPatientJournal = ({patientId}) => {
@@ -13,7 +12,7 @@ const CreateNewPatientJournal = ({patientId}) => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
     const [fieldErrors, setFieldErrors] = useState({});
-    const navigate = useNavigate();
+
 
 
     const location = useLocation();
@@ -69,11 +68,6 @@ const CreateNewPatientJournal = ({patientId}) => {
 
     return (
         <div className="create-journal-form">
-            <div className={'create-journal-form-header'}>
-                <img src={'/img/logo.png'} className={'logo-create-journal-form'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'create-journal-form-header-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'create-journal-form'}>
                 <h3>Create New Patient Journal</h3>
 
@@ -112,7 +106,6 @@ const CreateNewPatientJournal = ({patientId}) => {
                     {loading ? 'Saving...' : 'Create Journal'}
                 </button>
             </div>
-            <FooterComponent/>
         </div>
     );
 };

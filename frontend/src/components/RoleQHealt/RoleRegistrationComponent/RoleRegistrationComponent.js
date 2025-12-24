@@ -1,14 +1,11 @@
 import React, {useState} from 'react';
 import {roleService} from "../../../services/roleService";
 import './RoleRegistrationComponent.css';
-import {useNavigate} from "react-router-dom";
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
 import {registerStaffValidator} from "../../../validator/registerStaffValidator";
 
 
 
 const RoleRegistrationComponent = () => {
-    const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [form, setForm] = useState({
         role: '',
@@ -94,11 +91,6 @@ const RoleRegistrationComponent = () => {
 
     return (
         <div className={'role-registration-component'}>
-            <div className={'role-registration-component-header'}>
-                <img src={'/img/logo.png'} className={'role-logo-register'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'role-form-register-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'role-register-form-div'}>
                 {success ? (
                     <p className={'role-register-successful'}>
@@ -197,7 +189,6 @@ const RoleRegistrationComponent = () => {
                     </form>
                 )}
             </div>
-            <FooterComponent/>
         </div>
     );
 };

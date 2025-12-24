@@ -2,11 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {BookingDoctorProfile} from "../BookingDoctorProfile/BookingDoctorProfile";
 import {bookingDoctorService} from "../../../services/bookingDoctorService";
 import {PaginationComponent} from "../../PaginationComponent/PaginationComponent";
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
 import {BookingDoctorFilterComponent} from "../BookingDoctorFilterComponent/BookingDoctorFilterComponent";
 import {socketService} from "../../../services/socketService";
 import './BookingDoctorComponent.css';
-import {useNavigate} from "react-router-dom";
+
 
 
 const BookingDoctorComponent = () => {
@@ -17,7 +16,7 @@ const BookingDoctorComponent = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [trigger, setTrigger] = useState(null);
-    const navigate = useNavigate();
+
 
 
     useEffect(() => {
@@ -79,11 +78,6 @@ const BookingDoctorComponent = () => {
 
     return (
         <div className={'booking-doctor-component'}>
-            <div className={'booking-doctor-component-header'}>
-                <img src={'/img/logo.png'} className={'logo-booking-doctor-component-header'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'booking-doctor-component-button-header'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'booking-doctor-component-filter'}>
                 <BookingDoctorFilterComponent onFilter={(params) => {
                     bookingDoctorService.getAllListOfBookingDoctor(params).then(res => setBookingDoctors(res.data));
@@ -107,7 +101,6 @@ const BookingDoctorComponent = () => {
                                      }}
                 />
             </div>
-            <FooterComponent/>
         </div>
     );
 };

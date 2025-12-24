@@ -4,42 +4,6 @@
 .home-page{
     width: 100%;
 }
-/*-----------------------------------------   div HEADER SECTION  -------------------------------------------------------*/
-.header-section-home-page{
-    width: 100%;
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: 170px;
-    background-color: lightyellow;
-}
-.header-section-home-page h1 {
-    font-family: "Lobster Two", sans-serif;
-    font-size: 80px;
-    font-weight: 700;
-    font-style: italic;
-    color: blue;
-}
-.logo{
-    width: 200px;
-    height: 120px;
-    margin-right: 50px;
-}
-.login-button {
-    width: 100px;
-    height: 45px;
-    border: none;
-    border-radius: 10px;
-    background-color: blue;
-}
-.login-button:hover {
-    background-color: green;
-}
-.login-link {
-    text-decoration: none;
-    color: white;
-}
 /*--------------------------------------------    div home-page-content  -------------------------------------------------*/
 .home-page-content {
     width: 100%;

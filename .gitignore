@@ -3,5 +3,5 @@
 .env
 .venv
 .vscode
-
+@localhost.session.sql
 

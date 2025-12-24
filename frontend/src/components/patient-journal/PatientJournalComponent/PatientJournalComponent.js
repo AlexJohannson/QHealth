@@ -2,11 +2,10 @@ import React, {useEffect, useState} from 'react';
 import './PatientJournalComponent.css';
 import {patientJournal} from "../../../services/patientJournal";
 import {PaginationComponent} from "../../PaginationComponent/PaginationComponent";
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
 import {PatientJournalProfile} from "../PatientJournalProfile/PatientJournalProfile";
 import {socketService} from "../../../services/socketService";
 import {PatientJournalFilter} from "../PatientJournalFilter/PatientJournalFilter";
-import {useNavigate} from "react-router-dom";
+
 
 const PatientJournalComponent = () => {
     const [journals, setJournals] = useState([]);
@@ -16,7 +15,7 @@ const PatientJournalComponent = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [trigger, setTrigger] = useState(null);
-    const navigate = useNavigate();
+
 
 
     useEffect(() => {
@@ -75,11 +74,6 @@ const PatientJournalComponent = () => {
 
     return (
         <div className={'patient-journal-component'}>
-            <div className={'patient-journal-component-header'}>
-                <img src={'/img/logo.png'} className={'logo-patient-journal-component'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'patient-journal-component-header-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'patient-journal-component-filter'}>
                 <PatientJournalFilter onFilter={(params) => {
                     patientJournal.getAllPatientJournal(params).then(res => setJournals(res.data));
@@ -102,7 +96,6 @@ const PatientJournalComponent = () => {
                                      }}
                 />
             </div>
-            <FooterComponent/>
         </div>
     );
 };

@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import './DiagnosticsListComponent.css';
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {diagnosticsService} from "../../../services/diagnosticsService";
 import {socketService} from "../../../services/socketService";
 import {DiagnosticsFilterComponent} from "../../diagnostics/DiagnosticsFilterComponent/DiagnosticsFilterComponent";
 import {PaginationComponent} from "../../PaginationComponent/PaginationComponent";
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
 import {DiagnosticsListProfile} from "../DiagnosticsListProfile/DiagnosticsListProfile";
 
 const DiagnosticsListComponent = () => {
@@ -16,7 +15,7 @@ const DiagnosticsListComponent = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [trigger, setTrigger] = useState(null);
-    const navigate = useNavigate();
+
 
 
     useEffect(() => {
@@ -78,11 +77,6 @@ const DiagnosticsListComponent = () => {
 
     return (
         <div className="diagnostics-list-component">
-            <div className={'diagnostics-list-component-header'}>
-                <img src={'/img/logo.png'} className={'logo-diagnostics-list-component'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'diagnostics-list-component-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             {canCreate && (
             <din className={'diagnostics-list-component-link'}>
                 <Link className={'link-create-new-diagnostic-list-component'} to={'/create-new-diagnostic'}>Create New Modality</Link>
@@ -110,7 +104,6 @@ const DiagnosticsListComponent = () => {
                                      }}
                 />
             </div>
-            <FooterComponent/>
         </div>
     );
 };

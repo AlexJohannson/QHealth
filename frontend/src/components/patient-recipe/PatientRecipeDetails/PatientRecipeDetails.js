@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import './PatientRecipeDetails.css';
 import {useNavigate, useParams} from "react-router-dom";
 import {patientRecipeService} from "../../../services/patientRecipeService";
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
 import {formatDate} from "../../../untils/formatDate";
 
 
@@ -12,6 +11,7 @@ const PatientRecipeDetails = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const [confirmDelete, setConfirmDelete] = useState(false);
 
 
     useEffect(() => {
@@ -56,11 +56,6 @@ const PatientRecipeDetails = () => {
 
     return (
         <div className={'patient-recipe-details-container'}>
-            <div className={'patient-recipe-details-header'}>
-                <img src={'/img/logo.png'} className={'logo-patient-recipe-detail-header'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'patient-pecipe-detail-header-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'patient-recipe-details-profile'}>
                 <h2>My Recipe:</h2>
                 <p><strong>Number:</strong> {patientRecipes.id}</p>
@@ -72,10 +67,44 @@ const PatientRecipeDetails = () => {
                 <p><strong>Surname:</strong> {patientRecipes.user.profile.surname}</p>
             </div>
             {canDelete && (
-                <button className={'patient-recipe-details-delete-button'}
-                        onClick={handleDelete}>Delete Recipe</button>
+                !confirmDelete ? (
+                          <button className={'patient-recipe-details-delete-button'}
+                         onClick={() => setConfirmDelete(true)}>
+                              Delete Recipe
+                          </button>
+                    ) : (
+                        <div className={'patient-recipe-details-delete-button-confirmation'}>
+                            <p className={'patient-recipe-details-delete-button-confirmation-error'}>
+                                Are you sure you want to delete patient recipe?
+                            </p>
+
+                            {error && (
+                                <p className="patient-recipe-details-delete-button-confirmation-error">
+                                    {error}
+                                </p>
+                            )}
+
+                            <button
+                                className={'patient-recipe-details-delete-button-confirmation-button-delete'}
+                                type="button"
+                                onClick={handleDelete}
+                            >
+                                Yes, Delete
+                            </button>
+
+                            <button
+                                className={'patient-recipe-details-delete-button-confirmation-button-cancel'}
+                                type="button"
+                                onClick={() => {
+                                    setConfirmDelete(false);
+                                    setError('');
+                                }}
+                            >
+                                No, cancel
+                            </button>
+                        </div>
+                    )
             )}
-            <FooterComponent/>
         </div>
     );
 };

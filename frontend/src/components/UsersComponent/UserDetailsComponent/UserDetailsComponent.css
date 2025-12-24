@@ -1,54 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
-
 .user-details-container{
     width: 100%;
     background-color: lightyellow;
 }
-/*-------------------------------    user-details-container-header   -------------------------------------------------*/
-.user-details-container-header {
-    width: 100%;
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: 170px;
-    background-color: lightyellow;
-    border-bottom: 2px solid lightskyblue;
-}
-.logo-user-details {
-    width: 200px;
-    height: 120px;
-    margin-right: 50px;
-}
-.user-details-container-header h1 {
-    font-family: "Lobster Two", sans-serif;
-    font-size: 80px;
-    font-weight: 700;
-    font-style: italic;
-    color: blue;
-}
-.user-details-button {
-    width: 100px;
-    height: 45px;
-    border-radius: 10px;
-    border: none;
-    background-color: blue;
-    color: white;
-    cursor: pointer;
-}
-.user-details-button:hover {
-    background-color: green;
-}
+
 /*------------------------------------    user-details-container-profile  --------------------------------------------*/
 .user-details-container-profile {
     width: 100%;
-    height: 800px;
+    height: 900px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin: 15px 0 15px 0;
     gap: 25px;
 }
 .user-details-component-link {

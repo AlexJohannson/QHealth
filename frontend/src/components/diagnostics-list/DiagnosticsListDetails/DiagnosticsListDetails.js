@@ -3,7 +3,6 @@ import './DiagnosticsListDetails.css';
 import {useNavigate, useParams} from "react-router-dom";
 import {diagnosticsService} from "../../../services/diagnosticsService";
 import {DiagnosticsEditComponent} from "../../diagnostics/DiagnosticsEditComponent/DiagnosticsEditComponent";
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
 import {formatDate} from "../../../untils/formatDate";
 
 
@@ -13,7 +12,7 @@ const DiagnosticsListDetails = () => {
     const [diagnostic, setDiagnostic] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const [deleting, setDeleting] = useState(false);
+    const [confirmDelete, setConfirmDelete] = useState(false);
 
     useEffect(() => {
         const fetchDiagnostics = async () => {
@@ -35,16 +34,16 @@ const DiagnosticsListDetails = () => {
     const canCreate = isSuperUser || isStaff;
 
     const handleDelete = async () => {
-        setDeleting(true);
         try {
             await diagnosticsService.deleteDiagnostic(id);
+            setConfirmDelete(false);
             navigate(-1);
-        } catch (error) {
-            setError('Failed to delete diagnostic');
-        } finally {
-            setDeleting(false);
+        } catch (err) {
+            const msg = err.response?.data?.detail || 'Failed to delete diagnostic';
+            setError(msg);
         }
     };
+
 
     if (loading) return (
         <div className="diagnostic-profile-skeleton">
@@ -54,15 +53,10 @@ const DiagnosticsListDetails = () => {
             <div className="diagnostic-profile-skeleton-line long"></div>
         </div>
     );
-    if (error) return <p style={{color: 'red'}}>{error}</p>;
+
 
     return (
         <div className={'diagnostics-list-detail-component'}>
-            <div className={'diagnostic-list-detail-component-header'}>
-                <img src={'/img/logo.png'} className={'logo-diagnostic-list-detail-component'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'diagnostics-list-detail-component-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'diagnostics-list-detail-component-content'}>
                 <h4>{diagnostic.modality}</h4>
                 <p><strong>Number:</strong> {diagnostic.id}</p>
@@ -72,13 +66,44 @@ const DiagnosticsListDetails = () => {
             {canCreate && (
                 <div className={'diagnostics-list-detail-component-content-delete'}>
                     <h5>BLOCK FOR DELETE MODALITY</h5>
-                    <button
-                        className={'diagnostics-list-detail-component-content-delete-button'}
-                        onClick={handleDelete}
-                        disabled={deleting}
-                    >
-                        {deleting ? 'Deleting...' : 'Delete Diagnostic'}
-                    </button>
+                    {!confirmDelete ? (
+                        <button
+                            className={'diagnostics-list-detail-component-content-delete-button'}
+                            onClick={() => setConfirmDelete(true)}
+                        >
+                            Delete
+                        </button>
+                    ) : (
+                        <div className={'diagnostics-list-detail-component-content-delete-confirmation'}>
+                            <p className={'diagnostics-list-detail-component-content-delete-confirmation-error'}>
+                                Are you sure you want to delete diagnostic modality?
+                            </p>
+
+                            {error && (
+                                <p className="diagnostics-list-detail-component-content-delete-confirmation-error">
+                                    {error}
+                                </p>
+                            )}
+
+                            <button
+                                className={'diagnostics-list-detail-component-content-delete-confirmation-button-delete'}
+                                type="button"
+                                onClick={handleDelete}
+                            >
+                                Yes, Delete
+                            </button>
+                            <button
+                                className={'diagnostics-list-detail-component-content-delete-confirmation-button-cancel'}
+                                type="button"
+                                onClick={() => {
+                                    setConfirmDelete(false);
+                                    setError('');
+                                }}
+                            >
+                                No, cancel
+                            </button>
+                        </div>
+                    )}
                 </div>
             )}
             {canCreate && (
@@ -86,7 +111,6 @@ const DiagnosticsListDetails = () => {
                     <DiagnosticsEditComponent id={id}/>
                 </div>
             )}
-            <FooterComponent/>
         </div>
     )
 };

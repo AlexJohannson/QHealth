@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useNavigate, useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import {userService} from "../../../services/userService";
 import {UsersManagerComponent} from "../UsersManagerComponent/UsersManagerComponent";
 import './UserDetailsComponent.css';
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
 import {formatDate} from "../../../untils/formatDate";
 
 
@@ -13,7 +12,7 @@ const UserDetailsComponent = () => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const navigate = useNavigate();
+
 
 
     useEffect(() => {
@@ -86,11 +85,6 @@ const UserDetailsComponent = () => {
 
     return (
         <div className={'user-details-container'}>
-            <div className={'user-details-container-header'}>
-                <img src={'/img/logo.png'} className={'logo-user-details'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'user-details-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'user-details-container-profile'}>
                 <h3 style={getNameStyle()}>
                     {profile?.name || 'No name'} {profile?.surname || ''}
@@ -140,7 +134,6 @@ const UserDetailsComponent = () => {
                     </div>
                 )}
             </div>
-            <FooterComponent/>
         </div>
     );
 };

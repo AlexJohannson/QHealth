@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import './PatientJournalDetails.css';
 import {useNavigate, useParams} from "react-router-dom";
 import {patientJournal} from "../../../services/patientJournal";
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
 import {formatDate} from "../../../untils/formatDate";
 
 const PatientJournalDetails = () => {
@@ -11,6 +10,7 @@ const PatientJournalDetails = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const [confirmDelete, setConfirmDelete] = useState(false);
 
 
     useEffect(() => {
@@ -56,11 +56,6 @@ const PatientJournalDetails = () => {
 
     return (
         <div className={'patient-journal-details'}>
-            <div className={'patient-journal-details-header'}>
-                <img src={'/img/logo.png'} className={'logo-patient-journal-detail-header'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'patient-journal-detail-header-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'patient-journal-details-profile'}>
                 <h2>My Journal:</h2>
                 <p><strong>Number:</strong> {patientsJournals.id}</p>
@@ -73,10 +68,44 @@ const PatientJournalDetails = () => {
                 <p><strong>Surname:</strong> {patientsJournals.user.profile.surname}</p>
             </div>
             {canDelete && (
-                <button className={'patient-journal-details-button-delete'}
-                        onClick={handleDelete}>Delete Journal</button>
+                !confirmDelete ? (
+                         <button className={'patient-journal-details-button-delete'}
+                         onClick={() => setConfirmDelete(true)}>
+                             Delete Journal
+                         </button>
+                    ) : (
+                        <div className={'patient-journal-details-button-delete-confirmation'}>
+                            <p className={'patient-journal-details-button-delete-confirmation-error'}>
+                                Are you sure you want to delete patient journal?
+                            </p>
+
+                            {error && (
+                                <p className="patient-journal-details-button-delete-confirmation-error">
+                                    {error}
+                                </p>
+                            )}
+
+                            <button
+                                className={'patient-journal-details-button-delete-confirmation-button-delete'}
+                                type="button"
+                                onClick={handleDelete}
+                            >
+                                Yes, Delete
+                            </button>
+
+                            <button
+                                className={'patient-journal-details-button-delete-confirmation-button-cancel'}
+                                type="button"
+                                onClick={() => {
+                                    setConfirmDelete(false);
+                                    setError('');
+                                }}
+                            >
+                                No, cancel
+                            </button>
+                        </div>
+                    )
             )}
-            <FooterComponent/>
         </div>
     );
 };

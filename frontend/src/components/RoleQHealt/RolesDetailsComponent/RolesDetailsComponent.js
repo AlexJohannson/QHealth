@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {roleService} from "../../../services/roleService";
 import {RolesManagerComponent} from "../RolesManagerComponent/RolesManagerComponent";
 import './RoleDetailsComponent.css';
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
 import {formatDate} from "../../../untils/formatDate";
 
 const RolesDetailsComponent = () => {
@@ -12,7 +11,7 @@ const RolesDetailsComponent = () => {
     const [roles, setRoles] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const navigate = useNavigate();
+
 
 
     useEffect(() => {
@@ -58,11 +57,6 @@ const RolesDetailsComponent = () => {
 
     return (
         <div className={'role-details-component'}>
-            <div className={'role-details-container-header'}>
-                <img src={'/img/logo.png'} className={'logo-role-details'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'role-details-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'role-details-container-profile'}>
                 <h3>{profile.name} {profile.surname}</h3>
                 <p><strong>Number:</strong> {id}</p>
@@ -101,7 +95,6 @@ const RolesDetailsComponent = () => {
                 }}/>
                 )}
             </div>
-            <FooterComponent/>
         </div>
     );
 };

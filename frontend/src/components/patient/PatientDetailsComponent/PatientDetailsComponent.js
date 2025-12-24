@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {userService} from "../../../services/userService";
 import './PatientDetailsComponent.css';
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
 import {formatDate} from "../../../untils/formatDate";
 
 const PatientDetailsComponent = () => {
@@ -11,7 +10,7 @@ const PatientDetailsComponent = () => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const navigate = useNavigate();
+
 
     useEffect(() => {
         const fetchPatientDetails = async () => {
@@ -63,11 +62,6 @@ const PatientDetailsComponent = () => {
 
     return (
         <div className={'patient-details-component'}>
-            <div className={'patient-details-container-header'}>
-                <img src={'/img/logo.png'} className={'logo-patient-details'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'patient-details-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'patient-details-container-profile'}>
                 <h3>{profile?.name || ''} {profile?.surname || ''}</h3>
                 <p><strong>Number:</strong> {user.id}</p>
@@ -116,7 +110,6 @@ const PatientDetailsComponent = () => {
                 </Link>
                 )}
             </div>
-            <FooterComponent/>
         </div>
     );
 };

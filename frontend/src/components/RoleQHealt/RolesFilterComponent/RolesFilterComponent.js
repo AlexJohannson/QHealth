@@ -18,9 +18,21 @@ const RolesFilterComponent = ({onFilter}) => {
         onFilter(cleaned);
     };
 
+    const handleClear = () => {
+        setFilter(
+            {
+                icontains_name: '',
+                icontains_surname: '',
+                icontains_role: '',
+                icontains_specialty: '',
+                order: '',
+            });
+        onFilter({});
+    };
+
     return (
         <form className={'role-filter'} onSubmit={handleSubmit}>
-             <input
+            <input
                 type="text"
                 placeholder="Search Roles Name"
                 value={filter.icontains_name}
@@ -53,6 +65,13 @@ const RolesFilterComponent = ({onFilter}) => {
                 <option value="-id">ID descending</option>
             </select>
             <button className={'role-filter-button'} type="submit">Apply</button>
+            <button
+                    className={'role-filter-button'}
+                    type="button"
+                    onClick={handleClear}
+                >
+                    Clear
+                </button>
         </form>
     );
 };

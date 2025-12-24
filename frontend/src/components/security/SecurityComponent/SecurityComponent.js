@@ -4,8 +4,7 @@ import {SecurityProfileComponent} from "../SecurityProfileComponent/SecurityProf
 import {securityService} from "../../../services/securityListService";
 import {SecurityFilterComponent} from "../SecurityFilterComponent/SecurityFilterComponent";
 import './SecurityComponent.css';
-import {useNavigate} from "react-router-dom";
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
+
 
 const SecurityComponent = () => {
     const [security, setSecurity] = useState([]);
@@ -15,7 +14,7 @@ const SecurityComponent = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [selectedSecurityId, setSelectedSecurityId] = useState(null);
-    const navigate = useNavigate();
+
 
 
     useEffect(() => {
@@ -53,11 +52,6 @@ const SecurityComponent = () => {
 
     return (
         <div className={'security-container'}>
-            <div className={'security-container-header'}>
-                <img src={'/img/logo.png'} className={'logo-security-component'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'security-component-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'security-container-filter'}>
                 <SecurityFilterComponent onFilter={(params) => {
                     securityService.getAll(params).then(res => setSecurity(res.data));
@@ -98,7 +92,6 @@ const SecurityComponent = () => {
                                          setPage(1);
                                      }}/>
             </div>
-            <FooterComponent/>
         </div>
     );
 };

@@ -14,7 +14,6 @@ apiService.interceptors.request.use(req => {
 });
 
 
-
 apiService.interceptors.response.use(
     res => res,
     async error => {
@@ -33,6 +32,16 @@ apiService.interceptors.response.use(
         if (error.response?.status === 401 && !originalRequest._retry) {
             const refresh = localStorage.getItem('refresh');
             if (!refresh) {
+                localStorage.removeItem('role');
+                localStorage.removeItem('is_superuser');
+                localStorage.removeItem('is_staff');
+                localStorage.removeItem('is_user');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('roleId');
+                localStorage.removeItem('access');
+                localStorage.removeItem('refresh');
+
+                window.location.href = '/login';
                 return Promise.reject(error);
             }
 
@@ -45,8 +54,16 @@ apiService.interceptors.response.use(
                 };
                 return apiService(originalRequest);
             } catch (refreshError) {
+                localStorage.removeItem('role');
+                localStorage.removeItem('is_superuser');
+                localStorage.removeItem('is_staff');
+                localStorage.removeItem('is_user');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('roleId');
                 localStorage.removeItem('access');
                 localStorage.removeItem('refresh');
+
+                window.location.href = '/login';
                 return Promise.reject(error);
             }
         }

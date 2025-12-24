@@ -3,7 +3,6 @@ import {useForm} from 'react-hook-form';
 import {Link, useNavigate} from 'react-router-dom';
 import {authService} from '../../services/authService';
 import './LoginFormComponent.css';
-import {FooterComponent} from "../FooterComponent/FooterComponent";
 import {emailValidator} from "../../validator/emailValidator";
 
 const LoginFormComponent = () => {
@@ -36,6 +35,7 @@ const LoginFormComponent = () => {
             localStorage.setItem('is_superuser', data.is_superuser);
             localStorage.setItem('is_staff', data.is_staff);
             localStorage.setItem('is_user', data.is_user);
+            window.dispatchEvent(new Event("authChanged"));
 
 
             let path = '/login';
@@ -46,7 +46,6 @@ const LoginFormComponent = () => {
             else if (data.role === 'pharmacist') path = '/pharmacist';
             else if (data.is_user) path = '/user-home-page';
 
-            localStorage.setItem('currentPath', path);
             navigate(path);
         } catch (e) {
             setError(e.response?.data?.detail || e.message || 'Something went wrong');
@@ -57,10 +56,6 @@ const LoginFormComponent = () => {
 
     return (
         <div className={'login-container'}>
-            <div className={'login-container-header'}>
-                <img src={'/img/logo.png'} className={'logo-login'} alt="Logo"/>
-                <h1>QHealth</h1>
-            </div>
             <div className={'login-form-div'}>
                 <form className={'form-login'} onSubmit={handleSubmit(onSubmit)}>
                     <h2>LOGIN</h2>
@@ -97,7 +92,6 @@ const LoginFormComponent = () => {
                     </div>
                 </form>
             </div>
-            <FooterComponent/>
         </div>
     );
 };

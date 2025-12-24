@@ -2,15 +2,15 @@ import React, {useState} from 'react';
 import {apiService} from "../../services/apiService";
 import {urls} from "../../constants/urls";
 import './RecoveryRequestComponent.css';
-import {useNavigate} from "react-router-dom";
-import {FooterComponent} from "../FooterComponent/FooterComponent";
 import {recoveryPasswordEmailValidator} from "../../validator/recoveryPasswordEmailValidator";
+import {useNavigate} from "react-router-dom";
 
 const RecoveryRequestComponent = () => {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -42,11 +42,6 @@ const RecoveryRequestComponent = () => {
 
     return (
         <div className={'recovery-request-container'}>
-            <div className={'recovery-request-container-header'}>
-                <img src={'/img/logo.png'} className={'logo-recovery-request'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'recovery-request-button-navigate'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'recovery-request-form-div'}>
                 <form className={'recovery-request-form'} onSubmit={handleSubmit}>
                     <h2>RECOVERY PASSWORD</h2>
@@ -56,10 +51,10 @@ const RecoveryRequestComponent = () => {
                            onChange={e => setEmail(e.target.value)}/>
                     <div className={'recovery-request-button-div'}>
                         <button className={'recovery-request-button'} type="submit">SEND RECOVERY LINK</button>
+                        <button className={'recovery-request-button'} type="button" onClick={() => navigate(-1)}>BACK</button>
                     </div>
                 </form>
             </div>
-            <FooterComponent/>
         </div>
     );
 };

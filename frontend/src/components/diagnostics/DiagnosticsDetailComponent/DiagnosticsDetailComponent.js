@@ -1,15 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {useParams, useNavigate} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {diagnosticsService} from "../../../services/diagnosticsService";
 import {BookDiagnosticComponent} from "../../booking-diagnostics/BookDiagnosticComponent/BookDiagnosticComponent";
 import './DiagnosticsDetailComponent.css';
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
 import {formatDate} from "../../../untils/formatDate";
 
 
 const DiagnosticsDetailComponent = () => {
     const {id} = useParams();
-    const navigate = useNavigate();
     const [diagnostic, setDiagnostic] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -43,11 +41,6 @@ const DiagnosticsDetailComponent = () => {
 
     return (
         <div className={'diagnostics-detail-component'}>
-            <div className={'diagnostic-detail-component-header'}>
-                <img src={'/img/logo.png'} className={'logo-diagnostic-detail-component'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'diagnostics-detail-component-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'diagnostics-detail-component-content'}>
                 <h4>{diagnostic.modality}</h4>
                 <p><strong>Number:</strong> {diagnostic.id}</p>
@@ -57,7 +50,6 @@ const DiagnosticsDetailComponent = () => {
             <div className={'diagnostics-detail-component-booking-form'}>
                 <BookDiagnosticComponent id={id}/>
             </div>
-            <FooterComponent/>
         </div>
     )
 

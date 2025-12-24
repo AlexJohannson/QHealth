@@ -16,6 +16,16 @@ const PatientRecipeFilter = ({onFilter}) => {
         onFilter(cleaned);
     }
 
+    const handleClear = () => {
+        setFilter(
+            {
+                patient_name: '',
+                patient_surname: '',
+                recipe: '',
+            });
+        onFilter({});
+    };
+
     const isSuperUser = localStorage.getItem('is_superuser') === 'true';
     const isStaff = localStorage.getItem('is_staff') === 'true';
     const role = localStorage.getItem('role');
@@ -27,21 +37,21 @@ const PatientRecipeFilter = ({onFilter}) => {
     return (
         <div>
             <form className={'patient-recipe-filter-form'} onSubmit={handleSubmit}>
-                { canSeeInputPatientNameOrSurname && (
-                <>
-                    <input
-                    type="text"
-                    placeholder={'Patient Name'}
-                    value={filter.patient_name}
-                    onChange={(e) => setFilter({...filter, patient_name: e.target.value})}
-                />
-                    <input
-                    type="text"
-                    placeholder={'Patient Surname'}
-                    value={filter.patient_surname}
-                    onChange={(e) => setFilter({...filter, patient_surname: e.target.value})}
-                />
-                </>
+                {canSeeInputPatientNameOrSurname && (
+                    <>
+                        <input
+                            type="text"
+                            placeholder={'Patient Name'}
+                            value={filter.patient_name}
+                            onChange={(e) => setFilter({...filter, patient_name: e.target.value})}
+                        />
+                        <input
+                            type="text"
+                            placeholder={'Patient Surname'}
+                            value={filter.patient_surname}
+                            onChange={(e) => setFilter({...filter, patient_surname: e.target.value})}
+                        />
+                    </>
                 )}
                 <input
                     type="text"
@@ -50,6 +60,13 @@ const PatientRecipeFilter = ({onFilter}) => {
                     onChange={(e) => setFilter({...filter, recipe: e.target.value})}
                 />
                 <button className={'patient-recipe-filter-form-button'} type="submit">Apply</button>
+                <button
+                    className={'patient-recipe-filter-form-button'}
+                    type="button"
+                    onClick={handleClear}
+                >
+                    Clear
+                </button>
             </form>
         </div>
     );

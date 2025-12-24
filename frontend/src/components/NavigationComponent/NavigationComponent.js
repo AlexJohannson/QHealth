@@ -1,25 +1,29 @@
 import React, {useState, useEffect} from 'react';
 import {useMenuByRole} from '../../hooks/useMenuByRole';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useNavigate, useLocation} from 'react-router-dom';
 import './NavigationComponent.css';
 
 const NavigationComponent = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const menu = useMenuByRole();
     const navigate = useNavigate();
+    const location = useLocation();
+
+
+
 
     useEffect(() => {
-        const userId = localStorage.getItem('userId');
-        setIsLoggedIn(!!userId);
-
-        const handleStorageChange = () => {
+        const checkAuth = () => {
             const userId = localStorage.getItem('userId');
             setIsLoggedIn(!!userId);
         };
 
-        window.addEventListener('storage', handleStorageChange);
+        checkAuth();
+
+        window.addEventListener("authChanged", checkAuth);
+
         return () => {
-            window.removeEventListener('storage', handleStorageChange);
+            window.removeEventListener("authChanged", checkAuth);
         };
     }, []);
 
@@ -33,11 +37,30 @@ const NavigationComponent = () => {
         localStorage.removeItem('access');
         localStorage.removeItem('refresh');
 
+
         setIsLoggedIn(false);
         navigate('/');
     };
 
-    if (!isLoggedIn || !menu.length) return null;
+    const getHomePath = () => {
+        const role = localStorage.getItem('role');
+        const isSuper = localStorage.getItem('is_superuser') === 'true';
+        const isStaff = localStorage.getItem('is_staff') === 'true';
+        const isUser = localStorage.getItem('is_user') === 'true';
+
+        if (isSuper) return '/superuser';
+        if (isStaff) return '/admin';
+        if (role === 'doctor') return '/doctor';
+        if (role === 'operator') return '/operator';
+        if (role === 'pharmacist') return '/pharmacist';
+        if (isUser) return '/user-home-page';
+
+        return '/';
+    };
+
+    const isUserHome = location.pathname === getHomePath();
+
+    if (!isLoggedIn) return null;
 
     return (
         <div className={'navigation-nav'}>
@@ -53,14 +76,23 @@ const NavigationComponent = () => {
                     ))}
                 </ul>
             </nav>
-            <div>
+            <div className={'navigate-buttons'}>
                 <button onClick={handleLogout}>LOGOUT</button>
+                <button onClick={() => {
+                    if (!isUserHome) navigate(-1);
+                }}>
+                    BACK
+                </button>
+                <button onClick={() => navigate(getHomePath())}>
+                    HOME
+                </button>
             </div>
         </div>
     );
 };
 
 export {NavigationComponent};
+
 
 
 

@@ -3,10 +3,9 @@ import './PatientRecipeComponent.css';
 import {patientRecipeService} from "../../../services/patientRecipeService";
 import {PatientRecipeProfile} from "../PatientRecipeProfile/PatientRecipeProfile";
 import {PaginationComponent} from "../../PaginationComponent/PaginationComponent";
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
 import {socketService} from "../../../services/socketService";
 import {PatientRecipeFilter} from "../PatientRecipeFilter/PatientRecipeFilter";
-import {useNavigate} from "react-router-dom";
+
 
 const PatientRecipeComponent = () => {
     const [recipes, setRecipes] = useState([]);
@@ -16,7 +15,7 @@ const PatientRecipeComponent = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [trigger, setTrigger] = useState(null);
-    const navigate = useNavigate();
+
 
 
     useEffect(() => {
@@ -72,11 +71,6 @@ const PatientRecipeComponent = () => {
 
     return (
         <div className={'patient-recipe-container'}>
-            <div className={'patient-recipe-component-header'}>
-                <img src={'/img/logo.png'} className={'logo-patient-recipe-component'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'patient-recipe-component-header-button'} onClick={() => navigate(-1)}>BACK</button>
-            </div>
             <div className={'patient-recipe-component-filter'}>
                 <PatientRecipeFilter onFilter={(params) => {
                     patientRecipeService.getAllPatientRecipe(params).then(res => setRecipes(res.data))
@@ -99,7 +93,6 @@ const PatientRecipeComponent = () => {
                                      }}
                 />
             </div>
-            <FooterComponent/>
         </div>
     );
 };

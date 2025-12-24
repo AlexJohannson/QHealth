@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {bookingDiagnosticsService} from "../../../services/bookingDiagnosticsService";
 import './BookingDiagnosticsDetailsComponent.css';
-import {FooterComponent} from "../../FooterComponent/FooterComponent";
 import {formatDate} from "../../../untils/formatDate";
 
 const BookingDiagnosticsDetailsComponent = () => {
@@ -11,6 +10,7 @@ const BookingDiagnosticsDetailsComponent = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const [confirmDelete, setConfirmDelete] = useState(false);
 
     useEffect(() => {
         const fetchBookingDiagnostics = async () => {
@@ -38,7 +38,8 @@ const BookingDiagnosticsDetailsComponent = () => {
             await bookingDiagnosticsService.deleteBookingDiagnostic(id);
             navigate(-1);
         } catch (err) {
-            alert('Failed to delete booking.');
+            const msg = err.response?.data?.detail || 'Failed to delete diagnostic';
+            setError(msg);
         }
     };
 
@@ -55,12 +56,6 @@ const BookingDiagnosticsDetailsComponent = () => {
 
     return (
         <div className={'booking-diagnostics-details-component'}>
-            <div className={'booking-diagnostic-detail-component-header'}>
-                <img src={'/img/logo.png'} className={'logo-booking-diagnostic-detail-component'} alt="Logo"/>
-                <h1>QHealth</h1>
-                <button className={'booking-diagnostics-detail-component-button'} onClick={() => navigate(-1)}>BACK
-                </button>
-            </div>
             <div className={'booking-diagnostics-details-component-profile'}>
                 <h3>Patient:</h3>
                 <h4>
@@ -101,13 +96,48 @@ const BookingDiagnosticsDetailsComponent = () => {
             </div>
             <div className={'booking-diagnostics-details-component-button'}>
                 {canDelete && (
-                    <button className={'booking-diagnostics-details-component-button-delete-booking'}
-                            onClick={handleDelete}>
-                        Delete Booking
-                    </button>
+                    !confirmDelete ? (
+                        <button
+                            className={'booking-diagnostics-details-component-button-delete-booking'}
+                            onClick={() => setConfirmDelete(true)}
+                        >
+                            Delete Booking
+                        </button>
+                    ) : (
+                        <div className={'booking-diagnostics-detail-component-delete-confirmation'}>
+                            <p className={'booking-diagnostics-component-delete-confirmation-error'}>
+                                Are you sure you want to delete booking diagnostic modality?
+                            </p>
+
+                            {error && (
+                                <p className="booking-diagnostics-component-delete-confirmation-error">
+                                    {error}
+                                </p>
+                            )}
+
+                            <button
+                                className={'booking-diagnostics-component-delete-confirmation-button-delete'}
+                                type="button"
+                                onClick={handleDelete}
+                            >
+                                Yes, Delete
+                            </button>
+
+                            <button
+                                className={'booking-diagnostics-component-delete-confirmation-button-cancel'}
+                                type="button"
+                                onClick={() => {
+                                    setConfirmDelete(false);
+                                    setError('');
+                                }}
+                            >
+                                No, cancel
+                            </button>
+                        </div>
+                    )
                 )}
+
             </div>
-            <FooterComponent/>
         </div>
     );
 };
