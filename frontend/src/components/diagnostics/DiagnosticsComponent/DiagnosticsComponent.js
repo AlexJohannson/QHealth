@@ -5,16 +5,34 @@ import {DiagnosticsProfileComponent} from "../DiagnosticsProfileComponent/Diagno
 import {PaginationComponent} from "../../PaginationComponent/PaginationComponent";
 import {DiagnosticsFilterComponent} from "../DiagnosticsFilterComponent/DiagnosticsFilterComponent";
 import {socketService} from "../../../services/socketService";
+import { useSearchParams } from "react-router-dom";
 
 
 const DiagnosticsComponent = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
     const [diagnostics, setDiagnostics] = useState([]);
-    const [page, setPage] = useState(1);
-    const [size, setSize] = useState(5);
+    const [page, setPage] = useState(Number(searchParams.get("page")) || 1);
+    const [size, setSize] = useState(Number(searchParams.get("size")) || 5);
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [trigger, setTrigger] = useState(null);
+    const [filters, setFilters] = useState({
+        modality: searchParams.get("modality") || "",
+        order: searchParams.get("order") || "",
+    });
+
+    const updateQueryParams = (params) => {
+        const cleaned = {};
+
+        Object.entries(params).forEach(([key, value]) => {
+            if (value !== "" && value !== null && value !== undefined) {
+                cleaned[key] = value;
+            }
+        });
+
+        setSearchParams(cleaned);
+    };
 
 
 
@@ -22,7 +40,11 @@ const DiagnosticsComponent = () => {
         const fetchDiagnostics = async () => {
             setLoading(true);
             try {
-                const data = await diagnosticsService.getAllDiagnosticsService({page, size});
+                const data = await diagnosticsService.getAllDiagnosticsService({
+                    page,
+                    size,
+                    ...filters,
+                });
                 setDiagnostics(data.data);
                 setTotalPages(data.total_pages);
             } catch (error) {
@@ -32,7 +54,7 @@ const DiagnosticsComponent = () => {
             }
         };
         fetchDiagnostics();
-    }, [page, size, trigger]);
+    }, [page, size, trigger, filters]);
 
 
     useEffect(() => {
@@ -52,7 +74,40 @@ const DiagnosticsComponent = () => {
         client.onmessage = ({data}) => {
             setTrigger(prev => !prev)
         }
-    }
+    };
+
+    const handleFilter = (newFilters) => {
+        setFilters(newFilters);
+        setPage(1);
+
+        updateQueryParams({
+            page: 1,
+            size,
+            ...newFilters,
+        });
+    };
+
+
+    const handlePageChange = (newPage) => {
+        setPage(newPage);
+
+        updateQueryParams({
+            page: newPage,
+            size,
+            ...filters,
+        });
+    };
+
+    const handleSizeChange = (newSize) => {
+        setSize(newSize);
+        setPage(1);
+
+        updateQueryParams({
+            page: 1,
+            size: newSize,
+            ...filters,
+        });
+    };
 
 
     if (loading) return (
@@ -73,9 +128,7 @@ const DiagnosticsComponent = () => {
     return (
         <div className="diagnostics-component">
             <div className={'diagnostics-component-filter'}>
-                <DiagnosticsFilterComponent onFilter={(params) => {
-                    diagnosticsService.getAllDiagnosticsService(params).then(res => setDiagnostics(res.data))
-                }}/>
+                <DiagnosticsFilterComponent onFilter={handleFilter}/>
             </div>
             <div className={'diagnostics-component-maping'}>
                 {diagnostics.length === 0 ? (
@@ -87,11 +140,12 @@ const DiagnosticsComponent = () => {
                 )}
             </div>
             <div className={'diagnostics-component-pagination'}>
-                <PaginationComponent page={page} totalPages={totalPages} size={size} onPageChange={setPage}
-                                     onSizeChange={(newSize) => {
-                                         setSize(newSize);
-                                         setPage(1);
-                                     }}
+                <PaginationComponent
+                    page={page}
+                    totalPages={totalPages}
+                    size={size}
+                    onPageChange={handlePageChange}
+                    onSizeChange={handleSizeChange}
                 />
             </div>
         </div>

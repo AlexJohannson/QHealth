@@ -4,23 +4,47 @@ import {RolesProfileComponent} from "../RolesProfileComponent/RolesProfileCompon
 import {PaginationComponent} from "../../PaginationComponent/PaginationComponent";
 import {RolesFilterComponent} from "../RolesFilterComponent/RolesFilterComponent";
 import './RolesComponent.css';
-
+import { useSearchParams } from "react-router-dom";
 
 
 const RolesComponent = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
     const [roles, setRoles] = useState([]);
-    const [page, setPage] = useState(1);
-    const [size, setSize] = useState(5);
+    const [page, setPage] = useState(Number(searchParams.get("page")) || 1);
+    const [size, setSize] = useState(Number(searchParams.get("size")) || 5);
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [filters, setFilters] = useState({
+        icontains_name: searchParams.get("icontains_name") || "",
+        icontains_surname: searchParams.get("icontains_surname") || "",
+        icontains_role: searchParams.get("icontains_role") || "",
+        icontains_specialty: searchParams.get("icontains_specialty") || "",
+        order: searchParams.get("order") || "",
+    });
+
+    const updateQueryParams = (params) => {
+        const cleaned = {};
+
+        Object.entries(params).forEach(([key, value]) => {
+            if (value !== "" && value !== null && value !== undefined) {
+                cleaned[key] = value;
+            }
+        });
+
+        setSearchParams(cleaned);
+    };
 
 
     useEffect(() => {
         const fetchRoles = async () => {
             setLoading(true);
             try {
-                const data = await roleService.getAll({page, size});
+                const data = await roleService.getAll({
+                    page,
+                    size,
+                    ...filters,
+                });
                 setRoles(data.data);
                 setTotalPages(data.total_pages);
             } catch (error) {
@@ -30,7 +54,40 @@ const RolesComponent = () => {
             }
         };
         fetchRoles();
-    }, [page, size]);
+    }, [page, size, filters]);
+
+    const handleFilter = (newFilters) => {
+        setFilters(newFilters);
+        setPage(1);
+
+        updateQueryParams({
+            page: 1,
+            size,
+            ...newFilters,
+        });
+    };
+
+
+    const handlePageChange = (newPage) => {
+        setPage(newPage);
+
+        updateQueryParams({
+            page: newPage,
+            size,
+            ...filters,
+        });
+    };
+
+    const handleSizeChange = (newSize) => {
+        setSize(newSize);
+        setPage(1);
+
+        updateQueryParams({
+            page: 1,
+            size: newSize,
+            ...filters,
+        });
+    };
 
 
     if (loading) return (
@@ -54,10 +111,7 @@ const RolesComponent = () => {
     return (
         <div className="roles-component-container">
             <div className="roles-component-filter">
-                <RolesFilterComponent onFilter={(params) => {
-                        roleService.getAll(params).then(res => setRoles(res.data));
-                    }}
-                />
+                <RolesFilterComponent onFilter={handleFilter}/>
             </div>
             <div className={'roles-component-maping'}>
                 {roles.length === 0 ? (
@@ -69,8 +123,12 @@ const RolesComponent = () => {
                 )}
             </div>
             <div className={'roles-component-pagination'}>
-                <PaginationComponent page={page} totalPages={totalPages} size={size} onPageChange={setPage}
-                                        onSizeChange={(newSize) => {setSize(newSize); setPage(1)}}
+                <PaginationComponent
+                    page={page}
+                    totalPages={totalPages}
+                    size={size}
+                    onPageChange={handlePageChange}
+                    onSizeChange={handleSizeChange}
                 />
             </div>
         </div>

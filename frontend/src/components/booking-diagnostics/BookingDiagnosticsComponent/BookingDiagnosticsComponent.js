@@ -7,22 +7,46 @@ import {
     BookingDiagnosticsFilterComponent
 } from "../BookingDiagnosticsFilterComponent/BookingDiagnosticsFilterComponent";
 import {socketService} from "../../../services/socketService";
+import { useSearchParams } from "react-router-dom";
 
 const BookingDiagnosticsComponent = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
     const [bookingDiagnostics, setBookingDiagnostics] = useState([]);
-    const [page, setPage] = useState(1);
-    const [size, setSize] = useState(5);
+    const [page, setPage] = useState(Number(searchParams.get("page")) || 1);
+    const [size, setSize] = useState(Number(searchParams.get("size")) || 5);
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [trigger, setTrigger] = useState(null);
+    const [filters, setFilters] = useState({
+        patient_name: searchParams.get("patient_name") || "",
+        patient_surname: searchParams.get("patient_surname") || "",
+        diagnostic_service: searchParams.get("diagnostic_service") || "",
+        order: searchParams.get("order") || "",
+    });
+
+    const updateQueryParams = (params) => {
+        const cleaned = {};
+
+        Object.entries(params).forEach(([key, value]) => {
+            if (value !== "" && value !== null && value !== undefined) {
+                cleaned[key] = value;
+            }
+        });
+
+        setSearchParams(cleaned);
+    };
 
 
     useEffect(() => {
         const fetchBookingDiagnostics = async () => {
             setLoading(true);
             try {
-                const data = await bookingDiagnosticsService.getAllLisr({page, size});
+                const data = await bookingDiagnosticsService.getAllLisr({
+                    page,
+                    size,
+                    ...filters,
+                });
                 setBookingDiagnostics(data.data);
                 setTotalPages(data.total_pages);
             } catch (err) {
@@ -32,7 +56,7 @@ const BookingDiagnosticsComponent = () => {
             }
         };
         fetchBookingDiagnostics();
-    }, [page, size, trigger]);
+    }, [page, size, trigger, filters]);
 
     useEffect(() => {
         socketInit().then()
@@ -53,7 +77,40 @@ const BookingDiagnosticsComponent = () => {
         client.onmessage = ({data}) => {
             setTrigger(prev => !prev)
         }
-    }
+    };
+
+    const handleFilter = (newFilters) => {
+        setFilters(newFilters);
+        setPage(1);
+
+        updateQueryParams({
+            page: 1,
+            size,
+            ...newFilters,
+        });
+    };
+
+
+    const handlePageChange = (newPage) => {
+        setPage(newPage);
+
+        updateQueryParams({
+            page: newPage,
+            size,
+            ...filters,
+        });
+    };
+
+    const handleSizeChange = (newSize) => {
+        setSize(newSize);
+        setPage(1);
+
+        updateQueryParams({
+            page: 1,
+            size: newSize,
+            ...filters,
+        });
+    };
 
 
     if (loading) return (
@@ -76,9 +133,7 @@ const BookingDiagnosticsComponent = () => {
     return (
         <div className={'booking-diagnostics-component'}>
             <div className={'booking-diagnostics-component-filter'}>
-                <BookingDiagnosticsFilterComponent onFilter={(params) => {
-                    bookingDiagnosticsService.getAllLisr(params).then(res => setBookingDiagnostics(res.data));
-                }}/>
+                <BookingDiagnosticsFilterComponent onFilter={handleFilter}/>
             </div>
             <div className={'booking-diagnostics-component-maping'}>
                 {bookingDiagnostics.length === 0 ? (
@@ -90,11 +145,12 @@ const BookingDiagnosticsComponent = () => {
                 )}
             </div>
             <div className={'booking-diagnostics-component-pagination'}>
-                <PaginationComponent page={page} totalPages={totalPages} size={size} onPageChange={setPage}
-                                     onSizeChange={(newSize) => {
-                                         setSize(newSize);
-                                         setPage(1);
-                                     }}
+                <PaginationComponent
+                    page={page}
+                    totalPages={totalPages}
+                    size={size}
+                    onPageChange={handlePageChange}
+                    onSizeChange={handleSizeChange}
                 />
             </div>
         </div>

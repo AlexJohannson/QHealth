@@ -5,17 +5,38 @@ import {PaginationComponent} from "../../PaginationComponent/PaginationComponent
 import {DoctorsFilterComponent} from "../DoctorsFilterComponet/DoctorsFilterComponent";
 import {useLocation} from "react-router-dom";
 import './DoctorsComponent.css';
+import { useSearchParams } from "react-router-dom";
+
 
 const DoctorsComponent = () => {
+    const [searchParam, setSearchParam] = useSearchParams();
     const [doctors, setDoctors] = useState([]);
-    const [page, setPage] = useState(1);
-    const [size, setSize] = useState(5);
+    const [page, setPage] = useState(Number(searchParam.get("page")) || 1);
+    const [size, setSize] = useState(Number(searchParam.get("size")) || 5);
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const patientId = searchParams.get('patientId');
+    const [filters, setFilters] = useState({
+        icontains_name: searchParam.get("icontains_name") || "",
+        icontains_surname: searchParam.get("icontains_surname") || "",
+        icontains_specialty: searchParam.get("icontains_specialty") || "",
+        order: searchParams.get("order") || "",
+    });
+
+    const updateQueryParams = (params) => {
+        const cleaned = {};
+
+        Object.entries(params).forEach(([key, value]) => {
+            if (value !== "" && value !== null && value !== undefined) {
+                cleaned[key] = value;
+            }
+        });
+
+        setSearchParam(cleaned);
+    };
 
 
 
@@ -23,7 +44,11 @@ const DoctorsComponent = () => {
         const fetchDoctors = async () => {
             setLoading(true);
             try {
-                const data = await roleService.getListOfDoctors({page, size});
+                const data = await roleService.getListOfDoctors({
+                    page,
+                    size,
+                    ...filters,
+                });
                 setDoctors(data.data);
                 setTotalPages(data.total_pages);
             } catch (error) {
@@ -33,7 +58,40 @@ const DoctorsComponent = () => {
             }
         };
         fetchDoctors();
-    }, [page, size]);
+    }, [page, size, filters]);
+
+    const handleFilter = (newFilters) => {
+        setFilters(newFilters);
+        setPage(1);
+
+        updateQueryParams({
+            page: 1,
+            size,
+            ...newFilters,
+        });
+    };
+
+
+    const handlePageChange = (newPage) => {
+        setPage(newPage);
+
+        updateQueryParams({
+            page: newPage,
+            size,
+            ...filters,
+        });
+    };
+
+    const handleSizeChange = (newSize) => {
+        setSize(newSize);
+        setPage(1);
+
+        updateQueryParams({
+            page: 1,
+            size: newSize,
+            ...filters,
+        });
+    };
 
 
     if (loading) return (
@@ -55,10 +113,7 @@ const DoctorsComponent = () => {
     return (
         <div className={'doctors-component'}>
             <div className={'doctors-component-filter'}>
-                <DoctorsFilterComponent onFilter={(params) => {
-                    roleService.getListOfDoctors(params).then(res => setDoctors(res.data));
-                }}
-                />
+                <DoctorsFilterComponent onFilter={handleFilter}/>
             </div>
             <div className={'doctors-component-maping'}>
                 {doctors.length === 0 ? (
@@ -70,11 +125,12 @@ const DoctorsComponent = () => {
                 )}
             </div>
             <div className={'doctors-component-pagination'}>
-                <PaginationComponent page={page} totalPages={totalPages} size={size} onPageChange={setPage}
-                                     onSizeChange={(newSize) => {
-                                         setSize(newSize);
-                                         setPage(1)
-                                     }}
+                <PaginationComponent
+                    page={page}
+                    totalPages={totalPages}
+                    size={size}
+                    onPageChange={handlePageChange}
+                    onSizeChange={handleSizeChange}
                 />
             </div>
         </div>
