@@ -16,14 +16,13 @@
 }
 /*----------------------------------------------    diagnostics-list-component-filter   ------------------------------*/
 .diagnostics-list-component-filter {
-    margin: 15px 0 15px 0;
+    margin-bottom: 15px;
 }
 /*----------------------------------------   diagnostics-list-component-maping   -------------------------------------*/
 .diagnostics-list-component-maping {
     width: 100%;
-    height: 300px;
+    height: 400px;
     display: flex;
-    align-items: center;
     flex-direction: column;
     gap: 40px;
     overflow-y: auto;
@@ -39,7 +38,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 15px 0 15px 0;
+    margin-top: 15px;
 }
 /*-----------------------------------------   diagnostics-skeleton-container   ---------------------------------------*/
 .diagnostics-skeleton-container {

@@ -7,17 +7,38 @@ import {formatDate} from "../../../untils/formatDate";
  * @param {{security: ISecurity}} props
  */
 const SecurityProfileComponent = ({security, onSelect}) => {
-  return (
-    <div className={'security-profile-component'} onClick={onSelect}>
-        <h4>ID: {security.id}</h4>
-        <h4>Email: {security.email}</h4>
-        <h4>IP Address: {security.ip_address}</h4>
-        <h4>Time stamp: {formatDate(security.timestamp)}</h4>
-        <h4>Success: {security.success ? 'Yes' : 'No'}</h4>
-        <h4>Created: {formatDate(security.created_at)}</h4>
-        <h4>Updated: {formatDate(security.updated_at)}</h4>
-    </div>
-  );
+    return (
+        <div className={'security-profile-component'} onClick={onSelect}>
+            <div className={'security-profile-items'}>
+                <h5>ID:</h5>
+                <h3>{security.id}</h3>
+            </div>
+            <div className={'security-profile-items'}>
+                <h5>Email:</h5>
+                <h3>{security.email}</h3>
+            </div>
+            <div className={'security-profile-items'}>
+                <h5>IP Address:</h5>
+                <h3>{security.ip_address}</h3>
+            </div>
+            <div className={'security-profile-items'}>
+                <h5>Time stamp:</h5>
+                <h3>{formatDate(security.timestamp)}</h3>
+            </div>
+            <div className={'security-profile-items'}>
+                <h5>Success:</h5>
+                <h3>{security.success ? 'Yes' : 'No'}</h3>
+            </div>
+            <div className={'security-profile-items'}>
+                <h5>Created:</h5>
+                <h3>{formatDate(security.created_at)}</h3>
+            </div>
+            <div className={'security-profile-items'}>
+                <h5>Updated:</h5>
+                <h3>{formatDate(security.updated_at)}</h3>
+            </div>
+        </div>
+    );
 };
 
 export {SecurityProfileComponent};

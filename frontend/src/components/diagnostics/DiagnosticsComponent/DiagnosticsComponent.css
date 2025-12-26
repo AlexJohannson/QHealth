@@ -9,9 +9,8 @@
 /*-----------------------------------------    diagnostics-component-maping   ----------------------------------------*/
 .diagnostics-component-maping {
     width: 100%;
-    height: 300px;
+    height: 400px;
     display: flex;
-    align-items: center;
     flex-direction: column;
     gap: 40px;
     overflow-y: auto;

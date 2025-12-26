@@ -1,7 +1,30 @@
 .diagnostics-list-profile-component {
+    width: 100%;
+    height: 100px;
     font: inherit;
     color: inherit;
+    text-decoration: none;
+    border: 1px solid gray;
+    margin-bottom: 10px;
+    background-color: white;
+    cursor: pointer;
 }
 .diagnostics-list-profile-component:hover {
-    color: red;
+    background-color: green;
+}
+.diagnostics-list-profile-component-link{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.diagnostics-list-profile-component-items{
+    width: 400px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
 }

@@ -14,12 +14,15 @@ const DiagnosticsProfileComponent = ({diagnostic}) => {
     const patientId = searchParams.get('patientId');
 
     return (
-        <div>
-            <Link className={'diagnostics-profile-component'}
-                  to={`/diagnostics/${diagnostic.id}${patientId ? `?patientId=${patientId}` : ''}`}>
-                <h2>{diagnostic.modality}</h2>
-            </Link>
-        </div>
+        <Link className={'diagnostics-profile-component'}
+              to={`/diagnostics/${diagnostic.id}${patientId ? `?patientId=${patientId}` : ''}`}>
+            <div className="diagnostics-profile-component-container">
+                <div className="diagnostics-profile-component-items">
+                    <h4>Diagnostic:</h4>
+                    <h2>{diagnostic.modality}</h2>
+                </div>
+            </div>
+        </Link>
     );
 };
 

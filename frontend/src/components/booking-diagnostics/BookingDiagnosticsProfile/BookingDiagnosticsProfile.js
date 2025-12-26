@@ -7,21 +7,27 @@ import './BookingDiagnosticsProfile.css';
  * @param {{bookingDiagnostic : IDiagnosticBooking}} props
  */
 
-const BookingDiagnosticsProfile = ({ bookingDiagnostic }) => {
+const BookingDiagnosticsProfile = ({bookingDiagnostic}) => {
     const userProfile = bookingDiagnostic.user?.profile;
     const modality = bookingDiagnostic.diagnostic_service?.modality;
 
     return (
-        <div className="booking-diagnostics-profile">
-            <Link className={'booking-diagnostics-profile-link'} to={`/booking-diagnostic/${bookingDiagnostic.id}`}>
-                <h4>
-                    {userProfile
-                        ? `${userProfile.name} ${userProfile.surname}`
-                        : 'Unknown patient'}
-                </h4>
-                <p>Diagnostics: {modality || 'Unknown modality'}</p>
-            </Link>
-        </div>
+        <Link className={'booking-diagnostics-profile-link'} to={`/booking-diagnostic/${bookingDiagnostic.id}`}>
+            <div className="booking-diagnostics-profile-link-container">
+                <div className="booking-diagnostics-profile-link-container-items">
+                    <h4>Patient Name:</h4>
+                    <h2>{userProfile.name}</h2>
+                </div>
+                <div className="booking-diagnostics-profile-link-container-item">
+                    <h4>Patient Surname:</h4>
+                    <h2>{userProfile.surname}</h2>
+                </div>
+                <div className="booking-diagnostics-profile-link-container-item">
+                    <h4>Diagnostic:</h4>
+                    <h2>{modality}</h2>
+                </div>
+            </div>
+        </Link>
     );
 };
 
