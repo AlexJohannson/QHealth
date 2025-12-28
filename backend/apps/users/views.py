@@ -3,9 +3,10 @@ from django.utils.decorators import method_decorator
 
 from rest_framework import status
 from rest_framework.generics import GenericAPIView, ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
+from core.services.jwt_service import JWTService, VerifyEmailToken
 from core.tasks.send_block_user_account_email_task import send_block_user_account_email_task
 from core.tasks.send_create_admin_email_task import send_create_admin_email_task
 from core.tasks.send_delete_user_account_email_task import send_delete_user_account_email_task
@@ -69,6 +70,36 @@ class UsersRetrieveUpdateDestroyApiView(RetrieveUpdateDestroyAPIView):
 
         send_delete_user_account_email_task.delay(email, name)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+class VerifyEmailView(GenericAPIView):
+    """
+    get:
+        Token for verify email
+    """
+    permission_classes = (IsAuthenticated,)
+
+    def get_serializer(self):
+        return None
+
+    def get(self, request, token, *args, **kwargs):
+        user = JWTService.verify_token(token, VerifyEmailToken)
+
+        if not user.pending_email:
+            return Response({'detail': 'Nothing to verify'}, status=400)
+
+        user.email = user.pending_email
+        user.pending_email = None
+        user.is_email_verified = True
+        user.save()
+
+        return Response({'detail': 'Email successfully verified'}, status=200)
+
+
+
+
+
 
 
 class BlockUserView(GenericAPIView):

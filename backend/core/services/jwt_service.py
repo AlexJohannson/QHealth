@@ -30,6 +30,10 @@ class SocketToken(ActionToken):
     token_type = ActionTokenEnum.SOCKET.token_type
     lifetime = ActionTokenEnum.SOCKET.lifetime
 
+class VerifyEmailToken(ActionToken):
+    token_type = ActionTokenEnum.VERIFY_EMAIL.token_type
+    lifetime = ActionTokenEnum.VERIFY_EMAIL.lifetime
+
 
 
 class JWTService:

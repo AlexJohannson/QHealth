@@ -9,10 +9,12 @@ from apps.users.views import (
     UsersListCreateApiView,
     UsersRetrieveUpdateDestroyApiView,
     UserToAdminView,
+    VerifyEmailView,
 )
 
 urlpatterns = [
     path('', UsersListCreateApiView.as_view(), name='users_list_create'),
+    path('/verify_email/<str:token>', VerifyEmailView.as_view(), name='verify_email'),
     path('/<int:pk>', UsersRetrieveUpdateDestroyApiView.as_view(), name='users_retrieve_update'),
     path('/<int:pk>/block', BlockUserView.as_view(), name='user_block'),
     path('/<int:pk>/unblock', UnBlockUserView.as_view(), name='user_unblock'),

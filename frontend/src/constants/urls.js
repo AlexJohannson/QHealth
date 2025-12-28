@@ -24,7 +24,8 @@ const urls = {
     users: {
         list: users,
         registrationUserAccount: users,
-        patientCards: `${users}/patient`
+        patientCards: `${users}/patient`,
+        verifyEmail: token => `${users}/verify_email/${token}`,
     },
     roles: {
         list: roles,

@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {apiService} from "../../services/apiService";
 import {urls} from "../../constants/urls";
+import './ActivateAccountComponent.css';
 
 const ActivateAccountComponent = () => {
     const {token} = useParams();
@@ -22,7 +23,7 @@ const ActivateAccountComponent = () => {
 
 
     return (
-        <div>
+        <div className={'activate-account-component'}>
             <p>Activate account...</p>
         </div>
     );

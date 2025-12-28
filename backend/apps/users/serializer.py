@@ -106,8 +106,14 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 
-    def update(self, instance, validated_data:dict):
+    def update(self, instance, validated_data: dict):
         profile_data = validated_data.pop('profile', None)
+        new_email = validated_data.pop('email', None)
+
+        if new_email and new_email != instance.email:
+            instance.pending_email = new_email
+            instance.is_email_verified = False
+            EmailService.verify_email(instance)
 
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
@@ -120,6 +126,8 @@ class UserSerializer(serializers.ModelSerializer):
             profile.save()
 
         return instance
+
+
 
 
 

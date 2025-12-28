@@ -34,6 +34,7 @@ const UserEditFormComponent = ({userId, canEdit, onDelete}) => {
                     },
                 };
             }
+
             return {...prev, [field]: value};
         });
     };
@@ -41,9 +42,12 @@ const UserEditFormComponent = ({userId, canEdit, onDelete}) => {
 
     const buildData = () => {
         const data = {};
+        let emailChanged = false;
 
         if (formData.email !== originalData.email) {
             data.email = formData.email;
+            emailChanged = true;
+
         }
 
         const profile = {};
@@ -60,7 +64,7 @@ const UserEditFormComponent = ({userId, canEdit, onDelete}) => {
             data.profile = profile;
         }
 
-        return data;
+        return {data, emailChanged};
     };
 
     const handelSubmit = async e => {
@@ -80,7 +84,7 @@ const UserEditFormComponent = ({userId, canEdit, onDelete}) => {
             return;
         }
 
-        const data = buildData();
+        const { data, emailChanged } = buildData();
         if (!data || Object.keys(data).length === 0) {
             setError({general: 'No changes to update'});
             return;
@@ -88,7 +92,12 @@ const UserEditFormComponent = ({userId, canEdit, onDelete}) => {
 
         try {
             await userService.update(userId, data);
+            if (emailChanged) {
+            setMessage('Profile updated successfully. A confirmation email has been sent to your new email address.');
+        } else {
             setMessage('Profile updated successfully.');
+        }
+        setOriginalData(formData);
         } catch (err) {
             if (err.response?.data) {
                 setError(err.response.data);

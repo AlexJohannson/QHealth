@@ -48,7 +48,7 @@ import {CreatePatientRecipePage} from "../pages/patient-recipe-page/CreatePatien
 import {RoleGuardComponent} from "../components/RoleGuardComponent/RoleGuardComponent";
 import {PublicOnlyGuard} from "../components/RoleGuardComponent/PublicOnlyGuard";
 import {MainLayout} from "../layouts/MainLayout";
-
+import {VerifyEmailPage} from "../pages/VerifyEmailPage/VerifyEmailPage";
 
 
 const router = createBrowserRouter([
@@ -57,9 +57,9 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true, element: (
-                     <PublicOnlyGuard>
-                         <HomePage/>
-                     </PublicOnlyGuard>
+                    <PublicOnlyGuard>
+                        <HomePage/>
+                    </PublicOnlyGuard>
                 )
             },
             {
@@ -143,6 +143,7 @@ const router = createBrowserRouter([
                     </PublicOnlyGuard>
                 )
             },
+            {path: 'users/verify_email/:token', element: <VerifyEmailPage/>},
             {path: 'users', element: <UserPage/>},
             {path: 'users/:id', element: <UserDetailsPage/>},
             {path: 'users-update/:id', element: <UserEditFormPage/>},

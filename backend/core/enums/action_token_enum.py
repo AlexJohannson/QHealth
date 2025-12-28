@@ -18,6 +18,11 @@ class ActionTokenEnum(Enum):
         timedelta(seconds=10)
     )
 
+    VERIFY_EMAIL = (
+        'verify_email',
+        timedelta(minutes=10)
+    )
+
 
     def __init__(self, token_type, lifetime):
         self.token_type = token_type
