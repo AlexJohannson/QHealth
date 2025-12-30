@@ -9,6 +9,7 @@ const bookingDiagnostic = '/booking_diagnostic';
 const bookingDoctor = '/booking_doctor';
 const patientJournal = '/patient_card';
 const patientRecipe = '/patient_recipe';
+const sickLeave = '/sick_leaves';
 
 
 const urls = {
@@ -47,6 +48,9 @@ const urls = {
     },
     patientRecipe: {
         list: patientRecipe,
+    },
+    sickLeave: {
+        list: sickLeave,
     }
 }
 

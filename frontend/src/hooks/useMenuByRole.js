@@ -24,6 +24,7 @@ const useMenuByRole = () => {
                 {label: 'Booking Doctors List', path: '/booking-doctor'},
                 {label: 'Journal', path: '/patient-journal'},
                 {label: 'Patient Recipes', path: '/patient-recipe'},
+                {label: 'Sick Leaves', path: '/sick-leaves'},
                 {label: 'Security List', path: '/security-list'},
             ];
         }
@@ -39,6 +40,7 @@ const useMenuByRole = () => {
                 {label: 'Booking Doctors List', path: '/booking-doctor'},
                 {label: 'Journal', path: '/patient-journal'},
                 {label: 'Patient Recipes', path: '/patient-recipe'},
+                {label: 'Sick Leaves', path: '/sick-leaves'},
                 {label: 'Security List', path: '/security-list'},
             ];
         }
@@ -54,6 +56,7 @@ const useMenuByRole = () => {
                     {label: 'Booking Doctors List', path: '/booking-doctor'},
                     {label: 'Journal', path: '/patient-journal'},
                     {label: 'Patient Recipes', path: '/patient-recipe'},
+                    {label: 'Sick Leaves', path: '/sick-leaves'},
                 ];
             case 'operator':
                 return [
@@ -65,6 +68,7 @@ const useMenuByRole = () => {
                     {label: 'Booking Doctors List', path: '/booking-doctor'},
                     {label: 'Journal', path: '/patient-journal'},
                     {label: 'Patient Recipes', path: '/patient-recipe'},
+                    {label: 'Sick Leaves', path: '/sick-leaves'},
                 ];
             case 'pharmacist':
                 return [
@@ -84,6 +88,7 @@ const useMenuByRole = () => {
                         {label: 'Booking Doctors List', path: '/booking-doctor'},
                         {label: 'Journal', path: '/patient-journal'},
                         {label: 'My Recipes', path: '/patient-recipe'},
+                        {label: 'My Sick Leaves', path: '/sick-leaves'},
                     ];
                 }
                 return [];

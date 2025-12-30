@@ -122,3 +122,5 @@ class UserRoleView(GenericAPIView):
         serializer = UserRoleSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         return Response(serializer.data)
+
+

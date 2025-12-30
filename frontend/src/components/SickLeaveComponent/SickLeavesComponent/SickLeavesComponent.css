@@ -1,0 +1,85 @@
+.patient-sick-leaves-container{
+    width: 100%;
+    background-color: lightyellow;
+}
+/*----------------------------------    patient-sick-leaves-container-filter   ---------------------------------------*/
+.patient-sick-leaves-container-filter{
+    margin-bottom: 15px;
+}
+/*--------------------------------    patient-sick-leaves-container-maping  ------------------------------------------*/
+.patient-sick-leaves-container-maping{
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    overflow-y: auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.patient-sick-leaves-container-maping-error{
+    color: red;
+}
+/*------------------------------------    patient-sick-leaves-container-pagination   ---------------------------------*/
+.patient-sick-leaves-container-pagination{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+/*----------------------------------   sick-leaves-skeleton-container  -----------------------------------------------*/
+.sick-leaves-skeleton-container{
+    width: 100%;
+    height: 690px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.sick-leaves-skeleton-item{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: #f2f2f2;
+    border-radius: 6px;
+    animation: pulse 1.2s infinite;
+    width: 100%;
+}
+.sick-leaves-skeleton-avatar{
+     width: 50px;
+    height: 50px;
+    background: #ddd;
+    border-radius: 50%;
+}
+.sick-leaves-skeleton-info{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 200px;
+}
+.sick-leaves-skeleton-line{
+    height: 10px;
+    background: #ddd;
+    border-radius: 4px;
+}
+.sick-leaves-skeleton-line.short {
+    width: 30%;
+}
+.sick-leaves-skeleton-line.long {
+    width: 70%;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}

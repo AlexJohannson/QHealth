@@ -252,7 +252,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"email\": \"neuropsychologist@operator.send\",\r\n    \"profile\": {\r\n        \"name\": \"Jonathan\",\r\n        \"surname\": \"Neuropsychologist\",\r\n        \"phone_number\": \"+46700000000\",\r\n        \"date_of_birth\": \"1972-07-12\",\r\n        \"height\": 168,\r\n        \"weight\": 47,\r\n        \"street\": \"St. Street\",\r\n        \"house\": \"3A\",\r\n        \"city\": \"Lund\",\r\n        \"region\": \"Skone\",\r\n        \"country\": \"Sweden\",\r\n        \"gender\": \"Male\"\r\n    }\r\n}",
+									"raw": "{\r\n    \"email\": \"mehedsanya@gmail.com\",\r\n    \"profile\": {\r\n        \"name\": \"Jonathan\",\r\n        \"surname\": \"Neuropsychologist\",\r\n        \"phone_number\": \"+46700000000\",\r\n        \"date_of_birth\": \"1972-07-12\",\r\n        \"height\": 168,\r\n        \"weight\": 47,\r\n        \"street\": \"St. Street\",\r\n        \"house\": \"3A\",\r\n        \"city\": \"Lund\",\r\n        \"region\": \"Skone\",\r\n        \"country\": \"Sweden\",\r\n        \"gender\": \"Male\"\r\n    }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -271,7 +271,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "40"
+											"value": "15"
 										}
 									]
 								}
@@ -305,7 +305,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "61"
+											"value": "15"
 										}
 									]
 								}
@@ -339,7 +339,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "95"
+											"value": "16"
 										}
 									]
 								}
@@ -353,7 +353,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"email\": \"patienttwo@send.com\",\r\n    \"password\": \"AdminNQ@!1\",\r\n    \"profile\": {\r\n        \"name\": \"Eva\",\r\n        \"surname\": \"Patient Two\",\r\n        \"phone_number\": \"+46700000000\",\r\n        \"date_of_birth\": \"1985-09-22\",\r\n        \"height\": 170,\r\n        \"weight\": 60,\r\n        \"street\": \"St. Street\",\r\n        \"house\": \"3A\",\r\n        \"city\": \"Helsinborg\",\r\n        \"region\": \"Skone\",\r\n        \"country\": \"Sweden\",\r\n        \"gender\": \"Female\"\r\n    }\r\n}",
+									"raw": "{\r\n    \"email\": \"mehedsanya@gmail.com\",\r\n    \"password\": \"AdminNQ@!1\",\r\n    \"profile\": {\r\n        \"name\": \"Oleksandr\",\r\n        \"surname\": \"Oleksandr\",\r\n        \"phone_number\": \"+46700000000\",\r\n        \"date_of_birth\": \"1985-09-22\",\r\n        \"height\": 170,\r\n        \"weight\": 60,\r\n        \"street\": \"St. Street\",\r\n        \"house\": \"3A\",\r\n        \"city\": \"Helsinborg\",\r\n        \"region\": \"Skone\",\r\n        \"country\": \"Sweden\",\r\n        \"gender\": \"Female\"\r\n    }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -447,6 +447,42 @@
 											"key": "id",
 											"value": "10"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "verifyEmail",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"patienttwo@send.com\",\r\n    \"password\": \"AdminNQ@!1\",\r\n    \"profile\": {\r\n        \"name\": \"Eva\",\r\n        \"surname\": \"Patient Two\",\r\n        \"phone_number\": \"+46700000000\",\r\n        \"date_of_birth\": \"1985-09-22\",\r\n        \"height\": 170,\r\n        \"weight\": 60,\r\n        \"street\": \"St. Street\",\r\n        \"house\": \"3A\",\r\n        \"city\": \"Helsinborg\",\r\n        \"region\": \"Skone\",\r\n        \"country\": \"Sweden\",\r\n        \"gender\": \"Female\"\r\n    }\r\n}"
+								},
+								"url": {
+									"raw": "{{host}}/users/verify_email/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoidmVyaWZ5X2VtYWlsIiwiZXhwIjoxNzY2ODQyNDczLCJpYXQiOjE3NjY4NDE4NzMsImp0aSI6IjE2NTQ1NTgzOGYxYjRmMjM5NmMwYzdlMmMwNTI4MzU5IiwidXNlcl9pZCI6MTV9.X66L75AUDDhjTQnuRTuK7kvrTRbmBR_xzJGJ3jaJzDA",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"verify_email",
+										"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoidmVyaWZ5X2VtYWlsIiwiZXhwIjoxNzY2ODQyNDczLCJpYXQiOjE3NjY4NDE4NzMsImp0aSI6IjE2NTQ1NTgzOGYxYjRmMjM5NmMwYzdlMmMwNTI4MzU5IiwidXNlcl9pZCI6MTV9.X66L75AUDDhjTQnuRTuK7kvrTRbmBR_xzJGJ3jaJzDA"
 									]
 								}
 							},
@@ -2134,6 +2170,174 @@
 								{
 									"key": "id",
 									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sickLeaves",
+			"item": [
+				{
+					"name": "getAllListSickLeaves",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/sick_leaves",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sick_leaves"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "patient_name",
+									"value": "kok",
+									"disabled": true
+								},
+								{
+									"key": "patient_surname",
+									"value": "one",
+									"disabled": true
+								},
+								{
+									"key": "diagnosis",
+									"value": "wwww",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "-id",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createNewSickLeaves",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 4,\r\n    \"diagnosis\": \"WWWWWWWWW\",\r\n    \"description\": \"QQQQQQQQQQ.\",\r\n    \"from_date\": \"2026-01-01\",\r\n    \"to_date\": \"2027-01-01\",\r\n    \"doctor_id\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/sick_leaves",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sick_leaves"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSickLeavesByID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/sick_leaves/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sick_leaves",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "28"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSickLeaves",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/sick_leaves/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sick_leaves",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "32"
 								}
 							]
 						}

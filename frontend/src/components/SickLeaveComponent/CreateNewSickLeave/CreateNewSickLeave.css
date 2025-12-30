@@ -1,0 +1,77 @@
+.create-sick-leave-container{
+    width: 100%;
+    background-color: lightyellow;
+    padding: 15px 0 15px 0;
+}
+
+.form-group-sick{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: grey;
+    gap: 25px;
+}
+.form-group-sick-leave-diagnosis{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+.form-group-sick-leave-diagnosis input {
+    width: 750px;
+    height: 60px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease
+}
+.form-group-sick-leave-description{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+.form-group-sick-leave-description textarea{
+    width: 750px;
+    height: 170px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease
+}
+.form-group-sick-leave-date{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+.form-group-sick-leave-date input{
+    width: 400px;
+    height: 60px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease
+}
+.create-sick-leave-button{
+    width: 170px;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+.create-sick-leave-button:hover{
+    background-color: green;
+}

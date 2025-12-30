@@ -170,6 +170,18 @@ zookeeper = ["kazoo (>=1.3.1)"]
 zstd = ["zstandard (==0.23.0)"]
 
 [[package]]
+name = "certifi"
+version = "2025.11.12"
+description = "Python package for providing Mozilla's CA Bundle."
+optional = false
+python-versions = ">=3.7"
+groups = ["main"]
+files = [
+    {file = "certifi-2025.11.12-py3-none-any.whl", hash = "sha256:97de8790030bbd5c2d96b7ec782fc2f7820ef8dba6db909ccf95449f2d062d4b"},
+    {file = "certifi-2025.11.12.tar.gz", hash = "sha256:d8ab5478f2ecd78af242878415affce761ca6bc54a22a27e026d7c25357c3316"},
+]
+
+[[package]]
 name = "cffi"
 version = "2.0.0"
 description = "Foreign Function Interface for Python calling C code."
@@ -375,6 +387,26 @@ prompt-toolkit = ">=3.0.36"
 
 [package.extras]
 testing = ["pytest (>=7.2.1)", "pytest-cov (>=4.0.0)", "tox (>=4.4.3)"]
+
+[[package]]
+name = "cloudinary"
+version = "1.44.1"
+description = "Python and Django SDK for Cloudinary"
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "cloudinary-1.44.1-py3-none-any.whl", hash = "sha256:b4785031179a5ec7010f46665e5c8fad2cae022c18405546f01d257e02f78b1c"},
+    {file = "cloudinary-1.44.1.tar.gz", hash = "sha256:62d4374b79d5476de2a86cb6a1da709a5429e02aef474bfc5d99f3e38a1a62ff"},
+]
+
+[package.dependencies]
+certifi = "*"
+six = "*"
+urllib3 = ">=1.26.5"
+
+[package.extras]
+dev = ["pytest (==4.6) ; python_version < \"3.7\"", "pytest ; python_version >= \"3.7\"", "tox"]
 
 [[package]]
 name = "colorama"
@@ -684,6 +716,17 @@ uritemplate = ">=3.0.0"
 [package.extras]
 coreapi = ["coreapi (>=2.3.3)", "coreschema (>=0.0.4)"]
 validation = ["swagger-spec-validator (>=2.1.0)"]
+
+[[package]]
+name = "fpdf"
+version = "1.7.2"
+description = "Simple PDF generation for Python"
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "fpdf-1.7.2.tar.gz", hash = "sha256:125840783289e7d12552b1e86ab692c37322e7a65b96a99e0ea86cca041b6779"},
+]
 
 [[package]]
 name = "hyperlink"
@@ -1303,6 +1346,24 @@ files = [
 ]
 
 [[package]]
+name = "urllib3"
+version = "2.6.2"
+description = "HTTP library with thread-safe connection pooling, file post, and more."
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "urllib3-2.6.2-py3-none-any.whl", hash = "sha256:ec21cddfe7724fc7cb4ba4bea7aa8e2ef36f607a4bab81aa6ce42a13dc3f03dd"},
+    {file = "urllib3-2.6.2.tar.gz", hash = "sha256:016f9c98bb7e98085cb2b4b17b87d2c702975664e4f060c6532e64d1c1a5e797"},
+]
+
+[package.extras]
+brotli = ["brotli (>=1.2.0) ; platform_python_implementation == \"CPython\"", "brotlicffi (>=1.2.0.0) ; platform_python_implementation != \"CPython\""]
+h2 = ["h2 (>=4,<5)"]
+socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
+zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
+
+[[package]]
 name = "vine"
 version = "5.1.0"
 description = "Python promises."
@@ -1375,4 +1436,4 @@ testing = ["coverage[toml]", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "cf39606e056cdcfcbe8d16740b9a95387e9baebe9d5256ba551884ecd7e8d6ac"
+content-hash = "72bf6dfad7f3995e0332332f46314f3eb588ff1e4932147d6c32e16ecb48610d"

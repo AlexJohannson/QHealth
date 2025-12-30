@@ -46,6 +46,7 @@ const PatientDetailsComponent = () => {
         isStaff ||
         role === 'pharmacist';
 
+    const canSeePatientSickLeaveLinc = role === 'doctor';
 
     if (loading) return (
         <div className="patient-profile-skeleton">
@@ -100,13 +101,19 @@ const PatientDetailsComponent = () => {
                 {canSeeJournalLink && (
                     <Link className={'booking-diagnostics-link-patient-details-component'}
                           to={`/create-patient-journal?patientId=${user.id}`}>
-                    Create Patient Journal
-                </Link>
+                        Create Patient Journal
+                    </Link>
                 )}
                 {canSeePatientRecipeLink && (
-                <Link className={'booking-diagnostics-link-patient-details-component'}
-                      to={`/create-patient-recipe?patientId=${user.id}`}>
-                    Create Patient Recipe
+                    <Link className={'booking-diagnostics-link-patient-details-component'}
+                          to={`/create-patient-recipe?patientId=${user.id}`}>
+                        Create Patient Recipe
+                    </Link>
+                )}
+                {canSeePatientSickLeaveLinc && (
+                    <Link className={'booking-diagnostics-link-patient-details-component'}
+                        to={`/create-new-sick-leave?patientId=${user.id}&doctorId=${localStorage.getItem("userId")}`}>
+                    Create New Sick Leave
                 </Link>
                 )}
             </div>

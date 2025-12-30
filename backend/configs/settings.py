@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'apps.booking_diagnostic',
     'apps.booking_doctor',
     'apps.patient_recipe',
+    'apps.sick_leaves',
 ]
 
 MIDDLEWARE = [
@@ -137,6 +138,15 @@ USE_TZ = True
 
 STATIC_URL = '/drf-static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+
+
+CLOUDINARY_CLOUD_NAME = os.getenv("CLOUDINARY_CLOUD_NAME")
+CLOUDINARY_API_KEY = os.getenv("CLOUDINARY_API_KEY")
+CLOUDINARY_API_SECRET = os.getenv("CLOUDINARY_API_SECRET")
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

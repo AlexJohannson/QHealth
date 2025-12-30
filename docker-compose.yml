@@ -44,4 +44,13 @@ services:
     restart: on-failure
     command: >
       sh -c "celery -A configs worker -l info -B"
+      
+      
+      
+      
+      
+      
+      
+      
+
 

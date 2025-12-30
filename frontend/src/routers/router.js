@@ -49,6 +49,9 @@ import {RoleGuardComponent} from "../components/RoleGuardComponent/RoleGuardComp
 import {PublicOnlyGuard} from "../components/RoleGuardComponent/PublicOnlyGuard";
 import {MainLayout} from "../layouts/MainLayout";
 import {VerifyEmailPage} from "../pages/VerifyEmailPage/VerifyEmailPage";
+import {SickLeavesPage} from "../pages/SickLeavePages/SickLeavesPage/SickLeavesPage";
+import {SickLeaveDetailPage} from "../pages/SickLeavePages/SickLeaveDetailPage/SickLeaveDetailPage";
+import {CreateNewSickLeavePage} from "../pages/SickLeavePages/CreateNewSickLeavePage/CreateNewSickLeavePage";
 
 
 const router = createBrowserRouter([
@@ -169,7 +172,10 @@ const router = createBrowserRouter([
             {path: 'create-patient-journal', element: <CreatePatientJournalPage/>},
             {path: 'patient-recipe', element: <PatientRecipePage/>},
             {path: 'patient-recipe/:id', element: <PatientRecipeDetailsPage/>},
-            {path: 'create-patient-recipe', element: <CreatePatientRecipePage/>}
+            {path: 'create-patient-recipe', element: <CreatePatientRecipePage/>},
+            {path: 'sick-leaves', element: <SickLeavesPage/>},
+            {path: 'sick-leaves/:id', element: <SickLeaveDetailPage/>},
+            {path: 'create-new-sick-leave', element: <CreateNewSickLeavePage/>}
         ]
     },
 ])

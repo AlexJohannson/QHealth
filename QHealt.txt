@@ -52,6 +52,11 @@ Project Type: Fullstack application for a medical institution
 	- Create new prescriptions for a patient
 	- Getting patient prescription by ID
 	- Delete patient prescription by ID
+	- Create sick leave for patient
+	- Get list of sick leaves
+	- Get sick leave by ID
+	- Delete sick leave by ID
+	- Formatting sick leave in PDF file
 
 - User Roles:
 	- Superuser
@@ -223,6 +228,11 @@ Non-Functional Requirements & Technologies
     Security list:
         - Success (True/False)
         - Ordering (by ID, by success, by created_at)
+    Sick leaves list:
+        - Patient Name
+        - Patient Surname
+        - Diagnosis
+        - Ordering (by ID)
 
 
 Celery tasks:

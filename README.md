@@ -35,6 +35,8 @@ It provides secure role-based access and real-time functionality for booking dia
     - MySQL;
     - Channels + Daphne + WebSocket;
     - DRF-YASG (Swagger);
+    - Cloudinary;
+    - fpdf;
 
 - **DevOps:**
     - Docker / Docker Compose;
@@ -64,6 +66,8 @@ It provides secure role-based access and real-time functionality for booking dia
   - DRF YASG (Swagger);
   - Django Filter;
   - isort;
+  - Cloudinary;
+  - fpdf;
 - **Frontend:**
     - react;
     - react-dom;
@@ -100,6 +104,7 @@ It is designed to handle role-based access, medical workflows, and real-time upd
 - **API documentation:** Swagger (DRF-YASG) and Postman collection for testing and integration.
 - **Testing:** coverage: views - api`s, filters, managers, models, permissions, serializers 
 - **Deployment:** containerized with Docker, orchestrated via Docker Compose, served through Nginx.
+- **PDF Sick Leaves:** formatting on the backend and saving the PDF file in Cloudinary.
 
 ### Key Features on Backend
 - Secure role-based endpoints for all user types.
@@ -159,6 +164,10 @@ It is designed to support role-based access and seamless interaction with the ba
     REDIS_HOST=
     REDIS_PORT=
     REDIS_DB=
+
+    CLOUDINARY_CLOUD_NAME=
+    CLOUDINARY_API_KEY=
+    CLOUDINARY_API_SECRET=
 
 ---
 
