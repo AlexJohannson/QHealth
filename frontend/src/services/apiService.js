@@ -41,7 +41,8 @@ apiService.interceptors.response.use(
                 localStorage.removeItem('access');
                 localStorage.removeItem('refresh');
 
-                window.location.href = '/login';
+
+                window.history.pushState({}, '', '/login');
                 return Promise.reject(error);
             }
 
@@ -63,7 +64,8 @@ apiService.interceptors.response.use(
                 localStorage.removeItem('access');
                 localStorage.removeItem('refresh');
 
-                window.location.href = '/login';
+
+                window.history.pushState({}, '', '/login');
                 return Promise.reject(error);
             }
         }
@@ -73,3 +75,4 @@ apiService.interceptors.response.use(
 );
 
 export {apiService};
+
