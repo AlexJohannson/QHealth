@@ -1,77 +1,95 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './RoleFilterComponent.css';
 
-const RolesFilterComponent = ({onFilter}) => {
-    const [filter, setFilter] = useState({
-        icontains_name: '',
-        icontains_surname: '',
-        icontains_role: '',
-        icontains_specialty: '',
-        order: '',
-    });
+const RolesFilterComponent = ({filters, onApply}) => {
+    const [localFilters, setLocalFilters] = useState(filters);
+
+    useEffect(() => {
+        setLocalFilters(filters);
+    }, [filters]);
+
+    const handleChange = (field, value) => {
+        setLocalFilters(prev => ({
+            ...prev,
+            [field]: value,
+        }));
+    };
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const cleaned = Object.fromEntries(
-            Object.entries(filter).filter(([_, value]) => value !== '' && value !== null)
-        );
-        onFilter(cleaned);
+        onApply(localFilters);
     };
 
     const handleClear = () => {
-        setFilter(
-            {
-                icontains_name: '',
-                icontains_surname: '',
-                icontains_role: '',
-                icontains_specialty: '',
-                order: '',
-            });
-        onFilter({});
+        const cleared = {
+            icontains_name: '',
+            icontains_surname: '',
+            icontains_role: '',
+            icontains_specialty: '',
+            order: '',
+        };
+        setLocalFilters(cleared);
+        onApply(cleared);
     };
 
     return (
         <form className={'role-filter'} onSubmit={handleSubmit}>
+            <div className={'roles-filter-field'}>
+                <label>Role Name</label>
             <input
                 type="text"
                 placeholder="Search Roles Name"
-                value={filter.icontains_name}
-                onChange={(e) => setFilter({...filter, icontains_name: e.target.value})}
+                value={localFilters.icontains_name}
+                onChange={(e) => handleChange('icontains_name', e.target.value)}
             />
+            </div>
+            <div className={'roles-filter-field'}>
+                <label>Role Surname</label>
             <input
                 type="text"
                 placeholder="Search Roles Surname"
-                value={filter.icontains_surname}
-                onChange={(e) => setFilter({...filter, icontains_surname: e.target.value})}
+                value={localFilters.icontains_surname}
+                onChange={(e) => handleChange('icontains_surname', e.target.value)}
             />
+            </div>
+            <div className={'roles-filter-field'}>
+                <label>Search Roles</label>
             <input
                 type="text"
                 placeholder="Search Roles"
-                value={filter.icontains_role}
-                onChange={(e) => setFilter({...filter, icontains_role: e.target.value})}
+                value={localFilters.icontains_role}
+                onChange={(e) => handleChange('icontains_role', e.target.value)}
             />
+            </div>
+            <div className={'roles-filter-field'}>
+                <label>Specialty for doctors</label>
             <input
                 type="text"
                 placeholder="Search Specialty"
-                value={filter.icontains_specialty}
-                onChange={(e) => setFilter({...filter, icontains_specialty: e.target.value})}
+                value={localFilters.icontains_specialty}
+                onChange={(e) => handleChange('icontains_specialty', e.target.value)}
             />
+            </div>
+            <div className={'roles-filter-field'}>
+                <label>Ordering filter</label>
             <select
-                value={filter.order}
-                onChange={(e) => setFilter({...filter, order: e.target.value})}
+                value={localFilters.order}
+                onChange={(e) => handleChange('order', e.target.value)}
             >
                 <option value="">Order by ID</option>
                 <option value="id">ID ascending</option>
                 <option value="-id">ID descending</option>
             </select>
+            </div>
             <button className={'role-filter-button'} type="submit">Apply</button>
             <button
-                    className={'role-filter-button'}
-                    type="button"
-                    onClick={handleClear}
-                >
-                    Clear
-                </button>
+                className={'role-filter-button'}
+                type="button"
+                onClick={handleClear}
+            >
+                Clear
+            </button>
         </form>
     );
 };

@@ -9,6 +9,14 @@
     border-radius: 10px;
     background-color: gray;
 }
+.patient-recipe-filter-field{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    width: 450px;
+}
 .patient-recipe-filter-form input {
      width: 450px;
     height: 40px;

@@ -2,13 +2,15 @@ import React, {useEffect, useState} from 'react';
 import {userService} from "../../../services/userService";
 import './UserEditFormComponent.css';
 import {editUsersValidator} from "../../../validator/editUsersValidator";
+import {useNavigate} from "react-router-dom";
 
-const UserEditFormComponent = ({userId, canEdit, onDelete}) => {
+const UserEditFormComponent = ({userId, canEdit}) => {
     const [formData, setFormData] = useState(null);
     const [originalData, setOriginalData] = useState(null);
     const [message, setMessage] = useState('');
     const [error, setError] = useState({});
     const [confirmDelete, setConfirmDelete] = useState(false);
+    const navigatePath = useNavigate();
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -84,7 +86,7 @@ const UserEditFormComponent = ({userId, canEdit, onDelete}) => {
             return;
         }
 
-        const { data, emailChanged } = buildData();
+        const {data, emailChanged} = buildData();
         if (!data || Object.keys(data).length === 0) {
             setError({general: 'No changes to update'});
             return;
@@ -93,11 +95,14 @@ const UserEditFormComponent = ({userId, canEdit, onDelete}) => {
         try {
             await userService.update(userId, data);
             if (emailChanged) {
-            setMessage('Profile updated successfully. A confirmation email has been sent to your new email address.');
-        } else {
-            setMessage('Profile updated successfully.');
-        }
-        setOriginalData(formData);
+                setMessage('Profile updated successfully. A confirmation email has been sent to your new email address.');
+            } else {
+                setMessage('Profile updated successfully.');
+            }
+            setOriginalData(formData);
+            setTimeout(() => {
+                navigatePath(`/users/${userId}`);
+            }, 1500);
         } catch (err) {
             if (err.response?.data) {
                 setError(err.response.data);
@@ -111,7 +116,17 @@ const UserEditFormComponent = ({userId, canEdit, onDelete}) => {
         if (!canEdit) return;
         try {
             await userService.delete(userId);
-            onDelete();
+            localStorage.removeItem('role');
+            localStorage.removeItem('is_superuser');
+            localStorage.removeItem('is_staff');
+            localStorage.removeItem('is_user');
+            localStorage.removeItem('userId');
+            localStorage.removeItem('roleId');
+            localStorage.removeItem('access');
+            localStorage.removeItem('refresh');
+
+            window.dispatchEvent(new Event("authChanged"));
+            navigatePath('/login');
         } catch (err) {
             if (err.response?.data) {
                 const backendMessage = err.response.data.detail || err.response.data.message || null;
@@ -262,6 +277,9 @@ const UserEditFormComponent = ({userId, canEdit, onDelete}) => {
                         <option value={'Male'}>Male</option>
                     </select>
                     {error["profile.gender"] && <p style={{color: 'red'}}>{error["profile.gender"]}</p>}
+
+                    {error.general && <p style={{color: 'red'}}>{error.general}</p>}
+                    {message && <p style={{color: 'green'}}>{message}</p>}
 
                     <button className={'user-edit-form-save-change'} type="submit">Save Changes</button>
                     {!confirmDelete ? (

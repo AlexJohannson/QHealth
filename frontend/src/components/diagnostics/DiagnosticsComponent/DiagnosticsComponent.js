@@ -11,28 +11,38 @@ import { useSearchParams } from "react-router-dom";
 const DiagnosticsComponent = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [diagnostics, setDiagnostics] = useState([]);
-    const [page, setPage] = useState(Number(searchParams.get("page")) || 1);
-    const [size, setSize] = useState(Number(searchParams.get("size")) || 5);
+    const page = Number(searchParams.get("page")) || 1;
+    const size = Number(searchParams.get("size")) || 5;
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [trigger, setTrigger] = useState(null);
-    const [filters, setFilters] = useState({
+    const filtersFromUrl = {
         modality: searchParams.get("modality") || "",
         order: searchParams.get("order") || "",
-    });
-
-    const updateQueryParams = (params) => {
-        const cleaned = {};
-
-        Object.entries(params).forEach(([key, value]) => {
-            if (value !== "" && value !== null && value !== undefined) {
-                cleaned[key] = value;
-            }
-        });
-
-        setSearchParams(cleaned);
     };
+
+    const [filters, setFilters] = useState(filtersFromUrl);
+
+    const updateSearchParams = (params) => {
+        setSearchParams(prev => {
+            const next = new URLSearchParams(prev);
+
+            Object.entries(params).forEach(([key, value]) => {
+                if (value === '' || value === null || value === undefined) {
+                    next.delete(key);
+                } else {
+                    next.set(key, value);
+                }
+            });
+
+            return next;
+        });
+    };
+
+    useEffect(() => {
+        setFilters(filtersFromUrl);
+    }, [searchParams]);
 
 
 
@@ -43,7 +53,7 @@ const DiagnosticsComponent = () => {
                 const data = await diagnosticsService.getAllDiagnosticsService({
                     page,
                     size,
-                    ...filters,
+                    ...filtersFromUrl,
                 });
                 setDiagnostics(data.data);
                 setTotalPages(data.total_pages);
@@ -54,7 +64,7 @@ const DiagnosticsComponent = () => {
             }
         };
         fetchDiagnostics();
-    }, [page, size, trigger, filters]);
+    }, [trigger, searchParams]);
 
 
     useEffect(() => {
@@ -76,36 +86,29 @@ const DiagnosticsComponent = () => {
         }
     };
 
-    const handleFilter = (newFilters) => {
+    const handleFilterApply = (newFilters) => {
         setFilters(newFilters);
-        setPage(1);
 
-        updateQueryParams({
+        updateSearchParams({
+            ...newFilters,
             page: 1,
             size,
-            ...newFilters,
         });
     };
 
-
     const handlePageChange = (newPage) => {
-        setPage(newPage);
-
-        updateQueryParams({
+        updateSearchParams({
             page: newPage,
             size,
-            ...filters,
+            ...filtersFromUrl,
         });
     };
 
     const handleSizeChange = (newSize) => {
-        setSize(newSize);
-        setPage(1);
-
-        updateQueryParams({
+        updateSearchParams({
             page: 1,
             size: newSize,
-            ...filters,
+            ...filtersFromUrl,
         });
     };
 
@@ -128,7 +131,10 @@ const DiagnosticsComponent = () => {
     return (
         <div className="diagnostics-component">
             <div className={'diagnostics-component-filter'}>
-                <DiagnosticsFilterComponent onFilter={handleFilter}/>
+                <DiagnosticsFilterComponent
+                    filters={filters}
+                    onApply={handleFilterApply}
+                />
             </div>
             <div className={'diagnostics-component-maping'}>
                 {diagnostics.length === 0 ? (

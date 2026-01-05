@@ -8,12 +8,12 @@ import './SecurityComponent.css';
 
 const SecurityComponent = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const [page, setPage] = useState(Number(searchParams.get("page")) || 1);
-    const [size, setSize] = useState(Number(searchParams.get("size")) || 5);
-    const [filters, setFilters] = useState({
+    const page = Number(searchParams.get("page")) || 1;
+    const size = Number(searchParams.get("size")) || 5;
+    const filtersFromUrl = {
         success: searchParams.get("success") || "",
         order: searchParams.get("order") || "",
-    });
+    };
     const [security, setSecurity] = useState([]);
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(true);
@@ -21,17 +21,27 @@ const SecurityComponent = () => {
     const [selectedSecurityId, setSelectedSecurityId] = useState(null);
 
 
-    const updateQueryParams = (params) => {
-        const cleaned = {};
+    const [filters, setFilters] = useState(filtersFromUrl);
 
-        Object.entries(params).forEach(([key, value]) => {
-            if (value !== "" && value !== null && value !== undefined) {
-                cleaned[key] = value;
-            }
+    const updateSearchParams = (params) => {
+        setSearchParams(prev => {
+            const next = new URLSearchParams(prev);
+
+            Object.entries(params).forEach(([key, value]) => {
+                if (value === '' || value === null || value === undefined) {
+                    next.delete(key);
+                } else {
+                    next.set(key, value);
+                }
+            });
+
+            return next;
         });
-
-        setSearchParams(cleaned);
     };
+
+    useEffect(() => {
+        setFilters(filtersFromUrl);
+    }, [searchParams]);
 
 
     useEffect(() => {
@@ -41,7 +51,7 @@ const SecurityComponent = () => {
                 const data = await securityService.getAll({
                     page,
                     size,
-                    ...filters,
+                    ...filtersFromUrl,
                 });
 
                 setSecurity(data.data);
@@ -54,39 +64,32 @@ const SecurityComponent = () => {
         };
 
         fetchSecurity();
-    }, [page, size, filters]);
+    }, [searchParams]);
 
 
-    const handleFilter = (newFilters) => {
+    const handleFilterApply = (newFilters) => {
         setFilters(newFilters);
-        setPage(1);
 
-        updateQueryParams({
+        updateSearchParams({
+            ...newFilters,
             page: 1,
             size,
-            ...newFilters,
         });
     };
 
-
     const handlePageChange = (newPage) => {
-        setPage(newPage);
-
-        updateQueryParams({
+        updateSearchParams({
             page: newPage,
             size,
-            ...filters,
+            ...filtersFromUrl,
         });
     };
 
     const handleSizeChange = (newSize) => {
-        setSize(newSize);
-        setPage(1);
-
-        updateQueryParams({
+        updateSearchParams({
             page: 1,
             size: newSize,
-            ...filters,
+            ...filtersFromUrl,
         });
     };
 
@@ -112,7 +115,10 @@ const SecurityComponent = () => {
     return (
         <div className="security-container">
             <div className="security-container-filter">
-                <SecurityFilterComponent onFilter={handleFilter} />
+                <SecurityFilterComponent
+                    filters={filters}
+                    onApply={handleFilterApply}
+                />
             </div>
 
             <div className="security-container-delete">

@@ -1,73 +1,94 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './DoctorsFilterComponent.css';
 
-const DoctorsFilterComponent = ({onFilter}) => {
-    const [filter, setFilter] = useState({
-        icontains_name: '',
-        icontains_surname: '',
-        icontains_specialty: '',
-        order: '',
-    });
+const DoctorsFilterComponent = ({filters, onApply}) => {
+    const [localFilters, setLocalFilters] = useState(filters);
+
+    useEffect(() => {
+        setLocalFilters(filters);
+    }, [filters]);
+
+    const handleChange = (field, value) => {
+        setLocalFilters(prev => ({
+            ...prev,
+            [field]: value,
+        }));
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const cleaned = Object.fromEntries(
-            Object.entries(filter).filter(([_, value]) => value !== '' && value !== null)
-        );
-        onFilter(cleaned);
-    }
-
-    const handleClear = () => {
-        setFilter(
-            {
-                icontains_name: '',
-                icontains_surname: '',
-                icontains_specialty: '',
-                order: '',
-            });
-        onFilter({});
+        onApply(localFilters);
     };
 
+    const handleClear = () => {
+        const cleared = {
+            icontains_name: "",
+            icontains_surname: "",
+            icontains_specialty: "",
+            order: "",
+        };
+        setLocalFilters(cleared);
+        onApply(cleared);
+    };
 
     return (
-        <div>
-            <form className={'doctor-filter-component'} onSubmit={handleSubmit}>
+        <form className="doctor-filter-component" onSubmit={handleSubmit}>
+
+            <div className="doctor-filter-field">
+                <label>Doctor Name</label>
                 <input
                     type="text"
                     placeholder="Search Doctor Name"
-                    value={filter.icontains_name}
-                    onChange={(e) => setFilter({...filter, icontains_name: e.target.value})}
+                    value={localFilters.icontains_name}
+                    onChange={(e) => handleChange('icontains_name', e.target.value)}
                 />
+            </div>
+
+            <div className="doctor-filter-field">
+                <label>Doctor Surname</label>
                 <input
                     type="text"
                     placeholder="Search Doctor Surname"
-                    value={filter.icontains_surname}
-                    onChange={(e) => setFilter({...filter, icontains_surname: e.target.value})}
+                    value={localFilters.icontains_surname}
+                    onChange={(e) => handleChange('icontains_surname', e.target.value)}
                 />
+            </div>
+
+            <div className="doctor-filter-field">
+                <label>Specialty</label>
                 <input
                     type="text"
                     placeholder="Search Specialty"
-                    value={filter.icontains_specialty}
-                    onChange={(e) => setFilter({...filter, icontains_specialty: e.target.value})}
+                    value={localFilters.icontains_specialty}
+                    onChange={(e) => handleChange('icontains_specialty', e.target.value)}
                 />
+            </div>
+
+            <div className="doctor-filter-field">
+                <label>Ordering</label>
                 <select
-                    value={filter.order}
-                    onChange={(e) => setFilter({...filter, order: e.target.value})}
+                    value={localFilters.order}
+                    onChange={(e) => handleChange('order', e.target.value)}
                 >
                     <option value="">Order by ID</option>
                     <option value="id">ID ascending</option>
                     <option value="-id">ID descending</option>
                 </select>
-                <button className={'doctor-filter-component-button'} type="submit">Apply</button>
-                <button
-                    className={'doctor-filter-component-button'}
-                    type="button"
-                    onClick={handleClear}
-                >
-                    Clear
-                </button>
-            </form>
-        </div>
+            </div>
+
+            <button className="doctor-filter-component-button" type="submit">
+                Apply
+            </button>
+
+            <button
+                type="button"
+                className="doctor-filter-component-button"
+                onClick={handleClear}
+            >
+                Clear
+            </button>
+
+        </form>
     );
 };
 

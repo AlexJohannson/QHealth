@@ -10,29 +10,39 @@ import { useSearchParams } from "react-router-dom";
 const PatientRecipeComponent = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [recipes, setRecipes] = useState([]);
-    const [page, setPage] = useState(Number(searchParams.get("page")) || 1);
-    const [size, setSize] = useState(Number(searchParams.get("size")) || 5);
+    const page = Number(searchParams.get("page")) || 1;
+    const size = Number(searchParams.get("size")) || 5;
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [trigger, setTrigger] = useState(null);
-    const [filters, setFilters] = useState({
+    const filtersFromUrl = {
         patient_name: searchParams.get("patient_name") || "",
         patient_surname: searchParams.get("patient_surname") || "",
          recipe: searchParams.get("recipe") || "",
-    });
-
-    const updateQueryParams = (params) => {
-        const cleaned = {};
-
-        Object.entries(params).forEach(([key, value]) => {
-            if (value !== "" && value !== null && value !== undefined) {
-                cleaned[key] = value;
-            }
-        });
-
-        setSearchParams(cleaned);
     };
+
+    const [filters, setFilters] = useState(filtersFromUrl);
+
+    const updateSearchParams = (params) => {
+        setSearchParams(prev => {
+            const next = new URLSearchParams(prev);
+
+            Object.entries(params).forEach(([key, value]) => {
+                if (value === '' || value === null || value === undefined) {
+                    next.delete(key);
+                } else {
+                    next.set(key, value);
+                }
+            });
+
+            return next;
+        });
+    };
+
+    useEffect(() => {
+        setFilters(filtersFromUrl);
+    }, [searchParams]);
 
 
 
@@ -43,7 +53,7 @@ const PatientRecipeComponent = () => {
                 const data = await patientRecipeService.getAllPatientRecipe({
                     page,
                     size,
-                    ...filters,
+                    ...filtersFromUrl,
                 });
                 setRecipes(data.data);
                 setTotalPages(data.total_pages);
@@ -54,7 +64,7 @@ const PatientRecipeComponent = () => {
             }
         };
         fetchRecipes();
-    }, [page, size, trigger, filters]);
+    }, [trigger, searchParams]);
 
     useEffect(() => {
         socketInit().then()
@@ -76,36 +86,29 @@ const PatientRecipeComponent = () => {
         }
     };
 
-    const handleFilter = (newFilters) => {
+    const handleFilterApply = (newFilters) => {
         setFilters(newFilters);
-        setPage(1);
 
-        updateQueryParams({
+        updateSearchParams({
+            ...newFilters,
             page: 1,
             size,
-            ...newFilters,
         });
     };
 
-
     const handlePageChange = (newPage) => {
-        setPage(newPage);
-
-        updateQueryParams({
+        updateSearchParams({
             page: newPage,
             size,
-            ...filters,
+            ...filtersFromUrl,
         });
     };
 
     const handleSizeChange = (newSize) => {
-        setSize(newSize);
-        setPage(1);
-
-        updateQueryParams({
+        updateSearchParams({
             page: 1,
             size: newSize,
-            ...filters,
+            ...filtersFromUrl,
         });
     };
 
@@ -127,7 +130,10 @@ const PatientRecipeComponent = () => {
     return (
         <div className={'patient-recipe-container'}>
             <div className={'patient-recipe-component-filter'}>
-                <PatientRecipeFilter onFilter={handleFilter}/>
+                <PatientRecipeFilter
+                    filters={filters}
+                    onApply={handleFilterApply}
+                />
             </div>
             <div className={'patient-recipe-component-maping'}>
                 {recipes.length === 0 ? (

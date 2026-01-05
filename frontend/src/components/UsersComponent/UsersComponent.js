@@ -4,19 +4,18 @@ import {PaginationComponent} from "../PaginationComponent/PaginationComponent";
 import {UserProfileComponent} from "./UserProfileComponent/UserProfileComponent";
 import {UsersFilterComponent} from "./UserFilterComponent/UserFilterComponent";
 import './UsersComponet.css';
-import { useSearchParams } from "react-router-dom";
-
+import {useSearchParams} from "react-router-dom";
 
 
 const UsersComponent = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [users, setUsers] = useState([]);
-    const [page, setPage] = useState(Number(searchParams.get("page")) || 1);
-    const [size, setSize] = useState(Number(searchParams.get("size")) || 5);
+    const page = Number(searchParams.get("page")) || 1;
+    const size = Number(searchParams.get("size")) || 5;
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const [filters, setFilters] = useState({
+    const filtersFromUrl = {
         icontains_name: searchParams.get("icontains_name") || "",
         icontains_surname: searchParams.get("icontains_surname") || "",
         min_age: searchParams.get("min_age") || "",
@@ -25,19 +24,28 @@ const UsersComponent = () => {
         icontains_city: searchParams.get("icontains_city") || "",
         icontains_country: searchParams.get("icontains_country") || "",
         gender: searchParams.get("gender") || "",
-    });
-
-    const updateQueryParams = (params) => {
-        const cleaned = {};
-
-        Object.entries(params).forEach(([key, value]) => {
-            if (value !== "" && value !== null && value !== undefined) {
-                cleaned[key] = value;
-            }
-        });
-
-        setSearchParams(cleaned);
     };
+    const [filters, setFilters] = useState(filtersFromUrl);
+
+    const updateSearchParams = (params) => {
+        setSearchParams(prev => {
+            const next = new URLSearchParams(prev);
+
+            Object.entries(params).forEach(([key, value]) => {
+                if (value === '' || value === null || value === undefined) {
+                    next.delete(key);
+                } else {
+                    next.set(key, value);
+                }
+            });
+
+            return next;
+        });
+    };
+
+    useEffect(() => {
+        setFilters(filtersFromUrl);
+    }, [searchParams]);
 
 
     useEffect(() => {
@@ -47,7 +55,7 @@ const UsersComponent = () => {
                 const data = await userService.getAll({
                     page,
                     size,
-                    ...filters,
+                    ...filtersFromUrl,
                 });
                 setUsers(data.data);
                 setTotalPages(data.total_pages);
@@ -59,37 +67,31 @@ const UsersComponent = () => {
         };
 
         fetchUsers();
-    }, [page, size, filters]);
+    }, [searchParams]);
 
-    const handleFilter = (newFilters) => {
+    const handleFilterApply = (newFilters) => {
         setFilters(newFilters);
-        setPage(1);
 
-        updateQueryParams({
+        updateSearchParams({
+            ...newFilters,
             page: 1,
             size,
-            ...newFilters,
         });
     };
 
     const handlePageChange = (newPage) => {
-        setPage(newPage);
-
-        updateQueryParams({
+        updateSearchParams({
             page: newPage,
             size,
-            ...filters,
+            ...filtersFromUrl,
         });
     };
 
     const handleSizeChange = (newSize) => {
-        setSize(newSize);
-        setPage(1);
-
-        updateQueryParams({
+        updateSearchParams({
             page: 1,
             size: newSize,
-            ...filters,
+            ...filtersFromUrl,
         });
     };
 
@@ -113,7 +115,10 @@ const UsersComponent = () => {
     return (
         <div className="users-component-container">
             <div className="users-component-container-filter">
-                <UsersFilterComponent onFilter={handleFilter}/>
+                <UsersFilterComponent
+                    filters={filters}
+                    onApply={handleFilterApply}
+                />
             </div>
             <div className='users-component-container-maping'>
                 {users.length === 0 ? (

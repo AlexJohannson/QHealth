@@ -3,11 +3,26 @@
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 2px;
+    justify-content: space-around;
     padding: 25px 0 25px 0;
     border-radius: 10px;
     background-color: gray;
+}
+.booking-doctor-filter-field{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    width: 180px;
+}
+.booking-doctor-filter-field-order{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    width: 180px;
 }
 .booking-doctor-filter-component-form input {
     width: 180px;
@@ -28,7 +43,7 @@
     opacity: 1;
 }
 .booking-doctor-filter-component-form select {
-    width: 250px;
+    width: 180px;
     height: 40px;
     padding: 10px 12px;
     font-size: 16px;

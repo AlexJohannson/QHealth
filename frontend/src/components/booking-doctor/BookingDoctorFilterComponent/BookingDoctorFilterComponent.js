@@ -1,28 +1,27 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './BookingDoctorFilterComponent.css';
 
-const BookingDoctorFilterComponent = ({onFilter}) => {
-    const [filter, setFilter] = useState({
-        patient_name: '',
-        patient_surname: '',
-        specialty: '',
-        doctor_name: '',
-        doctor_surname: '',
-        order: '',
-        status: '',
-    });
+const BookingDoctorFilterComponent = ({filters, onApply}) => {
+   const [localFilters, setLocalFilters] = useState(filters);
+
+    useEffect(() => {
+        setLocalFilters(filters);
+    }, [filters]);
+
+    const handleChange = (field, value) => {
+        setLocalFilters(prev => ({
+            ...prev,
+            [field]: value,
+        }));
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const cleaned = Object.fromEntries(
-            Object.entries(filter).filter(([_, value]) => value !== '' && value !== null)
-        );
-        onFilter(cleaned);
-    }
+        onApply(localFilters);
+    };
 
     const handleClear = () => {
-        setFilter(
-            {
+        const cleared = {
                 patient_name: '',
                 patient_surname: '',
                 specialty: '',
@@ -30,8 +29,9 @@ const BookingDoctorFilterComponent = ({onFilter}) => {
                 doctor_surname: '',
                 order: '',
                 status: '',
-            });
-        onFilter({});
+            };
+            setLocalFilters(cleared);
+            onApply(cleared);
     };
 
     const isSuperUser = localStorage.getItem('is_superuser') === 'true';
@@ -46,53 +46,74 @@ const BookingDoctorFilterComponent = ({onFilter}) => {
             <form className={'booking-doctor-filter-component-form'} onSubmit={handleSubmit}>
                 {canSeeInputPatientNameOrSurname && (
                     <>
+                        <div className={'booking-doctor-filter-field'}>
+                            <label>Patient Name</label>
                         <input
                             type={'text'}
                             placeholder={'Patient Name'}
-                            value={filter.patient_name}
-                            onChange={(e) => setFilter({...filter, patient_name: e.target.value})}
+                            value={localFilters.patient_name}
+                            onChange={(e) => handleChange('patient_name', e.target.value)}
                         />
+                        </div>
+                        <div className={'booking-doctor-filter-field'}>
+                            <label>Patient Surname</label>
                         <input
                             type={'text'}
                             placeholder={'Patient Surname'}
-                            value={filter.patient_surname}
-                            onChange={(e) => setFilter({...filter, patient_surname: e.target.value})}
+                            value={localFilters.patient_surname}
+                            onChange={(e) => handleChange('patient_surname', e.target.value)}
                         />
+                        </div>
                     </>
                 )}
+                <div className={'booking-doctor-filter-field'}>
+                    <label>Doctor Specialty</label>
                 <input
                     type={'text'}
                     placeholder={'Specialty'}
-                    value={filter.specialty}
-                    onChange={(e) => setFilter({...filter, specialty: e.target.value})}
+                    value={localFilters.specialty}
+                    onChange={(e) => handleChange('specialty', e.target.value)}
                 />
+                </div>
+                <div className={'booking-doctor-filter-field'}>
+                    <label>Doctor Name</label>
                 <input
                     type={'text'}
                     placeholder={'Doctor Name'}
-                    value={filter.doctor_name}
-                    onChange={(e) => setFilter({...filter, doctor_name: e.target.value})}
+                    value={localFilters.doctor_name}
+                    onChange={(e) => handleChange('doctor_name', e.target.value)}
                 />
+                </div>
+                <div className={'booking-doctor-filter-field'}>
+                    <label>Doctor Surname</label>
                 <input
                     type={'text'}
                     placeholder={'Doctor Surname'}
-                    value={filter.doctor_surname}
-                    onChange={(e) => setFilter({...filter, doctor_surname: e.target.value})}
+                    value={localFilters.doctor_surname}
+                    onChange={(e) => handleChange('doctor_surname', e.target.value)}
                 />
-                <select value={filter.status}
-                        onChange={(e) => setFilter({...filter, status: e.target.value})}
+                </div>
+                <div className={'booking-doctor-filter-field-order'}>
+                    <label>Ordering Status</label>
+                <select value={localFilters.status}
+                        onChange={(e) => handleChange('status', e.target.value)}
                 >
                     <option value={''}>Status</option>
                     <option value={'booked'}>Booked</option>
                     <option value={'cancelled'}>Cancelled</option>
                 </select>
+                </div>
+                <div className={'booking-doctor-filter-field-order'}>
+                    <label>Ordering ID</label>
                 <select
-                    value={filter.order}
-                    onChange={(e) => setFilter({...filter, order: e.target.value})}
+                    value={localFilters.order}
+                    onChange={(e) => handleChange('order', e.target.value)}
                 >
                     <option value={''}>Order by ID</option>
                     <option value={'id'}>ID ascending</option>
                     <option value={'-id'}>ID descending</option>
                 </select>
+                </div>
                 <button className={'booking-doctor-filter-component-form-button'} type="submit">Apply</button>
                 <button
                     className={'booking-doctor-filter-component-form-button'}

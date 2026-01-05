@@ -7,35 +7,45 @@ import {
     BookingDiagnosticsFilterComponent
 } from "../BookingDiagnosticsFilterComponent/BookingDiagnosticsFilterComponent";
 import {socketService} from "../../../services/socketService";
-import { useSearchParams } from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 
 const BookingDiagnosticsComponent = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [bookingDiagnostics, setBookingDiagnostics] = useState([]);
-    const [page, setPage] = useState(Number(searchParams.get("page")) || 1);
-    const [size, setSize] = useState(Number(searchParams.get("size")) || 5);
+    const page = Number(searchParams.get("page")) || 1;
+    const size = Number(searchParams.get("size")) || 5;
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [trigger, setTrigger] = useState(null);
-    const [filters, setFilters] = useState({
+    const filtersFromUrl = {
         patient_name: searchParams.get("patient_name") || "",
         patient_surname: searchParams.get("patient_surname") || "",
         diagnostic_service: searchParams.get("diagnostic_service") || "",
         order: searchParams.get("order") || "",
-    });
-
-    const updateQueryParams = (params) => {
-        const cleaned = {};
-
-        Object.entries(params).forEach(([key, value]) => {
-            if (value !== "" && value !== null && value !== undefined) {
-                cleaned[key] = value;
-            }
-        });
-
-        setSearchParams(cleaned);
     };
+
+    const [filters, setFilters] = useState(filtersFromUrl);
+
+    const updateSearchParams = (params) => {
+        setSearchParams(prev => {
+            const next = new URLSearchParams(prev);
+
+            Object.entries(params).forEach(([key, value]) => {
+                if (value === '' || value === null || value === undefined) {
+                    next.delete(key);
+                } else {
+                    next.set(key, value);
+                }
+            });
+
+            return next;
+        });
+    };
+
+    useEffect(() => {
+        setFilters(filtersFromUrl);
+    }, [searchParams]);
 
 
     useEffect(() => {
@@ -45,7 +55,7 @@ const BookingDiagnosticsComponent = () => {
                 const data = await bookingDiagnosticsService.getAllLisr({
                     page,
                     size,
-                    ...filters,
+                    ...filtersFromUrl,
                 });
                 setBookingDiagnostics(data.data);
                 setTotalPages(data.total_pages);
@@ -56,7 +66,7 @@ const BookingDiagnosticsComponent = () => {
             }
         };
         fetchBookingDiagnostics();
-    }, [page, size, trigger, filters]);
+    }, [trigger, searchParams]);
 
     useEffect(() => {
         socketInit().then()
@@ -79,36 +89,29 @@ const BookingDiagnosticsComponent = () => {
         }
     };
 
-    const handleFilter = (newFilters) => {
+    const handleFilterApply = (newFilters) => {
         setFilters(newFilters);
-        setPage(1);
 
-        updateQueryParams({
+        updateSearchParams({
+            ...newFilters,
             page: 1,
             size,
-            ...newFilters,
         });
     };
 
-
     const handlePageChange = (newPage) => {
-        setPage(newPage);
-
-        updateQueryParams({
+        updateSearchParams({
             page: newPage,
             size,
-            ...filters,
+            ...filtersFromUrl,
         });
     };
 
     const handleSizeChange = (newSize) => {
-        setSize(newSize);
-        setPage(1);
-
-        updateQueryParams({
+        updateSearchParams({
             page: 1,
             size: newSize,
-            ...filters,
+            ...filtersFromUrl,
         });
     };
 
@@ -129,18 +132,20 @@ const BookingDiagnosticsComponent = () => {
     if (error) return <p style={{color: 'red'}}>{error}</p>;
 
 
-
     return (
         <div className={'booking-diagnostics-component'}>
             <div className={'booking-diagnostics-component-filter'}>
-                <BookingDiagnosticsFilterComponent onFilter={handleFilter}/>
+                <BookingDiagnosticsFilterComponent
+                    filters={filters}
+                    onApply={handleFilterApply}
+                />
             </div>
             <div className={'booking-diagnostics-component-maping'}>
                 {bookingDiagnostics.length === 0 ? (
-                     <p className={'booking-diagnostics-component-maping-information'}>No booking diagnostics found.</p>
+                    <p className={'booking-diagnostics-component-maping-information'}>No booking diagnostics found.</p>
                 ) : (
                     bookingDiagnostics.map((bookingDiagnostic) => (
-                        <BookingDiagnosticsProfile key={bookingDiagnostic.id} bookingDiagnostic={bookingDiagnostic} />
+                        <BookingDiagnosticsProfile key={bookingDiagnostic.id} bookingDiagnostic={bookingDiagnostic}/>
                     ))
                 )}
             </div>

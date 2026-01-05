@@ -8,6 +8,14 @@
     border-radius: 10px;
     background-color: gray;
 }
+.patient-journal-filter-fields{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    width: 400px;
+}
 .patient-journal-filter-component input {
     width: 400px;
     height: 40px;

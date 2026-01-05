@@ -1,30 +1,33 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './PatientJournalFilter.css';
 
-const PatientJournalFilter = ({onFilter}) => {
-    const [filter, setFilter] = useState({
-        patient_name: '',
-        patient_surname: '',
-        diagnosis: '',
-    });
+const PatientJournalFilter = ({filters, onApply}) => {
+    const [localFilters, setLocalFilters] = useState(filters);
 
+    useEffect(() => {
+        setLocalFilters(filters);
+    }, [filters]);
+
+    const handleChange = (field, value) => {
+        setLocalFilters(prev => ({
+            ...prev,
+            [field]: value,
+        }));
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const cleaned = Object.fromEntries(
-            Object.entries(filter).filter(([_, value]) => value !== '' && value !== null)
-        );
-        onFilter(cleaned);
-    }
+        onApply(localFilters);
+    };
 
     const handleClear = () => {
-        setFilter(
-            {
-                patient_name: '',
-                patient_surname: '',
-                diagnosis: '',
-            });
-        onFilter({});
+        const cleared = {
+            patient_name: '',
+            patient_surname: '',
+            diagnosis: '',
+        };
+        setLocalFilters(cleared);
+        onApply(cleared);
     };
 
     const isSuperUser = localStorage.getItem('is_superuser') === 'true';
@@ -39,26 +42,35 @@ const PatientJournalFilter = ({onFilter}) => {
             <form className={'patient-journal-filter-component'} onSubmit={handleSubmit}>
                 {canSeeInputPatientNameOrSurname && (
                     <>
-                        <input
-                            type={'text'}
-                            placeholder={'Patient Name'}
-                            value={filter.patient_name}
-                            onChange={(e) => setFilter({...filter, patient_name: e.target.value})}
-                        />
-                        <input
-                            type={'text'}
-                            placeholder={'Patient Surname'}
-                            value={filter.patient_surname}
-                            onChange={(e) => setFilter({...filter, patient_surname: e.target.value})}
-                        />
+                        <div className={'patient-journal-filter-fields'}>
+                            <label>Patient Name</label>
+                            <input
+                                type={'text'}
+                                placeholder={'Patient Name'}
+                                value={localFilters.patient_name}
+                                onChange={(e) => handleChange('patient_name', e.target.value)}
+                            />
+                        </div>
+                        <div className={'patient-journal-filter-fields'}>
+                            <label>Patient Surname</label>
+                            <input
+                                type={'text'}
+                                placeholder={'Patient Surname'}
+                                value={localFilters.patient_surname}
+                                onChange={(e) => handleChange('patient_surname', e.target.value)}
+                            />
+                        </div>
                     </>
                 )}
-                <input
-                    type={'text'}
-                    placeholder={'Search Diagnosis'}
-                    value={filter.diagnosis}
-                    onChange={(e) => setFilter({...filter, diagnosis: e.target.value})}
-                />
+                <div className={'patient-journal-filter-fields'}>
+                    <label>Diagnosis</label>
+                    <input
+                        type={'text'}
+                        placeholder={'Search Diagnosis'}
+                        value={localFilters.diagnosis}
+                        onChange={(e) => handleChange('diagnosis', e.target.value)}
+                    />
+                </div>
                 <button className={'patient-journal-filter-component-button'} type="submit">Apply</button>
                 <button
                     className={'patient-journal-filter-component-button'}

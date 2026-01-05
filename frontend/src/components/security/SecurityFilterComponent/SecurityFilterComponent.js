@@ -1,51 +1,62 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './SecurityFilterComponent.css';
 
-const SecurityFilterComponent = ({onFilter}) => {
-    const [filter, setFilter] = useState({
-        success: '',
-        order: '',
-    });
+const SecurityFilterComponent = ({filters, onApply}) => {
+    const [localFilters, setLocalFilters] = useState(filters);
+
+    useEffect(() => {
+        setLocalFilters(filters);
+    }, [filters]);
+
+    const handleChange = (field, value) => {
+        setLocalFilters(prev => ({
+            ...prev,
+            [field]: value,
+        }));
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const cleaned = Object.fromEntries(
-            Object.entries(filter).filter(([_, value]) => value !== '' && value !== null)
-        );
-        if ('success' in cleaned) {
-            cleaned.success = cleaned.success === 'true';
-            }
-        onFilter(cleaned);
-    }
-
-    const handleClear = () => {
-        setFilter({ success: '', order: '' });
-        onFilter({});
+        onApply(localFilters);
     };
 
+    const handleClear = () => {
+        const cleared = {
+            success: '',
+            order: ''
+        };
+        setLocalFilters(cleared);
+        onApply(cleared);
+    };
 
 
     return (
         <div>
             <form className={'security-filter'} onSubmit={handleSubmit}>
-                <select value={filter.success}
-                onChange={(e) => setFilter({ ...filter, success: e.target.value })}
-                >
-                    <option value={''}>Success Yes : No</option>
-                    <option value={'true'}>Success Yes</option>
-                    <option value={'false'}>Success No</option>
-                </select>
-                <select value={filter.order}
-                onChange={(e) => setFilter({ ...filter, order: e.target.value })}
-                >
-                    <option value={''}>Order filter</option>
-                    <option value={'id'}>ID ascending</option>
-                    <option value={'-id'}>ID descending</option>
-                    <option value={'success'}>Success ascending</option>
-                    <option value={'-success'}>Success descending</option>
-                    <option value={'created_at'}>Created ascending</option>
-                    <option value={'-created_at'}>Created descending</option>
-                </select>
+                <div className={'security-filter-field'}>
+                    <label>Success Yes/No</label>
+                    <select value={localFilters.success}
+                            onChange={(e) => handleChange('success', e.target.value)}
+                    >
+                        <option value={''}>Success Yes : No</option>
+                        <option value={'true'}>Success Yes</option>
+                        <option value={'false'}>Success No</option>
+                    </select>
+                </div>
+                <div className={'security-filter-field'}>
+                    <label>Order ID/Success/Created</label>
+                    <select value={localFilters.order}
+                            onChange={(e) => handleChange('order', e.target.value)}
+                    >
+                        <option value={''}>Order filter</option>
+                        <option value={'id'}>ID ascending</option>
+                        <option value={'-id'}>ID descending</option>
+                        <option value={'success'}>Success ascending</option>
+                        <option value={'-success'}>Success descending</option>
+                        <option value={'created_at'}>Created ascending</option>
+                        <option value={'-created_at'}>Created descending</option>
+                    </select>
+                </div>
                 <button className={'security-filter-button'} type="submit">Apply</button>
                 <button
                     className={'security-filter-button'}

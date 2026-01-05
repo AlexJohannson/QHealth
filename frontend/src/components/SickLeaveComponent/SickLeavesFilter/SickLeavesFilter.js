@@ -1,31 +1,34 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './SickLeavesFilter.css';
 
-const SickLeavesFilter = ({onFilter}) => {
-    const [filter, setFilter] = useState({
-        patient_name: '',
-        patient_surname: '',
-        diagnosis: '',
-        order: '',
-    });
+const SickLeavesFilter = ({filters, onApply}) => {
+    const [localFilters, setLocalFilters] = useState(filters);
+
+    useEffect(() => {
+        setLocalFilters(filters);
+    }, [filters]);
+
+    const handleChange = (field, value) => {
+        setLocalFilters(prev => ({
+            ...prev,
+            [field]: value,
+        }));
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const cleaned = Object.fromEntries(
-            Object.entries(filter).filter(([_, value]) => value !== '' && value !== null)
-        );
-        onFilter(cleaned);
-    }
+        onApply(localFilters);
+    };
 
     const handleClear = () => {
-        setFilter(
-            {
+        const cleared = {
                 patient_name: '',
                 patient_surname: '',
                 diagnosis: '',
                 order: '',
-            });
-        onFilter({});
+            };
+            setLocalFilters(cleared);
+            onApply(cleared);
     };
 
     const isSuperUser = localStorage.getItem('is_superuser') === 'true';
@@ -40,34 +43,46 @@ const SickLeavesFilter = ({onFilter}) => {
             <form className={'sick-leaves-form-filter'} onSubmit={handleSubmit}>
                 {canSeeInputPatientNameOrSurname && (
                     <>
+                        <div className={'sick-leave-filter-field'}>
+                            <label>Patient Name</label>
                         <input
                             type={'text'}
                             placeholder={'Search Patient Name'}
-                            value={filter.patient_name}
-                            onChange={(e) => setFilter({...filter, patient_name: e.target.value})}
+                            value={localFilters.patient_name}
+                            onChange={(e) => handleChange('patient_name', e.target.value)}
                         />
+                        </div>
+                        <div className={'sick-leave-filter-field'}>
+                            <label>Patient Surname</label>
                         <input
                             type={'text'}
                             placeholder={'Search Patient Surname'}
-                            value={filter.patient_surname}
-                            onChange={(e) => setFilter({...filter, patient_surname: e.target.value})}
+                            value={localFilters.patient_surname}
+                            onChange={(e) => handleChange('patient_surname', e.target.value)}
                         />
+                        </div>
                     </>
                 )}
+                <div className={'sick-leave-filter-field'}>
+                    <label>Diagnosis</label>
                 <input
                     type={'text'}
                     placeholder={'Search Diagnosis'}
-                    value={filter.diagnosis}
-                    onChange={(e) => setFilter({...filter, diagnosis: e.target.value})}
+                    value={localFilters.diagnosis}
+                    onChange={(e) => handleChange('diagnosis', e.target.value)}
                 />
+                </div>
+                <div className={'sick-leave-filter-field'}>
+                    <label>Order ID</label>
                 <select
-                    value={filter.order}
-                    onChange={(e) => setFilter({...filter, order: e.target.value})}
+                    value={localFilters.order}
+                    onChange={(e) => handleChange('order', e.target.value)}
                 >
                     <option value={''}>Order by ID</option>
                     <option value={'id'}>ID ascending</option>
                     <option value={'-id'}>ID descending</option>
                 </select>
+                </div>
                 <button className={'sick-leaves-form-button'} type="submit">Apply</button>
                 <button
                     className={'sick-leaves-form-button'}

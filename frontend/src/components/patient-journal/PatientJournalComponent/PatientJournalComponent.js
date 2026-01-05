@@ -10,29 +10,39 @@ import { useSearchParams } from "react-router-dom";
 const PatientJournalComponent = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [journals, setJournals] = useState([]);
-    const [page, setPage] = useState(Number(searchParams.get("page")) || 1);
-    const [size, setSize] = useState(Number(searchParams.get("size")) || 5);
+    const page = Number(searchParams.get("page")) || 1;
+    const size = Number(searchParams.get("size")) || 5;
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [trigger, setTrigger] = useState(null);
-    const [filters, setFilters] = useState({
+    const filtersFromUrl = {
         patient_name: searchParams.get("patient_name") || "",
         patient_surname: searchParams.get("patient_surname") || "",
         diagnosis: searchParams.get("diagnosis") || "",
-    });
-
-    const updateQueryParams = (params) => {
-        const cleaned = {};
-
-        Object.entries(params).forEach(([key, value]) => {
-            if (value !== "" && value !== null && value !== undefined) {
-                cleaned[key] = value;
-            }
-        });
-
-        setSearchParams(cleaned);
     };
+
+    const [filters, setFilters] = useState(filtersFromUrl);
+
+    const updateSearchParams = (params) => {
+        setSearchParams(prev => {
+            const next = new URLSearchParams(prev);
+
+            Object.entries(params).forEach(([key, value]) => {
+                if (value === '' || value === null || value === undefined) {
+                    next.delete(key);
+                } else {
+                    next.set(key, value);
+                }
+            });
+
+            return next;
+        });
+    };
+
+    useEffect(() => {
+        setFilters(filtersFromUrl);
+    }, [searchParams]);
 
 
 
@@ -43,7 +53,7 @@ const PatientJournalComponent = () => {
                 const data = await patientJournal.getAllPatientJournal({
                     page,
                     size,
-                    ...filters,
+                    ...filtersFromUrl,
                 });
                 setJournals(data.data);
                 setTotalPages(data.total_pages);
@@ -54,7 +64,7 @@ const PatientJournalComponent = () => {
             }
         };
         fetchJournals();
-    }, [page, size, trigger, filters]);
+    }, [trigger, searchParams]);
 
 
     useEffect(() => {
@@ -77,36 +87,29 @@ const PatientJournalComponent = () => {
         }
     };
 
-    const handleFilter = (newFilters) => {
+    const handleFilterApply = (newFilters) => {
         setFilters(newFilters);
-        setPage(1);
 
-        updateQueryParams({
+        updateSearchParams({
+            ...newFilters,
             page: 1,
             size,
-            ...newFilters,
         });
     };
 
-
     const handlePageChange = (newPage) => {
-        setPage(newPage);
-
-        updateQueryParams({
+        updateSearchParams({
             page: newPage,
             size,
-            ...filters,
+            ...filtersFromUrl,
         });
     };
 
     const handleSizeChange = (newSize) => {
-        setSize(newSize);
-        setPage(1);
-
-        updateQueryParams({
+        updateSearchParams({
             page: 1,
             size: newSize,
-            ...filters,
+            ...filtersFromUrl,
         });
     };
 
@@ -130,7 +133,10 @@ const PatientJournalComponent = () => {
     return (
         <div className={'patient-journal-component'}>
             <div className={'patient-journal-component-filter'}>
-                <PatientJournalFilter onFilter={handleFilter}/>
+                <PatientJournalFilter
+                    filters={filters}
+                    onApply={handleFilterApply}
+                />
             </div>
             <div className={'patient-journal-component-maping'}>
                 {journals.length === 0 ? (

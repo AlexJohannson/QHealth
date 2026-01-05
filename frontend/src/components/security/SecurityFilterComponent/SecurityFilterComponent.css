@@ -8,6 +8,14 @@
     border-radius: 10px;
     background-color: gray;
 }
+.security-filter-field{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    width: 250px;
+}
 .security-filter select {
     width: 250px;
     height: 40px;
