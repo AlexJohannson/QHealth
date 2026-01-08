@@ -4,23 +4,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: 100px;
-    gap: 30px;
     background-color: gray;
-    border-radius: 10px;
-
 }
-.pagination-button {
-    width: 100px;
-    height: 45px;
-    border-radius: 10px;
+.pagination-component-pagination{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pagination-button,
+.pagination-page {
+    padding: 6px 10px;
+    border-radius: 50%;
     border: none;
-    background-color: lightgray;
-    color: black;
+    background: limegreen;
+    color: white;
     cursor: pointer;
 }
 
-.pagination-component select {
+.pagination-page.active {
+    background: darkgreen;
+}
+
+.pagination-ellipsis {
+    padding: 0 6px;
+    font-size: 18px;
+}
+.select-size-page{
     width: 150px;
     height: 45px;
     padding: 10px 12px;
@@ -29,15 +39,7 @@
     border-radius: 6px;
     outline: none;
     transition: border-color 0.2s ease;
-    color: #999;
-    font-style: italic;
-    opacity: 1;
-}
-.pagination-component select:focus {
-    border-color: #007bff;
-}
-.pagination-component select::placeholder {
-    color: #999;
+    color: grey;
     font-style: italic;
     opacity: 1;
 }
