@@ -33,7 +33,7 @@ const BookingActionsComponent = ({bookingDoctorId, status, onStatusChange}) => {
     const handleDelete = async () => {
         try {
             await bookingDoctorService.deleteBookingVisitToDoctor(bookingDoctorId);
-            navigate(-1);
+            navigate('/booking-doctor');
         } catch (e) {
             setError('Deleted error');
         }

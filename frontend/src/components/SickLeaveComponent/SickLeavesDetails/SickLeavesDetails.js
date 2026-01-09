@@ -34,7 +34,7 @@ const SickLeavesDetails = () => {
     const handleDelete = async () => {
         try {
             await sickLeaveService.deleteSickLeaveById(id);
-            navigate(-1);
+            navigate('/sick-leaves');
         } catch (err) {
             setError('Delete Failed');
         }

@@ -37,7 +37,7 @@ const PatientJournalDetails = () => {
     const handleDelete = async () => {
         try {
             await patientJournal.deletePatientJournal(id);
-            navigate(-1);
+            navigate('/patient-journal');
         } catch (err) {
             setError('Delete failed');
         }

@@ -51,7 +51,7 @@ const RecoveryRequestComponent = () => {
                            onChange={e => setEmail(e.target.value)}/>
                     <div className={'recovery-request-button-div'}>
                         <button className={'recovery-request-button'} type="submit">SEND RECOVERY LINK</button>
-                        <button className={'recovery-request-button'} type="button" onClick={() => navigate(-1)}>BACK</button>
+                        <button className={'recovery-request-button'} type="button" onClick={() => navigate('/login')}>BACK</button>
                     </div>
                 </form>
             </div>

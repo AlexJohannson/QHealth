@@ -36,7 +36,7 @@ const BookingDiagnosticsDetailsComponent = () => {
     const handleDelete = async () => {
         try {
             await bookingDiagnosticsService.deleteBookingDiagnostic(id);
-            navigate(-1);
+            navigate('/booking-diagnostic');
         } catch (err) {
             const msg = err.response?.data?.detail || 'Failed to delete diagnostic';
             setError(msg);

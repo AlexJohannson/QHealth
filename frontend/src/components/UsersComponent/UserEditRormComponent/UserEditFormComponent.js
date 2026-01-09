@@ -112,21 +112,32 @@ const UserEditFormComponent = ({userId, canEdit}) => {
         }
     };
 
+
     const handleDelete = async () => {
         if (!canEdit) return;
-        try {
-            await userService.delete(userId);
-            localStorage.removeItem('role');
-            localStorage.removeItem('is_superuser');
-            localStorage.removeItem('is_staff');
-            localStorage.removeItem('is_user');
-            localStorage.removeItem('userId');
-            localStorage.removeItem('roleId');
-            localStorage.removeItem('access');
-            localStorage.removeItem('refresh');
 
-            window.dispatchEvent(new Event("authChanged"));
-            navigatePath('/login');
+        try {
+            const currentUserId = localStorage.getItem('userId');
+            const isSelfDelete = String(userId) === String(currentUserId);
+
+            await userService.delete(userId);
+
+            if (isSelfDelete) {
+                localStorage.removeItem('role');
+                localStorage.removeItem('is_superuser');
+                localStorage.removeItem('is_staff');
+                localStorage.removeItem('is_user');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('roleId');
+                localStorage.removeItem('access');
+                localStorage.removeItem('refresh');
+
+                window.dispatchEvent(new Event("authChanged"));
+                navigatePath('/login');
+            } else {
+                navigatePath('/users');
+            }
+
         } catch (err) {
             if (err.response?.data) {
                 const backendMessage = err.response.data.detail || err.response.data.message || null;

@@ -37,7 +37,7 @@ const PatientRecipeDetails = () => {
     const handleDelete = async () => {
         try {
             await patientRecipeService.deletePatientRecipeById(id);
-            navigate(-1);
+            navigate('/patient-recipe');
         } catch (err) {
             setError('Delete failed');
         }

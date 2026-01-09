@@ -37,7 +37,7 @@ const DiagnosticsListDetails = () => {
         try {
             await diagnosticsService.deleteDiagnostic(id);
             setConfirmDelete(false);
-            navigate(-1);
+            navigate('/diagnostics-list');
         } catch (err) {
             const msg = err.response?.data?.detail || 'Failed to delete diagnostic';
             setError(msg);

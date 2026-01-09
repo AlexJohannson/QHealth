@@ -187,7 +187,7 @@ const RegistrationFormComponent = () => {
                         {error.general && (<p className={'register-error'}>{error.general}</p>)}
                         <div className={'form-register-button-div'}>
                             <button className={'form-register-button'} type={'submit'}>REGISTER</button>
-                            <button className={'form-register-button'} type="button" onClick={() => navigate(-1)}>BACK</button>
+                            <button className={'form-register-button'} type="button" onClick={() => navigate('/login')}>BACK</button>
                         </div>
                     </form>
                 )}
