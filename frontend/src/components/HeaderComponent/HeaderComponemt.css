@@ -33,24 +33,16 @@
     height: 45px;
     border: none;
     border-radius: 10px;
-    background-color: blue;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1F74C2;
 }
 .login-button:hover {
-     background-color: green;
+     background-color: #4CAF50;
 }
-.login-link {
-    text-decoration: none;
-    color: white;
-}
-.header-back{
-    width: 100px;
-    height: 45px;
-    border: none;
-    border-radius: 10px;
-    background-color: blue;
-    color: white;
-}
-.header-back:hover{
-    background-color: green;
+.login-icon{
+    width: 25px;
+    height: 25px;
+
 }

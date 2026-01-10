@@ -47,23 +47,26 @@
     font-style: italic;
     opacity: 1;
 }
-.role-filter select:focus {
-    border-color: #007bff;
-}
-.role-filter select::placeholder {
-    color: #999;
-    font-style: italic;
-    opacity: 1;
+.role-filter-field-label{
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
 }
 .role-filter-button {
     width: 100px;
     height: 45px;
     border-radius: 10px;
     border: none;
-    background-color: blue;
+    background-color: #1F74C2;
     color: white;
     cursor: pointer;
 }
 .role-filter-button:hover {
-    background-color: green;
+    background-color: #4CAF50;
+}
+.staff-filter-icon{
+    width: 25px;
+    height: 25px;
 }

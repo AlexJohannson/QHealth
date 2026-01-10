@@ -292,14 +292,16 @@ const UserEditFormComponent = ({userId, canEdit}) => {
                     {error.general && <p style={{color: 'red'}}>{error.general}</p>}
                     {message && <p style={{color: 'green'}}>{message}</p>}
 
-                    <button className={'user-edit-form-save-change'} type="submit">Save Changes</button>
+                    <button className={'user-edit-form-save-change'} type="submit">
+                        <img src={'/img/save.png'} alt={'save'} className={'user-edit-form-icon'} />
+                    </button>
                     {!confirmDelete ? (
                         <button
                             className={'user-edit-form-delete-account'}
                             type="button"
                             onClick={() => setConfirmDelete(true)}
                         >
-                            DELETE ACCOUNT
+                            <img src={'/img/delete.png'} alt={'delete'} className={'user-edit-form-icon'} />
                         </button>
                     ) : (
                         <div className={'user-edit-form-delete-confirmation'}>

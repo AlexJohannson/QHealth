@@ -135,7 +135,7 @@ const SecurityComponent = () => {
                             }
                         }}
                     >
-                        DELETE SELECTED
+                        <img src={'/img/delete.png'} alt={'delete icon'} className="security-delete-icon" />
                     </button>
                 )}
             </div>

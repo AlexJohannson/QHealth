@@ -88,8 +88,8 @@ const CreateNewPatientRecipe = ({patientId}) => {
                         onChange={(e) => setDescription(e.target.value)}
                     />
                 </div>
-                <button className={'create-recipe-form-button-recipe'} onClick={handleBookingRecipe} disabled={loading}>
-                    {loading ? 'Saving...' : 'Create Recipe'}
+                <button className={'create-recipe-form-button-recipe'} onClick={handleBookingRecipe}>
+                    <img src={'/img/save.png'} alt='save icon' className={'create-recipe-icon'} />
                 </button>
             </div>
         </div>

@@ -75,12 +75,16 @@
     height: 45px;
     border-radius: 10px;
     border: none;
-    background-color: blue;
+    background-color: #1F74C2;
     color: white;
     cursor: pointer;
 }
 .form-login-button:hover {
-    background-color: green;
+    background-color: #4CAF50;
+}
+.login-icon-page{
+    width: 25px;
+    height: 25px;
 }
 /*--------------------------------------    form-login-links-div   ------------------------------------------------------*/
 .form-login-links-div {

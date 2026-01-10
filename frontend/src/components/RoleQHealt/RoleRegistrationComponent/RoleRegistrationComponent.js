@@ -184,7 +184,9 @@ const RoleRegistrationComponent = () => {
                         </select>
                         {error.general && (<p className={'role-error-register'}>{error.general}</p>)}
                         <div className={'role-register-button-div'}>
-                            <button className={'role-form-register-button'} type={'submit'}>REGISTER</button>
+                            <button className={'role-form-register-button'} type={'submit'}>
+                                <img src={'/img/register-form.png'} alt="register icon" className="staff-register-icon"/>
+                            </button>
                         </div>
                     </form>
                 )}

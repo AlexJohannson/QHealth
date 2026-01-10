@@ -38,7 +38,7 @@ const UsersFilterComponent = ({filters, onApply}) => {
     return (
         <form className={'user-filter'} onSubmit={handleSubmit}>
             <div className={'users-filter-field'}>
-                <label>Name</label>
+                <label className={'users-filter-field-label'}>Name</label>
                 <input
                     type="text"
                     placeholder="Name"
@@ -47,7 +47,7 @@ const UsersFilterComponent = ({filters, onApply}) => {
                 />
             </div>
             <div className={'users-filter-field'}>
-                <label>Surname</label>
+                <label className={'users-filter-field-label'}>Surname</label>
                 <input
                     type="text"
                     placeholder="Surname"
@@ -56,7 +56,7 @@ const UsersFilterComponent = ({filters, onApply}) => {
                 />
             </div>
             <div className={'users-filter-field'}>
-                <label> Min Age</label>
+                <label className={'users-filter-field-label'}>Min Age</label>
                 <input
                     type="number"
                     placeholder="Min Age"
@@ -65,7 +65,7 @@ const UsersFilterComponent = ({filters, onApply}) => {
                 />
             </div>
             <div className={'users-filter-field'}>
-                <label>Mix Age</label>
+                <label className={'users-filter-field-label'}>Mix Age</label>
                 <input
                     type="number"
                     placeholder="Max Age"
@@ -74,7 +74,7 @@ const UsersFilterComponent = ({filters, onApply}) => {
                 />
             </div>
             <div className={'users-filter-field'}>
-                <label>Date of Birth</label>
+                <label className={'users-filter-field-label'}>Date of Birth</label>
                 <input
                     type="date"
                     placeholder="Date of Birth"
@@ -83,7 +83,7 @@ const UsersFilterComponent = ({filters, onApply}) => {
                 />
             </div>
             <div className={'users-filter-field'}>
-                <label>City</label>
+                <label className={'users-filter-field-label'}>City</label>
                 <input
                     type="text"
                     placeholder="City"
@@ -92,7 +92,7 @@ const UsersFilterComponent = ({filters, onApply}) => {
                 />
             </div>
             <div className={'users-filter-field'}>
-                <label>Country</label>
+                <label className={'users-filter-field-label'}>Country</label>
                 <input
                     type="text"
                     placeholder="Country"
@@ -101,7 +101,7 @@ const UsersFilterComponent = ({filters, onApply}) => {
                 />
             </div>
             <div className={'users-filter-field'}>
-                <label>Gender</label>
+                <label className={'users-filter-field-label'}>Gender</label>
                 <select
                     value={localFilters.gender}
                     onChange={(e) => handleChange('gender', e.target.value)}
@@ -111,13 +111,15 @@ const UsersFilterComponent = ({filters, onApply}) => {
                     <option value="female">Female</option>
                 </select>
             </div>
-            <button className={'user-filter-component-button'} type="submit">Apply</button>
+            <button className={'user-filter-component-button'} type="submit">
+                <img src={'/img/filter.png'} alt="filter icon" className="user-filter-icon"/>
+            </button>
             <button
                 className={'user-filter-component-button'}
                 type="button"
                 onClick={handleClear}
             >
-                Clear
+                <img src={'/img/clear.png'} alt="clear icon" className="user-filter-icon"/>
             </button>
         </form>
     );

@@ -49,24 +49,27 @@
     font-style: italic;
     opacity: 1;
 }
+.users-filter-field-label{
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+}
 
-.user-filter select:focus{
-    border-color: #007bff;
-}
-.user-filter select::placeholder {
-    color: #999;
-    font-style: italic;
-    opacity: 1;
-}
 .user-filter-component-button {
     width: 100px;
     height: 45px;
     border-radius: 10px;
     border: none;
-    background-color: blue;
+    background-color: #1F74C2;
     color: white;
     cursor: pointer;
 }
 .user-filter-component-button:hover {
-    background-color: green;
+    background-color: #4CAF50;
+}
+.user-filter-icon{
+    width: 25px;
+    height: 25px;
 }

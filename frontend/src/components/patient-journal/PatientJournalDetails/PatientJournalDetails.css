@@ -57,6 +57,10 @@
     color: white;
     cursor: pointer;
 }
+.patient-journal-delete-icon{
+    width: 25px;
+    height: 25px;
+}
 /*--------------------------------------     patient-journal-details-skeleton   ---------------------------------------*/
 .patient-journal-details-skeleton {
     width: 100%;

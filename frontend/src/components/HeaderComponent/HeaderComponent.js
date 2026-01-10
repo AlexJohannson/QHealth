@@ -15,9 +15,9 @@ const HeaderComponent = () => {
                 <img src={'/img/logo.png'} className={'logo-header-page'} alt="Logo"/>
                 <h1>QHealth</h1>
                 {isHomePage && (
-                    <button className={'login-button'}>
-                        <Link className={'login-link'} to="/login">LOGIN</Link>
-                    </button>
+                    <Link className="login-button" to="/login">
+                        <img src="/img/log-in.png" alt="login icon" className="login-icon"/>
+                    </Link>
                 )}
             </div>
         </div>

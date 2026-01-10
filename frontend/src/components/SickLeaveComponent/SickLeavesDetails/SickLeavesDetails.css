@@ -64,12 +64,16 @@
     height: 45px;
     border-radius: 10px;
     border: none;
-    background-color: blue;
+    background-color: #1F74C2;
     color: white;
     cursor: pointer
 }
 .sick-leave-download-pdf:hover{
-    background-color: green;
+    background-color: #4CAF50;
+}
+.sick-leave-manage-icon{
+    width: 25px;
+    height: 25px;
 }
 /*----------------------------   sick-leave-details-skeleton   -------------------------------------------------------*/
 .sick-leave-details-skeleton{

@@ -34,7 +34,7 @@ const SecurityFilterComponent = ({filters, onApply}) => {
         <div>
             <form className={'security-filter'} onSubmit={handleSubmit}>
                 <div className={'security-filter-field'}>
-                    <label>Success Yes/No</label>
+                    <label className={'security-filter-field-label'}>Success Yes/No</label>
                     <select value={localFilters.success}
                             onChange={(e) => handleChange('success', e.target.value)}
                     >
@@ -44,7 +44,7 @@ const SecurityFilterComponent = ({filters, onApply}) => {
                     </select>
                 </div>
                 <div className={'security-filter-field'}>
-                    <label>Order ID/Success/Created</label>
+                    <label className={'security-filter-field-label'}>Order ID/Success/Created</label>
                     <select value={localFilters.order}
                             onChange={(e) => handleChange('order', e.target.value)}
                     >
@@ -57,13 +57,15 @@ const SecurityFilterComponent = ({filters, onApply}) => {
                         <option value={'-created_at'}>Created descending</option>
                     </select>
                 </div>
-                <button className={'security-filter-button'} type="submit">Apply</button>
+                <button className={'security-filter-button'} type="submit">
+                    <img src={'/img/filter.png'} alt="filter icon" className={'security-filter-icon'} />
+                </button>
                 <button
                     className={'security-filter-button'}
                     type="button"
                     onClick={handleClear}
                 >
-                    Clear
+                    <img src={'/img/clear.png'} alt="clear icon" className={'security-filter-icon'} />
                 </button>
             </form>
         </div>

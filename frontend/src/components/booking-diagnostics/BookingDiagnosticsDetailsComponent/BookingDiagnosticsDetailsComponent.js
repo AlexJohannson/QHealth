@@ -101,7 +101,7 @@ const BookingDiagnosticsDetailsComponent = () => {
                             className={'booking-diagnostics-details-component-button-delete-booking'}
                             onClick={() => setConfirmDelete(true)}
                         >
-                            Delete Booking
+                            <img src={'/img/delete.png'} alt={'delete'} className={'booking-diagnostics-delete-icon'} />
                         </button>
                     ) : (
                         <div className={'booking-diagnostics-detail-component-delete-confirmation'}>

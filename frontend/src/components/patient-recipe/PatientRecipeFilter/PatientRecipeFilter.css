@@ -3,8 +3,7 @@
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 2px;
+    justify-content: space-around;
     padding: 25px 0 25px 0;
     border-radius: 10px;
     background-color: gray;
@@ -15,10 +14,10 @@
     align-items: center;
     flex-direction: column;
     gap: 5px;
-    width: 450px;
+    width: 250px;
 }
 .patient-recipe-filter-form input {
-     width: 450px;
+    width: 250px;
     height: 40px;
     padding: 10px 12px;
     font-size: 16px;
@@ -40,10 +39,21 @@
     height: 45px;
     border-radius: 10px;
     border: none;
-    background-color: blue;
+    background-color: #1F74C2;
     color: white;
     cursor: pointer;
 }
 .patient-recipe-filter-form-button:hover {
-    background-color: green;
+    background-color: #4CAF50;
+}
+.patient-recipe-filter-icon{
+    width: 25px;
+    height: 25px;
+}
+.patient-recipe-filter-field-label{
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
 }

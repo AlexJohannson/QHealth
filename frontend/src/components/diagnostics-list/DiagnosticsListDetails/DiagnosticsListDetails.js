@@ -71,7 +71,7 @@ const DiagnosticsListDetails = () => {
                             className={'diagnostics-list-detail-component-content-delete-button'}
                             onClick={() => setConfirmDelete(true)}
                         >
-                            Delete
+                            <img src={'/img/delete.png'} alt="delete" className={'diagnostics-delete-icon'} />
                         </button>
                     ) : (
                         <div className={'diagnostics-list-detail-component-content-delete-confirmation'}>

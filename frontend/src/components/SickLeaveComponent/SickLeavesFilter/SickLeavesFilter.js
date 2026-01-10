@@ -44,7 +44,7 @@ const SickLeavesFilter = ({filters, onApply}) => {
                 {canSeeInputPatientNameOrSurname && (
                     <>
                         <div className={'sick-leave-filter-field'}>
-                            <label>Patient Name</label>
+                            <label className={'sick-leave-filter-field-label'}>Patient Name</label>
                         <input
                             type={'text'}
                             placeholder={'Search Patient Name'}
@@ -53,7 +53,7 @@ const SickLeavesFilter = ({filters, onApply}) => {
                         />
                         </div>
                         <div className={'sick-leave-filter-field'}>
-                            <label>Patient Surname</label>
+                            <label className={'sick-leave-filter-field-label'}>Patient Surname</label>
                         <input
                             type={'text'}
                             placeholder={'Search Patient Surname'}
@@ -64,7 +64,7 @@ const SickLeavesFilter = ({filters, onApply}) => {
                     </>
                 )}
                 <div className={'sick-leave-filter-field'}>
-                    <label>Diagnosis</label>
+                    <label className={'sick-leave-filter-field-label'}>Diagnosis</label>
                 <input
                     type={'text'}
                     placeholder={'Search Diagnosis'}
@@ -73,7 +73,7 @@ const SickLeavesFilter = ({filters, onApply}) => {
                 />
                 </div>
                 <div className={'sick-leave-filter-field'}>
-                    <label>Order ID</label>
+                    <label className={'sick-leave-filter-field-label'}>Order ID</label>
                 <select
                     value={localFilters.order}
                     onChange={(e) => handleChange('order', e.target.value)}
@@ -83,13 +83,15 @@ const SickLeavesFilter = ({filters, onApply}) => {
                     <option value={'-id'}>ID descending</option>
                 </select>
                 </div>
-                <button className={'sick-leaves-form-button'} type="submit">Apply</button>
+                <button className={'sick-leaves-form-button'} type="submit">
+                    <img src={'/img/filter.png'} alt="filter icon" className={'sick-leave-filter-icon'} />
+                </button>
                 <button
                     className={'sick-leaves-form-button'}
                     type="button"
                     onClick={handleClear}
                 >
-                    Clear
+                    <img src={'/img/clear.png'} alt={'clear icon'} className={'sick-leave-filter-icon'}/>
                 </button>
             </form>
         </div>

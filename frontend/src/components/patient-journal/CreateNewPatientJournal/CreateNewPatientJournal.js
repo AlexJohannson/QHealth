@@ -102,8 +102,8 @@ const CreateNewPatientJournal = ({patientId}) => {
                     />
                 </div>
 
-                <button className={'create-journal-form-button-create'} onClick={handleBooking} disabled={loading}>
-                    {loading ? 'Saving...' : 'Create Journal'}
+                <button className={'create-journal-form-button-create'} onClick={handleBooking}>
+                    <img src={'/img/save.png'} alt='save' className={'create-journal-save-icon'} />
                 </button>
             </div>
         </div>

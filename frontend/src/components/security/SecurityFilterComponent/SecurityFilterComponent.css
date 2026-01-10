@@ -29,23 +29,27 @@
     font-style: italic;
     opacity: 1;
 }
-.security-filter select:focus {
-    border-color: #007bff;
-}
-.security-filter select::placeholder {
-    color: #999;
-    font-style: italic;
-    opacity: 1;
-}
+
 .security-filter-button {
     width: 100px;
     height: 45px;
     border-radius: 10px;
     border: none;
-    background-color: blue;
+    background-color: #1F74C2;
     color: white;
     cursor: pointer;
 }
 .security-filter-button:hover {
-    background-color: green;
+    background-color: #4CAF50;
+}
+.security-filter-icon{
+    width: 25px;
+    height: 25px;
+}
+.security-filter-field-label{
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
 }

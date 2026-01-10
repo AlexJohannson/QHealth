@@ -44,7 +44,7 @@ const PatientRecipeFilter = ({filters, onApply}) => {
                 {canSeeInputPatientNameOrSurname && (
                     <>
                         <div className={'patient-recipe-filter-field'}>
-                            <label>Patient Name</label>
+                            <label className={'patient-recipe-filter-field-label'}>Patient Name</label>
                         <input
                             type="text"
                             placeholder={'Patient Name'}
@@ -53,7 +53,7 @@ const PatientRecipeFilter = ({filters, onApply}) => {
                         />
                         </div>
                         <div className={'patient-recipe-filter-field'}>
-                            <label>Patient Surname</label>
+                            <label className={'patient-recipe-filter-field-label'}>Patient Surname</label>
                         <input
                             type="text"
                             placeholder={'Patient Surname'}
@@ -64,7 +64,7 @@ const PatientRecipeFilter = ({filters, onApply}) => {
                     </>
                 )}
                 <div className={'patient-recipe-filter-field'}>
-                    <label>Recipe</label>
+                    <label className={'patient-recipe-filter-field-label'}>Recipe</label>
                 <input
                     type="text"
                     placeholder={'Search Recipe'}
@@ -72,13 +72,15 @@ const PatientRecipeFilter = ({filters, onApply}) => {
                     onChange={(e) => handleChange('recipe', e.target.value)}
                 />
                 </div>
-                <button className={'patient-recipe-filter-form-button'} type="submit">Apply</button>
+                <button className={'patient-recipe-filter-form-button'} type="submit">
+                    <img src={'/img/filter.png'} alt="filter icon" className={'patient-recipe-filter-icon'} />
+                </button>
                 <button
                     className={'patient-recipe-filter-form-button'}
                     type="button"
                     onClick={handleClear}
                 >
-                    Clear
+                    <img src={'/img/clear.png'} alt="clear icon" className={'patient-recipe-filter-icon'} />
                 </button>
             </form>
         </div>

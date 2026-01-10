@@ -47,7 +47,7 @@ const BookingDoctorFilterComponent = ({filters, onApply}) => {
                 {canSeeInputPatientNameOrSurname && (
                     <>
                         <div className={'booking-doctor-filter-field'}>
-                            <label>Patient Name</label>
+                            <label className={'booking-doctor-filter-field-label'}>Patient Name</label>
                         <input
                             type={'text'}
                             placeholder={'Patient Name'}
@@ -56,7 +56,7 @@ const BookingDoctorFilterComponent = ({filters, onApply}) => {
                         />
                         </div>
                         <div className={'booking-doctor-filter-field'}>
-                            <label>Patient Surname</label>
+                            <label className={'booking-doctor-filter-field-label'}>Patient Surname</label>
                         <input
                             type={'text'}
                             placeholder={'Patient Surname'}
@@ -67,7 +67,7 @@ const BookingDoctorFilterComponent = ({filters, onApply}) => {
                     </>
                 )}
                 <div className={'booking-doctor-filter-field'}>
-                    <label>Doctor Specialty</label>
+                    <label className={'booking-doctor-filter-field-label'}>Doctor Specialty</label>
                 <input
                     type={'text'}
                     placeholder={'Specialty'}
@@ -76,7 +76,7 @@ const BookingDoctorFilterComponent = ({filters, onApply}) => {
                 />
                 </div>
                 <div className={'booking-doctor-filter-field'}>
-                    <label>Doctor Name</label>
+                    <label className={'booking-doctor-filter-field-label'}>Doctor Name</label>
                 <input
                     type={'text'}
                     placeholder={'Doctor Name'}
@@ -85,7 +85,7 @@ const BookingDoctorFilterComponent = ({filters, onApply}) => {
                 />
                 </div>
                 <div className={'booking-doctor-filter-field'}>
-                    <label>Doctor Surname</label>
+                    <label className={'booking-doctor-filter-field-label'}>Doctor Surname</label>
                 <input
                     type={'text'}
                     placeholder={'Doctor Surname'}
@@ -94,7 +94,7 @@ const BookingDoctorFilterComponent = ({filters, onApply}) => {
                 />
                 </div>
                 <div className={'booking-doctor-filter-field-order'}>
-                    <label>Ordering Status</label>
+                    <label className={'booking-doctor-filter-field-label'}>Ordering Status</label>
                 <select value={localFilters.status}
                         onChange={(e) => handleChange('status', e.target.value)}
                 >
@@ -104,7 +104,7 @@ const BookingDoctorFilterComponent = ({filters, onApply}) => {
                 </select>
                 </div>
                 <div className={'booking-doctor-filter-field-order'}>
-                    <label>Ordering ID</label>
+                    <label className={'booking-doctor-filter-field-label'}>Ordering ID</label>
                 <select
                     value={localFilters.order}
                     onChange={(e) => handleChange('order', e.target.value)}
@@ -114,13 +114,15 @@ const BookingDoctorFilterComponent = ({filters, onApply}) => {
                     <option value={'-id'}>ID descending</option>
                 </select>
                 </div>
-                <button className={'booking-doctor-filter-component-form-button'} type="submit">Apply</button>
+                <button className={'booking-doctor-filter-component-form-button'} type="submit">
+                    <img src={'img/filter.png'} alt="filter icon" className="booking-doctor-filter-icon" />
+                </button>
                 <button
                     className={'booking-doctor-filter-component-form-button'}
                     type="button"
                     onClick={handleClear}
                 >
-                    Clear
+                    <img src={'/img/clear.png'} alt="clear icon" className="booking-doctor-filter-icon" />
                 </button>
             </form>
         </div>

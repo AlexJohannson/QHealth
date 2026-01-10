@@ -186,8 +186,12 @@ const RegistrationFormComponent = () => {
 
                         {error.general && (<p className={'register-error'}>{error.general}</p>)}
                         <div className={'form-register-button-div'}>
-                            <button className={'form-register-button'} type={'submit'}>REGISTER</button>
-                            <button className={'form-register-button'} type="button" onClick={() => navigate('/login')}>BACK</button>
+                            <button className={'form-register-button'} type={'submit'}>
+                                <img src={'img/register-form.png'} alt={'register icon'} className={'register-icon-page'}/>
+                            </button>
+                            <button className={'form-register-button'} type="button" onClick={() => navigate('/login')}>
+                                <img src={'/img/left-arrow.png'} alt="back icon" className="register-icon-page"/>
+                            </button>
                         </div>
                     </form>
                 )}

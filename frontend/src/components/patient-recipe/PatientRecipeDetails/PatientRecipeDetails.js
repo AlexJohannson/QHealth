@@ -70,7 +70,7 @@ const PatientRecipeDetails = () => {
                 !confirmDelete ? (
                           <button className={'patient-recipe-details-delete-button'}
                          onClick={() => setConfirmDelete(true)}>
-                              Delete Recipe
+                              <img src={'/img/delete.png'} alt={'delete'} className={'patient-recipe-details-delete-icon'} />
                           </button>
                     ) : (
                         <div className={'patient-recipe-details-delete-button-confirmation'}>

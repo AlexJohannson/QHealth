@@ -43,7 +43,7 @@ const PatientJournalFilter = ({filters, onApply}) => {
                 {canSeeInputPatientNameOrSurname && (
                     <>
                         <div className={'patient-journal-filter-fields'}>
-                            <label>Patient Name</label>
+                            <label className={'patient-journal-filter-fields-label'}>Patient Name</label>
                             <input
                                 type={'text'}
                                 placeholder={'Patient Name'}
@@ -52,7 +52,7 @@ const PatientJournalFilter = ({filters, onApply}) => {
                             />
                         </div>
                         <div className={'patient-journal-filter-fields'}>
-                            <label>Patient Surname</label>
+                            <label className={'patient-journal-filter-fields-label'}>Patient Surname</label>
                             <input
                                 type={'text'}
                                 placeholder={'Patient Surname'}
@@ -63,7 +63,7 @@ const PatientJournalFilter = ({filters, onApply}) => {
                     </>
                 )}
                 <div className={'patient-journal-filter-fields'}>
-                    <label>Diagnosis</label>
+                    <label className={'patient-journal-filter-fields-label'}>Diagnosis</label>
                     <input
                         type={'text'}
                         placeholder={'Search Diagnosis'}
@@ -71,13 +71,15 @@ const PatientJournalFilter = ({filters, onApply}) => {
                         onChange={(e) => handleChange('diagnosis', e.target.value)}
                     />
                 </div>
-                <button className={'patient-journal-filter-component-button'} type="submit">Apply</button>
+                <button className={'patient-journal-filter-component-button'} type="submit">
+                    <img src={'/img/filter.png'} alt="filter" className={'patient-journal-filter-icon'} />
+                </button>
                 <button
                     className={'patient-journal-filter-component-button'}
                     type="button"
                     onClick={handleClear}
                 >
-                    Clear
+                    <img src={'/img/clear.png'} alt="clear icon" className="patient-journal-filter-icon" />
                 </button>
             </form>
         </div>

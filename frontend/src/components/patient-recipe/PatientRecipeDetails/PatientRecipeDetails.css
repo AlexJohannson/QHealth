@@ -59,6 +59,10 @@
     color: white;
     cursor: pointer;
 }
+.patient-recipe-details-delete-icon{
+    width: 25px;
+    height: 25px;
+}
 /*---------------------------------------   patient-recipe-details-skeleton   -----------------------------------------*/
 .patient-recipe-details-skeleton {
     width: 100%;

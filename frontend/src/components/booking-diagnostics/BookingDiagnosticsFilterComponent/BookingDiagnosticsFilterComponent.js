@@ -45,7 +45,7 @@ const BookingDiagnosticsFilterComponent = ({filters, onApply}) => {
                 {canSeeInputNameOrSurname && (
                     <>
                         <div className={'booking-diagnostic-filter-field'}>
-                            <label>Patient Name</label>
+                            <label className={'booking-diagnostic-filter-field-label'}>Patient Name</label>
                             <input
                                 type={'text'}
                                 placeholder={'Patient Name'}
@@ -54,7 +54,7 @@ const BookingDiagnosticsFilterComponent = ({filters, onApply}) => {
                             />
                         </div>
                         <div className={'booking-diagnostic-filter-field'}>
-                            <label>Patient Surname</label>
+                            <label className={'booking-diagnostic-filter-field-label'}>Patient Surname</label>
                             <input
                                 type={'text'}
                                 placeholder={'Patient Surname'}
@@ -65,7 +65,7 @@ const BookingDiagnosticsFilterComponent = ({filters, onApply}) => {
                     </>
                 )}
                 <div className={'booking-diagnostic-filter-field'}>
-                    <label>Diagnostic</label>
+                    <label className={'booking-diagnostic-filter-field-label'}>Diagnostic</label>
                 <input
                     type={'text'}
                     placeholder={'Diagnostic Service'}
@@ -74,7 +74,7 @@ const BookingDiagnosticsFilterComponent = ({filters, onApply}) => {
                 />
                 </div>
                 <div className={'booking-diagnostic-filter-field'}>
-                    <label>Ordering</label>
+                    <label className={'booking-diagnostic-filter-field-label'}>Ordering</label>
                 <select
                     value={localFilters.order}
                     onChange={(e) => handleChange('order', e.target.value)}
@@ -84,13 +84,15 @@ const BookingDiagnosticsFilterComponent = ({filters, onApply}) => {
                     <option value={'-id'}>ID descending</option>
                 </select>
                 </div>
-                <button className={'booking-diagnostics-form-filter-component-button'} type="submit">Apply</button>
+                <button className={'booking-diagnostics-form-filter-component-button'} type="submit">
+                    <img src={'/img/filter.png'} alt="filter icon" className="booking-diagnostic-filter-icon" />
+                </button>
                 <button
                     className={'booking-diagnostics-form-filter-component-button'}
                     type="button"
                     onClick={handleClear}
                 >
-                    Clear
+                    <img src={'/img/clear.png'} alt="filter icon" className="booking-diagnostic-filter-icon" />
                 </button>
             </form>
         </div>

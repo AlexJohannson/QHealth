@@ -39,10 +39,21 @@
     height: 45px;
     border-radius: 10px;
     border: none;
-    background-color: blue;
+    background-color: #1F74C2;
     color: white;
     cursor: pointer;
 }
 .patient-journal-filter-component-button:hover {
-    background-color: green;
+    background-color: #4CAF50;
+}
+.patient-journal-filter-icon{
+    width: 25px;
+    height: 25px;
+}
+.patient-journal-filter-fields-label{
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
 }

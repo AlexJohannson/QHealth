@@ -27,6 +27,10 @@
     color: white;
     cursor: pointer;
 }
+.security-delete-icon{
+    width: 25px;
+    height: 25px;
+}
 /*------------------------------------------   security-container-maping  --------------------------------------------*/
 .security-container-maping {
     width: 100%;

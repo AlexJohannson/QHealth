@@ -60,7 +60,7 @@ const BookingActionsComponent = ({bookingDoctorId, status, onStatusChange}) => {
                 !confirmCancel ? (
                         <button  className={'booking-actions-component-button-canceled'}
                                  onClick={() => setConfirmCancel(true)}>
-                                    Canceled booking
+                                <img src={'/img/cancel.png'} alt={'cancel'} className={'booking-doctor-delete-icon'}/>
                         </button>
                     ) : (
                         <div className={'booking-actions-component-button-canceled-confirmation'}>
@@ -102,7 +102,7 @@ const BookingActionsComponent = ({bookingDoctorId, status, onStatusChange}) => {
                             className={'booking-actions-component-button-delete'}
                             onClick={() => setConfirmDelete(true)}
                         >
-                            Delete Booking
+                            <img src={'/img/delete.png'} alt={'delete'} className={'booking-doctor-delete-icon'} />
                         </button>
                     ) : (
                         <div className={'booking-actions-component-button-delete-confirmation'}>

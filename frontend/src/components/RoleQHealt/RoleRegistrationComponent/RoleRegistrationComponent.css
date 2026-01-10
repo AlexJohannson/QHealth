@@ -8,12 +8,16 @@
     height: 45px;
     border-radius: 10px;
     border: none;
-    background-color: blue;
+    background-color: #1F74C2;
     color: white;
     cursor: pointer;
 }
 .role-form-register-button:hover {
-    background-color: green;
+    background-color: #4CAF50;
+}
+.staff-register-icon{
+    width: 25px;
+    height: 25px;
 }
 /*-----------------------------------------------    role-register-form-div   ----------------------------------------*/
 .role-register-form-div {
@@ -41,6 +45,13 @@
     padding: 25px 0 25px 0;
     border-radius: 10px;
     background-color: gray;
+}
+.role-register-form label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
 }
 /*---------------------------------------   role-register-form input   -----------------------------------------------*/
 .role-register-form input {
@@ -71,14 +82,6 @@
     border-radius: 6px;
     outline: none;
     transition: border-color 0.2s ease;
-    color: #999;
-    font-style: italic;
-    opacity: 1;
-}
-.role-register-form select:focus {
-    border-color: #007bff;
-}
-.role-register-form select option {
     color: #999;
     font-style: italic;
     opacity: 1;

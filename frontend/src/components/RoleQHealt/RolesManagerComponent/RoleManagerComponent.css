@@ -9,10 +9,10 @@
     height: 45px;
     border-radius: 10px;
     border: none;
-    background-color: blue;
+    background-color: #1F74C2;
     color: white;
     cursor: pointer;
 }
 .role-manager-component button:hover {
-    background-color: green;
+    background-color: #4CAF50;
 }

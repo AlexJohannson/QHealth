@@ -50,8 +50,12 @@ const RecoveryRequestComponent = () => {
                     <input type={'email'} placeholder={'Enter your email'} value={email}
                            onChange={e => setEmail(e.target.value)}/>
                     <div className={'recovery-request-button-div'}>
-                        <button className={'recovery-request-button'} type="submit">SEND RECOVERY LINK</button>
-                        <button className={'recovery-request-button'} type="button" onClick={() => navigate('/login')}>BACK</button>
+                        <button className={'recovery-request-button'} type="submit">
+                            <img src={'/img/link.png'} alt="link icon" className="recovery-icon-page"/>
+                        </button>
+                        <button className={'recovery-request-button'} type="button" onClick={() => navigate('/login')}>
+                            <img src={'/img/left-arrow.png'} alt="back icon" className="recovery-icon-page"/>
+                        </button>
                     </div>
                 </form>
             </div>

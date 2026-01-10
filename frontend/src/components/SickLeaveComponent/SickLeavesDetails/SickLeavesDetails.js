@@ -67,7 +67,7 @@ const SickLeavesDetails = () => {
                     !confirmDelete ? (
                         <button className={'sick-leave-details-delete-button'}
                                 onClick={() => setConfirmDelete(true)}>
-                            Delete Sick Leave
+                            <img src={'/img/delete.png'} alt={'delete'} className="sick-leave-manage-icon" />
                         </button>
                     ) : (
                         <div className={'sick-leave-details-delete-button-confirmation'}>
@@ -105,7 +105,7 @@ const SickLeavesDetails = () => {
                 <button
                     className={'sick-leave-download-pdf'}
                     onClick={() => window.open(sickLeave.file_url, "_blank")}>
-                    Download PDF
+                    <img src={'/img/export-pdf.png'} alt={'download'} className={'sick-leave-manage-icon'}/>
                 </button>
             </div>
         </div>

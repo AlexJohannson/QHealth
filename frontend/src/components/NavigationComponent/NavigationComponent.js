@@ -58,7 +58,7 @@ const NavigationComponent = () => {
         return '/';
     };
 
-    const isUserHome = location.pathname === getHomePath();
+
 
     if (!isLoggedIn) return null;
 
@@ -77,14 +77,11 @@ const NavigationComponent = () => {
                 </ul>
             </nav>
             <div className={'navigate-buttons'}>
-                <button onClick={handleLogout}>LOGOUT</button>
-                <button onClick={() => {
-                    if (!isUserHome) navigate(-1);
-                }}>
-                    BACK
+                <button onClick={handleLogout}>
+                    <img src={'/img/logout.png'} alt="logout icon" className="navigation-icon"/>
                 </button>
                 <button onClick={() => navigate(getHomePath())}>
-                    HOME
+                    <img src={'/img/home.png'} alt="home icon" className="navigation-icon"/>
                 </button>
             </div>
         </div>

@@ -60,6 +60,10 @@
     color: white;
     cursor: pointer;
 }
+.booking-diagnostics-delete-icon{
+    width: 25px;
+    height: 25px;
+}
 /*-------------------------------------     booking-diagnostic-profile-skeleton   ------------------------------------*/
 .booking-diagnostic-profile-skeleton {
     width: 100%;

@@ -70,6 +70,10 @@
     color: white;
     cursor: pointer;
 }
+.diagnostics-delete-icon{
+    width: 25px;
+    height: 25px;
+}
 /*-------------------------------------------     diagnostic-profile-skeleton    -------------------------------------*/
 .diagnostic-profile-skeleton {
     width: 100%;

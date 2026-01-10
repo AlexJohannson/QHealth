@@ -96,8 +96,8 @@ const BookDoctorComponent = ({id, patientId}) => {
                     onChange={(e) => setDateTime(e.target.value)}
                 />
             </div>
-            <button onClick={handleBooking} disabled={loading}>
-                {loading ? 'Booking...' : 'Book Doctor'}
+            <button onClick={handleBooking}>
+                <img src={'/img/save.png'} alt='save' className={'book-doctor-save-icon'} />
             </button>
         </div>
     );

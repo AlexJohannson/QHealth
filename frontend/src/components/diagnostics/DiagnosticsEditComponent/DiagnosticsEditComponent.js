@@ -73,7 +73,9 @@ const DiagnosticsEditComponent = ({id}) => {
                     onChange={e => handleChange('modality', e.target.value)}
                     placeholder="Modality"
                 />
-                <button className={'diagnostics-edit-form-component-button'} type="submit">Update</button>
+                <button className={'diagnostics-edit-form-component-button'} type="submit">
+                    <img src={'/img/update.png'} alt="update" className={'diagnostics-update-icon'} />
+                </button>
             </form>
         </div>
     );

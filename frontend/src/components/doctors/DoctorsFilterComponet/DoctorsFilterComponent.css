@@ -48,23 +48,27 @@
     font-style: italic;
     opacity: 1;
 }
-.doctor-filter-component select:focus {
-     border-color: #007bff;
-}
-.doctor-filter-component select::placeholder {
-    color: #999;
-    font-style: italic;
-    opacity: 1;
-}
+
 .doctor-filter-component-button {
     width: 100px;
     height: 45px;
     border-radius: 10px;
     border: none;
-    background-color: blue;
+    background-color: #1F74C2;
     color: white;
     cursor: pointer;
 }
 .doctor-filter-component-button:hover {
-    background-color: green;
+    background-color: #4CAF50;
+}
+.doctor-filter-icon{
+    width: 25px;
+    height: 25px;
+}
+.doctor-filter-field-label{
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
 }

@@ -35,7 +35,7 @@ const DoctorsFilterComponent = ({filters, onApply}) => {
         <form className="doctor-filter-component" onSubmit={handleSubmit}>
 
             <div className="doctor-filter-field">
-                <label>Doctor Name</label>
+                <label className={'doctor-filter-field-label'}>Doctor Name</label>
                 <input
                     type="text"
                     placeholder="Search Doctor Name"
@@ -45,7 +45,7 @@ const DoctorsFilterComponent = ({filters, onApply}) => {
             </div>
 
             <div className="doctor-filter-field">
-                <label>Doctor Surname</label>
+                <label className={'doctor-filter-field-label'}>Doctor Surname</label>
                 <input
                     type="text"
                     placeholder="Search Doctor Surname"
@@ -55,7 +55,7 @@ const DoctorsFilterComponent = ({filters, onApply}) => {
             </div>
 
             <div className="doctor-filter-field">
-                <label>Specialty</label>
+                <label className={'doctor-filter-field-label'}>Specialty</label>
                 <input
                     type="text"
                     placeholder="Search Specialty"
@@ -65,7 +65,7 @@ const DoctorsFilterComponent = ({filters, onApply}) => {
             </div>
 
             <div className="doctor-filter-field">
-                <label>Ordering</label>
+                <label className={'doctor-filter-field-label'}>Ordering</label>
                 <select
                     value={localFilters.order}
                     onChange={(e) => handleChange('order', e.target.value)}
@@ -77,7 +77,7 @@ const DoctorsFilterComponent = ({filters, onApply}) => {
             </div>
 
             <button className="doctor-filter-component-button" type="submit">
-                Apply
+                <img src={'/img/filter.png'} alt="filter icon" className="doctor-filter-icon" />
             </button>
 
             <button
@@ -85,7 +85,7 @@ const DoctorsFilterComponent = ({filters, onApply}) => {
                 className="doctor-filter-component-button"
                 onClick={handleClear}
             >
-                Clear
+                <img src={'/img/clear.png'} alt="filter icon" className="doctor-filter-icon" />
             </button>
 
         </form>

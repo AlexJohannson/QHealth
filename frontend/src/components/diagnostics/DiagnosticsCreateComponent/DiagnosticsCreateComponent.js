@@ -67,7 +67,9 @@ const DiagnosticsCreateComponent = () => {
                                value={form.modality}/>
                         {error.modality && (<p className={'diagnostics-create-component-form-error'}>{error.modality}</p>)}
                         {error.general && (<p className={'diagnostics-create-component-form-error'}>{error.general}</p>)}
-                        <button className={'diagnostics-create-component-form-button'} type={'submit'}>REGISTER</button>
+                        <button className={'diagnostics-create-component-form-button'} type={'submit'}>
+                            <img src={'/img/save.png'} alt={'save'} className={'diagnostics-save-icon'} />
+                        </button>
                     </form>
                 )}
             </div>

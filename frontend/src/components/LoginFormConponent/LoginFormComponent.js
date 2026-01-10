@@ -83,8 +83,12 @@ const LoginFormComponent = () => {
                     </div>
                     {errors.password && (<p className="form-login-error">{errors.password.message}</p>)}
                     <div className={'form-login-button-div'}>
-                        <button className={'form-login-button'} type="submit">LOGIN</button>
-                        <button className={'form-login-button'} type="button" onClick={() => navigate('/')}>BACK</button>
+                        <button className={'form-login-button'} type="submit">
+                            <img src="/img/log-in.png" alt="login icon" className="login-icon-page"/>
+                        </button>
+                        <button className={'form-login-button'} type="button" onClick={() => navigate('/')}>
+                            <img src={'/img/left-arrow.png'} alt="back icon" className="login-icon-page"/>
+                        </button>
                     </div>
                     <div className={'form-login-links-div'}>
                         <Link className={'form-login-links'} to={'/registration'}>Register</Link>

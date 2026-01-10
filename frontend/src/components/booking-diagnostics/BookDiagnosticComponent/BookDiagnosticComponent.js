@@ -101,8 +101,8 @@ const BookDiagnosticComponent = ({id}) => {
                     />
                 </div>
             )}
-            <button onClick={handleBooking} disabled={loading}>
-                {loading ? 'Booking...' : 'Book Diagnostic'}
+            <button onClick={handleBooking}>
+                <img src={'/img/save.png'} alt='save' className={'book-diagnostic-save-icon'} />
             </button>
         </div>
     );

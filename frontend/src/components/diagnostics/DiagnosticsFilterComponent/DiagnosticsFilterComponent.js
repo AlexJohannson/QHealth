@@ -34,7 +34,7 @@ const DiagnosticsFilterComponent = ({filters, onApply}) => {
         <div className="diagnostics-filter-div">
             <form className={'diagnostics-component-filter'} onSubmit={handleSubmit}>
                 <div className={'diagnostics-filter-field'}>
-                    <label>Diagnostics</label>
+                    <label className={'diagnostics-filter-field-label'}>Diagnostics</label>
                     <input
                         type={'text'}
                         placeholder={'Search Diagnostics'}
@@ -43,7 +43,7 @@ const DiagnosticsFilterComponent = ({filters, onApply}) => {
                     />
                 </div>
                 <div className={'diagnostics-filter-field'}>
-                    <label>Ordering</label>
+                    <label className={'diagnostics-filter-field-label'}>Ordering</label>
                     <select
                         value={localFilters.order}
                         onChange={(e) => handleChange('order', e.target.value)}
@@ -53,13 +53,15 @@ const DiagnosticsFilterComponent = ({filters, onApply}) => {
                         <option value="-id">ID descending</option>
                     </select>
                 </div>
-                <button className={'diagnostics-component-filter-button'} type="submit">Apply</button>
+                <button className={'diagnostics-component-filter-button'} type="submit">
+                    <img src={'/img/filter.png'} alt="filter icon" className={'diagnostics-filter-icon'} />
+                </button>
                 <button
                     className={'diagnostics-component-filter-button'}
                     type="button"
                     onClick={handleClear}
                 >
-                    Clear
+                    <img src={'/img/clear.png'} alt="clear icon" className={'diagnostics-filter-icon'} />
                 </button>
             </form>
         </div>

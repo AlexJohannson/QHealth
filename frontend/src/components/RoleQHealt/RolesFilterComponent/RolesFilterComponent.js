@@ -36,7 +36,7 @@ const RolesFilterComponent = ({filters, onApply}) => {
     return (
         <form className={'role-filter'} onSubmit={handleSubmit}>
             <div className={'roles-filter-field'}>
-                <label>Role Name</label>
+                <label className={'role-filter-field-label'}>Role Name</label>
             <input
                 type="text"
                 placeholder="Search Roles Name"
@@ -45,7 +45,7 @@ const RolesFilterComponent = ({filters, onApply}) => {
             />
             </div>
             <div className={'roles-filter-field'}>
-                <label>Role Surname</label>
+                <label className={'role-filter-field-label'}>Role Surname</label>
             <input
                 type="text"
                 placeholder="Search Roles Surname"
@@ -54,7 +54,7 @@ const RolesFilterComponent = ({filters, onApply}) => {
             />
             </div>
             <div className={'roles-filter-field'}>
-                <label>Search Roles</label>
+                <label className={'role-filter-field-label'}>Search Roles</label>
             <input
                 type="text"
                 placeholder="Search Roles"
@@ -63,7 +63,7 @@ const RolesFilterComponent = ({filters, onApply}) => {
             />
             </div>
             <div className={'roles-filter-field'}>
-                <label>Specialty for doctors</label>
+                <label className={'role-filter-field-label'}>Specialty for doctors</label>
             <input
                 type="text"
                 placeholder="Search Specialty"
@@ -72,7 +72,7 @@ const RolesFilterComponent = ({filters, onApply}) => {
             />
             </div>
             <div className={'roles-filter-field'}>
-                <label>Ordering filter</label>
+                <label className={'role-filter-field-label'}>Ordering filter</label>
             <select
                 value={localFilters.order}
                 onChange={(e) => handleChange('order', e.target.value)}
@@ -82,13 +82,15 @@ const RolesFilterComponent = ({filters, onApply}) => {
                 <option value="-id">ID descending</option>
             </select>
             </div>
-            <button className={'role-filter-button'} type="submit">Apply</button>
+            <button className={'role-filter-button'} type="submit">
+                <img src={'/img/filter.png'} alt="filter icon" className="staff-filter-icon"/>
+            </button>
             <button
                 className={'role-filter-button'}
                 type="button"
                 onClick={handleClear}
             >
-                Clear
+                <img src={'/img/clear.png'} alt="filter icon" className="staff-filter-icon"/>
             </button>
         </form>
     );
