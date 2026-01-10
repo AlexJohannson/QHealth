@@ -75,3 +75,24 @@
 .create-sick-leave-button:hover{
     background-color: #4CAF50;
 }
+.form-group-sick-leave-diagnosis label{
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+}
+.form-group-sick-leave-description label{
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+}
+.form-group-sick-leave-date label{
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+}

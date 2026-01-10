@@ -28,3 +28,9 @@
     flex-direction: column;
     gap: 15px;
 }
+.patient-profile-component-link-items h4{
+    color: #444;
+}
+.patient-profile-component-link-items h2{
+    color: #222;
+}

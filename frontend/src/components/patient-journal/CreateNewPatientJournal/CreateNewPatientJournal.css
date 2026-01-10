@@ -82,3 +82,24 @@
     width: 25px;
     height: 25px;
 }
+.create-journal-form-diagnosis label{
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+}
+.create-journal-form-description label{
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+}
+.create-journal-form-planning label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+}

@@ -28,3 +28,9 @@
     flex-direction: column;
     gap: 15px;
 }
+.booking-doctor-profile-link-container-items h4{
+    color: #444;
+}
+.booking-doctor-profile-link-container-items h2{
+    color: #222;
+}

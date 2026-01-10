@@ -28,3 +28,9 @@
     flex-direction: column;
     gap: 15px;
 }
+.booking-diagnostics-profile-link-container-items h4{
+    color: #444;
+}
+.booking-diagnostics-profile-link-container-items h2{
+    color: #222;
+}

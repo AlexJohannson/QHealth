@@ -28,4 +28,11 @@
     flex-direction: column;
     gap: 15px;
 }
+.user-profile-container-items h4 {
+    color: #444;
+}
+
+.user-profile-container-items h2 {
+    color: #222;
+}
 

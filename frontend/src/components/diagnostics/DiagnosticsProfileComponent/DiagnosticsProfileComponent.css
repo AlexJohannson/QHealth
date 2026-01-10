@@ -28,3 +28,9 @@
     flex-direction: column;
     gap: 15px;
 }
+.diagnostics-profile-component-items h4{
+    color: #444;
+}
+.diagnostics-profile-component-items h2{
+    color: #222;
+}

@@ -21,3 +21,9 @@
     flex-direction: column;
     gap: 10px;
 }
+.security-profile-items h5{
+    color: #444;
+}
+.security-profile-items h3{
+    color: #222;
+}

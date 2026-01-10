@@ -64,3 +64,17 @@
     width: 25px;
     height: 25px;
 }
+.create-recipe-form-recipe label{
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+}
+.create-recipe-form-description label{
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+}

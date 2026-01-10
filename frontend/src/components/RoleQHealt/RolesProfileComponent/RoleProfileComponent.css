@@ -28,3 +28,9 @@
     flex-direction: column;
     gap: 15px;
 }
+.role-profile-container-items h4{
+    color: #444;
+}
+.role-profile-container-items h2{
+    color: #222;
+}
