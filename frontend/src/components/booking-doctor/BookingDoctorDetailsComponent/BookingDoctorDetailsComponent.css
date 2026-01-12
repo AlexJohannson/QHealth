@@ -1,6 +1,6 @@
 .booking-doctor-details-component {
     width: 100%;
-    background-color: lightyellow;
+
 }
 /*-----------------------------------------------------   booking-doctor-details-component-profile   -----------------*/
 .booking-doctor-details-component-profile {
@@ -11,6 +11,7 @@
     flex-direction: column;
     padding: 15px 0 15px 0;
     gap: 25px;
+    margin-top: 10px;
 }
 /*-------------------------------------------------   booking-doctor-details-component-actions  ----------------------*/
 .booking-doctor-details-component-actions {

@@ -1,6 +1,5 @@
 .patient-recipe-details-container {
     width: 100%;
-    background-color: lightyellow;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,7 +10,7 @@
 /*----------------------------------     patient-recipe-details-profile   --------------------------------------------*/
 .patient-recipe-details-profile {
     width: 100%;
-    height: 350px;
+    height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;

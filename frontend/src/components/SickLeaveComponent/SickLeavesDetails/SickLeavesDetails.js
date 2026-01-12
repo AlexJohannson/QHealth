@@ -59,8 +59,10 @@ const SickLeavesDetails = () => {
                 <p><strong>Patient Surname:</strong> {sickLeave.user.profile.surname}</p>
                 <p><strong>Doctor Name:</strong> {sickLeave.doctor.profile.name}</p>
                 <p><strong>Doctor Surname:</strong> {sickLeave.doctor.profile.surname}</p>
-                <p><strong>Diagnosis:</strong> {sickLeave.diagnosis}</p>
-                <p><storng>Description:</storng> {sickLeave.description}</p>
+                <p><strong>Diagnosis:</strong></p>
+                <p>{sickLeave.diagnosis}</p>
+                <p><storng>Description:</storng></p>
+                <p>{sickLeave.description}</p>
                 <p><strong>From:</strong> {sickLeave.from_date}</p>
                 <p><strong>To:</strong> {sickLeave.to_date}</p>
                 {canDelete && (

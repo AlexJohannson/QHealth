@@ -59,9 +59,12 @@ const PatientJournalDetails = () => {
             <div className={'patient-journal-details-profile'}>
                 <h2>My Journal:</h2>
                 <p><strong>Number:</strong> {patientsJournals.id}</p>
-                <p><strong>Diagnosis:</strong> {patientsJournals.diagnosis}</p>
-                <p><strong>Description:</strong> {patientsJournals.description}</p>
-                <p><strong>Planning:</strong> {patientsJournals.planning}</p>
+                <p><strong>Diagnosis:</strong></p>
+                <p>{patientsJournals.diagnosis}</p>
+                <p><strong>Description:</strong></p>
+                <p>{patientsJournals.description}</p>
+                <p><strong>Planning:</strong></p>
+                <p>{patientsJournals.planning}</p>
                 <p><strong>Create:</strong> {formatDate(patientsJournals.created_at)}</p>
                 <h3>Patient:</h3>
                 <p><strong>Name:</strong> {patientsJournals.user.profile.name}</p>

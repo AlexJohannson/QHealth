@@ -1,6 +1,5 @@
 .user-details-container{
     width: 100%;
-    background-color: lightyellow;
 }
 
 /*------------------------------------    user-details-container-profile  --------------------------------------------*/
@@ -12,6 +11,9 @@
     justify-content: center;
     flex-direction: column;
     gap: 25px;
+}
+.user-details-container-profile p{
+    color: #333333;
 }
 .user-details-component-link {
     font-weight: bold;

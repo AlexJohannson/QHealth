@@ -59,8 +59,10 @@ const PatientRecipeDetails = () => {
             <div className={'patient-recipe-details-profile'}>
                 <h2>My Recipe:</h2>
                 <p><strong>Number:</strong> {patientRecipes.id}</p>
-                <p><strong>Recipe:</strong> {patientRecipes.recipe}</p>
-                <p><strong>Description:</strong> {patientRecipes.description}</p>
+                <p><strong>Recipe:</strong></p>
+                <p>{patientRecipes.recipe}</p>
+                <p><strong>Description:</strong></p>
+                <p>{patientRecipes.description}</p>
                 <p><strong>Greate:</strong> {formatDate(patientRecipes.created_at)}</p>
                 <h3>Patient:</h3>
                 <p><strong>Name:</strong> {patientRecipes.user.profile.name}</p>
