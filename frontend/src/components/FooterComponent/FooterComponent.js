@@ -11,7 +11,7 @@ const FooterComponent = () => {
             <div className={'footer-dev-information'}>
                 <p>QHealth</p>
                 <p>Developed by Oleksandr Mekhed</p>
-                <p>© Copyright 2025</p>
+                <p>© Copyright 2025 - 2026</p>
             </div>
             <div className={'footer-contact'}>
                 <Link  className={'swagger'} to="http://localhost/api/doc" target="_blank" rel="noopener noreferrer">

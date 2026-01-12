@@ -1,14 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {useMenuByRole} from '../../hooks/useMenuByRole';
-import {Link, useNavigate, useLocation} from 'react-router-dom';
+import {useNavigate, NavLink} from 'react-router-dom';
 import './NavigationComponent.css';
 
 const NavigationComponent = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const menu = useMenuByRole();
     const navigate = useNavigate();
-    const location = useLocation();
-
 
 
 
@@ -59,7 +57,6 @@ const NavigationComponent = () => {
     };
 
 
-
     if (!isLoggedIn) return null;
 
     return (
@@ -69,7 +66,12 @@ const NavigationComponent = () => {
                     {menu.map((item, index) => (
                         <React.Fragment key={index}>
                             <li>
-                                <Link to={item.path}>{item.label}</Link>
+                                <NavLink
+                                    to={item.path}
+                                    className={({isActive}) => isActive ? "nav-link active" : "nav-link"}
+                                >
+                                    {item.label}
+                                </NavLink>
                             </li>
                             {index < menu.length - 1 && <span className="nav-separator">|</span>}
                         </React.Fragment>

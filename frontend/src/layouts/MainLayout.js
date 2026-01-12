@@ -1,9 +1,10 @@
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
-import { NavigationComponent } from "../components/NavigationComponent/NavigationComponent";
-import { useMenuByRole } from "../hooks/useMenuByRole";
+import {NavigationComponent} from "../components/NavigationComponent/NavigationComponent";
+import {useMenuByRole} from "../hooks/useMenuByRole";
 import {HeaderComponent} from "../components/HeaderComponent/HeaderComponent";
 import {FooterComponent} from "../components/FooterComponent/FooterComponent";
 import {setNavigate} from "../untils/navigation";
+import './MainLayout.css';
 
 const MainLayout = () => {
     const menu = useMenuByRole();
@@ -12,17 +13,19 @@ const MainLayout = () => {
     setNavigate(navigate);
 
 
-     const hideNavigation = location.pathname.startsWith("/users/verify_email");
+    const hideNavigation = location.pathname.startsWith("/users/verify_email");
 
     return (
-        <>
+        <div className="main-layout">
             <HeaderComponent/>
-            {!hideNavigation && <NavigationComponent menu={menu} />}
-            <Outlet context={{ menu }} />
-            <FooterComponent/>
-        </>
+            {!hideNavigation && <NavigationComponent menu={menu}/>}
+            <div className="layout-content-wrapper">
+                <Outlet context={{menu}}/>
+                <FooterComponent/>
+            </div>
+        </div>
     );
 };
 
-export { MainLayout };
+export {MainLayout};
 

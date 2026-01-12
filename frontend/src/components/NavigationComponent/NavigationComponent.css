@@ -6,6 +6,11 @@
     background-color: #ffffe0;
     padding: 10px 0 10px 0;
     border-bottom: 2px solid lightskyblue;
+    position: fixed;
+    top: 150px;
+    left: 0;
+    width: 100%;
+    z-index: 999;
 }
 
 .navigation-nav ul {
@@ -20,15 +25,19 @@
     padding: 0;
 }
 
-.navigation-nav a {
+.nav-link {
     text-decoration: none;
     color: black;
     font-size: 15px;
     font-weight: bold;
 }
 
-.navigation-nav a:hover {
-    color: blue;
+.nav-link:hover {
+    color: #1F74C2;
+}
+
+.nav-link.active {
+    color: #4CAF50;
 }
 
 .navigation-nav div button {

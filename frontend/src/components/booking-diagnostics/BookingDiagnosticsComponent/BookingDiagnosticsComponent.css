@@ -9,13 +9,13 @@
 /*-------------------------------------------   booking-diagnostics-component-maping   -------------------------------*/
 .booking-diagnostics-component-maping {
     width: 100%;
-    height: 400px;
+    min-height: 400px;
     display: flex;
     flex-direction: column;
     gap: 40px;
-    overflow-y: auto;
     padding: 10px;
     box-sizing: border-box;
+    overflow-y: visible;
 }
 
 .booking-diagnostics-component-maping-information {

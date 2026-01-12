@@ -6,6 +6,7 @@
 .diagnostics-list-component-link {
     width: 100%;
     height: 45px;
+    margin-top: 10px;
     border-bottom: 2px solid lightskyblue;
     display: flex;
     align-items: center;
@@ -21,13 +22,13 @@
 /*----------------------------------------   diagnostics-list-component-maping   -------------------------------------*/
 .diagnostics-list-component-maping {
     width: 100%;
-    height: 400px;
+    min-height: 400px;
     display: flex;
     flex-direction: column;
     gap: 40px;
-    overflow-y: auto;
     padding: 10px;
     box-sizing: border-box;
+    overflow-y: visible;
 }
 .diagnostics-list-component-information {
     color: red;
