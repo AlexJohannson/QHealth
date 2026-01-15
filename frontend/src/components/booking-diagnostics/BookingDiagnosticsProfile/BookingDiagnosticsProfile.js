@@ -14,6 +14,9 @@ const BookingDiagnosticsProfile = ({bookingDiagnostic}) => {
     return (
         <Link className={'booking-diagnostics-profile-link'} to={`/booking-diagnostic/${bookingDiagnostic.id}`}>
             <div className="booking-diagnostics-profile-link-container">
+                <div className="booking-diagnostics-profile-link-container-items-id">
+                    <h4>{bookingDiagnostic.id}</h4>
+                </div>
                 <div className="booking-diagnostics-profile-link-container-items">
                     <h4>Patient Name:</h4>
                     <h2>{userProfile.name}</h2>

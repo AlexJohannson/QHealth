@@ -13,6 +13,9 @@ const UserProfileComponent = ({user}) => {
 
             <Link className={'link-user-profile-component'} to={`/users/${user.id}`}>
                 <div className={'user-profile-container'}>
+                    <div className={'user-profile-container-items-id'}>
+                        <h4>{user.id}</h4>
+                    </div>
                     <div className={'user-profile-container-items'}>
                         <h4>Name:</h4>
                         <h2>{profile?.name || 'No Name'}</h2>

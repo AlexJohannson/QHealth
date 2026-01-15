@@ -14,6 +14,9 @@ const SickLeavesProfile = ({sick}) => {
     return (
         <Link className={'sick-leaves-profile-link'} to={`/sick-leaves/${sick.id}`}>
             <div className="sick-leaves-profile-link-container">
+                <div className="sick-leaves-profile-link-container-items-id">
+                    <h4>{sick.id}</h4>
+                </div>
                 <div className="sick-leaves-profile-link-container-items">
                     <h4>Patient Name:</h4>
                     <h2>{userProfile ? `${userProfile.name}` : 'Unknow patient'}</h2>

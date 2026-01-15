@@ -15,6 +15,9 @@ const RolesProfileComponent = ({role}) => {
     return (
         <Link className={'role-profile-component-link'} to={`/roles/${role.id}`}>
             <div className="role-profile-container">
+                <div className={'role-profile-container-items-id'}>
+                    <h4>{user.id}</h4>
+                </div>
                 <div className="role-profile-container-items">
                     <h4>Name:</h4>
                     <h2>{profile.name}</h2>

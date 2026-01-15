@@ -65,7 +65,7 @@ const UsersFilterComponent = ({filters, onApply}) => {
                 />
             </div>
             <div className={'users-filter-field'}>
-                <label className={'users-filter-field-label'}>Mix Age</label>
+                <label className={'users-filter-field-label'}>Max Age</label>
                 <input
                     type="number"
                     placeholder="Max Age"

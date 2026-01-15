@@ -28,6 +28,13 @@
     flex-direction: column;
     gap: 15px;
 }
+.doctors-profile-container-item-id{
+    width: 50px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .doctors-profile-container-items h4{
     color: #444;
 }

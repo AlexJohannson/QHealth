@@ -12,6 +12,9 @@ const PatientJournalProfile = ({journal}) => {
     return (
         <Link className={'patient-journal-profile'} to={`/patient-journal/${journal.id}`}>
             <div className={'patient-journal-profile-container'}>
+                <div className={'patient-journal-profile-container-items-id'}>
+                    <h4>{journal.id}</h4>
+                </div>
                 <div className={'patient-journal-profile-container-items'}>
                     <h4>Patient Name:</h4>
                     <h2>{userProfile.name}</h2>

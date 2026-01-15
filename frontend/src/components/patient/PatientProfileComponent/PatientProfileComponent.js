@@ -14,6 +14,9 @@ const PatientProfileComponent = ({patient}) => {
     return (
         <Link className={'patient-profile-component-link'} to={`/patients-card/${patient.id}`}>
             <div className={'patient-profile-component-link-container'}>
+                <div className={'patient-profile-component-link-items-id'}>
+                    <h4>{patient.id}</h4>
+                </div>
                 <div className={'patient-profile-component-link-items'}>
                     <h4>Name:</h4>
                     <h2>{profile?.name || 'No name'}</h2>

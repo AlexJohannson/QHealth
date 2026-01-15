@@ -28,6 +28,13 @@
     flex-direction: column;
     gap: 15px;
 }
+.patient-recipe-profile-link-container-items-id{
+    width: 30px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .patient-recipe-profile-link-container-items h4{
     color: #444;
 }

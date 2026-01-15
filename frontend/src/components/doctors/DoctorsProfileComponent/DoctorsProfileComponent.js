@@ -16,6 +16,9 @@ const DoctorsProfileComponent = ({doctor, patientId}) => {
         <Link className={'doctors-profile-component'}
               to={`/doctors/${doctor.id}?patientId=${patientId}&userId=${user.id}`}>
             <div className="doctors-profile-container-link">
+                <div className={'doctors-profile-container-item-id'}>
+                    <h4>{user.id}</h4>
+                </div>
                 <div className="doctors-profile-container-items">
                     <h4>Name:</h4>
                     <h2>{profile.name}</h2>

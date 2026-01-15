@@ -17,6 +17,9 @@ const DiagnosticsProfileComponent = ({diagnostic}) => {
         <Link className={'diagnostics-profile-component'}
               to={`/diagnostics/${diagnostic.id}${patientId ? `?patientId=${patientId}` : ''}`}>
             <div className="diagnostics-profile-component-container">
+                <div className={'diagnostics-profile-component-items-id'}>
+                    <h4>{diagnostic.id}</h4>
+                </div>
                 <div className="diagnostics-profile-component-items">
                     <h4>Diagnostic:</h4>
                     <h2>{diagnostic.modality}</h2>

@@ -13,6 +13,9 @@ const PatientRecipeProfile = ({recipe}) => {
     return (
         <Link className={'patient-recipe-profile-link'} to={`/patient-recipe/${recipe.id}`}>
             <div className={'patient-recipe-profile-link-container'}>
+                <div className={'patient-recipe-profile-link-container-items-id'}>
+                    <h4>{recipe.id}</h4>
+                </div>
                 <div className={'patient-recipe-profile-link-container-items'}>
                     <h4>Patient Name:</h4>
                     <h2>{patientProfile.name}</h2>
