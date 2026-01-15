@@ -61,7 +61,7 @@ const SickLeavesDetails = () => {
                 <p><strong>Doctor Surname:</strong> {sickLeave.doctor.profile.surname}</p>
                 <p><strong>Diagnosis:</strong></p>
                 <p>{sickLeave.diagnosis}</p>
-                <p><storng>Description:</storng></p>
+                <p><strong>Description:</strong></p>
                 <p>{sickLeave.description}</p>
                 <p><strong>From:</strong> {sickLeave.from_date}</p>
                 <p><strong>To:</strong> {sickLeave.to_date}</p>
