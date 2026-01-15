@@ -21,11 +21,11 @@ const BookingDiagnosticsProfile = ({bookingDiagnostic}) => {
                     <h4>Patient Name:</h4>
                     <h2>{userProfile.name}</h2>
                 </div>
-                <div className="booking-diagnostics-profile-link-container-item">
+                <div className="booking-diagnostics-profile-link-container-items">
                     <h4>Patient Surname:</h4>
                     <h2>{userProfile.surname}</h2>
                 </div>
-                <div className="booking-diagnostics-profile-link-container-item">
+                <div className="booking-diagnostics-profile-link-container-items">
                     <h4>Diagnostic:</h4>
                     <h2>{modality}</h2>
                 </div>
