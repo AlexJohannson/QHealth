@@ -1,20 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
 .doctor-page {
     width: 100%;
     margin: 0 auto;
+    display: flex;
 }
 .doctor-page-information {
-    width: 100%;
+    width: 50%;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.doctor-page-information h3 {
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+}
+.clinic-photo-doctor-page{
+    width: 50%;
     height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.doctor-page-information h1 {
-    font-family: "Lobster Two", sans-serif;
-    font-size: 80px;
-    font-weight: 700;
-    font-style: italic;
-    color: blue;
+.clinic-photo-doctor{
+    width: 90%;
+    height: 350px;
+    border-radius: 15px;
 }
