@@ -14,6 +14,7 @@ const forceLogout = () => {
     localStorage.removeItem('roleId');
     localStorage.removeItem('access');
     localStorage.removeItem('refresh');
+    localStorage.removeItem('username');
     window.dispatchEvent(new Event("authChanged"));
     navigate('/login');
 };

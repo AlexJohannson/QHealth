@@ -35,6 +35,8 @@ const LoginFormComponent = () => {
             localStorage.setItem('is_superuser', data.is_superuser);
             localStorage.setItem('is_staff', data.is_staff);
             localStorage.setItem('is_user', data.is_user);
+            const username = data.name ? data.name : "Owner";
+            localStorage.setItem('username', username);
             window.dispatchEvent(new Event("authChanged"));
 
 

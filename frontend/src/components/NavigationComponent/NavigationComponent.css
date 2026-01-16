@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
 .navigation-nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 100px;
+    gap: 50px;
     background-color: #ffffe0;
     padding: 10px 0 10px 0;
     border-bottom: 2px solid lightskyblue;
@@ -53,17 +55,35 @@
 .navigation-nav div button:hover {
     background-color: #4CAF50;
 }
-.navigation-icon{
+
+.navigation-icon {
     width: 25px;
     height: 25px;
 }
+
 .nav-separator {
     margin: 0 8px;
     color: #888;
 }
-.navigate-buttons{
+
+.navigate-buttons {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
+}
+.navigate-username{
+    min-width: 150px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    background-color: rgba(31, 116, 194, 0.1);
+}
+.username {
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
 }

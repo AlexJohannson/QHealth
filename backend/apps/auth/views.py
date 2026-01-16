@@ -11,9 +11,12 @@ from core.services.jwt_service import ActivateToken, JWTService, RecoveryToken, 
 from drf_yasg.utils import swagger_auto_schema
 
 from apps.auth.serializer import EmailSerializer, PasswordSerializer, UserRoleSerializer
+from apps.users.models import ProfileModel
 from apps.users.serializer import UserSerializer
 
 UserModel = get_user_model()
+
+
 
 @method_decorator(name='patch', decorator=swagger_auto_schema(security=[]))
 class ActivateUserAccountView(GenericAPIView):
@@ -91,6 +94,7 @@ class WebSocketTokenView(GenericAPIView):
         return Response({'token': str(token)}, status=status.HTTP_200_OK)
 
 
+
 class UserRoleView(GenericAPIView):
     """
     get:
@@ -105,6 +109,12 @@ class UserRoleView(GenericAPIView):
         user = request.user
         role_obj = getattr(user, 'role', None)
 
+
+        try:
+            profile = user.profile
+        except ProfileModel.DoesNotExist:
+            profile = None
+
         role = role_obj.role if role_obj else None
         role_id = role_obj.id if role_obj else None
         specialty = role_obj.specialty if role_obj and role_obj.role == 'doctor' else None
@@ -117,10 +127,10 @@ class UserRoleView(GenericAPIView):
             'role': role,
             'role_id': role_id,
             'specialty': specialty,
+            'name': profile.name if profile else None,
         }
 
         serializer = UserRoleSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         return Response(serializer.data)
-
 

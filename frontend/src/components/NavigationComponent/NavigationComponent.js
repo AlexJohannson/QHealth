@@ -5,15 +5,18 @@ import './NavigationComponent.css';
 
 const NavigationComponent = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [username, setUsername] = useState('');
     const menu = useMenuByRole();
     const navigate = useNavigate();
-
 
 
     useEffect(() => {
         const checkAuth = () => {
             const userId = localStorage.getItem('userId');
+            const storedName = localStorage.getItem('username');
+
             setIsLoggedIn(!!userId);
+            setUsername(storedName || '');
         };
 
         checkAuth();
@@ -34,6 +37,7 @@ const NavigationComponent = () => {
         localStorage.removeItem('roleId');
         localStorage.removeItem('access');
         localStorage.removeItem('refresh');
+        localStorage.removeItem('username');
 
 
         setIsLoggedIn(false);
@@ -85,6 +89,9 @@ const NavigationComponent = () => {
                 <button onClick={() => navigate(getHomePath())}>
                     <img src={'/img/home.png'} alt="home icon" className="navigation-icon"/>
                 </button>
+            </div>
+            <div className={'navigate-username'}>
+                <span className="username">Hello, {username}</span>
             </div>
         </div>
     );

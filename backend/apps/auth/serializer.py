@@ -29,3 +29,13 @@ class UserRoleSerializer(serializers.Serializer):
     role = serializers.CharField(allow_null=True)
     role_id = serializers.IntegerField(allow_null=True)
     specialty = serializers.CharField(allow_null=True)
+    name = serializers.CharField(allow_null=True)
+
+
+
+
+
+
+
+
+
