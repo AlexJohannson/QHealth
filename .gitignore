@@ -1,6 +1,7 @@
 .idea
 /mysql/
 .env
+frontend/.env
 .venv
 .vscode
 @localhost.session.sql
