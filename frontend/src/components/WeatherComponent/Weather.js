@@ -4,6 +4,7 @@ import './Weather.css';
 function Weather() {
     const [weather, setWeather] = useState(null);
 
+
     useEffect(() => {
         async function loadWeather() {
             try {
@@ -18,7 +19,14 @@ function Weather() {
         }
 
         loadWeather();
+
+        const interval = setInterval(() => {
+            loadWeather();
+        }, 10 * 60 * 1000);
+
+        return () => clearInterval(interval);
     }, []);
+
 
     if (!weather) return <div className={'loading-weather'}>Loading weather...</div>;
 
