@@ -1,6 +1,7 @@
 import React from 'react';
 import './FooterComponent.css';
 import {Link} from "react-router-dom";
+import {Weather} from "../WeatherComponent/Weather";
 
 const FooterComponent = () => {
     return (
@@ -19,6 +20,9 @@ const FooterComponent = () => {
                 </Link>
                 <p>tel: +00 00 000-00 00</p>
                 <p>email: qhealth@exampl.com</p>
+            </div>
+            <div className={'footer-weather'}>
+                <Weather />
             </div>
         </div>
     );
