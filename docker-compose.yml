@@ -21,7 +21,6 @@ services:
     volumes:
       - ./mysql:/var/lib/mysql
     restart: on-failure
-    command: --lower_case_table_names=2
 
   web:
     image: nginx:alpine
