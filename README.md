@@ -1,7 +1,7 @@
 #  QHealth
 
 QHealth is a fullstack medical institution management system built with **Django REST Framework (DRF)** on the backend and **React** on the frontend.  
-It provides secure role-based access and real-time functionality for booking diagnostics, doctor visits, managing patient journals, and prescriptions.
+It provides secure role-based access and real-time functionality for booking diagnostics, doctor visits, managing patient journals, prescriptions and sick leaves.
 
 ##  Key Features
 -  **Role-based system**: Superuser, Admin, Doctor, Operator, Pharmacist, Patient  
@@ -9,7 +9,8 @@ It provides secure role-based access and real-time functionality for booking dia
 -  **Medical workflows**:
   - Booking diagnostics and doctor visits  
   - Patient journals (medical records)  
-  - Prescription management  
+  - Prescription management
+  - Sick Leaves management - PDF generation with storage on Cloudinary
 -  **Data handling**:
   - Pagination and filtering for all lists  
   - Real-time updates via WebSockets (diagnostics, bookings, journals, prescriptions)  
@@ -45,7 +46,7 @@ It provides secure role-based access and real-time functionality for booking dia
 
 - **Docker services:**
     - web: Django + Daphne (ASGI) server;
-    - db: MySQL; 
+    - db: MySQL deploy on Aiven; 
     - redis: Message broker for Celery;
     - nginx: Reverse proxy server;
     - celery: Background task processor (auto-started);
@@ -96,19 +97,19 @@ The backend of **QHealth** is built with **Django REST Framework (DRF)** and pro
 It is designed to handle role-based access, medical workflows, and real-time updates through WebSockets.
 
 ### Highlights
-- **Architecture:** modular Django apps for users, diagnostics, visits, journals, and prescriptions.
+- **Architecture:** modular Django apps for users, diagnostics, visits, journals, prescriptions and sick leaves - PDF files.
 - **Authentication:** JWT-based authentication with role management (Superuser, Admin, Doctor, Operator, Pharmacist, Patient).
-- **Database:** MySQL with migrations managed via Django ORM.
+- **Database:** MySQL with migrations managed via Django ORM with deploy and storage on Aiven.
 - **Real-time communication:** Channels + Daphne + WebSockets for live updates (diagnostics, bookings, journals, prescriptions).
 - **Background tasks:** Celery + Redis for asynchronous and scheduled jobs (notifications, cleanup, reporting).
 - **API documentation:** Swagger (DRF-YASG) and Postman collection for testing and integration.
-- **Testing:** coverage: views - api`s, filters, managers, models, permissions, serializers 
+- **Testing:** coverage: views - api`s, filters, managers, models, permissions, serializers. 
 - **Deployment:** containerized with Docker, orchestrated via Docker Compose, served through Nginx.
 - **PDF Sick Leaves:** formatting on the backend and saving the PDF file in Cloudinary.
 
 ### Key Features on Backend
 - Secure role-based endpoints for all user types.
-- CRUD operations for diagnostics, visits, journals, and prescriptions.
+- CRUD operations for diagnostics, visits, journals, prescriptions, sick leave.
 - Pagination and filtering integrated into API responses.
 - Error handling aligned with frontend validation.
 - Logging and monitoring of user activity (including login attempts).
@@ -131,7 +132,7 @@ It is designed to support role-based access and seamless interaction with the ba
 - **Styling:** simple and responsive design.
 
 ### Key Features on Frontend
-- Role-based dashboards (different views for Superuser, Admin, Doctor, Operator, Pharmacist, Patient).
+- Role-based dashboards (different views for Superuser, Admins, Doctors, Operators, Pharmacists, Patients).
 - Pagination and filtering integrated into tables and lists.
 - Real-time updates via WebSockets for diagnostics, bookings, journals, and prescriptions.
 - Error handling and validation aligned with backend responses.
@@ -182,20 +183,6 @@ cd QHealth
 ```bash
 docker compose up --build
 ```
-- **4. Apply migrations:**
-```bash
-docker compose run --rm app sh
-python manage.py makemigrations
-python manage.py migrate
-```
-- **Create superuser:**
-```bash
-docker compose run --rm app sh
-python manage.py createsuperuser
-email: <your_email>
-password: <your_password>
-```
-
 ---
 
 ## Project Test:
@@ -224,6 +211,7 @@ the doctor diagnoses and documents, the pharmacist prescribes prescriptions and 
     booking/cancellations.
 - **View history:**
   - The patient sees their journals and prescriptions (read only) a complete, unchangeable treatment history.
+  - The patient sees their sick leaves (read only) a  complete, unchangeable treatment history and can download PDF file with sick leave on device.
 
 ### Operator flow:
 
@@ -242,7 +230,7 @@ the doctor diagnoses and documents, the pharmacist prescribes prescriptions and 
 - **Patient access:**
   - The doctor views a filtered list of patients, their bookings and history.
 - **Clinical documentation:**
-  - The doctor creates entries in the patient journal without regex restrictions. Corrections are made with new
+  - The doctor creates entries in the patient journal and sick leave without regex restrictions. Corrections are made with new
     entries to maintain a complete history.
 
 
@@ -260,7 +248,7 @@ the doctor diagnoses and documents, the pharmacist prescribes prescriptions and 
 - **Business continuity:**
   - Admin/superuser manages users, roles, diagnostics. Block/Unblock accounts and doctors.
 - **Emergency actions:**
-  - In case of technical failures, performs booking, creating journal and prescriptions at the request of staff.
+  - In case of technical failures, performs booking, creating journal, prescriptions, sick leaves at the request of staff.
     Has full audit (logins, history of actions)
 
 
