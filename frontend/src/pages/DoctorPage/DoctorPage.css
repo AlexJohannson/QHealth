@@ -3,11 +3,12 @@
 .doctor-page {
     width: 100%;
     margin: 0 auto;
+    min-height: 600px;
     display: flex;
 }
 .doctor-page-information {
     width: 50%;
-    height: 400px;
+    height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,7 +22,7 @@
 }
 .clinic-photo-doctor-page{
     width: 50%;
-    height: 400px;
+    height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;

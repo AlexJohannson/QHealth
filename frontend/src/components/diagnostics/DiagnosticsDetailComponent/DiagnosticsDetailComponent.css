@@ -1,6 +1,7 @@
 .diagnostics-detail-component {
     width: 100%;
     margin-top: 15px;
+    min-height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
