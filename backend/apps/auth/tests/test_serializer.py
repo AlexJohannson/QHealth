@@ -44,6 +44,7 @@ class AuthTestSerializer(TestCase):
             'role': None,
             'role_id': None,
             'specialty': None,
+            'name': 'Test User'
         }
         serializer = UserRoleSerializer(data=data)
         self.assertTrue(serializer.is_valid(), serializer.errors)
