@@ -259,3 +259,8 @@ the doctor diagnoses and documents, the pharmacist prescribes prescriptions and 
 - **Real-time and notification:**
   - WebSocket for list updates. Celery sends all critical email notifications (bookings, block/unblock, greetings,
     users GRUD operations, role notification). 
+
+
+### Note: 
+ - For security reasons, the .env file is not included in the repository. If you'd like to run the project locally, 
+ - feel free to reach out and request access to it.
