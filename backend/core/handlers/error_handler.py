@@ -13,7 +13,6 @@ def error_handler(exc: Exception, context: dict):
         "InvalidToken": _invalid_token_handler,
         "PermissionDenied": _permission_denied_handler,
         "AuthenticationFailed": _authentication_failed_handler,
-        "ValidationError": _validation_error_handler,
         "ParseError": _parse_error_handler,
         "Http404": _not_found_handler,
         "ProtectedError": _protected_error,
@@ -51,12 +50,6 @@ def _authentication_failed_handler(exc, context):
         status=status.HTTP_401_UNAUTHORIZED,
     )
 
-
-def _validation_error_handler(exc, context):
-    return Response(
-        {"detail": "Invalid login data."},
-        status=status.HTTP_400_BAD_REQUEST,
-    )
 
 
 def _parse_error_handler(exc, context):
