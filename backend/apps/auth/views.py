@@ -18,6 +18,8 @@ UserModel = get_user_model()
 
 
 
+
+
 @method_decorator(name='patch', decorator=swagger_auto_schema(security=[]))
 class ActivateUserAccountView(GenericAPIView):
     """
