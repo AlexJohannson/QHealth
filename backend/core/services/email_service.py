@@ -1,8 +1,10 @@
 import os
 
 from django.core.mail import EmailMultiAlternatives
-from django.template.loader import get_template
+from email.mime.image import MIMEImage
 
+from django.template.loader import get_template
+from django.conf import settings
 from configs.celery import app
 from core.services.jwt_service import ActivateToken, JWTService, RecoveryToken, VerifyEmailToken
 
@@ -19,6 +21,14 @@ class EmailService:
             subject = subject,
         )
         msg.attach_alternative(html_content, "text/html")
+        logo_path = os.path.join(settings.BASE_DIR, "static", "logo_pdf.png")
+
+        with open(logo_path, "rb") as f:
+            logo = MIMEImage(f.read())
+            logo.add_header("Content-ID", "<logo_image>")
+            logo.add_header("Content-Disposition", "inline", filename="logo_pdf.png")
+            msg.attach(logo)
+
         msg.send()
 
 
